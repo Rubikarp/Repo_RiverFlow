@@ -39,10 +39,10 @@ public class GameGrid : MonoBehaviour
     {
         //Start at the bottom left border
         Vector3 bottomLeft = new Vector3(gridOffSet.x, gridOffSet.y, 0);
+        bottomLeft += new Vector3(cellSize * 0.5f, cellSize * 0.5f, 0);
         bottomLeft -= new Vector3(gridSize.x, gridSize.y, 0) * 0.5f * cellSize;
 
-
-        Vector3 result = (new Vector3(posInGrid.x, posInGrid.y, 0) * cellSize) - bottomLeft;
+        Vector3 result = bottomLeft + (new Vector3(posInGrid.x, posInGrid.y, 0) * cellSize);
 
         return result;
     }
@@ -50,10 +50,12 @@ public class GameGrid : MonoBehaviour
     {
         //Start at the bottom left border
         Vector3 bottomLeft = new Vector3(gridOffSet.x, gridOffSet.y, 0);
+        //bottomLeft += new Vector3(cellSize * 0.5f, cellSize * 0.5f, 0); //pas besoin car floor plus tard
         bottomLeft -= new Vector3(gridSize.x, gridSize.y, 0) * 0.5f * cellSize;
 
         Vector3 posRelaToGrid = planePos - bottomLeft;
-        Vector2Int result = new Vector2Int(Mathf.FloorToInt(posRelaToGrid.x * cellSize), Mathf.FloorToInt(posRelaToGrid.x * cellSize));
+        float returnToCellsize = 1 / cellSize;
+        Vector2Int result = new Vector2Int(Mathf.FloorToInt(posRelaToGrid.x * returnToCellsize), Mathf.FloorToInt(posRelaToGrid.y * returnToCellsize));
 
         return result;
     }
@@ -62,7 +64,8 @@ public class GameGrid : MonoBehaviour
     {
         if (showDebug)
         {
-            Vector3 startPos = new Vector3(gridOffSet.x - (gridSize.x * 0.5f * cellSize), gridOffSet.y - (gridSize.y * 0.5f * cellSize), 0);
+            Vector3 startPos = new Vector3(gridOffSet.x, gridOffSet.y, 0);
+            startPos -= new Vector3(gridSize.x, gridSize.y, 0) * 0.5f * cellSize;
 
             float halfCell = cellSize * 0.5f;
 
@@ -75,15 +78,13 @@ public class GameGrid : MonoBehaviour
                 {
                     for (int y = 0; y < gridSize.y; y++)
                     {
-                        Gizmos.DrawWireSphere(startPos + new Vector3(x * cellSize, y * cellSize, 0), cellSize * 0.5f * 0.8f);
+                        Gizmos.DrawWireSphere(startPos + new Vector3(x * cellSize, y * cellSize, 0) + new Vector3(cellSize * 0.5f, cellSize * 0.5f, 0), cellSize * 0.5f * 0.8f);
                     }
                 }
             #endregion
             }
 
             //Grid decals
-            startPos += new Vector3(-halfCell, -halfCell, 0);
-
             Gizmos.color = Color.red;
             for (int x = 0; x <= gridSize.x; x++)
             {

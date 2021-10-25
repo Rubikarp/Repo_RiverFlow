@@ -261,7 +261,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cam: {fileID: 2083589401}
   camTransf: {fileID: 2083589402}
-  testTemplate: {fileID: 0}
+  testTemplate: {fileID: 6563490132009339650, guid: 3271c8f08a5cab64d9543a5d2a577936, type: 3}
+  grid: {fileID: 925749903}
 --- !u!1 &925749902
 GameObject:
   m_ObjectHideFlags: 0
