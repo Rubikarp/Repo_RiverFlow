@@ -24,7 +24,7 @@ public class GameGrid : MonoBehaviour
         {
             for (int y = 0; y < gridSize.y; y++)
             {
-                GameObject go = Instantiate(tileTemplate, TilePos(new Vector2Int(x, y)), Quaternion.identity, transform);
+                GameObject go = Instantiate(tileTemplate, TileToPos(new Vector2Int(x, y)), Quaternion.identity, transform);
                 go.name = "Tile_(" + x + "/" + y + ")";
             }
         }
@@ -35,12 +35,25 @@ public class GameGrid : MonoBehaviour
 
     }
 
-    public Vector3 TilePos(Vector2Int posInGrid)
+    public Vector3 TileToPos(Vector2Int posInGrid)
     {
         //Start at the bottom left border
-        Vector3 result = new Vector3(gridOffSet.x - (gridSize.x * 0.5f * cellSize), gridOffSet.y - (gridSize.y * 0.5f * cellSize), 0);
+        Vector3 bottomLeft = new Vector3(gridOffSet.x, gridOffSet.y, 0);
+        bottomLeft -= new Vector3(gridSize.x, gridSize.y, 0) * 0.5f * cellSize;
 
-        result += new Vector3(posInGrid.x, posInGrid.y, 0) * cellSize;
+
+        Vector3 result = (new Vector3(posInGrid.x, posInGrid.y, 0) * cellSize) - bottomLeft;
+
+        return result;
+    }
+    public Vector2Int PosToTile(Vector3 planePos)
+    {
+        //Start at the bottom left border
+        Vector3 bottomLeft = new Vector3(gridOffSet.x, gridOffSet.y, 0);
+        bottomLeft -= new Vector3(gridSize.x, gridSize.y, 0) * 0.5f * cellSize;
+
+        Vector3 posRelaToGrid = planePos - bottomLeft;
+        Vector2Int result = new Vector2Int(Mathf.FloorToInt(posRelaToGrid.x * cellSize), Mathf.FloorToInt(posRelaToGrid.x * cellSize));
 
         return result;
     }
@@ -82,4 +95,5 @@ public class GameGrid : MonoBehaviour
             }
         }
     }
+
 }

@@ -10,7 +10,7 @@ public class PointerOld : MonoBehaviour
     void Start()
     {
         gridPos = new Vector2Int(Mathf.FloorToInt(grid.gridSize.x * 0.5f), Mathf.FloorToInt(grid.gridSize.y / 2));
-        transform.position = grid.TilePos(gridPos);
+        transform.position = grid.TileToPos(gridPos);
     }
 
     void Update()
@@ -51,7 +51,7 @@ public class PointerOld : MonoBehaviour
         //Clamp in zone
         gridPos = ClampPosInGrid(gridPos);
 
-        transform.position = grid.TilePos(gridPos);
+        transform.position = grid.TileToPos(gridPos);
     }
 
     public Vector2Int ClampPosInGrid(Vector2Int pos)

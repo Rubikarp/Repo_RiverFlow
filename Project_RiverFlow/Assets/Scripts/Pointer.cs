@@ -10,6 +10,8 @@ public class Pointer : MonoBehaviour
 
     public GameObject testTemplate;
 
+    public GameGrid grid;
+
     private void Start()
     {
         
@@ -23,16 +25,18 @@ public class Pointer : MonoBehaviour
             Ray ray = cam.ScreenPointToRay(Input.mousePosition);
             float hitDist;
 
+            Vector3 hitPoint = Vector3.zero;
+
             if (inputSurf.Raycast(ray, out hitDist))
             {
-                Vector3 hitPoint = camTransf.forward * hitDist;
+                hitPoint = ray.GetPoint(hitDist);
             }
             else
             {
                 Debug.Log("Ray parrallèle to plane");
             }
 
-            Instantiate(testTemplate, hitPoint, Quaternion.identity,)
+            Instantiate(testTemplate, grid.TileToPos(grid.PosToTile(hitPoint)), Quaternion.identity);
         }
     }
 }
