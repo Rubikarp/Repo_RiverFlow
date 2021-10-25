@@ -1,64 +1,38 @@
-ï»¿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Plane = UnityEngine.Plane;
 
 public class Pointer : MonoBehaviour
 {
-    public GameGrid grid;
-    public Vector2Int gridPos;
+    public Camera cam;
+    public Transform camTransf;
 
-    void Start()
+    public GameObject testTemplate;
+
+    private void Start()
     {
-        gridPos = new Vector2Int(Mathf.FloorToInt(grid.gridSize.x * 0.5f), Mathf.FloorToInt(grid.gridSize.y / 2));
-        transform.position = grid.TilePos(gridPos);
+        
     }
 
     void Update()
     {
-        //haut
-        if (Input.GetKey(KeyCode.Z) || Input.GetKey(KeyCode.UpArrow))
+        if (Input.GetMouseButtonDown(0))
         {
-            if (gridPos.y + 1 < grid.gridSize.y)
-            {
-                gridPos = gridPos + Vector2Int.up;
-            }
-        }
-        //bas
-        if (Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow))
-        {
-            if (0 <= gridPos.y - 1)
-            {
-                gridPos = gridPos + Vector2Int.down;
-            }
-        }
-        //droite
-        if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow))
-        {
-            if (gridPos.x + 1 < grid.gridSize.x)
-            {
-                gridPos = gridPos + Vector2Int.right;
-            }
-        }
-        //gauche
-        if (Input.GetKey(KeyCode.Q) || Input.GetKey(KeyCode.LeftArrow))
-        {
-            if (0 <= gridPos.x - 1)
-            {
-                gridPos = gridPos + Vector2Int.left;
-            }
-        }
+            Plane inputSurf = new Plane(Vector3.back, Vector3.zero);
+            Ray ray = cam.ScreenPointToRay(Input.mousePosition);
+            float hitDist;
 
-        //Clamp in zone
-        gridPos = ClampPosInGrid(gridPos);
+            if (inputSurf.Raycast(ray, out hitDist))
+            {
+                Vector3 hitPoint = camTransf.forward * hitDist;
+            }
+            else
+            {
+                Debug.Log("Ray parrallèle to plane");
+            }
 
-        transform.position = grid.TilePos(gridPos);
-    }
-
-    public Vector2Int ClampPosInGrid(Vector2Int pos)
-    {
-        return new Vector2Int(
-            Mathf.Clamp(pos.x, 0, grid.gridSize.x - 1),
-            Mathf.Clamp(pos.y, 0, grid.gridSize.y - 1)
-            );
+            Instantiate(testTemplate, hitPoint, Quaternion.identity,)
+        }
     }
 }
