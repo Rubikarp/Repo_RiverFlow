@@ -20,14 +20,7 @@ public class GameGrid : MonoBehaviour
 
     void Start()
     {
-        for (int x = 0; x < gridSize.x; x++)
-        {
-            for (int y = 0; y < gridSize.y; y++)
-            {
-                GameObject go = Instantiate(tileTemplate, TileToPos(new Vector2Int(x, y)), Quaternion.identity, transform);
-                go.name = "Tile_(" + x + "/" + y + ")";
-            }
-        }
+        PopulateGrid();
     }
 
     void Update()
@@ -35,23 +28,53 @@ public class GameGrid : MonoBehaviour
 
     }
 
+    private void PopulateGrid()
+    {
+        for (int x = 0; x < gridSize.x; x++)
+        {
+            for (int y = 0; y < gridSize.y; y++)
+            {
+                GameObject go = Instantiate(tileTemplate, TileToPos(new Vector2Int(x, y)), Quaternion.identity, transform);
+                go.name = "Tile_(" + x + "/" + y + ")";
+                Tile tile = go.AddComponent(typeof(Tile)) as Tile;
+                tile = new Tile(new Vector2Int(x, y), TileState.Full, TileType.soil);
+            }
+        }
+    }
+
+
+    /// <summary>
+    /// Convert a Grid Pos to a worldPos
+    /// WARNING ! The result can be extrapolate farther than the GridSize
+    /// </summary>
+    /// <param name="posInGrid"> Position on the Grid (can be negative)</param>
+    /// <returns></returns>
     public Vector3 TileToPos(Vector2Int posInGrid)
     {
-        //Start at the bottom left border
+        //Get bottom left corner |_
         Vector3 bottomLeft = new Vector3(gridOffSet.x, gridOffSet.y, 0);
-        bottomLeft += new Vector3(cellSize * 0.5f, cellSize * 0.5f, 0);
         bottomLeft -= new Vector3(gridSize.x, gridSize.y, 0) * 0.5f * cellSize;
+        //Centre de la case
+        bottomLeft += new Vector3(cellSize * 0.5f, cellSize * 0.5f, 0);
 
         Vector3 result = bottomLeft + (new Vector3(posInGrid.x, posInGrid.y, 0) * cellSize);
 
         return result;
     }
+
+    /// <summary>
+    /// Convert a Point on the GamePlane to the Grid Pos related
+    /// WARNING ! it can result a pos outside of the actual grid
+    /// </summary>
+    /// <param name="planePos"> point on the plane where you look for the tile</param>
+    /// <returns></returns>
     public Vector2Int PosToTile(Vector3 planePos)
     {
-        //Start at the bottom left border
+        //Get bottom left corner |_
         Vector3 bottomLeft = new Vector3(gridOffSet.x, gridOffSet.y, 0);
-        //bottomLeft += new Vector3(cellSize * 0.5f, cellSize * 0.5f, 0); //pas besoin car floor plus tard
         bottomLeft -= new Vector3(gridSize.x, gridSize.y, 0) * 0.5f * cellSize;
+        //Pas de centrage sur la case car floor, si round activer la ligne
+        //bottomLeft += new Vector3(cellSize * 0.5f, cellSize * 0.5f, 0);
 
         Vector3 posRelaToGrid = planePos - bottomLeft;
         float returnToCellsize = 1 / cellSize;

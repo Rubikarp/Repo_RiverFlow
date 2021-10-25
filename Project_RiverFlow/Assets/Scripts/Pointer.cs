@@ -19,6 +19,7 @@ public class Pointer : MonoBehaviour
 
     void Update()
     {
+        //TODO : Make it a proper methode to re-use
         if (Input.GetMouseButtonDown(0))
         {
             Plane inputSurf = new Plane(Vector3.back, Vector3.zero);
