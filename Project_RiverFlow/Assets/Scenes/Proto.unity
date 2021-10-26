@@ -261,8 +261,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cam: {fileID: 2083589401}
   camTransf: {fileID: 2083589402}
-  testTemplate: {fileID: 6563490132009339650, guid: 3271c8f08a5cab64d9543a5d2a577936, type: 3}
-  grid: {fileID: 925749903}
+  grid: {fileID: 0}
 --- !u!1 &564252434
 GameObject:
   m_ObjectHideFlags: 0
@@ -272,7 +271,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 564252435}
-  - component: {fileID: 564252436}
   m_Layer: 0
   m_Name: WaterGrid
   m_TagString: Untagged
@@ -294,24 +292,6 @@ Transform:
   m_Father: {fileID: 1930227711}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &564252436
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 564252434}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 819b21188882f39448a1937ee42e5256, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  cellSize: 1
-  gridSize: {x: 10, y: 10}
-  gridOffSet: {x: 0, y: 0}
-  tileTemplate: {fileID: 6563490132009339650, guid: a6cfd25e664e9754db02883a79d9c709, type: 3}
-  showDebug: 1
-  showCenter: 0
 --- !u!1 &925749902
 GameObject:
   m_ObjectHideFlags: 0
@@ -338,15 +318,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 925749902}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 819b21188882f39448a1937ee42e5256, type: 3}
+  m_Script: {fileID: 11500000, guid: ef9060e7728769b428427e629c191b0b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cellSize: 1
-  gridSize: {x: 10, y: 10}
-  gridOffSet: {x: 0, y: 0}
-  tileTemplate: {fileID: 6563490132009339650, guid: a6cfd25e664e9754db02883a79d9c709, type: 3}
-  showDebug: 1
-  showCenter: 0
+  grid: {fileID: 0}
 --- !u!4 &925749904
 Transform:
   m_ObjectHideFlags: 0
@@ -432,6 +407,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1930227711}
+  - component: {fileID: 1930227712}
   m_Layer: 0
   m_Name: '#GAMEPLAY#'
   m_TagString: Untagged
@@ -456,6 +432,24 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1930227712
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1930227710}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 819b21188882f39448a1937ee42e5256, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cellSize: 1
+  gridSize: {x: 10, y: 10}
+  gridOffSet: {x: 0, y: 0}
+  tileTemplate: {fileID: 6563490132009339650, guid: a6cfd25e664e9754db02883a79d9c709, type: 3}
+  showDebug: 1
+  showCenter: 0
 --- !u!1 &2083589399
 GameObject:
   m_ObjectHideFlags: 0
