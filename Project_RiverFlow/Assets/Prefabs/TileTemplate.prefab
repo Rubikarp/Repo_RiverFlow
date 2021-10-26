@@ -13,8 +13,9 @@ GameObject:
   - component: {fileID: 6861665421903798888}
   - component: {fileID: 3517016501047417106}
   - component: {fileID: -2505375269847791702}
+  - component: {fileID: 9193434603310611702}
   m_Layer: 0
-  m_Name: Cube
+  m_Name: TileTemplate
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -111,3 +112,24 @@ MonoBehaviour:
   pos: {x: 0, y: 0}
   state: 0
   type: 0
+--- !u!114 &9193434603310611702
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6563490132009339650}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7c6508da4cbbe8345960a67376033c0b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tile: {fileID: -2505375269847791702}
+  rend: {fileID: 6861665421903798888}
+  fullGround: {fileID: 2100000, guid: 50b03f2c62413dd4198b3570739ca706, type: 2}
+  holeGround: {fileID: 2100000, guid: 0ad8d3fd7cfdf4c40b453255ca2e43f2, type: 2}
+  errorMat: {fileID: 2100000, guid: 8038a140f9453324d9b99e3ebe1a366c, type: 2}
+  wat25: {fileID: 2100000, guid: 3cef0e482a3300c4e8dbe2717e6434a0, type: 2}
+  wat50: {fileID: 2100000, guid: e4d0851ec860c53498b6b1b1a3ecbd27, type: 2}
+  wat75: {fileID: 2100000, guid: 85b7260f230f019448bd383cfd4682dc, type: 2}
+  wat100: {fileID: 2100000, guid: ed56bacc91b1c694f9d287d2cb9539b2, type: 2}

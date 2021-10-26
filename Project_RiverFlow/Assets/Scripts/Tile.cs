@@ -32,4 +32,11 @@ public class Tile : MonoBehaviour
         this.state = state;
     }
 
+    public void SetValue(Vector2Int pos, TileType type = TileType.soil, TileState state = TileState.Full)
+    {
+        this.pos = pos;
+        this.type = type;
+        this.state = state;
+    }
+
 }

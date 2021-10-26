@@ -20,6 +20,7 @@ public class GameGrid : MonoBehaviour
 
     void Start()
     {
+        tiles = new Tile[gridSize.x, gridSize.y];
         PopulateGrid();
     }
 
@@ -36,8 +37,14 @@ public class GameGrid : MonoBehaviour
             {
                 GameObject go = Instantiate(tileTemplate, TileToPos(new Vector2Int(x, y)), Quaternion.identity, transform);
                 go.name = "Tile_(" + x + "/" + y + ")";
-                Tile tile = go.AddComponent(typeof(Tile)) as Tile;
-                tile = new Tile(new Vector2Int(x, y), TileState.Full, TileType.soil);
+
+                Tile tile = go.GetComponent<Tile>();
+                if (tile == null)
+                {
+                    Debug.LogError("can't Find Tile on the object");
+                }
+                tile.SetValue(new Vector2Int(x, y), TileType.soil, TileState.Full);
+                tiles[x, y] = tile;
             }
         }
     }
@@ -81,6 +88,10 @@ public class GameGrid : MonoBehaviour
         Vector2Int result = new Vector2Int(Mathf.FloorToInt(posRelaToGrid.x * returnToCellsize), Mathf.FloorToInt(posRelaToGrid.y * returnToCellsize));
 
         return result;
+    }
+    public Tile GetTile(Vector2Int posInGrid)
+    {
+        return tiles[posInGrid.x, posInGrid.y]; ;
     }
 
     private void OnDrawGizmos()
