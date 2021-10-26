@@ -261,7 +261,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cam: {fileID: 2083589401}
   camTransf: {fileID: 2083589402}
-  grid: {fileID: 0}
+  grid: {fileID: 1930227712}
 --- !u!1 &564252434
 GameObject:
   m_ObjectHideFlags: 0
@@ -321,7 +321,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef9060e7728769b428427e629c191b0b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  grid: {fileID: 0}
+  grid: {fileID: 1930227712}
+  startPos: {x: 0, y: 0}
+  size: {x: 0, y: 0}
 --- !u!4 &925749904
 Transform:
   m_ObjectHideFlags: 0
@@ -445,7 +447,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cellSize: 1
-  gridSize: {x: 10, y: 10}
+  gridSize: {x: 18, y: 10}
   gridOffSet: {x: 0, y: 0}
   tileTemplate: {fileID: 6563490132009339650, guid: a6cfd25e664e9754db02883a79d9c709, type: 3}
   showDebug: 1
@@ -486,8 +488,8 @@ Camera:
   m_GameObject: {fileID: 2083589399}
   m_Enabled: 1
   serializedVersion: 2
-  m_ClearFlags: 1
-  m_BackGroundColor: {r: 0.9, g: 0.9, b: 0.9, a: 0}
+  m_ClearFlags: 2
+  m_BackGroundColor: {r: 0.1, g: 0.1, b: 0.1, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0

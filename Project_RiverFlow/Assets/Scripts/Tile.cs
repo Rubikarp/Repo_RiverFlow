@@ -12,6 +12,19 @@ public enum TileType
     sand
 }
 
+[System.Flags]
+public enum NeighborDir
+{
+    TopLeft,
+    Top,
+    TopRight,
+    Left,
+    Right,
+    BottomLeft,
+    Bottom,
+    BottomRight
+}
+
 public class Tile : MonoBehaviour
 {
     public Vector2Int pos;

@@ -9,7 +9,14 @@ public class Pointer : MonoBehaviour
     public Camera cam;
     public Transform camTransf;
     [Space(10)]
-    public GameGrid grid;
+    public IteractionGrid grid;
+
+    [Header("Internal Value")]
+    public Plane inputSurf = new Plane(Vector3.back, Vector3.zero);
+
+    private Ray ray;
+    private float hitDist = 0f;
+    private Vector3 hitPoint = Vector3.zero;
 
     private void Start()
     {
@@ -31,14 +38,16 @@ public class Pointer : MonoBehaviour
         }
     }
 
+
     public Vector3 GetHitPos()
     {
-        Plane inputSurf = new Plane(Vector3.back, Vector3.zero);
-        Ray ray = cam.ScreenPointToRay(Input.mousePosition);
-        float hitDist;
+        //Reset HitPoint
+        hitPoint = Vector3.zero;
 
-        Vector3 hitPoint = Vector3.zero;
+        //Get Ray
+        ray = cam.ScreenPointToRay(Input.mousePosition);
 
+        //Raycast
         if (inputSurf.Raycast(ray, out hitDist))
         {
             hitPoint = ray.GetPoint(hitDist);
