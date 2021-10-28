@@ -9,6 +9,8 @@ public class InputHandler : MonoBehaviour
     public Transform camTransf;
     [Space(10)]
     public Grid grid;
+    [Space(10)]
+    public LineRenderer line;
 
     [Header("Internal Value")]
     public Plane inputSurf = new Plane(Vector3.back, Vector3.zero);
@@ -37,6 +39,8 @@ public class InputHandler : MonoBehaviour
             if(startSelectTile is TileGround)
             {
                 startSelectTileGround = startSelectTile.GetComponent<TileGround>();
+                line.positionCount = 1;
+                line.SetPosition(0, startSelectTilePos);
             }
             else
             {
@@ -48,6 +52,9 @@ public class InputHandler : MonoBehaviour
         if (Input.GetMouseButton(0))
         {
             dragPos = GetHitPos();
+            line.positionCount = 2;
+            line.SetPosition(1, dragPos);
+
             //Have drag a certainDistance
             Vector3 dragVect = (dragPos - startSelectTilePos);
             Debug.DrawLine(dragPos, startSelectTilePos, Color.blue);
@@ -64,17 +71,21 @@ public class InputHandler : MonoBehaviour
                 {
                     endSelectTileGround = null;
                 }
-                Debug.Log( startSelectTile.name + " to " + endSelectTile.name);
 
                 //Si j'ai bien 2 tile linkable
                 if(startSelectTileGround != null && endSelectTileGround != null)
                 {
+                    //Make the Flow
                     startSelectTileGround.isDuged = true;
+                    ///TODO :startSelectTileGround.flowOut.Add();
                     endSelectTileGround.isDuged = true;
+                    ///TODO :endSelectTileGround.flowIn.Add();
 
-                    //TODO : pleins de truc
-                    //reset le start...
-                    //mettre les flow in et out..
+                    //End became the new start
+                    startSelectTile = endSelectTile;
+                    startSelectTileGround = endSelectTileGround;
+                    startSelectTilePos = grid.TileToPos(startSelectTile.position);
+                    line.SetPosition(0, startSelectTilePos);
 
                 }
             }
@@ -100,6 +111,7 @@ public class InputHandler : MonoBehaviour
             endSelectPos = Vector3.zero;
 
             dragPos = Vector3.zero;
+            line.positionCount = 0;
         }
 
         if (Input.GetMouseButton(1))
