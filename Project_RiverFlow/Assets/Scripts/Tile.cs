@@ -1,55 +1,26 @@
-﻿using UnityEngine;
-
-public enum TileState
-{
-    Full,
-    Hole
-}
-public enum TileType
-{
-    soil,
-    clay,
-    sand
-}
-
-[System.Flags]
-public enum NeighborDir
-{
-    TopLeft,
-    Top,
-    TopRight,
-    Left,
-    Right,
-    BottomLeft,
-    Bottom,
-    BottomRight
-}
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
 
 public class Tile : MonoBehaviour
 {
-    public Vector2Int pos;
-    public TileState state;
-    public TileType type;
+    #region Variable 
+    [Header("Data")]
+    public Vector2Int position = new Vector2Int(0, 0);
+    [Space(5)]
+    public Tile[] neighbors = new Tile[8];
+    #endregion
 
-    //Constructor
-    public Tile(Vector2Int pos, TileType type = TileType.soil, TileState state = TileState.Full)
+    #region Constructor 
+    public Tile( int pos_x = 0, int pos_y = 0)
     {
-        this.pos = pos;
-        this.type = type;
-        this.state = state;
+        this.position = new Vector2Int(pos_x, pos_y);
     }
-    public Tile(Vector2Int pos, TileState state = TileState.Full, TileType type = TileType.soil)
+    public Tile(Vector2Int pos)
     {
-        this.pos = pos;
-        this.type = type;
-        this.state = state;
+        this.position = pos;
     }
+    #endregion
 
-    public void SetValue(Vector2Int pos, TileType type = TileType.soil, TileState state = TileState.Full)
-    {
-        this.pos = pos;
-        this.type = type;
-        this.state = state;
-    }
 
 }
