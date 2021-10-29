@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Grid : MonoBehaviour
+public class GameGrid : MonoBehaviour
 {
     [Header("Parameter")]
     public float cellSize = 1;
@@ -20,7 +20,6 @@ public class Grid : MonoBehaviour
 
     void Start()
     {
-        tiles = new Tile[size.x,size.y];
         PopulateGrid();
     }
 
@@ -29,25 +28,57 @@ public class Grid : MonoBehaviour
         
     }
 
+    [ContextMenu("Populate The GameGrid")]
     private void PopulateGrid()
     {
+        tiles = new Tile[size.x, size.y];
         for (int x = 0; x < size.x; x++)
         {
             for (int y = 0; y < size.y; y++)
             {
-                GameObject go = Instantiate(tileTemplate, TileToPos(new Vector2Int(x, y)), Quaternion.identity, transform);
-                go.name = "Tile_(" + x + "/" + y + ")";
-
-                TileGround tile = go.GetComponent<TileGround>();
-                if (tile == null)
+                if (tiles[x, y] == null)
                 {
-                    Debug.LogError("can't Find Tile on the object");
-                }
-                tile.isDuged = false;
-                tile.isRiver = false;
+                    GameObject go = Instantiate(tileTemplate, TileToPos(new Vector2Int(x, y)), Quaternion.identity, transform);
+                    go.name = "Tile_(" + x + "/" + y + ")";
 
-                tile.position = new Vector2Int(x, y);
-                tiles[x, y] = tile;
+                    TileGround tile = go.GetComponent<TileGround>();
+                    if (tile == null)
+                    {
+                        Debug.LogError("can't Find Tile on the object");
+                    }
+                    tile.isDuged = false;
+                    tile.isRiver = false;
+
+                    tile.position = new Vector2Int(x, y);
+                    tiles[x, y] = tile;
+                }
+            }
+        }
+    }
+    [ContextMenu("Clear The GameGrid")]
+    private void ClearGrid()
+    {
+        if (tiles != null)
+        {
+            for (int x = 0; x < size.x; x++)
+            {
+                for (int y = 0; y < size.y; y++)
+                {
+                    if (tiles[x, y] != null)
+                    {
+                        GameObject go = tiles[x, y].gameObject;
+
+                        if (Application.isEditor)
+                        {
+                            DestroyImmediate(go);
+                        }
+                        else
+                        {
+                            Destroy(go);
+                        }
+                        tiles[x, y] = null;
+                    }
+                }
             }
         }
     }
@@ -58,10 +89,10 @@ public class Grid : MonoBehaviour
     }
 
     /// <summary>
-    /// Convert a Grid Pos to a worldPos
+    /// Convert a GameGrid Pos to a worldPos
     /// WARNING ! The result can be extrapolate farther than the GridSize
     /// </summary>
-    /// <param name="posInGrid"> Position on the Grid (can be negative)</param>
+    /// <param name="posInGrid"> Position on the GameGrid (can be negative)</param>
     /// <returns></returns>
     public Vector3 TileToPos(Vector2Int posInGrid)
     {
@@ -77,7 +108,7 @@ public class Grid : MonoBehaviour
     }
 
     /// <summary>
-    /// Convert a Point on the GamePlane to the Grid Pos related
+    /// Convert a Point on the GamePlane to the GameGrid Pos related
     /// WARNING ! it can result a pos outside of the actual grid
     /// </summary>
     /// <param name="planePos"> point on the plane where you look for the tile</param>
@@ -121,7 +152,7 @@ public class Grid : MonoBehaviour
                 #endregion
             }
 
-            //Grid decals
+            //GameGrid decals
             Gizmos.color = Color.red;
             for (int x = 0; x <= size.x; x++)
             {

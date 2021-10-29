@@ -249,7 +249,7 @@ MonoBehaviour:
   size: {x: 20, y: 12}
   offSet: {x: 0, y: 0}
   tileTemplate: {fileID: 5375811947892556009, guid: fe2141f878066e442aa4ae59d20ba2d6, type: 3}
-  showDebug: 1
+  showDebug: 0
   showCenter: 0
 --- !u!4 &925749904
 Transform:
@@ -263,7 +263,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1930227711}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1168194666
 GameObject:
@@ -306,8 +306,9 @@ GameObject:
   m_Component:
   - component: {fileID: 1770999248}
   - component: {fileID: 1770999249}
+  - component: {fileID: 1770999250}
   m_Layer: 0
-  m_Name: "rep\xE8re"
+  m_Name: Grid_Visual
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -320,12 +321,12 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1770999247}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 20, y: 12, z: 1}
   m_Children: []
   m_Father: {fileID: 1930227711}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &1770999249
 SpriteRenderer:
@@ -368,7 +369,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 7482667652216324306, guid: 48e93eef0688c4a259cb0eddcd8661f7, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.90196085, g: 0.90196085, b: 0.90196085, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -378,6 +379,28 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &1770999250
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1770999247}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1bbcedcf2be77994a98290f18c609cf4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  grid: {fileID: 925749903}
+  input: {fileID: 1930227713}
+  rend: {fileID: 1770999249}
+  speed: 5
+  opacity: 0.66
+  roundness: 0.5
+  thickness: 0.1
+  pencilColor: {r: 0.9, g: 0.9, b: 0.9, a: 0}
+  eraserColor: {r: 0.9, g: 0.17999998, b: 0.17999998, a: 0}
+  time: 0
 --- !u!1 &1849595908
 GameObject:
   m_ObjectHideFlags: 0
@@ -567,8 +590,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 925749904}
   - {fileID: 1770999248}
+  - {fileID: 925749904}
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -684,6 +707,36 @@ MonoBehaviour:
   camTransf: {fileID: 2083589402}
   grid: {fileID: 925749903}
   line: {fileID: 1930227712}
+  onLeftClickDown:
+    m_PersistentCalls:
+      m_Calls: []
+  onRightClickDown:
+    m_PersistentCalls:
+      m_Calls: []
+  onLeftClicking:
+    m_PersistentCalls:
+      m_Calls: []
+  onRightClicking:
+    m_PersistentCalls:
+      m_Calls: []
+  onLeftClickUp:
+    m_PersistentCalls:
+      m_Calls: []
+  onRightClickUp:
+    m_PersistentCalls:
+      m_Calls: []
+  hitDist: 0
+  hitPoint: {x: 0, y: 0, z: 0}
+  startSelectTile: {fileID: 0}
+  startSelectTileGround: {fileID: 0}
+  startSelectTilePos: {x: 0, y: 0, z: 0}
+  endSelectTile: {fileID: 0}
+  endSelectTileGround: {fileID: 0}
+  endSelectPos: {x: 0, y: 0, z: 0}
+  dragPos: {x: 0, y: 0, z: 0}
+  dragVect: {x: 0, y: 0, z: 0}
+  eraserSelectTile: {fileID: 0}
+  eraserSelectTileGround: {fileID: 0}
 --- !u!1 &2083589399
 GameObject:
   m_ObjectHideFlags: 0
