@@ -11,6 +11,7 @@ public class InputHandler : MonoBehaviour
     [Space(10)]
     public GameGrid grid;
 
+    #region Event
     [Header("Event")]
     public UnityEvent onLeftClickDown;
     public UnityEvent onRightClickDown;
@@ -20,8 +21,7 @@ public class InputHandler : MonoBehaviour
     [Space(5)]
     public UnityEvent onLeftClickUp;
     public UnityEvent onRightClickUp;
-    [Space(10)]
-    public UnityEvent onLink;
+    #endregion
 
     [Header("Internal Value")]
     public Plane inputSurf = new Plane(Vector3.back, Vector3.zero);
@@ -45,8 +45,6 @@ public class InputHandler : MonoBehaviour
 
     private void Start()
     {
-        onLeftClicking.AddListener(OnLeftClicking);
-        onRightClicking.AddListener(OnRighClicking);
     }
 
     void Update()
@@ -130,36 +128,4 @@ public class InputHandler : MonoBehaviour
         #endregion
     }
     
-    //Diging
-    public void OnLeftClicking()
-    {
-        //Have drag a certainDistance        
-        if (Mathf.Abs(dragVect.x) > grid.cellSize || Mathf.Abs(dragVect.y) > grid.cellSize)
-        {
-            //Check la ou je touche
-            endSelectTile = grid.GetTile(grid.PosToTile(GetHitPos()));
-            endSelectPos = dragPos;
-
-            //Si j'ai bien 2 tile linkable
-            if (startSelectTile != null && endSelectTile != null)
-            {
-                //Make the Flow
-                startSelectTile.isDuged = true;
-                ///TODO :startSelectTileGround.flowOut.Add();
-                endSelectTile.isDuged = true;
-                ///TODO :endSelectTileGround.flowIn.Add();
-
-                //End became the new start
-                startSelectTile = endSelectTile;
-                startSelectTilePos = grid.TileToPos(startSelectTile.position);
-
-                onLink?.Invoke();
-            }
-        }
-    }
-    public void OnRighClicking()
-    {
-        eraserSelectTile.isDuged = false;
-    }
-
 }

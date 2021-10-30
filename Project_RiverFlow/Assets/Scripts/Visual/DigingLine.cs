@@ -5,6 +5,7 @@ using UnityEngine;
 public class DigingLine : MonoBehaviour
 {
     public InputHandler input;
+    public DigingHandler dig;
     [Space(10)]
     public GameGrid grid;
     public LineRenderer line;
@@ -15,7 +16,7 @@ public class DigingLine : MonoBehaviour
         input.onLeftClicking.AddListener(OnLeftClicking);
         input.onLeftClickUp.AddListener(OnLeftClickRelease);
 
-        input.onLink.AddListener(OnLink);
+        dig.onLink.AddListener(OnLink);
     }
 
     void Update()

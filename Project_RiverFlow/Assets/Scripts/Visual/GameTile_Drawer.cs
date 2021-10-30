@@ -30,7 +30,7 @@ public class GameTile_Drawer : MonoBehaviour
         {
             if (tile.isRiver)
             {
-                switch (tile.flowStrenght)
+                switch (tile.riverStrenght)
                 {
                     case RiverStrenght._00_:
                         rend.color = holedGround;

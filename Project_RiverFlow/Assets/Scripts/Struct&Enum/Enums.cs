@@ -5,6 +5,7 @@ public enum TileType
     clay,
     sand
 }
+
 public enum RiverStrenght
 {
     _00_,
@@ -14,3 +15,15 @@ public enum RiverStrenght
     _100_
 }
 
+public enum DirectionEnum
+{
+    center,
+    upLeft,
+    up,
+    upRight,
+    right,
+    downRight,
+    down,
+    downLeft,
+    left,
+}
