@@ -10,8 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 5446814402908427166}
   - component: {fileID: 6129579272483592476}
-  - component: {fileID: 3087010101205364723}
-  - component: {fileID: 305436612282727129}
+  - component: {fileID: 825307937645406591}
+  - component: {fileID: 4087104903862289866}
   m_Layer: 0
   m_Name: Tile-Ground
   m_TagString: Untagged
@@ -74,7 +74,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 7482667652216324306, guid: d4f2def0c7a2b0e4c9794c9d27871382, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.39607847, g: 0.87843144, b: 0.39607847, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -84,7 +84,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &3087010101205364723
+--- !u!114 &825307937645406591
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -93,24 +93,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 5375811947892556009}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0db01abda9e83a348b4cf3d8d3a2e79a, type: 3}
+  m_Script: {fileID: 11500000, guid: 849e6b0822dde464c9a11d74d7aec89a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   position: {x: 0, y: 0}
-  neighbors:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  neighbors: []
   type: 0
   isDuged: 0
   isRiver: 0
   flowStrenght: 0
---- !u!114 &305436612282727129
+  linkedTile: []
+--- !u!114 &4087104903862289866
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -122,12 +115,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7efe48a7badca8540a49a5af9b8b0d9d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ground: {fileID: 3087010101205364723}
+  tile: {fileID: 825307937645406591}
   rend: {fileID: 6129579272483592476}
-  fullGround: {r: 0.6039216, g: 0.7568628, b: 0.6392157, a: 1}
-  holedGround: {r: 0.75686276, g: 0.52980393, b: 0.30274507, a: 1}
-  wat25: {r: 0.16078429, g: 0.8, b: 0.8, a: 1}
-  wat50: {r: 0.16078429, g: 0.586928, b: 0.8, a: 1}
-  wat75: {r: 0.16078429, g: 0.26732016, b: 0.8, a: 1}
-  wat100: {r: 0.12058822, g: 0.12058822, b: 0.6, a: 1}
+  fullGround: {r: 0.3952941, g: 0.8784314, b: 0.3952941, a: 1}
+  holedGround: {r: 0.44, g: 0.21413334, b: 0.052800003, a: 1}
+  wat25: {r: 0.10560001, g: 0.88, b: 0.88, a: 1}
+  wat50: {r: 0.10588237, g: 0.62091494, b: 0.8784314, a: 1}
+  wat75: {r: 0.10588237, g: 0.36339882, b: 0.8784314, a: 1}
+  wat100: {r: 0.10588237, g: 0.10588237, b: 0.8784314, a: 1}
   errorMat: {r: 1, g: 0, b: 1, a: 1}
