@@ -5,6 +5,8 @@ public struct Direction
     [Header("Variable")]
     public Vector2Int dirValue;
     public DirectionEnum dirEnum;
+    public int x { set { dirValue.x = value; } }
+    public int y { set { dirValue.y = value; } }
 
     #region Constructor
     public Direction(int _x, int _y)

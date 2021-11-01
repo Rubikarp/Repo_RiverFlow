@@ -7,7 +7,9 @@ public class GameTile : MonoBehaviour
     [Header("Essential Data")]
     public Vector2Int position = new Vector2Int(0, 0);
     public GameTile[] neighbors = new GameTile[8];
+
     public Element element;
+    public Canal[] canalsLinked;
 
     public bool isLinkable 
     { 
@@ -29,10 +31,8 @@ public class GameTile : MonoBehaviour
 
     [Header("Input/Output")]
     public List<GameTile> linkedTile = new List<GameTile>();
-    public List<Direction> flowIn = new List<Direction>();
-    public List<Direction> flowOut = new List<Direction>();
     public bool isNode
-    { get {return flowIn.Count == 1 & flowOut.Count == 1 ? false : true;}}
+    { get {return linkedTile.Count == 2 ? false : true;}}
 
     #region Constructor 
     public GameTile()

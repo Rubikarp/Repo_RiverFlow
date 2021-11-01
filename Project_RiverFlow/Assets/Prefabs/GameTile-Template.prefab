@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 825307937645406591}
   - component: {fileID: 4087104903862289866}
   m_Layer: 0
-  m_Name: Tile-Ground
+  m_Name: GameTile-Template
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
