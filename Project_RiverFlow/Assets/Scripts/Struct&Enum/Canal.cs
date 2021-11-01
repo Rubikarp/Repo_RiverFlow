@@ -1,14 +1,18 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[Serializable]
 public class Canal
 {
+    public string name;
+    [Header("Data")]
     public GameTile startNode;
+    public List<GameTile> tiles;
     public GameTile endNode;
     [Space(10)]
     public RiverStrenght riverStrenght;
-    public List<GameTile> tiles;
 
     public Canal(GameTile _startNode, GameTile _endNode, List<GameTile> _tiles, RiverStrenght _riverStrengfht = RiverStrenght._00_)
     {
