@@ -39,9 +39,9 @@ public class DigingLine : MonoBehaviour
         line.positionCount = 0;
     }
 
-    public void OnLink()
+    public void OnLink(GameTile startSelectTile, GameTile endSelectTile)
     {
-        line.SetPosition(0, input.startSelectTilePos);
+        line.SetPosition(0, grid.TileToPos(endSelectTile.position));
     }
 
 }

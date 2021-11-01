@@ -1,14 +1,18 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+
+[Serializable]
+public class linkEvent : UnityEvent<GameTile, GameTile> { }
 
 public class DigingHandler : MonoBehaviour
 {
     public InputHandler input;
     public GameGrid grid;
     [Space(10)]
-    public UnityEvent onLink;
+    public linkEvent onLink;
 
     void Start()
     {
@@ -25,8 +29,14 @@ public class DigingHandler : MonoBehaviour
         //Have drag a certainDistance        
         if (Mathf.Abs(input.dragVect.x) > grid.cellSize || Mathf.Abs(input.dragVect.y) > grid.cellSize)
         {
+            Vector3 drag = input.GetHitPos() - input.startSelectTilePos;
+            //Si je dépasse de plus d'une case d'écart
+            if (drag.magnitude > (1.5f *grid.cellSize))
+            {
+                drag = drag.normalized * (1.5f * grid.cellSize);
+            }
             //Check la ou je touche
-            input.endSelectTile = grid.GetTile(grid.PosToTile(input.GetHitPos()));
+            input.endSelectTile = grid.GetTile(grid.PosToTile(input.startSelectTilePos + drag));
             input.endSelectPos = input.dragPos;
 
             //Si j'ai bien 2 tile linkable
@@ -49,7 +59,7 @@ public class DigingHandler : MonoBehaviour
                 input.startSelectTile = input.endSelectTile;
                 input.startSelectTilePos = grid.TileToPos(input.startSelectTile.position);
 
-                onLink?.Invoke();
+                onLink?.Invoke(input.startSelectTile, input.endSelectTile);
             }
         }
     }
