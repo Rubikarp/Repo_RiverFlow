@@ -9,8 +9,19 @@ public class GameTile : MonoBehaviour
     public GameTile[] neighbors = new GameTile[8];
 
     public Element element;
-    public Canal[] canalsLinked;
+    public bool isElement
+    {
+        get
+        {
+            if (element != null)
+            {
+                return true;
+            }
+            return false;
+        }
+    }
 
+    public Canal[] canalsLinked;
     public bool isLinkable 
     { 
         get 

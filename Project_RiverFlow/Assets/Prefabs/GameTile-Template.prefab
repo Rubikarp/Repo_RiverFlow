@@ -70,8 +70,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -682674765
+  m_SortingLayer: 1
   m_SortingOrder: 0
   m_Sprite: {fileID: 7482667652216324306, guid: d4f2def0c7a2b0e4c9794c9d27871382, type: 3}
   m_Color: {r: 0.39607847, g: 0.87843144, b: 0.39607847, a: 1}
@@ -101,7 +101,7 @@ MonoBehaviour:
   type: 0
   isDuged: 0
   isRiver: 0
-  flowStrenght: 0
+  riverStrenght: 0
   linkedTile: []
 --- !u!114 &4087104903862289866
 MonoBehaviour:

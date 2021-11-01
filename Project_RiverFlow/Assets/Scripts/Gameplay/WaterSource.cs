@@ -25,10 +25,19 @@ public class WaterSource : MonoBehaviour, Element
 
     void Start()
     {
+        if (tileOn.isElement)
+        {
+            tileOn.element = this;
+        }
     }
 
     void Update()
     {
+        if(!tileOn.isRiver)
+        {
+            tileOn.isRiver = true;
+            tileOn.riverStrenght = RiverStrenght._100_;
+        }
         
     }
 }

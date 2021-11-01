@@ -38,21 +38,21 @@ TagManager:
   - 
   - 
   m_SortingLayers:
-  - name: UI
-    uniqueID: 581601021
-    locked: 0
-  - name: ForeGround
-    uniqueID: 1558652177
-    locked: 0
-  - name: Element
-    uniqueID: 396104221
-    locked: 0
-  - name: Default
-    uniqueID: 0
+  - name: BackGround
+    uniqueID: 3090993603
     locked: 0
   - name: Tile
     uniqueID: 3612292531
     locked: 0
-  - name: BackGround
-    uniqueID: 3090993603
+  - name: Default
+    uniqueID: 0
+    locked: 0
+  - name: Element
+    uniqueID: 396104221
+    locked: 0
+  - name: ForeGround
+    uniqueID: 1558652177
+    locked: 0
+  - name: UI
+    uniqueID: 581601021
     locked: 0

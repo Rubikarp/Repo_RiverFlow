@@ -11,10 +11,27 @@ public class GameGrid : MonoBehaviour
     [Space(10)]
     [Header("Data")]
     public Transform gridContainer;
-    public GameTile[,] tiles;
-
     public GameObject tileTemplate;
-
+    #region Grid
+    public GameTile[] tiles;
+    public GameTile GetTile(int x, int y)
+    {
+        return tiles[x + (y * (size.x))];
+    }
+    public GameTile GetTile(Vector2Int pos)
+    {
+        return tiles[pos.x + (pos.y * (size.x))];
+    }
+    public void SetTile(int x, int y, GameTile value)
+    {
+        tiles[x + (y * (size.x))] = value;
+    }
+    public void SetTile(Vector2Int pos, GameTile value)
+    {
+        tiles[pos.x + (pos.y * (size.x))] = value;
+    }
+    #endregion
+    
     [Header("Debug")]
     public bool showDebug;
     public bool showCenter;
@@ -34,13 +51,13 @@ public class GameGrid : MonoBehaviour
     {
         if(tiles == null)
         {
-            tiles = new GameTile[size.x, size.y];
+            tiles = new GameTile[size.x * size.y];
         }
-        for (int x = 0; x < size.x; x++)
+        for (int y = 0; y < size.y; y++)
         {
-            for (int y = 0; y < size.y; y++)
+            for (int x = 0; x < size.x; x++)
             {
-                if (tiles[x, y] == null)
+                if (GetTile(x, y) == null)
                 {
                     GameObject go = Instantiate(tileTemplate, TileToPos(new Vector2Int(x, y)), Quaternion.identity, gridContainer);
                     go.name = "Tile_(" + x + "/" + y + ")";
@@ -54,7 +71,7 @@ public class GameGrid : MonoBehaviour
                     tile.isRiver = false;
 
                     tile.position = new Vector2Int(x, y);
-                    tiles[x, y] = tile;
+                    SetTile(x, y, tile);
                 }
             }
         }
@@ -62,11 +79,12 @@ public class GameGrid : MonoBehaviour
     [ContextMenu("Set Neighbor")]
     private void SetNeighbor()
     {
-        for (int x = 0; x < size.x; x++)
+        for (int y = 0; y < size.y; y++)
         {
-            for (int y = 0; y < size.y; y++)
+            for (int x = 0; x < size.x; x++)
             {
-                FillNeighbor(tiles[x, y].position);
+
+                FillNeighbor(GetTile(x, y).position);
             }
         }
     }
@@ -75,13 +93,13 @@ public class GameGrid : MonoBehaviour
     {
         if (tiles != null)
         {
-            for (int x = 0; x < size.x; x++)
+            for (int y = 0; y < size.y; y++)
             {
-                for (int y = 0; y < size.y; y++)
+                for (int x = 0; x < size.x; x++)
                 {
-                    if (tiles[x, y] != null)
+                    if (GetTile(x, y) != null)
                     {
-                        GameObject go = tiles[x, y].gameObject;
+                        GameObject go = GetTile(x, y).gameObject;
 
                         if (Application.isEditor)
                         {
@@ -91,7 +109,7 @@ public class GameGrid : MonoBehaviour
                         {
                             Destroy(go);
                         }
-                        tiles[x, y] = null;
+                        SetTile(x,y,(GameTile)null);
                     }
                 }
             }
@@ -108,14 +126,9 @@ public class GameGrid : MonoBehaviour
             temp = pos + dir.dirValue;
             temp.x = Mathf.Clamp(temp.x, 0, size.x);
             temp.y = Mathf.Clamp(temp.y, 0, size.y);
-            tiles[pos.x, pos.y].neighbors[i] = GetTile(temp);
+            GetTile(pos).neighbors[i] = GetTile(temp);
         }
 
-    }
-
-    public GameTile GetTile(Vector2Int posInGrid)
-    {
-        return tiles[posInGrid.x, posInGrid.y]; ;
     }
 
     /// <summary>
