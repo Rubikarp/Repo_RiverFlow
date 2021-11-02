@@ -110,6 +110,10 @@ public class GameTile : MonoBehaviour
         }
 
         isDuged = false;
+        isRiver = false;
+        riverStrenght = RiverStrenght._00_;
+        
+        canalsIn = new List<Canal>();
         linkedTile = new List<GameTile>();
     }
 

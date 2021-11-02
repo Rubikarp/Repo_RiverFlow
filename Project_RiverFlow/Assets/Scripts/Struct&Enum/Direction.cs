@@ -110,23 +110,32 @@ public struct Direction
         switch (dir)
         {
             case DirectionEnum.upLeft:
-                return center.dirValue;
+                return upLeft.dirValue;
+
             case DirectionEnum.up:
-                return center.dirValue;
+                return up.dirValue;
+
             case DirectionEnum.upRight:
-                return center.dirValue;
+                return upRight.dirValue;
+
             case DirectionEnum.right:
-                return center.dirValue;
+                return right.dirValue;
+
             case DirectionEnum.downRight:
-                return center.dirValue;
+                return downRight.dirValue;
+
             case DirectionEnum.down:
-                return center.dirValue;
+                return down.dirValue;
+
             case DirectionEnum.downLeft:
-                return center.dirValue;
+                return downLeft.dirValue;
+
             case DirectionEnum.left:
-                return center.dirValue;
+                return left.dirValue;
+
             case DirectionEnum.center:
                 return center.dirValue;
+
             default:
                 return center.dirValue;
         }

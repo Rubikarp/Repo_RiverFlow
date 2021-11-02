@@ -20,6 +20,7 @@ public class RiverManager : MonoBehaviour
         input.onRightClickDown.AddListener();
         */
         digging.onLink.AddListener(OnLink);
+        digging.onBreak.AddListener(OnBreak);
     }
 
     void Update()
@@ -67,6 +68,7 @@ public class RiverManager : MonoBehaviour
                 {
                     if (!haveAddCanal)
                     {
+                        ///TODO confluence
                         canals.Add(canal);
                         startTile.canalsIn.Add(canal);
                         endTile.canalsIn.Add(canal);
@@ -78,6 +80,7 @@ public class RiverManager : MonoBehaviour
                 {
                     if (!haveAddCanal)
                     {
+                        ///TODO confluence
                         canals.Add(canal);
                         startTile.canalsIn.Add(canal);
                         endTile.canalsIn.Add(canal);
@@ -86,6 +89,140 @@ public class RiverManager : MonoBehaviour
                     }
                 }
             }
+        }
+    }
+    public void OnBreak(GameTile erasedTile)
+    {
+        List<Canal> canals = new List<Canal>();
+        canals = erasedTile.canalsIn;
+
+        for (int i = 0; i < erasedTile.canalsIn.Count; i++)
+        {
+            ShortenCanal(erasedTile.canalsIn[i], erasedTile);
+        }
+
+    }
+    
+    public void ExtendCanal(Canal canal, GameTile extremumTile, GameTile addedTile)
+    {
+        if (canal.startNode == extremumTile)
+        {
+            List<GameTile> list = new List<GameTile>();
+            list.Add(canal.startNode);
+            list.AddRange(canal.tiles);
+            canal.tiles = list;
+
+            canal.startNode = addedTile;
+            addedTile.canalsIn.Add(canal);
+        }
+        else
+        if (canal.endNode == extremumTile)
+        {
+            canal.tiles.Add(canal.endNode);
+
+            canal.endNode = addedTile;
+            addedTile.canalsIn.Add(canal);
+        }
+    }
+    public void ShortenCanal(Canal canal, GameTile erasedTile)
+    {
+        if (canal.startNode == erasedTile)
+        {
+            //est ce qu'il reste une tile entre deux ?
+            if (canal.tiles.Count > 0)
+            {
+                canal.startNode.RemoveAllLinkedTile();
+                canal.startNode = canal.tiles[0];
+                canal.tiles.RemoveAt(0);
+            }
+            else
+            {
+                canal.startNode.RemoveAllLinkedTile();
+                canal.endNode.RemoveAllLinkedTile();
+                canals.Remove(canal);
+            }
+        }
+        else
+        if (canal.endNode == erasedTile)
+        {
+            //est ce qu'il reste une tile entre deux ?
+            if (canal.tiles.Count > 0)
+            {
+                canal.endNode.RemoveAllLinkedTile();
+                canal.endNode = canal.tiles[canal.tiles.Count-1];
+                canal.tiles.RemoveAt(canal.tiles.Count-1);
+            }
+            else
+            {
+                canal.startNode.RemoveAllLinkedTile();
+                canal.endNode.RemoveAllLinkedTile();
+                canals.Remove(canal);
+            }
+
+        }
+        else //Splitting
+        {
+            int index = canal.tiles.IndexOf(erasedTile);
+
+            #region SecondPart
+            //si plus de 2 tile après rupture alors je crer un nouveau canal
+            // (tile + start + end) - ((tileIndex+1 car commence à 0)+start)
+            if ((canal.tiles.Count+2) - ((index+1)+1) >= 2)
+            {
+                List<GameTile> temp = new List<GameTile>();
+                for (int i = index + 2; i < canal.tiles.Count; i++)
+                {
+                    temp.Add(canal.tiles[i]);
+                }
+                Canal secondaryCanal = new Canal(canal.tiles[index + 1], canal.endNode, temp);
+
+                canals.Add(secondaryCanal);
+
+                //Updates Canals In
+                secondaryCanal.startNode.canalsIn.Remove(canal);
+                secondaryCanal.startNode.canalsIn.Add(secondaryCanal);
+                for (int i = 0; i < secondaryCanal.tiles.Count; i++)
+                {
+                    secondaryCanal.tiles[i].canalsIn.Remove(canal);
+                    secondaryCanal.tiles[i].canalsIn.Add(secondaryCanal);
+                }
+                secondaryCanal.endNode.canalsIn.Remove(canal);
+                secondaryCanal.endNode.canalsIn.Add(secondaryCanal);
+
+            }
+            else
+            {
+                //toute les tiles après on les suppr
+                for (int i = index + 1; i < canal.tiles.Count; i++)
+                {
+                    canal.tiles[i].RemoveAllLinkedTile();
+                }
+                canal.endNode.RemoveAllLinkedTile();
+            }
+            #endregion
+            
+            #region FirstPart
+            //si plus de 2 tile avant rupture alors je raccorcie le canal
+            // (start + tileIndex)
+            if ((1 + (index - 1)) >= 2)
+            {
+                canal.endNode = canal.tiles[index - 1];
+                for (int i = canal.tiles.Count-1; i > (index - 2); i--)
+                {
+                    canal.tiles.RemoveAt(i);
+                }
+            }
+            else
+            {
+                canal.startNode.RemoveAllLinkedTile();
+                //toute les tiles avant on les suppr
+                for (int i = 0; i < canal.tiles.Count; i++)
+                {
+                    canal.tiles[i].RemoveAllLinkedTile();
+                }
+                canal.endNode.RemoveAllLinkedTile();
+            }
+            #endregion
         }
     }
 
@@ -116,25 +253,4 @@ public class RiverManager : MonoBehaviour
         }
     }
 
-    public void ExtendCanal(Canal canal, GameTile extremumTile, GameTile addedTile)
-    {
-        if (canal.startNode == extremumTile)
-        {
-            List<GameTile> list = new List<GameTile>();
-            list.Add(canal.startNode);
-            list.AddRange(canal.tiles);
-            canal.tiles = list;
-
-            canal.startNode = addedTile;
-            addedTile.canalsIn.Add(canal);
-        }
-        else
-        if (canal.endNode == extremumTile)
-        {
-            canal.tiles.Add(canal.endNode);
-
-            canal.endNode = addedTile;
-            addedTile.canalsIn.Add(canal);
-        }
-    }
 }

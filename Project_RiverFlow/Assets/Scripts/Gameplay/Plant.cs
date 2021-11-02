@@ -2,9 +2,20 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum PlantState
+{
+    Dead,
+    Agony,
+    Young,
+    Tree1,
+    Tree2,
+    Tree3
+}
+
 public class Plant : MonoBehaviour, Element
 {
-    [Header("Variable")]
+    #region Element
+    [Header("Element Data")]
     public GameTile tileOn;
     public GameTile[] TilesOn
     {
@@ -21,165 +32,122 @@ public class Plant : MonoBehaviour, Element
     }
     ///Not Likable
     public bool isLinkable { get { return false; } }
+    #endregion
 
+    [Header("Plant Data")]
+    public PlantState currentState = PlantState.Young;
+    [SerializeField] bool isIrrigated = false;
+    [SerializeField] bool IsAliveVisu = true;
+    private bool IsAlive { get { return currentState != PlantState.Dead; } }
+
+    private int stateIndex = 2;
     public List<int> closeRivers;
     private RiverStrenght bestRiverStrenght = 0;
-    public float noChangeTimer = 0.0f;
-    public float stateDowngradeTimer = 15f;
-    public float stateUpgradeTimer = 60f;
+    
+    [Header("Living")]
+    [Range(0f,1f)] public float timer = 1.0f;
+    public float stateUpgradeTime = 60f;
+    public float stateDowngradeTime = 15f;
 
-    private bool irrigated = false;
-    public string[] state = new string[6];
-    public string currentState;
-    private int stateIndex = 2;
-    private bool alive = true;
-
+    [Header("Visual")]
     public GameObject[] allSkins;
 
-    private void Awake()
+    private void Start()
     {
-        state[0] = "Dead";
-        state[1] = "Agony";
-        state[2] = "Young";
-        state[3] = "Tree1";
-        state[4] = "Tree2";
-        state[5] = "Tree3";
-
-        currentState = state[2];
+        currentState = PlantState.Young;
         UpdateSkin();
     }
 
     void Update()
     {
-        if (alive == true)
+        IsAliveVisu = IsAlive;
+        if (IsAlive)
         {
             CheckNeighboringRivers();
-            noChangeTimer += Time.deltaTime;
             StateUpdate();
         }
     }
 
-    private void CheckNeighboringRivers()  
+    private void CheckNeighboringRivers()
     {
-        for (int a = 0; a < tileOn.neighbors.Length; a++)
+        //Cherche all irrigated Neighbor
+        for (int i = 0; i < tileOn.neighbors.Length; i++)
         {
-            if (tileOn.neighbors[a].isRiver == true)
+            if (tileOn.neighbors[i].isRiver)
             {
-                closeRivers.Add(a);
+                if (!closeRivers.Contains(i))
+                {
+                    closeRivers.Add(i);
+                }
+            }
+            else
+            //if (!tileOn.neighbors[i].isRiver)
+            {
+                if (closeRivers.Contains(i))
+                {
+                    closeRivers.Remove(closeRivers.IndexOf(i));
+                }
             }
         }
 
-        if (closeRivers.Count > 0)
+        //Cherche best river Strenght
+        bestRiverStrenght = 0;
+        for (int j = 0; j < closeRivers.Count; j++)
         {
-            for (int b = 0; b < closeRivers.Count; b++)
+            if (tileOn.neighbors[closeRivers[j]].riverStrenght > bestRiverStrenght)
             {
-                if (tileOn.neighbors[b].riverStrenght >= bestRiverStrenght)
-                {
-                    bestRiverStrenght = tileOn.neighbors[b].riverStrenght;
-                }
+                bestRiverStrenght = tileOn.neighbors[closeRivers[j]].riverStrenght;
             }
+        }
 
-            VerifyIrrigation();
+        //Determine if irrigated
+        isIrrigated = VerifyIrrigation(bestRiverStrenght);
+    }
+
+    private bool VerifyIrrigation(RiverStrenght _bestRiverStrenght)
+    {
+        if(_bestRiverStrenght > RiverStrenght._00_)
+        {
+            return tileOn.type <= (TileType)_bestRiverStrenght;
         }
         else
         {
-            irrigated = false;
-        }
-    }
-
-    private void VerifyIrrigation()
-    {
-        switch (bestRiverStrenght)
-        {
-            case RiverStrenght._00_:
-                irrigated = false;
-                break;
-
-            case RiverStrenght._25_:
-                if (tileOn.type == TileType.soil || tileOn.type == TileType.other)
-                {
-                    irrigated = true;
-                }
-                else
-                {
-                    irrigated = false;
-                }
-                break;
-
-            case RiverStrenght._50_:
-                if (tileOn.type == TileType.soil || tileOn.type == TileType.clay || tileOn.type == TileType.other)
-                {
-                    irrigated = true;
-                }
-                else
-                {
-                    irrigated = false;
-                }
-                break;
-
-            case RiverStrenght._75_:
-                if (tileOn.type == TileType.soil || tileOn.type == TileType.clay || tileOn.type == TileType.sand || tileOn.type == TileType.other)
-                {
-                    irrigated = true;
-                }
-                else
-                {
-                    irrigated = false;
-                }
-                break;
-
-            case RiverStrenght._100_:
-                if (tileOn.type == TileType.soil || tileOn.type == TileType.clay || tileOn.type == TileType.sand)
-                {
-                    irrigated = true;
-                }
-                else
-                {
-                    irrigated = false;
-                }
-                break;
+            return false;
         }
     } 
 
     private void StateUpdate()
     {
-        if (irrigated == false)
+        if (isIrrigated)
         {
-            if (noChangeTimer >= stateDowngradeTimer)
-            {
-                stateIndex -= 1;
-                currentState = state[stateIndex];
-                noChangeTimer = 0.0f;
-                UpdateSkin();
-
-                if (currentState == state[0])
-                {
-                    alive = false;
-                }
-            }
+            timer += Time.deltaTime * (1/stateUpgradeTime);
         }
-        else if (irrigated == true)
+        else
         {
-            if (stateIndex <= 2)
+            timer -= Time.deltaTime * (1/stateDowngradeTime);
+        }
+
+        //Lvl Drop
+        if (timer < 0)
+        {
+            timer += 1f;
+            currentState = (PlantState)Mathf.Clamp((int)(currentState - 1), 0, (int)PlantState.Tree3);
+            UpdateSkin();
+        }
+        else
+        //Lvl Up
+        if (timer > 1)
+        {
+            //Si pas au niveau max
+            if(currentState < PlantState.Tree3)
             {
-                stateIndex = 3;
-                currentState = state[stateIndex];
-                noChangeTimer = 0.0f;
+                timer -= 1f;
+                currentState = (PlantState)Mathf.Clamp((int)(currentState + 1), 0, (int)PlantState.Tree3);
                 UpdateSkin();
             }
-            else if (stateIndex <= 4)
+            else
             {
-                if (noChangeTimer >= stateUpgradeTimer)
-                {
-                    stateIndex += 1;
-                    currentState = state[stateIndex];
-                    noChangeTimer = 0.0f;
-                    UpdateSkin();
-                }
-            }
-            else if (stateIndex == 5)
-            {
-                noChangeTimer = 0.0f;
+                timer = 1f;
             }
         }
     }

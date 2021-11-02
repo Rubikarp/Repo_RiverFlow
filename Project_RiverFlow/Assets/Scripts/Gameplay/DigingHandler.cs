@@ -6,6 +6,8 @@ using UnityEngine.Events;
 
 [Serializable]
 public class linkEvent : UnityEvent<GameTile, GameTile> { }
+[Serializable]
+public class TileEvent : UnityEvent<GameTile> { }
 
 public class DigingHandler : MonoBehaviour
 {
@@ -13,7 +15,8 @@ public class DigingHandler : MonoBehaviour
     public GameGrid grid;
     [Space(10)]
     public linkEvent onLink;
-
+    public TileEvent onBreak;
+    
     void Start()
     {
         input.onLeftClicking.AddListener(OnLeftClicking);
@@ -66,7 +69,13 @@ public class DigingHandler : MonoBehaviour
     }
     public void OnRighClicking()
     {
+        onBreak?.Invoke(input.eraserSelectTile);
+
         input.eraserSelectTile.RemoveAllLinkedTile();
+
+        input.eraserSelectTile.isDuged = false;
+        input.eraserSelectTile.isRiver = false;
+        input.eraserSelectTile.riverStrenght = RiverStrenght._00_;
     }
 
 }

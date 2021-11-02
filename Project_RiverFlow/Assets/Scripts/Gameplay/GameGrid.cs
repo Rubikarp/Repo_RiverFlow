@@ -39,6 +39,7 @@ public class GameGrid : MonoBehaviour
     void Start()
     {
         PopulateGrid();
+        SetNeighbor();
     }
 
     void Update()
@@ -83,7 +84,6 @@ public class GameGrid : MonoBehaviour
         {
             for (int x = 0; x < size.x; x++)
             {
-
                 FillNeighbor(GetTile(x, y).position);
             }
         }
@@ -120,13 +120,25 @@ public class GameGrid : MonoBehaviour
         Vector2Int temp = pos;
         Direction dir = new Direction(0);
 
+        GetTile(pos).neighbors = new GameTile[8];
         for (int i = 0; i < 8; i++)
         {
             dir = new Direction((DirectionEnum)i + 1);
             temp = pos + dir.dirValue;
-            temp.x = Mathf.Clamp(temp.x, 0, size.x);
-            temp.y = Mathf.Clamp(temp.y, 0, size.y);
-            GetTile(pos).neighbors[i] = GetTile(temp);
+
+            if(temp.x < 0 || temp.y < 0)
+            {
+                GetTile(pos).neighbors[i] = null;
+            }
+            else
+            if (temp.x > size.x - 1 || temp.y > size.y - 1)
+            {
+                GetTile(pos).neighbors[i] =  null;
+            }
+            else
+            {
+                GetTile(pos).neighbors[i] = GetTile(temp);
+            }
         }
 
     }

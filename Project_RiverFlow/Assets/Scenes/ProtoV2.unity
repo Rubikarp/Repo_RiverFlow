@@ -156,13 +156,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   position: {x: 18, y: 6}
   neighbors: []
-  canalsLinked: []
+  canalsIn: []
   type: 0
   isDuged: 0
   isRiver: 0
   riverStrenght: 0
   linkedTile: []
-  canalsIn: []
 --- !u!114 &2585725
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -282,13 +281,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   position: {x: 1, y: 2}
   neighbors: []
-  canalsLinked: []
+  canalsIn: []
   type: 0
   isDuged: 0
   isRiver: 0
   riverStrenght: 0
   linkedTile: []
-  canalsIn: []
 --- !u!114 &7634594
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -408,13 +406,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   position: {x: 13, y: 2}
   neighbors: []
-  canalsLinked: []
+  canalsIn: []
   type: 0
   isDuged: 0
   isRiver: 0
   riverStrenght: 0
   linkedTile: []
-  canalsIn: []
 --- !u!114 &14697398
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -534,13 +531,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   position: {x: 13, y: 11}
   neighbors: []
-  canalsLinked: []
+  canalsIn: []
   type: 0
   isDuged: 0
   isRiver: 0
   riverStrenght: 0
   linkedTile: []
-  canalsIn: []
 --- !u!114 &17908315
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -660,13 +656,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   position: {x: 15, y: 9}
   neighbors: []
-  canalsLinked: []
+  canalsIn: []
   type: 0
   isDuged: 0
   isRiver: 0
   riverStrenght: 0
   linkedTile: []
-  canalsIn: []
 --- !u!114 &30737611
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -753,6 +748,11 @@ Transform:
   m_Father: {fileID: 791313075}
   m_RootOrder: 195
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &39218114 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8408782267423306832, guid: 5a8552f0c1487f74bb441c5c837d2071, type: 3}
+  m_PrefabInstance: {fileID: 795910682}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &57381757
 GameObject:
   m_ObjectHideFlags: 0
@@ -786,13 +786,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   position: {x: 15, y: 10}
   neighbors: []
-  canalsLinked: []
+  canalsIn: []
   type: 0
   isDuged: 0
   isRiver: 0
   riverStrenght: 0
   linkedTile: []
-  canalsIn: []
 --- !u!114 &57381759
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -912,13 +911,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   position: {x: 19, y: 9}
   neighbors: []
-  canalsLinked: []
+  canalsIn: []
   type: 0
   isDuged: 0
   isRiver: 0
   riverStrenght: 0
   linkedTile: []
-  canalsIn: []
 --- !u!114 &59113067
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1038,13 +1036,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   position: {x: 14, y: 2}
   neighbors: []
-  canalsLinked: []
+  canalsIn: []
   type: 0
   isDuged: 0
   isRiver: 0
   riverStrenght: 0
   linkedTile: []
-  canalsIn: []
 --- !u!114 &83783451
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1164,13 +1161,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   position: {x: 5, y: 1}
   neighbors: []
-  canalsLinked: []
+  canalsIn: []
   type: 0
   isDuged: 0
   isRiver: 0
   riverStrenght: 0
   linkedTile: []
-  canalsIn: []
 --- !u!114 &91093739
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1290,13 +1286,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   position: {x: 12, y: 4}
   neighbors: []
-  canalsLinked: []
+  canalsIn: []
   type: 0
   isDuged: 0
   isRiver: 0
   riverStrenght: 0
   linkedTile: []
-  canalsIn: []
 --- !u!114 &100343727
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1416,13 +1411,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   position: {x: 3, y: 11}
   neighbors: []
-  canalsLinked: []
+  canalsIn: []
   type: 0
   isDuged: 0
   isRiver: 0
   riverStrenght: 0
   linkedTile: []
-  canalsIn: []
 --- !u!114 &105620126
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1542,13 +1536,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   position: {x: 3, y: 0}
   neighbors: []
-  canalsLinked: []
+  canalsIn: []
   type: 0
   isDuged: 0
   isRiver: 0
   riverStrenght: 0
   linkedTile: []
-  canalsIn: []
 --- !u!114 &110564981
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1729,13 +1722,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   position: {x: 7, y: 7}
   neighbors: []
-  canalsLinked: []
+  canalsIn: []
   type: 0
   isDuged: 0
   isRiver: 0
   riverStrenght: 0
   linkedTile: []
-  canalsIn: []
 --- !u!114 &126635866
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1855,13 +1847,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   position: {x: 14, y: 6}
   neighbors: []
-  canalsLinked: []
+  canalsIn: []
   type: 0
   isDuged: 0
   isRiver: 0
   riverStrenght: 0
   linkedTile: []
-  canalsIn: []
 --- !u!114 &128161351
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1981,13 +1972,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   position: {x: 7, y: 5}
   neighbors: []
-  canalsLinked: []
+  canalsIn: []
   type: 0
   isDuged: 0
   isRiver: 0
   riverStrenght: 0
   linkedTile: []
-  canalsIn: []
 --- !u!114 &132117536
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2200,13 +2190,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   position: {x: 7, y: 0}
   neighbors: []
-  canalsLinked: []
+  canalsIn: []
   type: 0
   isDuged: 0
   isRiver: 0
   riverStrenght: 0
   linkedTile: []
-  canalsIn: []
 --- !u!114 &137960987
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2326,13 +2315,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   position: {x: 17, y: 1}
   neighbors: []
-  canalsLinked: []
+  canalsIn: []
   type: 0
   isDuged: 0
   isRiver: 0
   riverStrenght: 0
   linkedTile: []
-  canalsIn: []
 --- !u!114 &147291940
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2452,13 +2440,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   position: {x: 6, y: 9}
   neighbors: []
-  canalsLinked: []
+  canalsIn: []
   type: 0
   isDuged: 0
   isRiver: 0
   riverStrenght: 0
   linkedTile: []
-  canalsIn: []
 --- !u!114 &167918965
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2578,13 +2565,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   position: {x: 11, y: 7}
   neighbors: []
-  canalsLinked: []
+  canalsIn: []
   type: 0
   isDuged: 0
   isRiver: 0
   riverStrenght: 0
   linkedTile: []
-  canalsIn: []
 --- !u!114 &168302296
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2704,13 +2690,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   position: {x: 14, y: 5}
   neighbors: []
-  canalsLinked: []
+  canalsIn: []
   type: 0
   isDuged: 0
   isRiver: 0
   riverStrenght: 0
   linkedTile: []
-  canalsIn: []
 --- !u!114 &181867915
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2831,13 +2816,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   position: {x: 16, y: 5}
   neighbors: []
-  canalsLinked: []
+  canalsIn: []
   type: 0
   isDuged: 0
   isRiver: 0
   riverStrenght: 0
   linkedTile: []
-  canalsIn: []
 --- !u!114 &184795695
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2957,13 +2941,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   position: {x: 2, y: 0}
   neighbors: []
-  canalsLinked: []
+  canalsIn: []
   type: 0
   isDuged: 0
   isRiver: 0
   riverStrenght: 0
   linkedTile: []
-  canalsIn: []
 --- !u!114 &188244719
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3083,13 +3066,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   position: {x: 6, y: 0}
   neighbors: []
-  canalsLinked: []
+  canalsIn: []
   type: 0
   isDuged: 0
   isRiver: 0
   riverStrenght: 0
   linkedTile: []
-  canalsIn: []
 --- !u!114 &192333234
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3209,13 +3191,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   position: {x: 7, y: 1}
   neighbors: []
-  canalsLinked: []
+  canalsIn: []
   type: 0
   isDuged: 0
   isRiver: 0
   riverStrenght: 0
   linkedTile: []
-  canalsIn: []
 --- !u!114 &204000451
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3335,13 +3316,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   position: {x: 11, y: 1}
   neighbors: []
-  canalsLinked: []
+  canalsIn: []
   type: 0
   isDuged: 0
   isRiver: 0
   riverStrenght: 0
   linkedTile: []
-  canalsIn: []
 --- !u!114 &222229738
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3461,13 +3441,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   position: {x: 0, y: 4}
   neighbors: []
-  canalsLinked: []
+  canalsIn: []
   type: 0
   isDuged: 0
   isRiver: 0
   riverStrenght: 0
   linkedTile: []
-  canalsIn: []
 --- !u!114 &227212552
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3587,13 +3566,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   position: {x: 7, y: 6}
   neighbors: []
-  canalsLinked: []
+  canalsIn: []
   type: 0
   isDuged: 0
   isRiver: 0
   riverStrenght: 0
   linkedTile: []
-  canalsIn: []
 --- !u!114 &231496968
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3713,13 +3691,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   position: {x: 4, y: 0}
   neighbors: []
-  canalsLinked: []
+  canalsIn: []
   type: 0
   isDuged: 0
   isRiver: 0
   riverStrenght: 0
   linkedTile: []
-  canalsIn: []
 --- !u!114 &235808095
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3839,13 +3816,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   position: {x: 16, y: 3}
   neighbors: []
-  canalsLinked: []
+  canalsIn: []
   type: 0
   isDuged: 0
   isRiver: 0
   riverStrenght: 0
   linkedTile: []
-  canalsIn: []
 --- !u!114 &250239779
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3965,13 +3941,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   position: {x: 4, y: 10}
   neighbors: []
-  canalsLinked: []
+  canalsIn: []
   type: 0
   isDuged: 0
   isRiver: 0
   riverStrenght: 0
   linkedTile: []
-  canalsIn: []
 --- !u!114 &253188087
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4091,13 +4066,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   position: {x: 5, y: 7}
   neighbors: []
-  canalsLinked: []
+  canalsIn: []
   type: 0
   isDuged: 0
   isRiver: 0
   riverStrenght: 0
   linkedTile: []
-  canalsIn: []
 --- !u!114 &257553543
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4217,13 +4191,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   position: {x: 9, y: 7}
   neighbors: []
-  canalsLinked: []
+  canalsIn: []
   type: 0
   isDuged: 0
   isRiver: 0
   riverStrenght: 0
   linkedTile: []
-  canalsIn: []
 --- !u!114 &265480202
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4343,13 +4316,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   position: {x: 11, y: 10}
   neighbors: []
-  canalsLinked: []
+  canalsIn: []
   type: 0
   isDuged: 0
   isRiver: 0
   riverStrenght: 0
   linkedTile: []
-  canalsIn: []
 --- !u!114 &271712564
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4469,13 +4441,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   position: {x: 15, y: 11}
   neighbors: []
-  canalsLinked: []
+  canalsIn: []
   type: 0
   isDuged: 0
   isRiver: 0
   riverStrenght: 0
   linkedTile: []
-  canalsIn: []
 --- !u!114 &275321112
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4595,13 +4566,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   position: {x: 17, y: 3}
   neighbors: []
-  canalsLinked: []
+  canalsIn: []
   type: 0
   isDuged: 0
   isRiver: 0
   riverStrenght: 0
   linkedTile: []
-  canalsIn: []
 --- !u!114 &287147941
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4721,13 +4691,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   position: {x: 5, y: 11}
   neighbors: []
-  canalsLinked: []
+  canalsIn: []
   type: 0
   isDuged: 0
   isRiver: 0
   riverStrenght: 0
   linkedTile: []
-  canalsIn: []
 --- !u!114 &305039164
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4847,13 +4816,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   position: {x: 1, y: 10}
   neighbors: []
-  canalsLinked: []
+  canalsIn: []
   type: 0
   isDuged: 0
   isRiver: 0
   riverStrenght: 0
   linkedTile: []
-  canalsIn: []
 --- !u!114 &319245305
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4973,13 +4941,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   position: {x: 15, y: 0}
   neighbors: []
-  canalsLinked: []
+  canalsIn: []
   type: 0
   isDuged: 0
   isRiver: 0
   riverStrenght: 0
   linkedTile: []
-  canalsIn: []
 --- !u!114 &319974620
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5099,13 +5066,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   position: {x: 0, y: 9}
   neighbors: []
-  canalsLinked: []
+  canalsIn: []
   type: 0
   isDuged: 0
   isRiver: 0
   riverStrenght: 0
   linkedTile: []
-  canalsIn: []
 --- !u!114 &326259221
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5225,13 +5191,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   position: {x: 3, y: 10}
   neighbors: []
-  canalsLinked: []
+  canalsIn: []
   type: 0
   isDuged: 0
   isRiver: 0
   riverStrenght: 0
   linkedTile: []
-  canalsIn: []
 --- !u!114 &328816733
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5351,13 +5316,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   position: {x: 2, y: 10}
   neighbors: []
-  canalsLinked: []
+  canalsIn: []
   type: 0
   isDuged: 0
   isRiver: 0
   riverStrenght: 0
   linkedTile: []
-  canalsIn: []
 --- !u!114 &339456751
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5477,13 +5441,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   position: {x: 0, y: 5}
   neighbors: []
-  canalsLinked: []
+  canalsIn: []
   type: 0
   isDuged: 0
   isRiver: 0
   riverStrenght: 0
   linkedTile: []
-  canalsIn: []
 --- !u!114 &352544648
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5603,13 +5566,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   position: {x: 16, y: 7}
   neighbors: []
-  canalsLinked: []
+  canalsIn: []
   type: 0
   isDuged: 0
   isRiver: 0
   riverStrenght: 0
   linkedTile: []
-  canalsIn: []
 --- !u!114 &375702227
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5729,13 +5691,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   position: {x: 15, y: 3}
   neighbors: []
-  canalsLinked: []
+  canalsIn: []
   type: 0
   isDuged: 0
   isRiver: 0
   riverStrenght: 0
   linkedTile: []
-  canalsIn: []
 --- !u!114 &390225579
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5855,13 +5816,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   position: {x: 17, y: 7}
   neighbors: []
-  canalsLinked: []
+  canalsIn: []
   type: 0
   isDuged: 0
   isRiver: 0
   riverStrenght: 0
   linkedTile: []
-  canalsIn: []
 --- !u!114 &401620142
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5981,13 +5941,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   position: {x: 18, y: 0}
   neighbors: []
-  canalsLinked: []
+  canalsIn: []
   type: 0
   isDuged: 0
   isRiver: 0
   riverStrenght: 0
   linkedTile: []
-  canalsIn: []
 --- !u!114 &411558582
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6107,13 +6066,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   position: {x: 9, y: 1}
   neighbors: []
-  canalsLinked: []
+  canalsIn: []
   type: 0
   isDuged: 0
   isRiver: 0
   riverStrenght: 0
   linkedTile: []
-  canalsIn: []
 --- !u!114 &416043341
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6233,13 +6191,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   position: {x: 18, y: 10}
   neighbors: []
-  canalsLinked: []
+  canalsIn: []
   type: 0
   isDuged: 0
   isRiver: 0
   riverStrenght: 0
   linkedTile: []
-  canalsIn: []
 --- !u!114 &423879495
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6359,13 +6316,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   position: {x: 7, y: 4}
   neighbors: []
-  canalsLinked: []
+  canalsIn: []
   type: 0
   isDuged: 0
   isRiver: 0
   riverStrenght: 0
   linkedTile: []
-  canalsIn: []
 --- !u!114 &432987416
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6485,13 +6441,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   position: {x: 4, y: 9}
   neighbors: []
-  canalsLinked: []
+  canalsIn: []
   type: 0
   isDuged: 0
   isRiver: 0
   riverStrenght: 0
   linkedTile: []
-  canalsIn: []
 --- !u!114 &433526048
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6611,13 +6566,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   position: {x: 14, y: 0}
   neighbors: []
-  canalsLinked: []
+  canalsIn: []
   type: 0
   isDuged: 0
   isRiver: 0
   riverStrenght: 0
   linkedTile: []
-  canalsIn: []
 --- !u!114 &443573317
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6737,13 +6691,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   position: {x: 0, y: 0}
   neighbors: []
-  canalsLinked: []
+  canalsIn: []
   type: 0
   isDuged: 0
   isRiver: 0
   riverStrenght: 0
   linkedTile: []
-  canalsIn: []
 --- !u!114 &444284404
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6863,13 +6816,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   position: {x: 5, y: 10}
   neighbors: []
-  canalsLinked: []
+  canalsIn: []
   type: 0
   isDuged: 0
   isRiver: 0
   riverStrenght: 0
   linkedTile: []
-  canalsIn: []
 --- !u!114 &466679808
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6989,13 +6941,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   position: {x: 4, y: 8}
   neighbors: []
-  canalsLinked: []
+  canalsIn: []
   type: 0
   isDuged: 0
   isRiver: 0
   riverStrenght: 0
   linkedTile: []
-  canalsIn: []
 --- !u!114 &468331444
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7115,13 +7066,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   position: {x: 0, y: 8}
   neighbors: []
-  canalsLinked: []
+  canalsIn: []
   type: 0
   isDuged: 0
   isRiver: 0
   riverStrenght: 0
   linkedTile: []
-  canalsIn: []
 --- !u!114 &472361563
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7241,13 +7191,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   position: {x: 19, y: 10}
   neighbors: []
-  canalsLinked: []
+  canalsIn: []
   type: 0
   isDuged: 0
   isRiver: 0
   riverStrenght: 0
   linkedTile: []
-  canalsIn: []
 --- !u!114 &478369122
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7367,13 +7316,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   position: {x: 0, y: 6}
   neighbors: []
-  canalsLinked: []
+  canalsIn: []
   type: 0
   isDuged: 0
   isRiver: 0
   riverStrenght: 0
   linkedTile: []
-  canalsIn: []
 --- !u!114 &484351936
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7493,13 +7441,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   position: {x: 4, y: 4}
   neighbors: []
-  canalsLinked: []
+  canalsIn: []
   type: 0
   isDuged: 0
   isRiver: 0
   riverStrenght: 0
   linkedTile: []
-  canalsIn: []
 --- !u!114 &485271517
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7619,13 +7566,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   position: {x: 6, y: 1}
   neighbors: []
-  canalsLinked: []
+  canalsIn: []
   type: 0
   isDuged: 0
   isRiver: 0
   riverStrenght: 0
   linkedTile: []
-  canalsIn: []
 --- !u!114 &499487231
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7745,13 +7691,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   position: {x: 9, y: 10}
   neighbors: []
-  canalsLinked: []
+  canalsIn: []
   type: 0
   isDuged: 0
   isRiver: 0
   riverStrenght: 0
   linkedTile: []
-  canalsIn: []
 --- !u!114 &502700620
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7871,13 +7816,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   position: {x: 9, y: 5}
   neighbors: []
-  canalsLinked: []
+  canalsIn: []
   type: 0
   isDuged: 0
   isRiver: 0
   riverStrenght: 0
   linkedTile: []
-  canalsIn: []
 --- !u!114 &513030967
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7997,13 +7941,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   position: {x: 10, y: 5}
   neighbors: []
-  canalsLinked: []
+  canalsIn: []
   type: 0
   isDuged: 0
   isRiver: 0
   riverStrenght: 0
   linkedTile: []
-  canalsIn: []
 --- !u!114 &518520925
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8123,13 +8066,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   position: {x: 11, y: 8}
   neighbors: []
-  canalsLinked: []
+  canalsIn: []
   type: 0
   isDuged: 0
   isRiver: 0
   riverStrenght: 0
   linkedTile: []
-  canalsIn: []
 --- !u!114 &542397144
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8249,13 +8191,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   position: {x: 3, y: 2}
   neighbors: []
-  canalsLinked: []
+  canalsIn: []
   type: 0
   isDuged: 0
   isRiver: 0
   riverStrenght: 0
   linkedTile: []
-  canalsIn: []
 --- !u!114 &550553477
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8375,13 +8316,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   position: {x: 7, y: 8}
   neighbors: []
-  canalsLinked: []
+  canalsIn: []
   type: 0
   isDuged: 0
   isRiver: 0
   riverStrenght: 0
   linkedTile: []
-  canalsIn: []
 --- !u!114 &629498043
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8501,13 +8441,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   position: {x: 2, y: 9}
   neighbors: []
-  canalsLinked: []
+  canalsIn: []
   type: 0
   isDuged: 0
   isRiver: 0
   riverStrenght: 0
   linkedTile: []
-  canalsIn: []
 --- !u!114 &636023389
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8627,13 +8566,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   position: {x: 5, y: 0}
   neighbors: []
-  canalsLinked: []
+  canalsIn: []
   type: 0
   isDuged: 0
   isRiver: 0
   riverStrenght: 0
   linkedTile: []
-  canalsIn: []
 --- !u!114 &642039897
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8753,13 +8691,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   position: {x: 8, y: 8}
   neighbors: []
-  canalsLinked: []
+  canalsIn: []
   type: 0
   isDuged: 0
   isRiver: 0
   riverStrenght: 0
   linkedTile: []
-  canalsIn: []
 --- !u!114 &648842636
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8842,7 +8779,8 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -1.5, y: 2.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 39218114}
   m_Father: {fileID: 791313075}
   m_RootOrder: 168
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -8879,13 +8817,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   position: {x: 14, y: 11}
   neighbors: []
-  canalsLinked: []
+  canalsIn: []
   type: 0
   isDuged: 0
   isRiver: 0
   riverStrenght: 0
   linkedTile: []
-  canalsIn: []
 --- !u!114 &679039332
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9005,13 +8942,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   position: {x: 14, y: 1}
   neighbors: []
-  canalsLinked: []
+  canalsIn: []
   type: 0
   isDuged: 0
   isRiver: 0
   riverStrenght: 0
   linkedTile: []
-  canalsIn: []
 --- !u!114 &680392602
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9131,13 +9067,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   position: {x: 1, y: 1}
   neighbors: []
-  canalsLinked: []
+  canalsIn: []
   type: 0
   isDuged: 0
   isRiver: 0
   riverStrenght: 0
   linkedTile: []
-  canalsIn: []
 --- !u!114 &689967350
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9257,13 +9192,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   position: {x: 3, y: 3}
   neighbors: []
-  canalsLinked: []
+  canalsIn: []
   type: 0
   isDuged: 0
   isRiver: 0
   riverStrenght: 0
   linkedTile: []
-  canalsIn: []
 --- !u!114 &697743061
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9383,13 +9317,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   position: {x: 1, y: 4}
   neighbors: []
-  canalsLinked: []
+  canalsIn: []
   type: 0
   isDuged: 0
   isRiver: 0
   riverStrenght: 0
   linkedTile: []
-  canalsIn: []
 --- !u!114 &698850208
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9509,13 +9442,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   position: {x: 3, y: 1}
   neighbors: []
-  canalsLinked: []
+  canalsIn: []
   type: 0
   isDuged: 0
   isRiver: 0
   riverStrenght: 0
   linkedTile: []
-  canalsIn: []
 --- !u!114 &736286173
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9635,13 +9567,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   position: {x: 5, y: 3}
   neighbors: []
-  canalsLinked: []
+  canalsIn: []
   type: 0
   isDuged: 0
   isRiver: 0
   riverStrenght: 0
   linkedTile: []
-  canalsIn: []
 --- !u!114 &742481036
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9761,13 +9692,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   position: {x: 2, y: 11}
   neighbors: []
-  canalsLinked: []
+  canalsIn: []
   type: 0
   isDuged: 0
   isRiver: 0
   riverStrenght: 0
   linkedTile: []
-  canalsIn: []
 --- !u!114 &753038670
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9887,13 +9817,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   position: {x: 3, y: 9}
   neighbors: []
-  canalsLinked: []
+  canalsIn: []
   type: 0
   isDuged: 0
   isRiver: 0
   riverStrenght: 0
   linkedTile: []
-  canalsIn: []
 --- !u!114 &754433423
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10013,13 +9942,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   position: {x: 13, y: 6}
   neighbors: []
-  canalsLinked: []
+  canalsIn: []
   type: 0
   isDuged: 0
   isRiver: 0
   riverStrenght: 0
   linkedTile: []
-  canalsIn: []
 --- !u!114 &757948545
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10139,13 +10067,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   position: {x: 15, y: 2}
   neighbors: []
-  canalsLinked: []
+  canalsIn: []
   type: 0
   isDuged: 0
   isRiver: 0
   riverStrenght: 0
   linkedTile: []
-  canalsIn: []
 --- !u!114 &778001919
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10535,13 +10462,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   position: {x: 0, y: 3}
   neighbors: []
-  canalsLinked: []
+  canalsIn: []
   type: 0
   isDuged: 0
   isRiver: 0
   riverStrenght: 0
   linkedTile: []
-  canalsIn: []
 --- !u!114 &791384864
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10628,6 +10554,67 @@ Transform:
   m_Father: {fileID: 791313075}
   m_RootOrder: 60
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &795910682
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 648842638}
+    m_Modifications:
+    - target: {fileID: 4751209323767118212, guid: 5a8552f0c1487f74bb441c5c837d2071, type: 3}
+      propertyPath: tileOn
+      value: 
+      objectReference: {fileID: 648842635}
+    - target: {fileID: 7129485572310087032, guid: 5a8552f0c1487f74bb441c5c837d2071, type: 3}
+      propertyPath: m_Name
+      value: Element-Plant
+      objectReference: {fileID: 0}
+    - target: {fileID: 8408782267423306832, guid: 5a8552f0c1487f74bb441c5c837d2071, type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8408782267423306832, guid: 5a8552f0c1487f74bb441c5c837d2071, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8408782267423306832, guid: 5a8552f0c1487f74bb441c5c837d2071, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8408782267423306832, guid: 5a8552f0c1487f74bb441c5c837d2071, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8408782267423306832, guid: 5a8552f0c1487f74bb441c5c837d2071, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8408782267423306832, guid: 5a8552f0c1487f74bb441c5c837d2071, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8408782267423306832, guid: 5a8552f0c1487f74bb441c5c837d2071, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8408782267423306832, guid: 5a8552f0c1487f74bb441c5c837d2071, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8408782267423306832, guid: 5a8552f0c1487f74bb441c5c837d2071, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8408782267423306832, guid: 5a8552f0c1487f74bb441c5c837d2071, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8408782267423306832, guid: 5a8552f0c1487f74bb441c5c837d2071, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 5a8552f0c1487f74bb441c5c837d2071, type: 3}
 --- !u!1 &800046420
 GameObject:
   m_ObjectHideFlags: 0
@@ -10661,13 +10648,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   position: {x: 7, y: 2}
   neighbors: []
-  canalsLinked: []
+  canalsIn: []
   type: 0
   isDuged: 0
   isRiver: 0
   riverStrenght: 0
   linkedTile: []
-  canalsIn: []
 --- !u!114 &800046422
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10787,13 +10773,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   position: {x: 3, y: 7}
   neighbors: []
-  canalsLinked: []
+  canalsIn: []
   type: 0
   isDuged: 0
   isRiver: 0
   riverStrenght: 0
   linkedTile: []
-  canalsIn: []
 --- !u!114 &803437377
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10913,13 +10898,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   position: {x: 13, y: 0}
   neighbors: []
-  canalsLinked: []
+  canalsIn: []
   type: 0
   isDuged: 0
   isRiver: 0
   riverStrenght: 0
   linkedTile: []
-  canalsIn: []
 --- !u!114 &807233614
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11039,13 +11023,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   position: {x: 10, y: 6}
   neighbors: []
-  canalsLinked: []
+  canalsIn: []
   type: 0
   isDuged: 0
   isRiver: 0
   riverStrenght: 0
   linkedTile: []
-  canalsIn: []
 --- !u!114 &814994016
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11165,13 +11148,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   position: {x: 19, y: 7}
   neighbors: []
-  canalsLinked: []
+  canalsIn: []
   type: 0
   isDuged: 0
   isRiver: 0
   riverStrenght: 0
   linkedTile: []
-  canalsIn: []
 --- !u!114 &830341733
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11291,13 +11273,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   position: {x: 16, y: 11}
   neighbors: []
-  canalsLinked: []
+  canalsIn: []
   type: 0
   isDuged: 0
   isRiver: 0
   riverStrenght: 0
   linkedTile: []
-  canalsIn: []
 --- !u!114 &838485428
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11417,13 +11398,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   position: {x: 12, y: 10}
   neighbors: []
-  canalsLinked: []
+  canalsIn: []
   type: 0
   isDuged: 0
   isRiver: 0
   riverStrenght: 0
   linkedTile: []
-  canalsIn: []
 --- !u!114 &856581407
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11543,13 +11523,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   position: {x: 10, y: 0}
   neighbors: []
-  canalsLinked: []
+  canalsIn: []
   type: 0
   isDuged: 0
   isRiver: 0
   riverStrenght: 0
   linkedTile: []
-  canalsIn: []
 --- !u!114 &859218440
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11669,13 +11648,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   position: {x: 9, y: 6}
   neighbors: []
-  canalsLinked: []
+  canalsIn: []
   type: 0
   isDuged: 0
   isRiver: 0
   riverStrenght: 0
   linkedTile: []
-  canalsIn: []
 --- !u!114 &863452057
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11795,13 +11773,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   position: {x: 17, y: 10}
   neighbors: []
-  canalsLinked: []
+  canalsIn: []
   type: 0
   isDuged: 0
   isRiver: 0
   riverStrenght: 0
   linkedTile: []
-  canalsIn: []
 --- !u!114 &867910855
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11921,13 +11898,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   position: {x: 15, y: 7}
   neighbors: []
-  canalsLinked: []
+  canalsIn: []
   type: 0
   isDuged: 0
   isRiver: 0
   riverStrenght: 0
   linkedTile: []
-  canalsIn: []
 --- !u!114 &872937476
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12047,13 +12023,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   position: {x: 16, y: 2}
   neighbors: []
-  canalsLinked: []
+  canalsIn: []
   type: 0
   isDuged: 0
   isRiver: 0
   riverStrenght: 0
   linkedTile: []
-  canalsIn: []
 --- !u!114 &874626249
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12173,13 +12148,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   position: {x: 7, y: 10}
   neighbors: []
-  canalsLinked: []
+  canalsIn: []
   type: 0
   isDuged: 0
   isRiver: 0
   riverStrenght: 0
   linkedTile: []
-  canalsIn: []
 --- !u!114 &891999961
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12299,13 +12273,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   position: {x: 2, y: 4}
   neighbors: []
-  canalsLinked: []
+  canalsIn: []
   type: 0
   isDuged: 0
   isRiver: 0
   riverStrenght: 0
   linkedTile: []
-  canalsIn: []
 --- !u!114 &911337469
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12718,13 +12691,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   position: {x: 13, y: 10}
   neighbors: []
-  canalsLinked: []
+  canalsIn: []
   type: 0
   isDuged: 0
   isRiver: 0
   riverStrenght: 0
   linkedTile: []
-  canalsIn: []
 --- !u!114 &930595961
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12844,13 +12816,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   position: {x: 10, y: 11}
   neighbors: []
-  canalsLinked: []
+  canalsIn: []
   type: 0
   isDuged: 0
   isRiver: 0
   riverStrenght: 0
   linkedTile: []
-  canalsIn: []
 --- !u!114 &931612855
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12970,13 +12941,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   position: {x: 3, y: 4}
   neighbors: []
-  canalsLinked: []
+  canalsIn: []
   type: 0
   isDuged: 0
   isRiver: 0
   riverStrenght: 0
   linkedTile: []
-  canalsIn: []
 --- !u!114 &961320115
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13096,13 +13066,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   position: {x: 18, y: 5}
   neighbors: []
-  canalsLinked: []
+  canalsIn: []
   type: 0
   isDuged: 0
   isRiver: 0
   riverStrenght: 0
   linkedTile: []
-  canalsIn: []
 --- !u!114 &966005474
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13222,13 +13191,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   position: {x: 10, y: 3}
   neighbors: []
-  canalsLinked: []
+  canalsIn: []
   type: 0
   isDuged: 0
   isRiver: 0
   riverStrenght: 0
   linkedTile: []
-  canalsIn: []
 --- !u!114 &969152814
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13348,13 +13316,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   position: {x: 17, y: 5}
   neighbors: []
-  canalsLinked: []
+  canalsIn: []
   type: 0
   isDuged: 0
   isRiver: 0
   riverStrenght: 0
   linkedTile: []
-  canalsIn: []
 --- !u!114 &969751869
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13474,13 +13441,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   position: {x: 2, y: 8}
   neighbors: []
-  canalsLinked: []
+  canalsIn: []
   type: 0
   isDuged: 0
   isRiver: 0
   riverStrenght: 0
   linkedTile: []
-  canalsIn: []
 --- !u!114 &977311900
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13600,13 +13566,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   position: {x: 1, y: 0}
   neighbors: []
-  canalsLinked: []
+  canalsIn: []
   type: 0
   isDuged: 0
   isRiver: 0
   riverStrenght: 0
   linkedTile: []
-  canalsIn: []
 --- !u!114 &985158767
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13726,13 +13691,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   position: {x: 11, y: 9}
   neighbors: []
-  canalsLinked: []
+  canalsIn: []
   type: 0
   isDuged: 0
   isRiver: 0
   riverStrenght: 0
   linkedTile: []
-  canalsIn: []
 --- !u!114 &992020277
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13852,13 +13816,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   position: {x: 19, y: 6}
   neighbors: []
-  canalsLinked: []
+  canalsIn: []
   type: 0
   isDuged: 0
   isRiver: 0
   riverStrenght: 0
   linkedTile: []
-  canalsIn: []
 --- !u!114 &994920644
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13978,13 +13941,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   position: {x: 6, y: 11}
   neighbors: []
-  canalsLinked: []
+  canalsIn: []
   type: 0
   isDuged: 0
   isRiver: 0
   riverStrenght: 0
   linkedTile: []
-  canalsIn: []
 --- !u!114 &996347962
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14104,13 +14066,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   position: {x: 19, y: 11}
   neighbors: []
-  canalsLinked: []
+  canalsIn: []
   type: 0
   isDuged: 0
   isRiver: 0
   riverStrenght: 0
   linkedTile: []
-  canalsIn: []
 --- !u!114 &1001812334
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14230,13 +14191,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   position: {x: 9, y: 2}
   neighbors: []
-  canalsLinked: []
+  canalsIn: []
   type: 0
   isDuged: 0
   isRiver: 0
   riverStrenght: 0
   linkedTile: []
-  canalsIn: []
 --- !u!114 &1005092314
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14356,13 +14316,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   position: {x: 18, y: 1}
   neighbors: []
-  canalsLinked: []
+  canalsIn: []
   type: 0
   isDuged: 0
   isRiver: 0
   riverStrenght: 0
   linkedTile: []
-  canalsIn: []
 --- !u!114 &1011156261
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14482,13 +14441,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   position: {x: 8, y: 9}
   neighbors: []
-  canalsLinked: []
+  canalsIn: []
   type: 0
   isDuged: 0
   isRiver: 0
   riverStrenght: 0
   linkedTile: []
-  canalsIn: []
 --- !u!114 &1019903724
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14608,13 +14566,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   position: {x: 3, y: 5}
   neighbors: []
-  canalsLinked: []
+  canalsIn: []
   type: 0
   isDuged: 0
   isRiver: 0
   riverStrenght: 0
   linkedTile: []
-  canalsIn: []
 --- !u!114 &1029101605
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14734,13 +14691,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   position: {x: 0, y: 2}
   neighbors: []
-  canalsLinked: []
+  canalsIn: []
   type: 0
   isDuged: 0
   isRiver: 0
   riverStrenght: 0
   linkedTile: []
-  canalsIn: []
 --- !u!114 &1047065297
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14860,13 +14816,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   position: {x: 1, y: 8}
   neighbors: []
-  canalsLinked: []
+  canalsIn: []
   type: 0
   isDuged: 0
   isRiver: 0
   riverStrenght: 0
   linkedTile: []
-  canalsIn: []
 --- !u!114 &1055401533
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14986,13 +14941,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   position: {x: 11, y: 2}
   neighbors: []
-  canalsLinked: []
+  canalsIn: []
   type: 0
   isDuged: 0
   isRiver: 0
   riverStrenght: 0
   linkedTile: []
-  canalsIn: []
 --- !u!114 &1058806468
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15112,13 +15066,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   position: {x: 1, y: 11}
   neighbors: []
-  canalsLinked: []
+  canalsIn: []
   type: 0
   isDuged: 0
   isRiver: 0
   riverStrenght: 0
   linkedTile: []
-  canalsIn: []
 --- !u!114 &1075604935
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15238,13 +15191,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   position: {x: 18, y: 11}
   neighbors: []
-  canalsLinked: []
+  canalsIn: []
   type: 0
   isDuged: 0
   isRiver: 0
   riverStrenght: 0
   linkedTile: []
-  canalsIn: []
 --- !u!114 &1079800221
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15364,13 +15316,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   position: {x: 17, y: 0}
   neighbors: []
-  canalsLinked: []
+  canalsIn: []
   type: 0
   isDuged: 0
   isRiver: 0
   riverStrenght: 0
   linkedTile: []
-  canalsIn: []
 --- !u!114 &1091445169
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15490,13 +15441,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   position: {x: 4, y: 6}
   neighbors: []
-  canalsLinked: []
+  canalsIn: []
   type: 0
   isDuged: 0
   isRiver: 0
   riverStrenght: 0
   linkedTile: []
-  canalsIn: []
 --- !u!114 &1093552190
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15616,13 +15566,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   position: {x: 17, y: 2}
   neighbors: []
-  canalsLinked: []
+  canalsIn: []
   type: 0
   isDuged: 0
   isRiver: 0
   riverStrenght: 0
   linkedTile: []
-  canalsIn: []
 --- !u!114 &1094117335
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15742,13 +15691,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   position: {x: 13, y: 7}
   neighbors: []
-  canalsLinked: []
+  canalsIn: []
   type: 0
   isDuged: 0
   isRiver: 0
   riverStrenght: 0
   linkedTile: []
-  canalsIn: []
 --- !u!114 &1094807536
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15868,13 +15816,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   position: {x: 12, y: 3}
   neighbors: []
-  canalsLinked: []
+  canalsIn: []
   type: 0
   isDuged: 0
   isRiver: 0
   riverStrenght: 0
   linkedTile: []
-  canalsIn: []
 --- !u!114 &1096292701
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15994,13 +15941,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   position: {x: 10, y: 2}
   neighbors: []
-  canalsLinked: []
+  canalsIn: []
   type: 0
   isDuged: 0
   isRiver: 0
   riverStrenght: 0
   linkedTile: []
-  canalsIn: []
 --- !u!114 &1101170779
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -16120,13 +16066,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   position: {x: 18, y: 4}
   neighbors: []
-  canalsLinked: []
+  canalsIn: []
   type: 0
   isDuged: 0
   isRiver: 0
   riverStrenght: 0
   linkedTile: []
-  canalsIn: []
 --- !u!114 &1103720139
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -16246,13 +16191,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   position: {x: 12, y: 11}
   neighbors: []
-  canalsLinked: []
+  canalsIn: []
   type: 0
   isDuged: 0
   isRiver: 0
   riverStrenght: 0
   linkedTile: []
-  canalsIn: []
 --- !u!114 &1119801613
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -16372,13 +16316,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   position: {x: 13, y: 8}
   neighbors: []
-  canalsLinked: []
+  canalsIn: []
   type: 0
   isDuged: 0
   isRiver: 0
   riverStrenght: 0
   linkedTile: []
-  canalsIn: []
 --- !u!114 &1123041198
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -16498,13 +16441,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   position: {x: 2, y: 1}
   neighbors: []
-  canalsLinked: []
+  canalsIn: []
   type: 0
   isDuged: 0
   isRiver: 0
   riverStrenght: 0
   linkedTile: []
-  canalsIn: []
 --- !u!114 &1125724426
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -16624,13 +16566,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   position: {x: 15, y: 5}
   neighbors: []
-  canalsLinked: []
+  canalsIn: []
   type: 0
   isDuged: 0
   isRiver: 0
   riverStrenght: 0
   linkedTile: []
-  canalsIn: []
 --- !u!114 &1134105260
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -16750,13 +16691,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   position: {x: 2, y: 3}
   neighbors: []
-  canalsLinked: []
+  canalsIn: []
   type: 0
   isDuged: 0
   isRiver: 0
   riverStrenght: 0
   linkedTile: []
-  canalsIn: []
 --- !u!114 &1134844199
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -16876,13 +16816,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   position: {x: 9, y: 3}
   neighbors: []
-  canalsLinked: []
+  canalsIn: []
   type: 0
   isDuged: 0
   isRiver: 0
   riverStrenght: 0
   linkedTile: []
-  canalsIn: []
 --- !u!114 &1144597978
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -17002,13 +16941,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   position: {x: 17, y: 9}
   neighbors: []
-  canalsLinked: []
+  canalsIn: []
   type: 0
   isDuged: 0
   isRiver: 0
   riverStrenght: 0
   linkedTile: []
-  canalsIn: []
 --- !u!114 &1158753428
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -17128,13 +17066,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   position: {x: 15, y: 6}
   neighbors: []
-  canalsLinked: []
+  canalsIn: []
   type: 0
   isDuged: 0
   isRiver: 0
   riverStrenght: 0
   linkedTile: []
-  canalsIn: []
 --- !u!114 &1164288142
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -17270,6 +17207,9 @@ MonoBehaviour:
   onLink:
     m_PersistentCalls:
       m_Calls: []
+  onBreak:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &1167527396
 GameObject:
   m_ObjectHideFlags: 0
@@ -17303,13 +17243,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   position: {x: 4, y: 1}
   neighbors: []
-  canalsLinked: []
+  canalsIn: []
   type: 0
   isDuged: 0
   isRiver: 0
   riverStrenght: 0
   linkedTile: []
-  canalsIn: []
 --- !u!114 &1167527398
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -17460,13 +17399,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   position: {x: 16, y: 6}
   neighbors: []
-  canalsLinked: []
+  canalsIn: []
   type: 0
   isDuged: 0
   isRiver: 0
   riverStrenght: 0
   linkedTile: []
-  canalsIn: []
 --- !u!114 &1176345499
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -17586,13 +17524,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   position: {x: 1, y: 9}
   neighbors: []
-  canalsLinked: []
+  canalsIn: []
   type: 0
   isDuged: 0
   isRiver: 0
   riverStrenght: 0
   linkedTile: []
-  canalsIn: []
 --- !u!114 &1177172838
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -17712,13 +17649,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   position: {x: 6, y: 7}
   neighbors: []
-  canalsLinked: []
+  canalsIn: []
   type: 0
   isDuged: 0
   isRiver: 0
   riverStrenght: 0
   linkedTile: []
-  canalsIn: []
 --- !u!114 &1179682929
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -17838,13 +17774,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   position: {x: 12, y: 9}
   neighbors: []
-  canalsLinked: []
+  canalsIn: []
   type: 0
   isDuged: 0
   isRiver: 0
   riverStrenght: 0
   linkedTile: []
-  canalsIn: []
 --- !u!114 &1191684420
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -17964,13 +17899,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   position: {x: 4, y: 2}
   neighbors: []
-  canalsLinked: []
+  canalsIn: []
   type: 0
   isDuged: 0
   isRiver: 0
   riverStrenght: 0
   linkedTile: []
-  canalsIn: []
 --- !u!114 &1223002959
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -18090,13 +18024,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   position: {x: 11, y: 4}
   neighbors: []
-  canalsLinked: []
+  canalsIn: []
   type: 0
   isDuged: 0
   isRiver: 0
   riverStrenght: 0
   linkedTile: []
-  canalsIn: []
 --- !u!114 &1226621725
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -18216,13 +18149,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   position: {x: 19, y: 1}
   neighbors: []
-  canalsLinked: []
+  canalsIn: []
   type: 0
   isDuged: 0
   isRiver: 0
   riverStrenght: 0
   linkedTile: []
-  canalsIn: []
 --- !u!114 &1231679793
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -18342,13 +18274,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   position: {x: 5, y: 8}
   neighbors: []
-  canalsLinked: []
+  canalsIn: []
   type: 0
   isDuged: 0
   isRiver: 0
   riverStrenght: 0
   linkedTile: []
-  canalsIn: []
 --- !u!114 &1232537375
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -18468,13 +18399,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   position: {x: 1, y: 6}
   neighbors: []
-  canalsLinked: []
+  canalsIn: []
   type: 0
   isDuged: 0
   isRiver: 0
   riverStrenght: 0
   linkedTile: []
-  canalsIn: []
 --- !u!114 &1233902030
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -18594,13 +18524,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   position: {x: 16, y: 1}
   neighbors: []
-  canalsLinked: []
+  canalsIn: []
   type: 0
   isDuged: 0
   isRiver: 0
   riverStrenght: 0
   linkedTile: []
-  canalsIn: []
 --- !u!114 &1248133522
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -18720,13 +18649,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   position: {x: 15, y: 8}
   neighbors: []
-  canalsLinked: []
+  canalsIn: []
   type: 0
   isDuged: 0
   isRiver: 0
   riverStrenght: 0
   linkedTile: []
-  canalsIn: []
 --- !u!114 &1251116294
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -18846,13 +18774,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   position: {x: 4, y: 3}
   neighbors: []
-  canalsLinked: []
+  canalsIn: []
   type: 0
   isDuged: 0
   isRiver: 0
   riverStrenght: 0
   linkedTile: []
-  canalsIn: []
 --- !u!114 &1253706541
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -18972,13 +18899,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   position: {x: 9, y: 0}
   neighbors: []
-  canalsLinked: []
+  canalsIn: []
   type: 0
   isDuged: 0
   isRiver: 0
   riverStrenght: 0
   linkedTile: []
-  canalsIn: []
 --- !u!114 &1255786245
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -19098,13 +19024,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   position: {x: 1, y: 7}
   neighbors: []
-  canalsLinked: []
+  canalsIn: []
   type: 0
   isDuged: 0
   isRiver: 0
   riverStrenght: 0
   linkedTile: []
-  canalsIn: []
 --- !u!114 &1266756297
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -19224,13 +19149,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   position: {x: 13, y: 4}
   neighbors: []
-  canalsLinked: []
+  canalsIn: []
   type: 0
   isDuged: 0
   isRiver: 0
   riverStrenght: 0
   linkedTile: []
-  canalsIn: []
 --- !u!114 &1272580102
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -19350,13 +19274,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   position: {x: 12, y: 2}
   neighbors: []
-  canalsLinked: []
+  canalsIn: []
   type: 0
   isDuged: 0
   isRiver: 0
   riverStrenght: 0
   linkedTile: []
-  canalsIn: []
 --- !u!114 &1274200329
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -19476,13 +19399,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   position: {x: 12, y: 1}
   neighbors: []
-  canalsLinked: []
+  canalsIn: []
   type: 0
   isDuged: 0
   isRiver: 0
   riverStrenght: 0
   linkedTile: []
-  canalsIn: []
 --- !u!114 &1277362795
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -19602,13 +19524,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   position: {x: 16, y: 8}
   neighbors: []
-  canalsLinked: []
+  canalsIn: []
   type: 0
   isDuged: 0
   isRiver: 0
   riverStrenght: 0
   linkedTile: []
-  canalsIn: []
 --- !u!114 &1288605772
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -19728,13 +19649,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   position: {x: 0, y: 10}
   neighbors: []
-  canalsLinked: []
+  canalsIn: []
   type: 0
   isDuged: 0
   isRiver: 0
   riverStrenght: 0
   linkedTile: []
-  canalsIn: []
 --- !u!114 &1289547455
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -19854,13 +19774,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   position: {x: 14, y: 7}
   neighbors: []
-  canalsLinked: []
+  canalsIn: []
   type: 0
   isDuged: 0
   isRiver: 0
   riverStrenght: 0
   linkedTile: []
-  canalsIn: []
 --- !u!114 &1294191848
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -19980,13 +19899,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   position: {x: 19, y: 0}
   neighbors: []
-  canalsLinked: []
+  canalsIn: []
   type: 0
   isDuged: 0
   isRiver: 0
   riverStrenght: 0
   linkedTile: []
-  canalsIn: []
 --- !u!114 &1304086516
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -20106,13 +20024,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   position: {x: 7, y: 3}
   neighbors: []
-  canalsLinked: []
+  canalsIn: []
   type: 0
   isDuged: 0
   isRiver: 0
   riverStrenght: 0
   linkedTile: []
-  canalsIn: []
 --- !u!114 &1310452384
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -20232,13 +20149,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   position: {x: 8, y: 0}
   neighbors: []
-  canalsLinked: []
+  canalsIn: []
   type: 0
   isDuged: 0
   isRiver: 0
   riverStrenght: 0
   linkedTile: []
-  canalsIn: []
 --- !u!114 &1319307084
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -20358,13 +20274,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   position: {x: 7, y: 11}
   neighbors: []
-  canalsLinked: []
+  canalsIn: []
   type: 0
   isDuged: 0
   isRiver: 0
   riverStrenght: 0
   linkedTile: []
-  canalsIn: []
 --- !u!114 &1335809501
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -20484,13 +20399,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   position: {x: 11, y: 11}
   neighbors: []
-  canalsLinked: []
+  canalsIn: []
   type: 0
   isDuged: 0
   isRiver: 0
   riverStrenght: 0
   linkedTile: []
-  canalsIn: []
 --- !u!114 &1347022079
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -20610,13 +20524,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   position: {x: 11, y: 3}
   neighbors: []
-  canalsLinked: []
+  canalsIn: []
   type: 0
   isDuged: 0
   isRiver: 0
   riverStrenght: 0
   linkedTile: []
-  canalsIn: []
 --- !u!114 &1368694702
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -20736,13 +20649,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   position: {x: 5, y: 5}
   neighbors: []
-  canalsLinked: []
+  canalsIn: []
   type: 0
   isDuged: 0
   isRiver: 0
   riverStrenght: 0
   linkedTile: []
-  canalsIn: []
 --- !u!114 &1369726769
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -20862,13 +20774,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   position: {x: 4, y: 7}
   neighbors: []
-  canalsLinked: []
+  canalsIn: []
   type: 0
   isDuged: 0
   isRiver: 0
   riverStrenght: 0
   linkedTile: []
-  canalsIn: []
 --- !u!114 &1370148733
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -20988,13 +20899,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   position: {x: 18, y: 2}
   neighbors: []
-  canalsLinked: []
+  canalsIn: []
   type: 0
   isDuged: 0
   isRiver: 0
   riverStrenght: 0
   linkedTile: []
-  canalsIn: []
 --- !u!114 &1389953722
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -21114,13 +21024,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   position: {x: 6, y: 4}
   neighbors: []
-  canalsLinked: []
+  canalsIn: []
   type: 0
   isDuged: 0
   isRiver: 0
   riverStrenght: 0
   linkedTile: []
-  canalsIn: []
 --- !u!114 &1396860288
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -21240,13 +21149,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   position: {x: 19, y: 2}
   neighbors: []
-  canalsLinked: []
+  canalsIn: []
   type: 0
   isDuged: 0
   isRiver: 0
   riverStrenght: 0
   linkedTile: []
-  canalsIn: []
 --- !u!114 &1400387955
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -21366,13 +21274,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   position: {x: 7, y: 9}
   neighbors: []
-  canalsLinked: []
+  canalsIn: []
   type: 0
   isDuged: 0
   isRiver: 0
   riverStrenght: 0
   linkedTile: []
-  canalsIn: []
 --- !u!114 &1400496153
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -21497,13 +21404,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   position: {x: 2, y: 6}
   neighbors: []
-  canalsLinked: []
+  canalsIn: []
   type: 0
   isDuged: 0
   isRiver: 0
   riverStrenght: 0
   linkedTile: []
-  canalsIn: []
 --- !u!114 &1409154003
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -21623,13 +21529,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   position: {x: 12, y: 5}
   neighbors: []
-  canalsLinked: []
+  canalsIn: []
   type: 0
   isDuged: 0
   isRiver: 0
   riverStrenght: 0
   linkedTile: []
-  canalsIn: []
 --- !u!114 &1413264557
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -21749,13 +21654,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   position: {x: 14, y: 4}
   neighbors: []
-  canalsLinked: []
+  canalsIn: []
   type: 0
   isDuged: 0
   isRiver: 0
   riverStrenght: 0
   linkedTile: []
-  canalsIn: []
 --- !u!114 &1416616154
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -21875,13 +21779,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   position: {x: 17, y: 8}
   neighbors: []
-  canalsLinked: []
+  canalsIn: []
   type: 0
   isDuged: 0
   isRiver: 0
   riverStrenght: 0
   linkedTile: []
-  canalsIn: []
 --- !u!114 &1418101735
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -22001,13 +21904,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   position: {x: 19, y: 8}
   neighbors: []
-  canalsLinked: []
+  canalsIn: []
   type: 0
   isDuged: 0
   isRiver: 0
   riverStrenght: 0
   linkedTile: []
-  canalsIn: []
 --- !u!114 &1419432716
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -22127,13 +22029,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   position: {x: 12, y: 0}
   neighbors: []
-  canalsLinked: []
+  canalsIn: []
   type: 0
   isDuged: 0
   isRiver: 0
   riverStrenght: 0
   linkedTile: []
-  canalsIn: []
 --- !u!114 &1428258463
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -22253,13 +22154,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   position: {x: 13, y: 9}
   neighbors: []
-  canalsLinked: []
+  canalsIn: []
   type: 0
   isDuged: 0
   isRiver: 0
   riverStrenght: 0
   linkedTile: []
-  canalsIn: []
 --- !u!114 &1428758780
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -22379,13 +22279,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   position: {x: 14, y: 9}
   neighbors: []
-  canalsLinked: []
+  canalsIn: []
   type: 0
   isDuged: 0
   isRiver: 0
   riverStrenght: 0
   linkedTile: []
-  canalsIn: []
 --- !u!114 &1469464783
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -22505,13 +22404,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   position: {x: 6, y: 2}
   neighbors: []
-  canalsLinked: []
+  canalsIn: []
   type: 0
   isDuged: 0
   isRiver: 0
   riverStrenght: 0
   linkedTile: []
-  canalsIn: []
 --- !u!114 &1474916273
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -22631,13 +22529,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   position: {x: 10, y: 8}
   neighbors: []
-  canalsLinked: []
+  canalsIn: []
   type: 0
   isDuged: 0
   isRiver: 0
   riverStrenght: 0
   linkedTile: []
-  canalsIn: []
 --- !u!114 &1477709681
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -22757,13 +22654,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   position: {x: 16, y: 4}
   neighbors: []
-  canalsLinked: []
+  canalsIn: []
   type: 0
   isDuged: 0
   isRiver: 0
   riverStrenght: 0
   linkedTile: []
-  canalsIn: []
 --- !u!114 &1479536815
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -22883,13 +22779,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   position: {x: 8, y: 11}
   neighbors: []
-  canalsLinked: []
+  canalsIn: []
   type: 0
   isDuged: 0
   isRiver: 0
   riverStrenght: 0
   linkedTile: []
-  canalsIn: []
 --- !u!114 &1493815817
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -23009,13 +22904,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   position: {x: 18, y: 7}
   neighbors: []
-  canalsLinked: []
+  canalsIn: []
   type: 0
   isDuged: 0
   isRiver: 0
   riverStrenght: 0
   linkedTile: []
-  canalsIn: []
 --- !u!114 &1499997580
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -23135,13 +23029,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   position: {x: 5, y: 6}
   neighbors: []
-  canalsLinked: []
+  canalsIn: []
   type: 0
   isDuged: 0
   isRiver: 0
   riverStrenght: 0
   linkedTile: []
-  canalsIn: []
 --- !u!114 &1502986117
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -23261,13 +23154,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   position: {x: 6, y: 6}
   neighbors: []
-  canalsLinked: []
+  canalsIn: []
   type: 0
   isDuged: 0
   isRiver: 0
   riverStrenght: 0
   linkedTile: []
-  canalsIn: []
 --- !u!114 &1517335569
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -23387,13 +23279,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   position: {x: 5, y: 2}
   neighbors: []
-  canalsLinked: []
+  canalsIn: []
   type: 0
   isDuged: 0
   isRiver: 0
   riverStrenght: 0
   linkedTile: []
-  canalsIn: []
 --- !u!114 &1519832854
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -23513,13 +23404,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   position: {x: 12, y: 6}
   neighbors: []
-  canalsLinked: []
+  canalsIn: []
   type: 0
   isDuged: 0
   isRiver: 0
   riverStrenght: 0
   linkedTile: []
-  canalsIn: []
 --- !u!114 &1527493304
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -23639,13 +23529,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   position: {x: 6, y: 10}
   neighbors: []
-  canalsLinked: []
+  canalsIn: []
   type: 0
   isDuged: 0
   isRiver: 0
   riverStrenght: 0
   linkedTile: []
-  canalsIn: []
 --- !u!114 &1567873822
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -23765,13 +23654,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   position: {x: 17, y: 4}
   neighbors: []
-  canalsLinked: []
+  canalsIn: []
   type: 0
   isDuged: 0
   isRiver: 0
   riverStrenght: 0
   linkedTile: []
-  canalsIn: []
 --- !u!114 &1569900661
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -23891,13 +23779,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   position: {x: 12, y: 8}
   neighbors: []
-  canalsLinked: []
+  canalsIn: []
   type: 0
   isDuged: 0
   isRiver: 0
   riverStrenght: 0
   linkedTile: []
-  canalsIn: []
 --- !u!114 &1580156105
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -24063,13 +23950,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   position: {x: 8, y: 2}
   neighbors: []
-  canalsLinked: []
+  canalsIn: []
   type: 0
   isDuged: 0
   isRiver: 0
   riverStrenght: 0
   linkedTile: []
-  canalsIn: []
 --- !u!114 &1588178762
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -24189,13 +24075,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   position: {x: 8, y: 3}
   neighbors: []
-  canalsLinked: []
+  canalsIn: []
   type: 0
   isDuged: 0
   isRiver: 0
   riverStrenght: 0
   linkedTile: []
-  canalsIn: []
 --- !u!114 &1595235933
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -24315,13 +24200,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   position: {x: 12, y: 7}
   neighbors: []
-  canalsLinked: []
+  canalsIn: []
   type: 0
   isDuged: 0
   isRiver: 0
   riverStrenght: 0
   linkedTile: []
-  canalsIn: []
 --- !u!114 &1620776209
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -24441,13 +24325,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   position: {x: 18, y: 9}
   neighbors: []
-  canalsLinked: []
+  canalsIn: []
   type: 0
   isDuged: 0
   isRiver: 0
   riverStrenght: 0
   linkedTile: []
-  canalsIn: []
 --- !u!114 &1639334059
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -24567,13 +24450,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   position: {x: 2, y: 7}
   neighbors: []
-  canalsLinked: []
+  canalsIn: []
   type: 0
   isDuged: 0
   isRiver: 0
   riverStrenght: 0
   linkedTile: []
-  canalsIn: []
 --- !u!114 &1659919720
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -24693,13 +24575,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   position: {x: 10, y: 7}
   neighbors: []
-  canalsLinked: []
+  canalsIn: []
   type: 0
   isDuged: 0
   isRiver: 0
   riverStrenght: 0
   linkedTile: []
-  canalsIn: []
 --- !u!114 &1686281885
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -24819,13 +24700,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   position: {x: 3, y: 8}
   neighbors: []
-  canalsLinked: []
+  canalsIn: []
   type: 0
   isDuged: 0
   isRiver: 0
   riverStrenght: 0
   linkedTile: []
-  canalsIn: []
 --- !u!114 &1687970775
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -24945,13 +24825,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   position: {x: 11, y: 5}
   neighbors: []
-  canalsLinked: []
+  canalsIn: []
   type: 0
   isDuged: 0
   isRiver: 0
   riverStrenght: 0
   linkedTile: []
-  canalsIn: []
 --- !u!114 &1695185636
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -25071,13 +24950,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   position: {x: 6, y: 8}
   neighbors: []
-  canalsLinked: []
+  canalsIn: []
   type: 0
   isDuged: 0
   isRiver: 0
   riverStrenght: 0
   linkedTile: []
-  canalsIn: []
 --- !u!114 &1707905734
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -25197,13 +25075,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   position: {x: 13, y: 3}
   neighbors: []
-  canalsLinked: []
+  canalsIn: []
   type: 0
   isDuged: 0
   isRiver: 0
   riverStrenght: 0
   linkedTile: []
-  canalsIn: []
 --- !u!114 &1715023751
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -25323,13 +25200,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   position: {x: 5, y: 9}
   neighbors: []
-  canalsLinked: []
+  canalsIn: []
   type: 0
   isDuged: 0
   isRiver: 0
   riverStrenght: 0
   linkedTile: []
-  canalsIn: []
 --- !u!114 &1719783181
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -25449,13 +25325,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   position: {x: 0, y: 11}
   neighbors: []
-  canalsLinked: []
+  canalsIn: []
   type: 0
   isDuged: 0
   isRiver: 0
   riverStrenght: 0
   linkedTile: []
-  canalsIn: []
 --- !u!114 &1728661794
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -25575,13 +25450,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   position: {x: 8, y: 10}
   neighbors: []
-  canalsLinked: []
+  canalsIn: []
   type: 0
   isDuged: 0
   isRiver: 0
   riverStrenght: 0
   linkedTile: []
-  canalsIn: []
 --- !u!114 &1745113762
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -25701,13 +25575,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   position: {x: 9, y: 4}
   neighbors: []
-  canalsLinked: []
+  canalsIn: []
   type: 0
   isDuged: 0
   isRiver: 0
   riverStrenght: 0
   linkedTile: []
-  canalsIn: []
 --- !u!114 &1759356339
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -25863,9 +25736,9 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 581601021
-  m_SortingLayer: 3
-  m_SortingOrder: 0
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 100
   m_Sprite: {fileID: 7482667652216324306, guid: 48e93eef0688c4a259cb0eddcd8661f7, type: 3}
   m_Color: {r: 0.90196085, g: 0.90196085, b: 0.90196085, a: 1}
   m_FlipX: 0
@@ -25935,13 +25808,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   position: {x: 9, y: 8}
   neighbors: []
-  canalsLinked: []
+  canalsIn: []
   type: 0
   isDuged: 0
   isRiver: 0
   riverStrenght: 0
   linkedTile: []
-  canalsIn: []
 --- !u!114 &1772059994
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -26061,13 +25933,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   position: {x: 14, y: 8}
   neighbors: []
-  canalsLinked: []
+  canalsIn: []
   type: 0
   isDuged: 0
   isRiver: 0
   riverStrenght: 0
   linkedTile: []
-  canalsIn: []
 --- !u!114 &1805180899
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -26187,13 +26058,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   position: {x: 17, y: 6}
   neighbors: []
-  canalsLinked: []
+  canalsIn: []
   type: 0
   isDuged: 0
   isRiver: 0
   riverStrenght: 0
   linkedTile: []
-  canalsIn: []
 --- !u!114 &1812536195
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -26313,13 +26183,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   position: {x: 8, y: 5}
   neighbors: []
-  canalsLinked: []
+  canalsIn: []
   type: 0
   isDuged: 0
   isRiver: 0
   riverStrenght: 0
   linkedTile: []
-  canalsIn: []
 --- !u!114 &1816894241
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -26439,13 +26308,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   position: {x: 17, y: 11}
   neighbors: []
-  canalsLinked: []
+  canalsIn: []
   type: 0
   isDuged: 0
   isRiver: 0
   riverStrenght: 0
   linkedTile: []
-  canalsIn: []
 --- !u!114 &1821319069
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -26565,13 +26433,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   position: {x: 8, y: 7}
   neighbors: []
-  canalsLinked: []
+  canalsIn: []
   type: 0
   isDuged: 0
   isRiver: 0
   riverStrenght: 0
   linkedTile: []
-  canalsIn: []
 --- !u!114 &1838416768
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -26722,13 +26589,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   position: {x: 8, y: 4}
   neighbors: []
-  canalsLinked: []
+  canalsIn: []
   type: 0
   isDuged: 0
   isRiver: 0
   riverStrenght: 0
   linkedTile: []
-  canalsIn: []
 --- !u!114 &1856843983
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -26848,13 +26714,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   position: {x: 8, y: 1}
   neighbors: []
-  canalsLinked: []
+  canalsIn: []
   type: 0
   isDuged: 0
   isRiver: 0
   riverStrenght: 0
   linkedTile: []
-  canalsIn: []
 --- !u!114 &1864387865
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -26974,13 +26839,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   position: {x: 1, y: 5}
   neighbors: []
-  canalsLinked: []
+  canalsIn: []
   type: 0
   isDuged: 0
   isRiver: 0
   riverStrenght: 0
   linkedTile: []
-  canalsIn: []
 --- !u!114 &1902693719
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -27100,13 +26964,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   position: {x: 13, y: 1}
   neighbors: []
-  canalsLinked: []
+  canalsIn: []
   type: 0
   isDuged: 0
   isRiver: 0
   riverStrenght: 0
   linkedTile: []
-  canalsIn: []
 --- !u!114 &1906271514
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -27226,13 +27089,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   position: {x: 2, y: 5}
   neighbors: []
-  canalsLinked: []
+  canalsIn: []
   type: 0
   isDuged: 0
   isRiver: 0
   riverStrenght: 0
   linkedTile: []
-  canalsIn: []
 --- !u!114 &1909991214
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -27352,13 +27214,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   position: {x: 8, y: 6}
   neighbors: []
-  canalsLinked: []
+  canalsIn: []
   type: 0
   isDuged: 0
   isRiver: 0
   riverStrenght: 0
   linkedTile: []
-  canalsIn: []
 --- !u!114 &1912491990
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -27478,13 +27339,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   position: {x: 15, y: 4}
   neighbors: []
-  canalsLinked: []
+  canalsIn: []
   type: 0
   isDuged: 0
   isRiver: 0
   riverStrenght: 0
   linkedTile: []
-  canalsIn: []
 --- !u!114 &1927385913
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -27680,13 +27540,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   position: {x: 11, y: 0}
   neighbors: []
-  canalsLinked: []
+  canalsIn: []
   type: 0
   isDuged: 0
   isRiver: 0
   riverStrenght: 0
   linkedTile: []
-  canalsIn: []
 --- !u!114 &1937825862
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -27806,13 +27665,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   position: {x: 10, y: 9}
   neighbors: []
-  canalsLinked: []
+  canalsIn: []
   type: 0
   isDuged: 0
   isRiver: 0
   riverStrenght: 0
   linkedTile: []
-  canalsIn: []
 --- !u!114 &1945724339
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -27932,13 +27790,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   position: {x: 3, y: 6}
   neighbors: []
-  canalsLinked: []
+  canalsIn: []
   type: 0
   isDuged: 0
   isRiver: 0
   riverStrenght: 0
   linkedTile: []
-  canalsIn: []
 --- !u!114 &1949149554
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -28058,13 +27915,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   position: {x: 18, y: 8}
   neighbors: []
-  canalsLinked: []
+  canalsIn: []
   type: 0
   isDuged: 0
   isRiver: 0
   riverStrenght: 0
   linkedTile: []
-  canalsIn: []
 --- !u!114 &1951400927
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -28184,13 +28040,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   position: {x: 6, y: 3}
   neighbors: []
-  canalsLinked: []
+  canalsIn: []
   type: 0
   isDuged: 0
   isRiver: 0
   riverStrenght: 0
   linkedTile: []
-  canalsIn: []
 --- !u!114 &1951516470
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -28310,13 +28165,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   position: {x: 18, y: 3}
   neighbors: []
-  canalsLinked: []
+  canalsIn: []
   type: 0
   isDuged: 0
   isRiver: 0
   riverStrenght: 0
   linkedTile: []
-  canalsIn: []
 --- !u!114 &1953716113
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -28436,13 +28290,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   position: {x: 14, y: 3}
   neighbors: []
-  canalsLinked: []
+  canalsIn: []
   type: 0
   isDuged: 0
   isRiver: 0
   riverStrenght: 0
   linkedTile: []
-  canalsIn: []
 --- !u!114 &1994865055
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -28562,13 +28415,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   position: {x: 16, y: 10}
   neighbors: []
-  canalsLinked: []
+  canalsIn: []
   type: 0
   isDuged: 0
   isRiver: 0
   riverStrenght: 0
   linkedTile: []
-  canalsIn: []
 --- !u!114 &1995190569
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -28688,13 +28540,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   position: {x: 4, y: 11}
   neighbors: []
-  canalsLinked: []
+  canalsIn: []
   type: 0
   isDuged: 0
   isRiver: 0
   riverStrenght: 0
   linkedTile: []
-  canalsIn: []
 --- !u!114 &1995949153
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -28814,13 +28665,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   position: {x: 19, y: 3}
   neighbors: []
-  canalsLinked: []
+  canalsIn: []
   type: 0
   isDuged: 0
   isRiver: 0
   riverStrenght: 0
   linkedTile: []
-  canalsIn: []
 --- !u!114 &1998392919
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -29084,13 +28934,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   position: {x: 5, y: 4}
   neighbors: []
-  canalsLinked: []
+  canalsIn: []
   type: 0
   isDuged: 0
   isRiver: 0
   riverStrenght: 0
   linkedTile: []
-  canalsIn: []
 --- !u!114 &2020408945
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -29210,13 +29059,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   position: {x: 6, y: 5}
   neighbors: []
-  canalsLinked: []
+  canalsIn: []
   type: 0
   isDuged: 0
   isRiver: 0
   riverStrenght: 0
   linkedTile: []
-  canalsIn: []
 --- !u!114 &2024975217
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -29336,13 +29184,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   position: {x: 2, y: 2}
   neighbors: []
-  canalsLinked: []
+  canalsIn: []
   type: 0
   isDuged: 0
   isRiver: 0
   riverStrenght: 0
   linkedTile: []
-  canalsIn: []
 --- !u!114 &2026479761
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -29462,13 +29309,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   position: {x: 9, y: 11}
   neighbors: []
-  canalsLinked: []
+  canalsIn: []
   type: 0
   isDuged: 0
   isRiver: 0
   riverStrenght: 0
   linkedTile: []
-  canalsIn: []
 --- !u!114 &2027226458
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -29588,13 +29434,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   position: {x: 1, y: 3}
   neighbors: []
-  canalsLinked: []
+  canalsIn: []
   type: 0
   isDuged: 0
   isRiver: 0
   riverStrenght: 0
   linkedTile: []
-  canalsIn: []
 --- !u!114 &2027914547
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -29714,13 +29559,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   position: {x: 14, y: 10}
   neighbors: []
-  canalsLinked: []
+  canalsIn: []
   type: 0
   isDuged: 0
   isRiver: 0
   riverStrenght: 0
   linkedTile: []
-  canalsIn: []
 --- !u!114 &2032822561
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -29840,13 +29684,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   position: {x: 9, y: 9}
   neighbors: []
-  canalsLinked: []
+  canalsIn: []
   type: 0
   isDuged: 0
   isRiver: 0
   riverStrenght: 0
   linkedTile: []
-  canalsIn: []
 --- !u!114 &2039876973
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -29966,13 +29809,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   position: {x: 0, y: 1}
   neighbors: []
-  canalsLinked: []
+  canalsIn: []
   type: 0
   isDuged: 0
   isRiver: 0
   riverStrenght: 0
   linkedTile: []
-  canalsIn: []
 --- !u!114 &2053512265
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -30092,13 +29934,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   position: {x: 10, y: 1}
   neighbors: []
-  canalsLinked: []
+  canalsIn: []
   type: 0
   isDuged: 0
   isRiver: 0
   riverStrenght: 0
   linkedTile: []
-  canalsIn: []
 --- !u!114 &2055309179
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -30218,13 +30059,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   position: {x: 0, y: 7}
   neighbors: []
-  canalsLinked: []
+  canalsIn: []
   type: 0
   isDuged: 0
   isRiver: 0
   riverStrenght: 0
   linkedTile: []
-  canalsIn: []
 --- !u!114 &2058365502
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -30344,13 +30184,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   position: {x: 16, y: 9}
   neighbors: []
-  canalsLinked: []
+  canalsIn: []
   type: 0
   isDuged: 0
   isRiver: 0
   riverStrenght: 0
   linkedTile: []
-  canalsIn: []
 --- !u!114 &2065320590
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -30586,13 +30425,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   position: {x: 19, y: 4}
   neighbors: []
-  canalsLinked: []
+  canalsIn: []
   type: 0
   isDuged: 0
   isRiver: 0
   riverStrenght: 0
   linkedTile: []
-  canalsIn: []
 --- !u!114 &2092143965
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -30712,13 +30550,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   position: {x: 13, y: 5}
   neighbors: []
-  canalsLinked: []
+  canalsIn: []
   type: 0
   isDuged: 0
   isRiver: 0
   riverStrenght: 0
   linkedTile: []
-  canalsIn: []
 --- !u!114 &2093492292
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -30838,13 +30675,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   position: {x: 10, y: 10}
   neighbors: []
-  canalsLinked: []
+  canalsIn: []
   type: 0
   isDuged: 0
   isRiver: 0
   riverStrenght: 0
   linkedTile: []
-  canalsIn: []
 --- !u!114 &2098366846
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -30964,13 +30800,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   position: {x: 16, y: 0}
   neighbors: []
-  canalsLinked: []
+  canalsIn: []
   type: 0
   isDuged: 0
   isRiver: 0
   riverStrenght: 0
   linkedTile: []
-  canalsIn: []
 --- !u!114 &2116994927
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -31090,13 +30925,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   position: {x: 4, y: 5}
   neighbors: []
-  canalsLinked: []
+  canalsIn: []
   type: 0
   isDuged: 0
   isRiver: 0
   riverStrenght: 0
   linkedTile: []
-  canalsIn: []
 --- !u!114 &2120459778
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -31216,13 +31050,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   position: {x: 10, y: 4}
   neighbors: []
-  canalsLinked: []
+  canalsIn: []
   type: 0
   isDuged: 0
   isRiver: 0
   riverStrenght: 0
   linkedTile: []
-  canalsIn: []
 --- !u!114 &2122952883
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -31342,13 +31175,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   position: {x: 11, y: 6}
   neighbors: []
-  canalsLinked: []
+  canalsIn: []
   type: 0
   isDuged: 0
   isRiver: 0
   riverStrenght: 0
   linkedTile: []
-  canalsIn: []
 --- !u!114 &2129170760
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -31468,13 +31300,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   position: {x: 19, y: 5}
   neighbors: []
-  canalsLinked: []
+  canalsIn: []
   type: 0
   isDuged: 0
   isRiver: 0
   riverStrenght: 0
   linkedTile: []
-  canalsIn: []
 --- !u!114 &2145921290
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -31594,13 +31425,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   position: {x: 15, y: 1}
   neighbors: []
-  canalsLinked: []
+  canalsIn: []
   type: 0
   isDuged: 0
   isRiver: 0
   riverStrenght: 0
   linkedTile: []
-  canalsIn: []
 --- !u!114 &2146819291
 MonoBehaviour:
   m_ObjectHideFlags: 0
