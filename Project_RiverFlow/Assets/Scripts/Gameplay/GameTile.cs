@@ -21,7 +21,7 @@ public class GameTile : MonoBehaviour
         }
     }
 
-    public Canal[] canalsLinked;
+    public List<Canal> canalsIn = new List<Canal>();
     public bool isLinkable 
     { 
         get 

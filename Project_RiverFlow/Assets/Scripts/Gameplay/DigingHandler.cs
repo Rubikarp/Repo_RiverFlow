@@ -55,11 +55,12 @@ public class DigingHandler : MonoBehaviour
 
                 }
 
+                //Event
+                onLink?.Invoke(input.startSelectTile, input.endSelectTile);
+
                 //End became the new start
                 input.startSelectTile = input.endSelectTile;
                 input.startSelectTilePos = grid.TileToPos(input.startSelectTile.position);
-
-                onLink?.Invoke(input.startSelectTile, input.endSelectTile);
             }
         }
     }
