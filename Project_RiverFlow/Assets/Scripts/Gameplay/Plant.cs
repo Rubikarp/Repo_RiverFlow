@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public enum PlantState
 {
@@ -48,6 +49,11 @@ public class Plant : MonoBehaviour, Element
     public float stateUpgradeTime = 60f;
     public float stateDowngradeTime = 15f;
 
+    [Header("Living")]
+    [SerializeField] Camera cam;
+    [SerializeField] Canvas canvas;
+    [SerializeField] Image imgTiller;
+
     [Header("Visual")]
     public GameObject[] allSkins;
 
@@ -55,6 +61,8 @@ public class Plant : MonoBehaviour, Element
     {
         currentState = PlantState.Young;
         UpdateSkin();
+        cam = Camera.main;
+        canvas.worldCamera = cam;
     }
 
     void Update()
@@ -64,6 +72,8 @@ public class Plant : MonoBehaviour, Element
         {
             CheckNeighboringRivers();
             StateUpdate();
+
+            imgTiller.fillAmount = timer;
         }
     }
 
