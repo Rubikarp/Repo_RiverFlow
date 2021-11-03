@@ -71,7 +71,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -682674765
-  m_SortingLayer: 1
+  m_SortingLayer: -1
   m_SortingOrder: 0
   m_Sprite: {fileID: 7482667652216324306, guid: d4f2def0c7a2b0e4c9794c9d27871382, type: 3}
   m_Color: {r: 0.39607847, g: 0.87843144, b: 0.39607847, a: 1}
@@ -98,6 +98,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   position: {x: 0, y: 0}
   neighbors: []
+  canalsIn: []
   type: 0
   isDuged: 0
   isRiver: 0
@@ -117,10 +118,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tile: {fileID: 825307937645406591}
   rend: {fileID: 6129579272483592476}
-  fullGround: {r: 0.3952941, g: 0.8784314, b: 0.3952941, a: 1}
-  holedGround: {r: 0.44, g: 0.21413334, b: 0.052800003, a: 1}
+  fullGround: {r: 0.6156863, g: 0.8392157, b: 0.5647059, a: 1}
+  holedGround: {r: 0.96862745, g: 0.8392157, b: 0.5803922, a: 1}
   wat25: {r: 0.10560001, g: 0.88, b: 0.88, a: 1}
   wat50: {r: 0.10588237, g: 0.62091494, b: 0.8784314, a: 1}
   wat75: {r: 0.10588237, g: 0.36339882, b: 0.8784314, a: 1}
-  wat100: {r: 0.10588237, g: 0.10588237, b: 0.8784314, a: 1}
+  wat100: {r: 0.6627451, g: 0.8666667, b: 0.94509804, a: 1}
   errorMat: {r: 1, g: 0, b: 1, a: 1}
