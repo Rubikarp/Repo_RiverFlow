@@ -16,7 +16,7 @@ public class DigingLine : MonoBehaviour
         input.onLeftClicking.AddListener(OnLeftClicking);
         input.onLeftClickUp.AddListener(OnLeftClickRelease);
 
-        dig.onLink.AddListener(OnLink);
+        dig.digMove.AddListener(OnDigMove);
     }
 
     void Update()
@@ -39,7 +39,7 @@ public class DigingLine : MonoBehaviour
         line.positionCount = 0;
     }
 
-    public void OnLink(GameTile startSelectTile, GameTile endSelectTile)
+    public void OnDigMove(GameTile startSelectTile, GameTile endSelectTile)
     {
         line.SetPosition(0, grid.TileToPos(endSelectTile.position));
     }

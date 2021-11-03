@@ -14,9 +14,13 @@ public class DigingHandler : MonoBehaviour
     public InputHandler input;
     public GameGrid grid;
     [Space(10)]
+    public linkEvent digMove;
     public linkEvent onLink;
     public TileEvent onBreak;
-    
+
+    [Header("Variable")]
+    public int shovelHit = 3;
+
     void Start()
     {
         input.onLeftClicking.AddListener(OnLeftClicking);
@@ -34,7 +38,7 @@ public class DigingHandler : MonoBehaviour
         {
             Vector3 drag = input.GetHitPos() - input.startSelectTilePos;
             //Si je dépasse de plus d'une case d'écart
-            if (drag.magnitude > (1.5f *grid.cellSize))
+            if (drag.magnitude > (1.5f * grid.cellSize))
             {
                 drag = drag.normalized * (1.5f * grid.cellSize);
             }
@@ -47,35 +51,44 @@ public class DigingHandler : MonoBehaviour
             {
                 if (input.startSelectTile.isLinkable && input.endSelectTile.isLinkable)
                 {
-                    //Make the Link
-                    input.startSelectTile.isDuged = true;
-                    input.startSelectTile.AddLinkedTile(input.endSelectTile);
-                    ///TODO :startSelectTileGround.flowOut.Add();
-                    
-                    input.endSelectTile.isDuged = true;
-                    input.endSelectTile.AddLinkedTile(input.startSelectTile);
-                    ///TODO :endSelectTileGround.flowIn.Add();
+                    if (shovelHit > 0)
+                    {
+                        //Make the Link
+                        input.startSelectTile.isDuged = true;
+                        input.startSelectTile.AddLinkedTile(input.endSelectTile);
+                        ///TODO :startSelectTileGround.flowOut.Add();
 
+                        input.endSelectTile.isDuged = true;
+                        input.endSelectTile.AddLinkedTile(input.startSelectTile);
+                        ///TODO :endSelectTileGround.flowIn.Add();
+
+                        //Event
+                        onLink?.Invoke(input.startSelectTile, input.endSelectTile);
+                        shovelHit--;
+                    }
                 }
 
-                //Event
-                onLink?.Invoke(input.startSelectTile, input.endSelectTile);
-
-                //End became the new start
-                input.startSelectTile = input.endSelectTile;
-                input.startSelectTilePos = grid.TileToPos(input.startSelectTile.position);
             }
+            
+            digMove?.Invoke(input.startSelectTile, input.endSelectTile);
+
+            //End became the new start
+            input.startSelectTile = input.endSelectTile;
+            input.startSelectTilePos = grid.TileToPos(input.startSelectTile.position);
         }
     }
     public void OnRighClicking()
     {
-        onBreak?.Invoke(input.eraserSelectTile);
+        if (input.eraserSelectTile.linkedTile.Count > 0)
+        {
+            shovelHit += input.eraserSelectTile.linkedTile.Count;
 
-        input.eraserSelectTile.RemoveAllLinkedTile();
+            onBreak?.Invoke(input.eraserSelectTile);
 
-        input.eraserSelectTile.isDuged = false;
-        input.eraserSelectTile.isRiver = false;
-        input.eraserSelectTile.riverStrenght = RiverStrenght._00_;
+            input.eraserSelectTile.RemoveAllLinkedTile();
+        }
+
+
     }
 
 }

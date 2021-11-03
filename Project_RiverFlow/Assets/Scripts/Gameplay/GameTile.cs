@@ -30,6 +30,11 @@ public class GameTile : MonoBehaviour
             {
                 return element.isLinkable;
             }
+            else
+            if(linkedTile.Count >= 3)
+            {
+                return false;
+            }
             return true; 
         } 
     }
@@ -60,6 +65,19 @@ public class GameTile : MonoBehaviour
         this.position = pos;
         linkedTile = new List<GameTile>();
     }
+    public GameTile(GameTile tile)
+    {
+        this.position = tile.position;
+        this.neighbors = tile.neighbors;
+        this.element = tile.element;
+        this.canalsIn = tile.canalsIn;
+        this.type = tile.type;
+        this.isDuged = tile.isDuged;
+        this.isRiver = tile.isRiver;
+        this.riverStrenght = tile.riverStrenght;
+        this.linkedTile = tile.linkedTile;
+    }
+
     #endregion
 
     void Start()

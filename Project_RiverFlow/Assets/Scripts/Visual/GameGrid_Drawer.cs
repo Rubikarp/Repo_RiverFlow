@@ -78,6 +78,11 @@ public class GameGrid_Drawer : MonoBehaviour
             rend.color = baseColor;
         }
 
+        //permet d'overide les param sans modif le mat ou créer d'instance
+        propBlock = new MaterialPropertyBlock();
+        //Recup Data
+        rend.GetPropertyBlock(propBlock);
+
         //EditZone
         propBlock.SetFloat("_Alpha", Mathf.Lerp(0, opacity, Mathf.Clamp01(time)));
         propBlock.SetFloat("_Thickness", Mathf.Lerp(0, thickness, Mathf.Clamp01(time)));

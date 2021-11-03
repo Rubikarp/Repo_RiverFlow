@@ -40,7 +40,6 @@ public class Plant : MonoBehaviour, Element
     [SerializeField] bool IsAliveVisu = true;
     private bool IsAlive { get { return currentState != PlantState.Dead; } }
 
-    private int stateIndex = 2;
     public List<int> closeRivers;
     private RiverStrenght bestRiverStrenght = 0;
     
@@ -154,11 +153,11 @@ public class Plant : MonoBehaviour, Element
 
     private void UpdateSkin()
     {
-        for (int c = 0; c < allSkins.Length; c++)
+        for (int i = 0; i < allSkins.Length; i++)
         {
-            allSkins[c].SetActive(false);
+            allSkins[i].SetActive(false);
         }
 
-        allSkins[stateIndex].SetActive(true);
+        allSkins[(int)currentState].SetActive(true);
     }
 }
