@@ -595,6 +595,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8408782267423306832}
   - component: {fileID: 4751209323767118212}
+  - component: {fileID: 6917927953608742452}
   m_Layer: 0
   m_Name: Element-Plant
   m_TagString: Untagged
@@ -638,14 +639,26 @@ MonoBehaviour:
   tileOn: {fileID: 0}
   currentState: 2
   isIrrigated: 0
-  IsAliveVisu: 1
   closeRivers: 
   timer: 1
   stateUpgradeTime: 15
   stateDowngradeTime: 20
-  cam: {fileID: 0}
-  canvas: {fileID: 4102402895808794355}
-  imgTiller: {fileID: 1606261058841424763}
+  onStateChange:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &6917927953608742452
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7129485572310087032}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1ae29a2e2e2336d49a56f9f0f2fd65b0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  plant: {fileID: 4751209323767118212}
   allSkins:
   - {fileID: 3600092017206602844}
   - {fileID: 834161168384341673}
@@ -653,6 +666,9 @@ MonoBehaviour:
   - {fileID: 3130269961963826144}
   - {fileID: 8083353670317407215}
   - {fileID: 7037351817227970101}
+  cam: {fileID: 0}
+  canvas: {fileID: 4102402895808794355}
+  imgTiller: {fileID: 1606261058841424763}
 --- !u!1 &8083353670317407215
 GameObject:
   m_ObjectHideFlags: 0
