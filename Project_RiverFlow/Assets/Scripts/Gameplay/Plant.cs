@@ -1,17 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
-
-public enum PlantState
-{
-    Dead,
-    Agony,
-    Young,
-    Tree1,
-    Tree2,
-    Tree3
-}
+using UnityEngine.Events;
 
 public class Plant : MonoBehaviour, Element
 {
@@ -38,7 +28,6 @@ public class Plant : MonoBehaviour, Element
     [Header("Plant Data")]
     public PlantState currentState = PlantState.Young;
     [SerializeField] bool isIrrigated = false;
-    [SerializeField] bool IsAliveVisu = true;
     private bool IsAlive { get { return currentState != PlantState.Dead; } }
 
     public List<int> closeRivers;
@@ -49,31 +38,20 @@ public class Plant : MonoBehaviour, Element
     public float stateUpgradeTime = 60f;
     public float stateDowngradeTime = 15f;
 
-    [Header("Living")]
-    [SerializeField] Camera cam;
-    [SerializeField] Canvas canvas;
-    [SerializeField] Image imgTiller;
-
-    [Header("Visual")]
-    public GameObject[] allSkins;
+    [Header("Event")]
+    public UnityEvent onStateChange;
 
     private void Start()
     {
-        currentState = PlantState.Young;
-        UpdateSkin();
-        cam = Camera.main;
-        canvas.worldCamera = cam;
+
     }
 
     void Update()
     {
-        IsAliveVisu = IsAlive;
         if (IsAlive)
         {
             CheckNeighboringRivers();
             StateUpdate();
-
-            imgTiller.fillAmount = timer;
         }
     }
 
@@ -140,34 +118,24 @@ public class Plant : MonoBehaviour, Element
         if (timer < 0)
         {
             timer += 1f;
-            currentState = (PlantState)Mathf.Clamp((int)(currentState - 1), 0, (int)PlantState.Tree3);
-            UpdateSkin();
+            currentState = (PlantState)Mathf.Clamp((int)(currentState - 1), 0, (int)PlantState.Senior);
+            onStateChange?.Invoke();
         }
         else
         //Lvl Up
         if (timer > 1)
         {
             //Si pas au niveau max
-            if(currentState < PlantState.Tree3)
+            if(currentState < PlantState.Senior)
             {
                 timer -= 1f;
-                currentState = (PlantState)Mathf.Clamp((int)(currentState + 1), 0, (int)PlantState.Tree3);
-                UpdateSkin();
+                currentState = (PlantState)Mathf.Clamp((int)(currentState + 1), 0, (int)PlantState.Senior);
+                onStateChange?.Invoke();
             }
             else
             {
                 timer = 1f;
             }
         }
-    }
-
-    private void UpdateSkin()
-    {
-        for (int i = 0; i < allSkins.Length; i++)
-        {
-            allSkins[i].SetActive(false);
-        }
-
-        allSkins[(int)currentState].SetActive(true);
     }
 }

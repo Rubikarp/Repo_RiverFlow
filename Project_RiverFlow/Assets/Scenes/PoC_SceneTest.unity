@@ -11496,10 +11496,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 866341456}
     m_Modifications:
-    - target: {fileID: 4751209323767118212, guid: 5a8552f0c1487f74bb441c5c837d2071, type: 3}
-      propertyPath: tileOn
-      value: 
-      objectReference: {fileID: 866341453}
     - target: {fileID: 7129485572310087032, guid: 5a8552f0c1487f74bb441c5c837d2071, type: 3}
       propertyPath: m_Name
       value: Plant3
