@@ -58,9 +58,9 @@ public class Plant : MonoBehaviour, Element
     private void CheckNeighboringRivers()
     {
         //Cherche all irrigated Neighbor
-        for (int i = 0; i < tileOn.neighbors.Length; i++)
+        for (int i = 0; i < tileOn.data.neighbors.Length; i++)
         {
-            if (tileOn.neighbors[i].isRiver)
+            if (tileOn.data.neighbors[i].isRiver)
             {
                 if (!closeRivers.Contains(i))
                 {
@@ -81,9 +81,9 @@ public class Plant : MonoBehaviour, Element
         bestRiverStrenght = 0;
         for (int j = 0; j < closeRivers.Count; j++)
         {
-            if (tileOn.neighbors[closeRivers[j]].riverStrenght > bestRiverStrenght)
+            if (tileOn.data.neighbors[closeRivers[j]].riverStrenght > bestRiverStrenght)
             {
-                bestRiverStrenght = tileOn.neighbors[closeRivers[j]].riverStrenght;
+                bestRiverStrenght = tileOn.data.neighbors[closeRivers[j]].riverStrenght;
             }
         }
 

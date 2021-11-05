@@ -5,45 +5,26 @@ using UnityEngine;
 public class GameTile : MonoBehaviour
 {
     [Header("Essential Data")]
-    public Vector2Int position = new Vector2Int(0, 0);
-    public GameTile[] neighbors = new GameTile[8];
-
-    public Element element;
-    public bool isElement
-    {
-        get
-        {
-            if (element != null)
-            {
-                return true;
-            }
-            return false;
-        }
-    }
-
+    public TileData data;
+    public GameTile[] neighbors;
+    [Space(10)]
     public List<Canal> canalsIn = new List<Canal>();
     public bool isLinkable 
     { 
         get 
         {
-            if (element != null)
+            if (!data.element.isLinkable)
             {
-                return element.isLinkable;
+                return false;
             }
             else
-            if(linkedTile.Count >= 3)
+            if (linkedTile.Count >= 3)
             {
                 return false;
             }
             return true; 
         } 
     }
-
-    [Header("State")]
-    public TileType type = TileType.soil;
-    public bool isDuged = false;
-    public bool isRiver = false;
-    public RiverStrenght riverStrenght = RiverStrenght._00_;
 
     [Header("Input/Output")]
     public List<GameTile> linkedTile = new List<GameTile>();
@@ -89,6 +70,7 @@ public class GameTile : MonoBehaviour
         
     }
 
+    //LINK
     public void AddLinkedTile(GameTile addedTile)
     {
         //Check if tile is already in list
@@ -134,5 +116,28 @@ public class GameTile : MonoBehaviour
         canalsIn = new List<Canal>();
         linkedTile = new List<GameTile>();
     }
-
+    
+    //GameTile to Data
+    public void LoadLinkedTile(TileData data)
+    {
+        for (int i = 0; i < 8; i++)
+        {
+            if (data.linkedToNeighbors[i])
+            {
+                linkedTile.Add(neighbors[i]);
+            }
+        }
+    }
+    public int LinkToNeighborPos(GameTile tile)
+    {
+        for (int i = 0; i < 8; i++)
+        {
+            if(neighbors[i] == tile)
+            {
+                return i;
+            }
+        }
+        Debug.LogError("Linked tile "+ tile.data.position + " n'est pas un voisin de "+ this.data.position +".", this);
+        return 8;
+    }
 }
