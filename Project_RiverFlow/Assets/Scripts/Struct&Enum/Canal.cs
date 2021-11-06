@@ -40,7 +40,7 @@ public class Canal
     {
         List<GameTile> temp = new List<GameTile>(canal.tiles);
         temp.Reverse();
-        return new Canal(grid.GetTile(canal.endNode.position), grid.GetTile(canal.startNode.position), canal.tiles, canal.riverStrenght);
+        return new Canal(grid.GetTile(canal.endNode.data.position), grid.GetTile(canal.startNode.data.position), canal.tiles, canal.riverStrenght);
     }
     public static Canal Merge(Canal startCanalEnd1, Canal startCanalEnd2)
     {

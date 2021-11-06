@@ -28,33 +28,26 @@ public class GameTile_Drawer : MonoBehaviour
     {
         if (tile.isDuged)
         {
-            if (tile.isRiver)
+            switch (tile.riverStrenght)
             {
-                switch (tile.riverStrenght)
-                {
-                    case RiverStrenght._00_:
-                        rend.color = holedGround;
-                        break;
-                    case RiverStrenght._25_:
-                        rend.color = wat25;
-                        break;
-                    case RiverStrenght._50_:
-                        rend.color = wat50;
-                        break;
-                    case RiverStrenght._75_:
-                        rend.color = wat75;
-                        break;
-                    case RiverStrenght._100_:
-                        rend.color = wat100;
-                        break;
-                    default:
-                        rend.color = errorMat;
-                        break;
-                }
-            }
-            else
-            {
-                rend.color = holedGround;
+                case RiverStrenght._00_:
+                    rend.color = holedGround;
+                    break;
+                case RiverStrenght._25_:
+                    rend.color = wat25;
+                    break;
+                case RiverStrenght._50_:
+                    rend.color = wat50;
+                    break;
+                case RiverStrenght._75_:
+                    rend.color = wat75;
+                    break;
+                case RiverStrenght._100_:
+                    rend.color = wat100;
+                    break;
+                default:
+                    rend.color = errorMat;
+                    break;
             }
         }
         else

@@ -68,10 +68,7 @@ public class GameGrid : MonoBehaviour
                     {
                         Debug.LogError("can't Find Tile on the object");
                     }
-                    tile.isDuged = false;
-                    tile.isRiver = false;
-
-                    tile.position = new Vector2Int(x, y);
+                    tile.data.position = new Vector2Int(x, y);
                     SetTile(x, y, tile);
                 }
             }
@@ -84,7 +81,7 @@ public class GameGrid : MonoBehaviour
         {
             for (int x = 0; x < size.x; x++)
             {
-                FillNeighbor(GetTile(x, y).position);
+                FillNeighbor(GetTile(x, y).data.position);
             }
         }
     }

@@ -35,7 +35,6 @@ public class WaterSource : MonoBehaviour, Element
     {
         if(!tileOn.isRiver)
         {
-            tileOn.isRiver = true;
             tileOn.riverStrenght = RiverStrenght._100_;
         }
         

@@ -23,7 +23,6 @@ public class RiverManager : MonoBehaviour
         digging.onLink.AddListener(OnLink);
         digging.onBreak.AddListener(OnBreak);
     }
-
     void Update()
     {
         WaterStep();
@@ -383,8 +382,6 @@ public class RiverManager : MonoBehaviour
     }
 
 
-
-
     public void WaterStep()
     {
         for (int i = 0; i < canals.Count; i++)
@@ -393,19 +390,15 @@ public class RiverManager : MonoBehaviour
             {
                 if (canals[i].tiles.Count > 0)
                 {
-                    canals[i].tiles[0].isRiver = canals[i].startNode.isRiver;
                     canals[i].tiles[0].riverStrenght = canals[i].startNode.riverStrenght;
                     for (int j = 1; j < canals[i].tiles.Count; j++)
                     {
-                        canals[i].tiles[j].isRiver = canals[i].tiles[j - 1].isRiver;
                         canals[i].tiles[j].riverStrenght = canals[i].tiles[j - 1].riverStrenght;
                     }
-                    canals[i].endNode.isRiver = canals[i].tiles[canals[i].tiles.Count - 1].isRiver;
                     canals[i].endNode.riverStrenght = canals[i].tiles[canals[i].tiles.Count - 1].riverStrenght;
                 }
                 else
                 {
-                    canals[i].endNode.isRiver = canals[i].startNode.isRiver;
                     canals[i].endNode.riverStrenght = canals[i].startNode.riverStrenght;
                 }
             }
@@ -418,17 +411,17 @@ public class RiverManager : MonoBehaviour
         {
             if (canals[i].tiles.Count > 0)
             {
-                Debug.DrawLine(grid.TileToPos(canals[i].startNode.position), grid.TileToPos(canals[i].tiles[0].position), Color.blue);
+                Debug.DrawLine(canals[i].startNode.worldPos, canals[i].tiles[0].worldPos, Color.blue);
                 for (int j = 0; j < canals[i].tiles.Count - 1; j++)
                 {
-                    Debug.DrawLine(grid.TileToPos(canals[i].tiles[j].position), grid.TileToPos(canals[i].tiles[j + 1].position), Color.blue);
+                    Debug.DrawLine(canals[i].tiles[j].worldPos, canals[i].tiles[j + 1].worldPos, Color.blue);
                 }
-                Debug.DrawLine(grid.TileToPos(canals[i].tiles[canals[i].tiles.Count-1].position), grid.TileToPos(canals[i].endNode.position), Color.blue);
+                Debug.DrawLine(canals[i].tiles[canals[i].tiles.Count-1].worldPos, canals[i].endNode.worldPos, Color.blue);
 
             }
             else
             {
-                Debug.DrawLine(grid.TileToPos(canals[i].startNode.position), grid.TileToPos(canals[i].endNode.position), Color.blue);
+                Debug.DrawLine(canals[i].startNode.worldPos, canals[i].endNode.worldPos, Color.blue);
             }
         }
 

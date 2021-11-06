@@ -10,7 +10,6 @@ public struct TileData
 
     [Header("State")]
     public TileType type;
-    public bool isDuged;
     public RiverStrenght riverStrenght;
 
     [Header("Stored Value")]
@@ -39,7 +38,6 @@ public struct TileData
 
         ///State
         type = _type;
-        isDuged = _isDuged;
         riverStrenght = _riverStrenght;
     }
     public TileData (int x , int y, Element _element = null, TileType _type = TileType.soil, bool _isDuged = false, RiverStrenght _riverStrenght = RiverStrenght._00_)
@@ -51,7 +49,6 @@ public struct TileData
 
         ///State
         type = _type;
-        isDuged = _isDuged;
         riverStrenght = _riverStrenght;
     }
     public TileData(TileData tile)
@@ -62,7 +59,6 @@ public struct TileData
         this.element = tile.element;
 
         this.type = tile.type;
-        this.isDuged = tile.isDuged;
         this.riverStrenght = tile.riverStrenght;
     }
     #endregion

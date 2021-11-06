@@ -54,11 +54,9 @@ public class DigingHandler : MonoBehaviour
                     if (shovelHit > 0)
                     {
                         //Make the Link
-                        input.startSelectTile.isDuged = true;
                         input.startSelectTile.AddLinkedTile(input.endSelectTile);
                         ///TODO :startSelectTileGround.flowOut.Add();
 
-                        input.endSelectTile.isDuged = true;
                         input.endSelectTile.AddLinkedTile(input.startSelectTile);
                         ///TODO :endSelectTileGround.flowIn.Add();
 
@@ -74,7 +72,7 @@ public class DigingHandler : MonoBehaviour
 
             //End became the new start
             input.startSelectTile = input.endSelectTile;
-            input.startSelectTilePos = grid.TileToPos(input.startSelectTile.position);
+            input.startSelectTilePos = grid.TileToPos(input.startSelectTile.data.position);
         }
     }
     public void OnRighClicking()

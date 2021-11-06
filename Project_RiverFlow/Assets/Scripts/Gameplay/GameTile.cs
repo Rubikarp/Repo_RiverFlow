@@ -6,12 +6,75 @@ public class GameTile : MonoBehaviour
 {
     [Header("Essential Data")]
     public TileData data;
-    public GameTile[] neighbors;
+    public Vector2Int gridPos
+    {
+        get
+        {
+            return data.position;
+        }
+    }
+    public Vector3 worldPos
+    {
+        get
+        {
+            return transform.position;
+        }
+    }
+    public Vector2 worldPos2D
+    {
+        get
+        {
+            return transform.position;
+        }
+    }
+    public Element element
+    {
+        get
+        {
+            return data.element;
+        }
+        set
+        {
+            data.element = value;
+        }
+    }
+    public TileType type
+    {
+        get
+        {
+            return data.type;
+        }
+        set
+        {
+            data.type = value;
+        }
+    }
+    public RiverStrenght riverStrenght
+    {
+        get
+        {
+            return data.riverStrenght;
+        }
+        set
+        {
+            data.riverStrenght = value;
+        }
+    }
     [Space(10)]
+    public GameTile[] neighbors;
+    [Space(5)]
     public List<Canal> canalsIn = new List<Canal>();
-    public bool isLinkable 
-    { 
-        get 
+
+    public bool isElement
+    {
+        get
+        {
+            return data.isElement;
+        }
+    }
+    public bool isLinkable
+    {
+        get
         {
             if (!data.element.isLinkable)
             {
@@ -22,44 +85,42 @@ public class GameTile : MonoBehaviour
             {
                 return false;
             }
-            return true; 
-        } 
+            return true;
+        }
+    }
+    public bool isDuged
+    {
+        get
+        {
+            if (linkedTile.Count > 0)
+            {
+                return true;
+            }
+            return false;
+        }
+    }
+    public bool isRiver
+    {
+        get
+        {
+            if (data.riverStrenght > 0 && isDuged)
+            {
+                return true;
+            }
+            return false;
+        }
     }
 
     [Header("Input/Output")]
     public List<GameTile> linkedTile = new List<GameTile>();
     public bool isNode
-    { get {return linkedTile.Count == 2 ? false : true;}}
-
-    #region Constructor 
-    public GameTile()
-    {
-        linkedTile = new List<GameTile>();
-    }
-    public GameTile(int pos_x = 0, int pos_y = 0)
-    {
-        this.position = new Vector2Int(pos_x, pos_y);
-        linkedTile = new List<GameTile>();
-    }
-    public GameTile(Vector2Int pos)
-    {
-        this.position = pos;
-        linkedTile = new List<GameTile>();
-    }
-    public GameTile(GameTile tile)
-    {
-        this.position = tile.position;
-        this.neighbors = tile.neighbors;
-        this.element = tile.element;
-        this.canalsIn = tile.canalsIn;
-        this.type = tile.type;
-        this.isDuged = tile.isDuged;
-        this.isRiver = tile.isRiver;
-        this.riverStrenght = tile.riverStrenght;
-        this.linkedTile = tile.linkedTile;
+    { 
+        get 
+        {
+            return linkedTile.Count == 2 ? false : true;
+        }
     }
 
-    #endregion
 
     void Start()
     {
@@ -96,7 +157,6 @@ public class GameTile : MonoBehaviour
         }
         if (linkedTile.Count <1)
         {
-            isDuged = false;
             linkedTile = new List<GameTile>();
         }
     }
@@ -109,8 +169,6 @@ public class GameTile : MonoBehaviour
             removeTile.RemoveLinkedTile(this);
         }
 
-        isDuged = false;
-        isRiver = false;
         riverStrenght = RiverStrenght._00_;
         
         canalsIn = new List<Canal>();

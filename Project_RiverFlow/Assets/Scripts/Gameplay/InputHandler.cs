@@ -78,7 +78,7 @@ public class InputHandler : MonoBehaviour
         {
             //Initialise start select
             startSelectTile = grid.GetTile(grid.PosToTile(GetHitPos()));
-            startSelectTilePos = grid.TileToPos(startSelectTile.position);
+            startSelectTilePos = grid.TileToPos(startSelectTile.gridPos);
 
             onLeftClickDown?.Invoke();
         }
