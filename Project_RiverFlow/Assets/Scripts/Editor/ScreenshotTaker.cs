@@ -5,7 +5,7 @@ using System.IO;
 
 public class ScreenshotTaker
 {
-    //[MenuItem("Tools/Take Screenshot")]
+    [MenuItem("Tools/Take Screenshot")]
     public static void TakeScreenshot()
     {
         if (!Directory.Exists("Screenshots"))
