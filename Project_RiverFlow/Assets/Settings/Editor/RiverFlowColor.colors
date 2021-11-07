@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &1
+MonoBehaviour:
+  m_ObjectHideFlags: 52
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 12323, guid: 0000000000000000e000000000000000, type: 0}
+  m_Name: RiverFlowColor
+  m_EditorClassIdentifier: 
+  m_Presets:
+  - m_Name: Ground
+    m_Color: {r: 0.9725491, g: 0.8470589, b: 0.6039216, a: 1}
+  - m_Name: Water100
+    m_Color: {r: 0.6745098, g: 0.8980392, b: 0.9490196, a: 1}
+  - m_Name: Water75
+    m_Color: {r: 0.3921569, g: 0.854902, b: 0.9568628, a: 1}
+  - m_Name: Water50
+    m_Color: {r: 0.30588236, g: 0.67058825, b: 0.7490196, a: 1}
+  - m_Name: Water25
+    m_Color: {r: 0.31764707, g: 0.427451, b: 0.45098042, a: 1}
+  - m_Name: Grass
+    m_Color: {r: 0.6, g: 0.854902, b: 0.60784316, a: 1}
+  - m_Name: Sand
+    m_Color: {r: 0.90196085, g: 0.9490197, b: 0.53333336, a: 1}
+  - m_Name: Aride
+    m_Color: {r: 0.93725497, g: 0.6784314, b: 0.5058824, a: 1}

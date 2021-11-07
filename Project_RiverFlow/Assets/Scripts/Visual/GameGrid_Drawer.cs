@@ -17,9 +17,9 @@ public class GameGrid_Drawer : MonoBehaviour
     [SerializeField, Range(0, 2.00f)] private float roundness = 1f;
     [SerializeField, Range(0, 0.25f)] private float thickness = 0.1f;
     [Space(10)]
-    [SerializeField, ColorUsage(false, false)] private Color baseColor;
-    [SerializeField, ColorUsage(false, false)] private Color pencilColor;
-    [SerializeField, ColorUsage(false, false)] private Color eraserColor;
+    [SerializeField, ColorUsage(true, false)] private Color baseColor;
+    [SerializeField, ColorUsage(true, false)] private Color pencilColor;
+    [SerializeField, ColorUsage(true, false)] private Color eraserColor;
     
     [Header("Internal")]
     private MaterialPropertyBlock propBlock;

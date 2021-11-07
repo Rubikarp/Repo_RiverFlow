@@ -1,7 +1,7 @@
 public enum TileType
 {
     other,
-    soil,
+    grass,
     clay,
     sand
 }
@@ -17,7 +17,6 @@ public enum RiverStrenght
 
 public enum DirectionEnum
 {
-    center,
     upLeft,
     up,
     upRight,
@@ -26,6 +25,7 @@ public enum DirectionEnum
     down,
     downLeft,
     left,
+    center
 }
 public enum PlantState
 {

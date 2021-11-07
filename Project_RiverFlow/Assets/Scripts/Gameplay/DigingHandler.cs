@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.Events;
 
 [Serializable]
-public class linkEvent : UnityEvent<GameTile, GameTile> { }
+public class LinkEvent : UnityEvent<GameTile, GameTile> { }
 [Serializable]
 public class TileEvent : UnityEvent<GameTile> { }
 
@@ -14,8 +14,8 @@ public class DigingHandler : MonoBehaviour
     public InputHandler input;
     public GameGrid grid;
     [Space(10)]
-    public linkEvent digMove;
-    public linkEvent onLink;
+    public LinkEvent digMove;
+    public LinkEvent onLink;
     public TileEvent onBreak;
 
     [Header("Variable")]
@@ -46,6 +46,7 @@ public class DigingHandler : MonoBehaviour
             input.endSelectTile = grid.GetTile(grid.PosToTile(input.startSelectTilePos + drag));
             input.endSelectPos = input.dragPos;
 
+            Debug.DrawRay(input.startSelectTilePos, input.startSelectTile.worldPos - input.endSelectTile.worldPos, Color.red);
             //Si j'ai bien 2 tile linkable
             if (input.startSelectTile != null && input.endSelectTile != null)
             {
@@ -54,11 +55,10 @@ public class DigingHandler : MonoBehaviour
                     if (shovelHit > 0)
                     {
                         //Make the Link
-                        input.startSelectTile.AddLinkedTile(input.endSelectTile);
-                        ///TODO :startSelectTileGround.flowOut.Add();
-
-                        input.endSelectTile.AddLinkedTile(input.startSelectTile);
-                        ///TODO :endSelectTileGround.flowIn.Add();
+                        Vector2Int endToStart = input.endSelectTile.gridPos - input.startSelectTile.gridPos;
+                        Direction dir = new Direction(endToStart);
+                        input.startSelectTile.AddLinkedTile(dir, false);
+                        input.endSelectTile.AddLinkedTile(Direction.Inverse(dir), true);
 
                         //Event
                         onLink?.Invoke(input.startSelectTile, input.endSelectTile);
@@ -72,14 +72,14 @@ public class DigingHandler : MonoBehaviour
 
             //End became the new start
             input.startSelectTile = input.endSelectTile;
-            input.startSelectTilePos = grid.TileToPos(input.startSelectTile.data.position);
+            input.startSelectTilePos = grid.TileToPos(input.startSelectTile.gridPos);
         }
     }
     public void OnRighClicking()
     {
-        if (input.eraserSelectTile.linkedTile.Count > 0)
+        if (input.eraserSelectTile.linkAmount > 0)
         {
-            shovelHit += input.eraserSelectTile.linkedTile.Count;
+            shovelHit += input.eraserSelectTile.linkAmount;
 
             onBreak?.Invoke(input.eraserSelectTile);
 

@@ -1,51 +1,42 @@
-using System.Collections;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
+[Serializable]
 public struct TileData 
 {
     [Header("Essential Data")]
-    public Vector2Int position;
-    public Element element;
+    public string name;
+    public Vector2Int gridPos;
 
     [Header("State")]
     public TileType type;
     public RiverStrenght riverStrenght;
 
     [Header("Stored Value")]
-    public bool[] linkedToNeighbors;
-
-    //Getter & Setter
-    public bool isElement
-    {
-        get
-        {
-            if (element != null)
-            {
-                return true;
-            }
-            return false;
-        }
-    }
+    public bool[] flowIn_Neighbors;
+    public bool[] flowOut_Neighbors;
 
     #region Constructor 
-    public TileData (Vector2Int _pos, Element _element = null, TileType _type = TileType.soil, bool _isDuged = false, RiverStrenght _riverStrenght = RiverStrenght._00_)
+    public TileData (Vector2Int _gridPos, TileType _type = TileType.grass, RiverStrenght _riverStrenght = RiverStrenght._00_)
     {
         ///Essential Data
-        position = _pos;
-        linkedToNeighbors = new bool[8] { false, false , false , false , false , false , false , false };
-        element = _element;
+        name = "Data_Tile(" + _gridPos.x + ":" + _gridPos.y + ")";
+        gridPos = _gridPos;
+        flowIn_Neighbors = new bool[8] { false, false, false, false, false, false, false, false };
+        flowOut_Neighbors = new bool[8] { false, false, false, false, false, false, false, false };
 
         ///State
         type = _type;
         riverStrenght = _riverStrenght;
     }
-    public TileData (int x , int y, Element _element = null, TileType _type = TileType.soil, bool _isDuged = false, RiverStrenght _riverStrenght = RiverStrenght._00_)
+    public TileData (int _gridPosX, int _gridPosY, TileType _type = TileType.grass, RiverStrenght _riverStrenght = RiverStrenght._00_)
     {
         ///Essential Data
-        position = new Vector2Int(x, y);
-        linkedToNeighbors = new bool[8] { false, false, false, false, false, false, false, false };
-        element = _element;
+        name = "Data_Tile(" + _gridPosX + ":" + _gridPosY + ")";
+        gridPos = new Vector2Int(_gridPosX, _gridPosY);
+        flowIn_Neighbors = new bool[8] { false, false, false, false, false, false, false, false };
+        flowOut_Neighbors = new bool[8] { false, false, false, false, false, false, false, false };
 
         ///State
         type = _type;
@@ -53,11 +44,13 @@ public struct TileData
     }
     public TileData(TileData tile)
     {
-        this.position = tile.position;
-        this.linkedToNeighbors = tile.linkedToNeighbors;
+        ///Essential Data
+        this.name = tile.name;
+        this.gridPos = tile.gridPos;
+        this.flowIn_Neighbors = tile.flowIn_Neighbors;
+        this.flowOut_Neighbors = tile.flowOut_Neighbors;
 
-        this.element = tile.element;
-
+        ///State
         this.type = tile.type;
         this.riverStrenght = tile.riverStrenght;
     }
@@ -66,10 +59,10 @@ public struct TileData
     public void Save(GameTile tile)
     {
         this = tile.data;
-
-        for (int i = 0; i < tile.linkedTile.Count; i++)
+        for (int i = 0; i < 8; i++)
         {
-            linkedToNeighbors[tile.LinkToNeighborPos(tile.linkedTile[i])] = true;
+            flowIn_Neighbors[i] = tile.IsLinkInDir(new Direction((DirectionEnum)i), true);
+            flowOut_Neighbors[i] = tile.IsLinkInDir(new Direction((DirectionEnum)i), true);
         }
     }
 

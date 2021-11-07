@@ -2,11 +2,26 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WaterSource : MonoBehaviour, Element
+public class WaterSource : Element
 {
-    [Header("Variable")]
+    #region Element
+    [Header("Element Data")]
     public GameTile tileOn;
-    public GameTile[] TilesOn 
+    public override GameTile TileOn
+    {
+        get
+        {
+            if (tileOn == null)
+            {
+                Debug.LogError("Can't find the tile where is this WaterSource", this);
+                return null;
+            }
+            return tileOn;
+        }
+        set
+        { tileOn = value; }
+    }
+    public override GameTile[] TilesOn 
     {
         get 
         { 
@@ -19,13 +34,24 @@ public class WaterSource : MonoBehaviour, Element
         } 
         set { tileOn = value[0]; } 
     }
-    public bool isLinkable { get { return true; } }
+    public override bool isLinkable { get { return true; } }
+    public override bool IsLinkable()
+    {
+        return true;
+    }
+    #endregion
+
+    public override void AddLink(Direction dir) 
+    {
+        ///TODO : 
+        Debug.Log("ToDo", this);
+    }
 
     public Direction flowOut;
 
     void Start()
     {
-        if (tileOn.isElement)
+        if (!tileOn.isElement)
         {
             tileOn.element = this;
         }
@@ -33,10 +59,6 @@ public class WaterSource : MonoBehaviour, Element
 
     void Update()
     {
-        if(!tileOn.isRiver)
-        {
-            tileOn.riverStrenght = RiverStrenght._100_;
-        }
         
     }
 }

@@ -41,7 +41,7 @@ public class DigingLine : MonoBehaviour
 
     public void OnDigMove(GameTile startSelectTile, GameTile endSelectTile)
     {
-        line.SetPosition(0, grid.TileToPos(endSelectTile.data.position));
+        line.SetPosition(0, grid.TileToPos(endSelectTile.data.gridPos));
     }
 
 }

@@ -1,5 +1,7 @@
+using System;
 using UnityEngine;
 
+[Serializable]
 public struct Direction
 {
     [Header("Variable")]
@@ -33,6 +35,14 @@ public struct Direction
         Vector2Int temp = DirEnumToVec2(_dirEnum);
         this.dirValue = temp;
     }
+    public Direction(int _intDir)
+    {
+        this.dirValue = Vector2Int.zero;
+        this.dirEnum = (DirectionEnum)_intDir;
+
+        Vector2Int temp = DirEnumToVec2((DirectionEnum)_intDir);
+        this.dirValue = temp;
+    }
     public Direction(Vector2Int _value, DirectionEnum _dirEnum)
     {
         this.dirValue = _value;
@@ -53,13 +63,10 @@ public struct Direction
     #endregion
 
     //Conversion
-    public DirectionEnum Vec2ToDirEnum(Vector2Int dir)
+    public static DirectionEnum Vec2ToDirEnum(Vector2Int dir)
     {
         dir.x = Mathf.Clamp(dir.x, -1, 1);
         dir.y = Mathf.Clamp(dir.y, -1, 1);
-
-        dir.x = Mathf.RoundToInt(dir.x);
-        dir.y = Mathf.RoundToInt(dir.x);
 
         #region HandSwitch
         if (dir == upLeft.dirValue)
@@ -105,7 +112,7 @@ public struct Direction
 
         return center.dirEnum;
     }
-    public Vector2Int DirEnumToVec2(DirectionEnum dir)
+    public static Vector2Int DirEnumToVec2(DirectionEnum dir)
     {
         switch (dir)
         {
@@ -140,13 +147,17 @@ public struct Direction
                 return center.dirValue;
         }
     }
-    
+    public static Direction DirFromInt(int _dirIndex)
+    {
+        return new Direction(_dirIndex);
+    }
+
     //Methode
-    public Direction Inverse(Direction dir)
+    public static Direction Inverse(Direction dir)
     {
         return new Direction(dir.dirValue * (-Vector2Int.one));
     }
-    public Vector2Int ClampDir(Vector2Int dir)
+    public static Vector2Int ClampDir(Vector2Int dir)
     {
         dir.x = Mathf.Clamp(dir.x, -1, 1);
         dir.y = Mathf.Clamp(dir.y, -1, 1);

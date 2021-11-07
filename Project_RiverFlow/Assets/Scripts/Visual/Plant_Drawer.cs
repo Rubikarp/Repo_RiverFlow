@@ -3,13 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+[RequireComponent(typeof(SpriteRenderer))]
 public class Plant_Drawer : MonoBehaviour
 {
     [Header("Réferences")]
     public Plant plant;
 
     [Header("Visual")]
-    public GameObject[] allSkins;
+    private SpriteRenderer sprRender;
+    public PlantSprites_SCO visual;
 
     [Header("Living")]
     [SerializeField] Camera cam;
@@ -21,6 +23,7 @@ public class Plant_Drawer : MonoBehaviour
         cam = Camera.main;
         canvas.worldCamera = cam;
 
+        sprRender = gameObject.GetComponent<SpriteRenderer>();
         UpdateSkin();
         plant.onStateChange.AddListener(UpdateSkin);
     }
@@ -32,11 +35,6 @@ public class Plant_Drawer : MonoBehaviour
 
     private void UpdateSkin()
     {
-        for (int i = 0; i < allSkins.Length; i++)
-        {
-            allSkins[i].SetActive(false);
-        }
-
-        allSkins[(int)plant.currentState].SetActive(true);
+        sprRender.sprite = visual.GetSprite(plant.currentState, plant.tileOn.type);
     }
 }

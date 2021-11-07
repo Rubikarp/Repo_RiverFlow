@@ -3,12 +3,26 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class Plant : MonoBehaviour, Element
+public class Plant : Element
 {
     #region Element
     [Header("Element Data")]
     public GameTile tileOn;
-    public GameTile[] TilesOn
+    public override GameTile TileOn
+    {
+        get
+        {
+            if (tileOn == null)
+            {
+                Debug.LogError("Can't find the tile where is this WaterSource", this);
+                return null ;
+            }
+            return tileOn;
+        }
+        set
+        { tileOn = value; }
+    }
+    public override GameTile[] TilesOn
     {
         get
         {
@@ -21,8 +35,7 @@ public class Plant : MonoBehaviour, Element
         }
         set { tileOn = value[0]; }
     }
-    ///Not Likable
-    public bool isLinkable { get { return false; } }
+    //Don't overide other methode because is not linkable
     #endregion
 
     [Header("Plant Data")]
@@ -43,7 +56,10 @@ public class Plant : MonoBehaviour, Element
 
     private void Start()
     {
-
+        if (tileOn.isElement)
+        {
+            tileOn.element = this;
+        }
     }
 
     void Update()

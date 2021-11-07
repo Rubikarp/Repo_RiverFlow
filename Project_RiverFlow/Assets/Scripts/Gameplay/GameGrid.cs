@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class GameGrid : MonoBehaviour
 {
+    public static GameGrid instance;
+
     [Header("Parameter")]
     public float cellSize = 1;
     public Vector2Int size = new Vector2Int(10, 10);
@@ -12,7 +14,7 @@ public class GameGrid : MonoBehaviour
     [Header("Data")]
     public Transform gridContainer;
     public GameObject tileTemplate;
-    #region Grid
+    #region Grid-GameTile
     public GameTile[] tiles;
     public GameTile GetTile(int x, int y)
     {
@@ -31,10 +33,16 @@ public class GameGrid : MonoBehaviour
         tiles[pos.x + (pos.y * (size.x))] = value;
     }
     #endregion
+    public GridData_SCO gridData;
     
     [Header("Debug")]
     public bool showDebug;
     public bool showCenter;
+
+    private void Awake()
+    {
+        instance = this;
+    }
 
     void Start()
     {
@@ -68,12 +76,25 @@ public class GameGrid : MonoBehaviour
                     {
                         Debug.LogError("can't Find Tile on the object");
                     }
-                    tile.data.position = new Vector2Int(x, y);
+                    tile.data = gridData.GetTile(x, y);
                     SetTile(x, y, tile);
                 }
             }
         }
     }
+    
+    [ContextMenu("Reference The GameGrid")]
+    private void ReferenceTheGrid()
+    {
+        for (int y = 0; y < size.y; y++)
+        {
+            for (int x = 0; x < size.x; x++)
+            {
+                GetTile(x,y).data = gridData.GetTile(x, y);
+            }
+        }
+    }
+
     [ContextMenu("Set Neighbor")]
     private void SetNeighbor()
     {
@@ -81,10 +102,11 @@ public class GameGrid : MonoBehaviour
         {
             for (int x = 0; x < size.x; x++)
             {
-                FillNeighbor(GetTile(x, y).data.position);
+                FillNeighbor(GetTile(x, y).gridPos);
             }
         }
     }
+    
     [ContextMenu("Clear The GameGrid")]
     private void ClearGrid()
     {
@@ -120,7 +142,7 @@ public class GameGrid : MonoBehaviour
         GetTile(pos).neighbors = new GameTile[8];
         for (int i = 0; i < 8; i++)
         {
-            dir = new Direction((DirectionEnum)i + 1);
+            dir = new Direction((DirectionEnum)i);
             temp = pos + dir.dirValue;
 
             if(temp.x < 0 || temp.y < 0)
