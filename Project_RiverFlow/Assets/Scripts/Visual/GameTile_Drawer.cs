@@ -101,13 +101,14 @@ public class GameTile_Drawer : MonoBehaviour
             lines.Add(Instantiate(lineRendererTemplate, transform.position, Quaternion.identity, transform).GetComponent<LineRenderer>());
         }
         else
-        if (tile.linkAmount < lines.Count)
+        if (tile.linkAmount-1 < lines.Count)
         {
-            for (int i = 1 + tile.linkAmount; i < lines.Count; i++)
+            for (int i = tile.linkAmount; i < lines.Count; i++)
             {
                 lines[i].positionCount = 0;
             }
         }
+
         int lineIndex = 0;
         for (int i = 0; i < tile.flowOut.Count; i++)
         {

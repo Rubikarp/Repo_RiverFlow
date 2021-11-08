@@ -52,7 +52,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -74,7 +74,7 @@ SpriteRenderer:
   m_SortingLayer: -1
   m_SortingOrder: 0
   m_Sprite: {fileID: 7482667652216324306, guid: d4f2def0c7a2b0e4c9794c9d27871382, type: 3}
-  m_Color: {r: 0.6156863, g: 0.8392157, b: 0.5647059, a: 1}
+  m_Color: {r: 0.6, g: 0.854902, b: 0.60784316, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -99,7 +99,7 @@ MonoBehaviour:
   data:
     name: 
     gridPos: {x: 0, y: 0}
-    type: 0
+    type: 1
     riverStrenght: 0
     flowIn_Neighbors: 
     flowOut_Neighbors: 
@@ -126,4 +126,4 @@ MonoBehaviour:
   grid: {fileID: 0}
   lineRendererTemplate: {fileID: 8909883473942522786, guid: 128afd9d17ba140459f8a85ac3f53961, type: 3}
   lines: []
-  palette: {fileID: 0}
+  palette: {fileID: 11400000, guid: 490d2554b53e93640bed8c1ce746c7ec, type: 2}

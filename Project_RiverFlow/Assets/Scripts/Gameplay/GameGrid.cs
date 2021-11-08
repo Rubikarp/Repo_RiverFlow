@@ -58,7 +58,7 @@ public class GameGrid : MonoBehaviour
     [ContextMenu("Populate The GameGrid")]
     private void PopulateGrid()
     {
-        if(tiles == null)
+        if(tiles == null || tiles.Length ==0)
         {
             tiles = new GameTile[size.x * size.y];
         }

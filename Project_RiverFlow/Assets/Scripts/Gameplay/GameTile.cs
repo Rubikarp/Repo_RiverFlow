@@ -5,6 +5,7 @@ using UnityEngine;
 public class GameTile : MonoBehaviour
 {
     public const int maxConnection = 3;
+    public static float simulStepDur = 0.3f;
 
     [Header("Essential Data")]
     public TileData data;
@@ -133,7 +134,7 @@ public class GameTile : MonoBehaviour
     void Update()
     {
         timer += Time.deltaTime;
-        if (timer >1)
+        if (timer > simulStepDur)
         {
             FlowStep();
             timer = 0f;
