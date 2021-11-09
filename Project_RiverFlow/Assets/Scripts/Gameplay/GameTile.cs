@@ -162,6 +162,40 @@ public class GameTile : MonoBehaviour
         receivedFlow = (RiverStrenght)Mathf.Clamp((int)receivedFlow, 0, (int)RiverStrenght._100_);
         SetFlow();
         //Check for FlowOut
+        if(linkAmount > 1)
+        {
+            if(linkAmount == 2 && flowOut.Count!= flowIn.Count)
+            {
+                if (flowOut.Count > flowIn.Count)
+                {
+                    if(Neighbor(flowOut[0]).riverStrenght > Neighbor(flowOut[1]).riverStrenght)
+                    {
+                        Neighbor(flowOut[1]).flowOut.Add(Direction.Inverse(flowOut[1]));
+                        Neighbor(flowOut[1]).flowIn.Remove(Direction.Inverse(flowOut[1]));
+                    }
+                    else
+                    {
+                        Neighbor(flowOut[0]).flowOut.Add(Direction.Inverse(flowOut[0]));
+                        Neighbor(flowOut[0]).flowIn.Remove(Direction.Inverse(flowOut[0]));
+                    }
+                }
+                else
+                {
+                    //ERROR
+                    if (Neighbor(flowOut[0]).riverStrenght > Neighbor(flowOut[1]).riverStrenght)
+                    {
+                        Neighbor(flowOut[1]).flowIn.Add(Direction.Inverse(flowOut[1]));
+                        Neighbor(flowOut[1]).flowOut.Remove(Direction.Inverse(flowOut[1]));
+                    }
+                    else
+                    {
+                        Neighbor(flowOut[0]).flowIn.Add(Direction.Inverse(flowOut[0]));
+                        Neighbor(flowOut[0]).flowOut.Remove(Direction.Inverse(flowOut[0]));
+                    }
+                }
+            }
+        }
+        //Send Water to neighbor
         if (SendWater())
         {
             // Envoie l'eau Thierry !

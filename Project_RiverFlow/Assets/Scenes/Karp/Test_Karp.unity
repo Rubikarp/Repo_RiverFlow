@@ -9858,6 +9858,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Element-Plant
       objectReference: {fileID: 0}
+    - target: {fileID: 7129485572310087032, guid: 5a8552f0c1487f74bb441c5c837d2071, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8408782267423306832, guid: 5a8552f0c1487f74bb441c5c837d2071, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -119446,7 +119450,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 81dbab1ec2a910b49aa5d56667ca58d8, type: 2}
+  - {fileID: 2100000, guid: f558987f1731b3b4a945a4afe428007c, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -119490,8 +119494,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1bbcedcf2be77994a98290f18c609cf4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  grid: {fileID: 925749903}
+  input: {fileID: 1930227713}
   rend: {fileID: 1770999249}
+  speed: 5
+  colorSpeed: 5
+  opacity: 0.66
+  roundness: 1
   thickness: 0.025
+  baseColor: {r: 1, g: 1, b: 1, a: 1}
+  pencilColor: {r: 1, g: 0.9999956, b: 0.8, a: 1}
+  eraserColor: {r: 0, g: 0, b: 0, a: 1}
+  time: 0
+  colorTime: 0
 --- !u!1 &1771319571
 GameObject:
   m_ObjectHideFlags: 0
@@ -136858,7 +136873,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 5
+  orthographic size: 6.2
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2

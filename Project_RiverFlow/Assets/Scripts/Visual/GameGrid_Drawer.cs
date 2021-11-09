@@ -55,7 +55,7 @@ public class GameGrid_Drawer : MonoBehaviour
             time = Mathf.Clamp01(time);
             colorTime = Mathf.Clamp01(colorTime);
 
-            rend.color = Color.Lerp(baseColor, pencilColor, colorTime);
+            rend.color = Color.Lerp(baseColor, pencilColor, Mathf.Pow(colorTime, 3));
         }
         else
         if(Input.GetMouseButton(1))
@@ -66,16 +66,17 @@ public class GameGrid_Drawer : MonoBehaviour
             time = Mathf.Clamp01(time);
             colorTime = Mathf.Clamp01(colorTime);
 
-            rend.color = Color.Lerp(baseColor, eraserColor, colorTime);
+            rend.color = Color.Lerp(baseColor, eraserColor, Mathf.Pow(colorTime, 3));
         }
-
-        //OnRelease
-        if (Input.GetMouseButtonUp(0)||Input.GetMouseButtonUp(1))
+        else
         {
-            time = 0;
-            colorTime = 0;
+            time -= Time.deltaTime * speed;
+            colorTime -= Time.deltaTime * colorSpeed;
 
-            rend.color = baseColor;
+            time = Mathf.Clamp01(time);
+            colorTime = Mathf.Clamp01(colorTime);
+
+            rend.color = Color.Lerp(baseColor, eraserColor, Mathf.Pow(colorTime, 3));
         }
 
         //permet d'overide les param sans modif le mat ou créer d'instance
@@ -84,8 +85,8 @@ public class GameGrid_Drawer : MonoBehaviour
         rend.GetPropertyBlock(propBlock);
 
         //EditZone
-        propBlock.SetFloat("_Alpha", Mathf.Lerp(0, opacity, Mathf.Clamp01(time)));
-        propBlock.SetFloat("_Thickness", Mathf.Lerp(0, thickness, Mathf.Clamp01(time)));
+        propBlock.SetFloat("_Alpha", Mathf.Lerp(0, opacity, Mathf.Clamp01(Mathf.Pow(time, 2))));
+        propBlock.SetFloat("_Thickness", Mathf.Lerp(0, thickness, Mathf.Clamp01(Mathf.Pow(time, 2))));
         propBlock.SetFloat("_Roundness", roundness);
 
         //Push Data
