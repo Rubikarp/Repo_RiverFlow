@@ -55,10 +55,7 @@ public class DigingHandler : MonoBehaviour
                     if (shovelHit > 0)
                     {
                         //Make the Link
-                        Vector2Int endToStart = input.endSelectTile.gridPos - input.startSelectTile.gridPos;
-                        Direction dir = new Direction(endToStart);
-                        input.startSelectTile.AddLinkedTile(dir, false);
-                        input.endSelectTile.AddLinkedTile(Direction.Inverse(dir), true);
+                        input.startSelectTile.LinkTo(input.endSelectTile);
 
                         //Event
                         onLink?.Invoke(input.startSelectTile, input.endSelectTile);

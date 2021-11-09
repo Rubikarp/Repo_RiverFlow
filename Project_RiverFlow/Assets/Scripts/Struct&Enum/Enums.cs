@@ -5,7 +5,11 @@ public enum TileType
     clay,
     sand
 }
-
+public enum FlowType
+{
+    flowIn,
+    flowOut
+}
 public enum RiverStrenght
 {
     _00_,

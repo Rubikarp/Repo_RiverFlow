@@ -164,35 +164,48 @@ public class GameTile : MonoBehaviour
         //Check for FlowOut
         if(linkAmount > 1)
         {
-            if(linkAmount == 2 && flowOut.Count!= flowIn.Count)
+            if (linkAmount == 2 && flowOut.Count != flowIn.Count)
             {
                 if (flowOut.Count > flowIn.Count)
                 {
-                    if(Neighbor(flowOut[0]).riverStrenght > Neighbor(flowOut[1]).riverStrenght)
+                    //flowOut.Count = 2
+                    GameTile neighborA = Neighbor(flowOut[0]);
+                    GameTile neighborB = Neighbor(flowOut[1]);
+
+                    if (neighborA.riverStrenght > neighborB.riverStrenght)
                     {
-                        Neighbor(flowOut[1]).flowOut.Add(Direction.Inverse(flowOut[1]));
-                        Neighbor(flowOut[1]).flowIn.Remove(Direction.Inverse(flowOut[1]));
+                        UnLinkFrom(neighborA);
+                        neighborA.LinkTo(this);
                     }
                     else
                     {
-                        Neighbor(flowOut[0]).flowOut.Add(Direction.Inverse(flowOut[0]));
-                        Neighbor(flowOut[0]).flowIn.Remove(Direction.Inverse(flowOut[0]));
+                        UnLinkFrom(neighborB);
+                        neighborB.LinkTo(this);
                     }
                 }
                 else
+                if (flowOut.Count < flowIn.Count)
                 {
-                    //ERROR
-                    if (Neighbor(flowOut[0]).riverStrenght > Neighbor(flowOut[1]).riverStrenght)
+                    //flowIn.Count = 2
+                    GameTile neighborA = Neighbor(flowIn[0]);
+                    GameTile neighborB = Neighbor(flowIn[1]);
+
+                    if (neighborA.riverStrenght > neighborB.riverStrenght)
                     {
-                        Neighbor(flowOut[1]).flowIn.Add(Direction.Inverse(flowOut[1]));
-                        Neighbor(flowOut[1]).flowOut.Remove(Direction.Inverse(flowOut[1]));
+                        neighborB.UnLinkFrom(this);
+                        LinkTo(neighborB);
                     }
                     else
                     {
-                        Neighbor(flowOut[0]).flowIn.Add(Direction.Inverse(flowOut[0]));
-                        Neighbor(flowOut[0]).flowOut.Remove(Direction.Inverse(flowOut[0]));
+                        neighborA.UnLinkFrom(this);
+                        LinkTo(neighborA);
                     }
                 }
+            }
+            else
+            {
+                //oh fuck comment  je  fais quand il y en a 3?
+                // pot'être en check qu'il y a  au moins une entrée et une  sortie
             }
         }
         //Send Water to neighbor
@@ -264,9 +277,35 @@ public class GameTile : MonoBehaviour
     }
 
     //LINK
-    public void AddLinkedTile(Direction addedDir, bool _flowIn)
+    public void LinkTo(GameTile tile)
     {
-        if (_flowIn)
+        Vector2Int tileToMe = tile.gridPos - gridPos;
+        Direction dir = new Direction(tileToMe);
+
+        AddLinkedTile(dir, FlowType.flowOut);
+        Neighbor(dir).AddLinkedTile(Direction.Inverse(dir), FlowType.flowIn);
+    }
+    public void UnLinkFrom(GameTile tile)
+    {
+        Vector2Int tileToMe = tile.gridPos - gridPos;
+        Direction dir = new Direction(tileToMe);
+
+        if (flowIn.Contains(dir))
+        {
+            tile.RemoveLinkedTile(Direction.Inverse(dir), FlowType.flowOut);
+            flowIn.Remove(dir);
+        }
+        else 
+        if (flowOut.Contains(dir))
+        {
+            tile.RemoveLinkedTile(Direction.Inverse(dir), FlowType.flowIn);
+            flowOut.Remove(dir);
+        }
+    }
+
+    public void AddLinkedTile(Direction addedDir, FlowType flow)
+    {
+        if (flow == FlowType.flowIn)
         {
             flowIn.Add(addedDir);
         }
@@ -275,9 +314,9 @@ public class GameTile : MonoBehaviour
             flowOut.Add(addedDir);
         }
     }
-    public void RemoveLinkedTile(Direction removeDir, bool _flowIn)
+    public void RemoveLinkedTile(Direction removeDir, FlowType flow)
     {
-        if (_flowIn)
+        if (flow == FlowType.flowIn)
         {
             flowIn.Remove(removeDir);
         }
@@ -288,22 +327,16 @@ public class GameTile : MonoBehaviour
     }
     public void RemoveAllLinkedTile()
     {
-        GameTile unlikeTile;
         //Flow In
         for (int i = 0; i < flowIn.Count; i++)
         {
-            unlikeTile = Neighbor(flowIn[i]);
-            unlikeTile.RemoveLinkedTile(Direction.Inverse(flowIn[i]), false);
+            UnLinkFrom(Neighbor(flowIn[i]));
         }
-        flowIn = new List<Direction>();
-
         //Flow Out
         for (int i = 0; i < flowOut.Count; i++)
         {
-            unlikeTile = Neighbor(flowOut[i]);
-            unlikeTile.RemoveLinkedTile(Direction.Inverse(flowOut[i]), true);
+            UnLinkFrom(Neighbor(flowOut[i]));
         }
-        flowOut = new List<Direction>();
 
         riverStrenght = RiverStrenght._00_;
         receivedFlow = RiverStrenght._00_;
