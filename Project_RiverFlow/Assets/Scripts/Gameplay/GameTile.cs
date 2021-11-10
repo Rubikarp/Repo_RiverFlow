@@ -202,11 +202,44 @@ public class GameTile : MonoBehaviour
                     }
                 }
             }
+            /*
             else
+            if (linkAmount > 2 && flowOut.Count < 1 && flowIn.Count < 1)
             {
                 //oh fuck comment  je  fais quand il y en a 3?
                 // pot'être en check qu'il y a  au moins une entrée et une  sortie
+                if (flowOut.Count < 1)
+                {
+                    GameTile weakRiver = Neighbor(flowIn[0]);
+                    for (int i = 1; i < flowIn.Count; i++)
+                    {
+                        if(Neighbor(flowIn[i]).riverStrenght < weakRiver.riverStrenght)
+                        {
+                            weakRiver = Neighbor(flowIn[i]);
+                        }
+                    }
+
+                    weakRiver.UnLinkFrom(this);
+                    LinkTo(weakRiver);
+                }
+                else
+                if (flowIn.Count < 1)
+                {
+                    GameTile weakRiver = Neighbor(flowOut[0]);
+                    for (int i = 1; i < flowOut.Count; i++)
+                    {
+                        if (Neighbor(flowOut[i]).riverStrenght < weakRiver.riverStrenght)
+                        {
+                            weakRiver = Neighbor(flowOut[i]);
+                        }
+                    }
+
+                    weakRiver.UnLinkFrom(this);
+                    LinkTo(weakRiver);
+                }
+
             }
+            */
         }
         //Send Water to neighbor
         if (SendWater())
