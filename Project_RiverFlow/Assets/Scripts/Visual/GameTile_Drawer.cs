@@ -60,23 +60,23 @@ public class GameTile_Drawer : MonoBehaviour
             {
                 switch (tile.riverStrenght)
                 {
-                    case RiverStrenght._00_:
+                    case FlowStrenght._00_:
                         lines[i].startColor = palette.holedGround;
                         lines[i].endColor = palette.holedGround;
                         break;
-                    case RiverStrenght._25_:
+                    case FlowStrenght._25_:
                         lines[i].startColor = palette.wat25;
                         lines[i].endColor = palette.wat25;
                         break;
-                    case RiverStrenght._50_:
+                    case FlowStrenght._50_:
                         lines[i].startColor = palette.wat50;
                         lines[i].endColor = palette.wat50;
                         break;
-                    case RiverStrenght._75_:
+                    case FlowStrenght._75_:
                         lines[i].startColor = palette.wat75;
                         lines[i].endColor = palette.wat75;
                         break;
-                    case RiverStrenght._100_:
+                    case FlowStrenght._100_:
                         lines[i].startColor = palette.wat100;
                         lines[i].endColor = palette.wat100;
                         break;

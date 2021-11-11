@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -30,18 +28,6 @@ public class InputHandler : MonoBehaviour
     [SerializeField] public float hitDist = 0f;
     [SerializeField] public Vector3 hitPoint = Vector3.zero;
 
-    [Header("Digging")]
-    [SerializeField] public GameTile startSelectTile;
-    [SerializeField] public Vector3 startSelectTilePos;
-    [Space(10)]
-    [SerializeField] public GameTile endSelectTile;
-    [SerializeField] public Vector3 endSelectPos;
-    [Space(10)]
-    [SerializeField] public Vector3 dragPos;
-    [SerializeField] public Vector3 dragVect;
-
-    [Header("Eraser")]
-    [SerializeField] public GameTile eraserSelectTile;
 
     private void Start()
     {
@@ -76,35 +62,17 @@ public class InputHandler : MonoBehaviour
         //OnPress
         if (Input.GetMouseButtonDown(0))
         {
-            //Initialise start select
-            startSelectTile = grid.GetTile(grid.PosToTile(GetHitPos()));
-            startSelectTilePos = grid.TileToPos(startSelectTile.gridPos);
-
             onLeftClickDown?.Invoke();
         }
         //OnDrag
         if (Input.GetMouseButton(0))
         {
-            dragPos = GetHitPos();
-            dragVect = (dragPos - startSelectTilePos);
-
             onLeftClicking?.Invoke();
         }
         //OnRelease
         if (Input.GetMouseButtonUp(0))
         {
             onLeftClickUp?.Invoke();
-
-            //Reset
-            startSelectTile = null;
-            startSelectTilePos = Vector3.zero;
-            //
-            endSelectTile = null;
-            endSelectPos = Vector3.zero;
-            //
-            dragPos = Vector3.zero;
-            dragVect = Vector3.zero;
-
         }
         #endregion
         #region rightClick
@@ -116,8 +84,6 @@ public class InputHandler : MonoBehaviour
         //OnDrag
         if (Input.GetMouseButton(1))
         {
-            eraserSelectTile = grid.GetTile(grid.PosToTile(GetHitPos()));
-
             onRightClicking?.Invoke();
         }
         //OnRelease

@@ -46,7 +46,7 @@ public class GameTile : MonoBehaviour
             data.type = value;
         }
     }
-    public RiverStrenght riverStrenght
+    public FlowStrenght riverStrenght
     {
         get
         {
@@ -59,14 +59,17 @@ public class GameTile : MonoBehaviour
     }
     #endregion
 
-    [Header("Essential Data")]
+    [Header("GameObject Data")]
     public Element element;
     public GameTile[] neighbors = new GameTile[8];
     [Space(8)]
-    public RiverStrenght receivedFlow = RiverStrenght._00_;
+    public FlowStrenght receivedFlow = FlowStrenght._00_;
     [Space(8)]
     public List<Direction> flowIn = new List<Direction>();
     public List<Direction> flowOut = new List<Direction>();
+    [Space(8)]
+    public int nearestSourceDistance = -1;
+
     #region Getter / Setter
     public bool isElement
     {
@@ -128,7 +131,7 @@ public class GameTile : MonoBehaviour
     [SerializeField] float timer;
     void Start()
     {
-        //InvokeRepeating("FlowStep", 0, 1f);
+
     }
 
     void Update()
@@ -155,11 +158,11 @@ public class GameTile : MonoBehaviour
         {
             if (element is WaterSource)
             {
-                receivedFlow = RiverStrenght._100_;
+                receivedFlow = FlowStrenght._100_;
             }
         }
-        //Clamp RiverStrenght
-        receivedFlow = (RiverStrenght)Mathf.Clamp((int)receivedFlow, 0, (int)RiverStrenght._100_);
+        //Clamp FlowStrenght
+        receivedFlow = (FlowStrenght)Mathf.Clamp((int)receivedFlow, 0, (int)FlowStrenght._100_);
         SetFlow();
         //Check for FlowOut
         if(linkAmount > 1)
@@ -287,7 +290,7 @@ public class GameTile : MonoBehaviour
             }
         }
         //Reset receivedFlow
-        receivedFlow = RiverStrenght._00_;
+        receivedFlow = FlowStrenght._00_;
     }
     public bool ReceiveWater()
     {
@@ -300,13 +303,13 @@ public class GameTile : MonoBehaviour
     public void SetFlow()
     {
         riverStrenght++;
-        riverStrenght = (RiverStrenght)Mathf.Clamp((int)riverStrenght, 0, (int)receivedFlow);
+        riverStrenght = (FlowStrenght)Mathf.Clamp((int)riverStrenght, 0, (int)receivedFlow);
     }
     public void StopFlow()
     {
         riverStrenght--;
-        riverStrenght = (RiverStrenght)Mathf.Max((int)riverStrenght, 0);
-        receivedFlow = RiverStrenght._00_;
+        riverStrenght = (FlowStrenght)Mathf.Max((int)riverStrenght, 0);
+        receivedFlow = FlowStrenght._00_;
     }
 
     //LINK
@@ -335,7 +338,6 @@ public class GameTile : MonoBehaviour
             flowOut.Remove(dir);
         }
     }
-
     public void AddLinkedTile(Direction addedDir, FlowType flow)
     {
         if (flow == FlowType.flowIn)
@@ -371,11 +373,38 @@ public class GameTile : MonoBehaviour
             UnLinkFrom(Neighbor(flowOut[i]));
         }
 
-        riverStrenght = RiverStrenght._00_;
-        receivedFlow = RiverStrenght._00_;
+        riverStrenght = FlowStrenght._00_;
+        receivedFlow = FlowStrenght._00_;
     }
 
     //Help
+    public void FillNeighbor()
+    {
+        Vector2Int temp = gridPos;
+        Direction dir = new Direction(0);
+
+        neighbors = new GameTile[8];
+        for (int i = 0; i < 8; i++)
+        {
+            dir = new Direction((DirectionEnum)i);
+            temp = gridPos + dir.dirValue;
+
+            if (temp.x < 0 || temp.y < 0)
+            {
+                neighbors[i] = null;
+            }
+            else
+            if (temp.x > GameGrid.instance.size.x - 1 || temp.y > GameGrid.instance.size.y - 1)
+            {
+                neighbors[i] = null;
+            }
+            else
+            {
+                neighbors[i] = GameGrid.instance.GetTile(temp);
+            }
+        }
+
+    }
     public int NeighborIndex(GameTile tile)
     {
         for (int i = 0; i < 8; i++)
@@ -392,9 +421,9 @@ public class GameTile : MonoBehaviour
     {
         return neighbors[(int)dir.dirEnum];
     }
-    public bool IsLinkInDir(Direction dir, bool _flowIn)
+    public bool IsLinkInDir(Direction dir, FlowType flow)
     {
-        if (_flowIn)
+        if (flow == FlowType.flowIn)
         {
             return flowIn.Contains(dir);
         }
@@ -405,7 +434,7 @@ public class GameTile : MonoBehaviour
     }
 
     //GameTile to Data
-    public void LoadLinkedTile(TileData data)
+    public void SaveInTileData(TileData data)
     {
         for (int i = 0; i < data.flowIn_Neighbors.Length; i++)
         {

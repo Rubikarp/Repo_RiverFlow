@@ -1,89 +1,144 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-[Serializable]
-public class LinkEvent : UnityEvent<GameTile, GameTile> { }
-[Serializable]
-public class TileEvent : UnityEvent<GameTile> { }
+
+[Serializable] public class LinkEvent : UnityEvent<GameTile, GameTile> { }
+[Serializable] public class TileEvent : UnityEvent<GameTile> { }
 
 public class DigingHandler : MonoBehaviour
 {
+    [Header("Reférence")]
     public InputHandler input;
     public GameGrid grid;
-    [Space(10)]
-    public LinkEvent digMove;
+
+    [Header("Event")]
     public LinkEvent onLink;
     public TileEvent onBreak;
+
+    [Header("Digging")]
+    [SerializeField] public GameTile startSelectTile;
+    [SerializeField] public Vector3 startSelectTilePos;
+    [Space(10)]
+    [SerializeField] public GameTile endSelectTile;
+    [SerializeField] public Vector3 endSelectPos;
+    [Space(10)]
+    [SerializeField] public Vector3 dragPos;
+    [SerializeField] public Vector3 dragVect;
+
+    [Header("Eraser")]
+    [SerializeField] public GameTile eraserSelectTile;
 
     [Header("Variable")]
     public int shovelHit = 3;
 
     void Start()
     {
+        input.onLeftClickDown.AddListener(OnLeftClick);
         input.onLeftClicking.AddListener(OnLeftClicking);
+        input.onLeftClickUp.AddListener(OnLeftClickRelease);
+
         input.onRightClicking.AddListener(OnRighClicking);
+        input.onRightClickUp.AddListener(OnRightClickRelease);
     }
+
     void Update()
     {
         
     }
 
+    private void OnDestroy()
+    {
+        input.onLeftClickDown.RemoveListener(OnLeftClick);
+        input.onLeftClicking.RemoveListener(OnLeftClicking);
+        input.onLeftClickUp.RemoveListener(OnLeftClickRelease);
+
+        input.onRightClicking.RemoveListener(OnRighClicking);
+        input.onRightClickUp.RemoveListener(OnRightClickRelease);
+
+    }
+
+    //Digging
+    public void OnLeftClick()
+    {
+        //Initialise start select
+        startSelectTile = grid.GetTile(grid.PosToTile(input.GetHitPos()));
+        startSelectTilePos = grid.TileToPos(startSelectTile.gridPos);
+    }
+
     public void OnLeftClicking()
     {
+        dragPos = input.GetHitPos();
+        dragVect = (dragPos - startSelectTilePos);
+
         //Have drag a certainDistance        
-        if (Mathf.Abs(input.dragVect.x) > grid.cellSize || Mathf.Abs(input.dragVect.y) > grid.cellSize)
+        if (Mathf.Abs(dragVect.x) > grid.cellSize || Mathf.Abs(dragVect.y) > grid.cellSize)
         {
-            Vector3 drag = input.GetHitPos() - input.startSelectTilePos;
+            Vector3 drag = input.GetHitPos() - startSelectTilePos;
             //Si je dépasse de plus d'une case d'écart
             if (drag.magnitude > (1.5f * grid.cellSize))
             {
                 drag = drag.normalized * (1.5f * grid.cellSize);
             }
             //Check la ou je touche
-            input.endSelectTile = grid.GetTile(grid.PosToTile(input.startSelectTilePos + drag));
-            input.endSelectPos = input.dragPos;
+            endSelectTile = grid.GetTile(grid.PosToTile(startSelectTilePos + drag));
+            endSelectPos = dragPos;
 
-            Debug.DrawRay(input.startSelectTilePos, input.startSelectTile.worldPos - input.endSelectTile.worldPos, Color.red);
             //Si j'ai bien 2 tile linkable
-            if (input.startSelectTile != null && input.endSelectTile != null)
+            if (startSelectTile != null && endSelectTile != null)
             {
-                if (input.startSelectTile.isLinkable && input.endSelectTile.isLinkable)
+                if (startSelectTile.isLinkable && endSelectTile.isLinkable)
                 {
                     if (shovelHit > 0)
                     {
                         //Make the Link
-                        input.startSelectTile.LinkTo(input.endSelectTile);
+                        startSelectTile.LinkTo(endSelectTile);
 
                         //Event
-                        onLink?.Invoke(input.startSelectTile, input.endSelectTile);
+                        onLink?.Invoke(startSelectTile, endSelectTile);
                         shovelHit--;
                     }
                 }
 
             }
             
-            digMove?.Invoke(input.startSelectTile, input.endSelectTile);
-
             //End became the new start
-            input.startSelectTile = input.endSelectTile;
-            input.startSelectTilePos = grid.TileToPos(input.startSelectTile.gridPos);
+            startSelectTile = endSelectTile;
+            startSelectTilePos = grid.TileToPos(startSelectTile.gridPos);
         }
     }
+
+    public void OnLeftClickRelease()
+    {
+        //Reset
+        startSelectTile = null;
+        startSelectTilePos = Vector3.zero;
+        //
+        endSelectTile = null;
+        endSelectPos = Vector3.zero;
+        //
+        dragPos = Vector3.zero;
+        dragVect = Vector3.zero;
+    }
+
+    //Undigging
     public void OnRighClicking()
     {
-        if (input.eraserSelectTile.linkAmount > 0)
+        eraserSelectTile = grid.GetTile(grid.PosToTile(input.GetHitPos()));
+
+        if (eraserSelectTile.linkAmount > 0)
         {
-            shovelHit += input.eraserSelectTile.linkAmount;
+            shovelHit += eraserSelectTile.linkAmount;
 
-            onBreak?.Invoke(input.eraserSelectTile);
+            onBreak?.Invoke(eraserSelectTile);
 
-            input.eraserSelectTile.RemoveAllLinkedTile();
+            eraserSelectTile.RemoveAllLinkedTile();
         }
+    }
 
-
+    public void OnRightClickRelease()
+    {
+        eraserSelectTile = null;
     }
 
 }

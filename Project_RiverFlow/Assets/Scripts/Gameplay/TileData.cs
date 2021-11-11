@@ -11,14 +11,14 @@ public struct TileData
 
     [Header("State")]
     public TileType type;
-    public RiverStrenght riverStrenght;
+    public FlowStrenght riverStrenght;
 
     [Header("Stored Value")]
     public bool[] flowIn_Neighbors;
     public bool[] flowOut_Neighbors;
 
     #region Constructor 
-    public TileData (Vector2Int _gridPos, TileType _type = TileType.grass, RiverStrenght _riverStrenght = RiverStrenght._00_)
+    public TileData (Vector2Int _gridPos, TileType _type = TileType.grass, FlowStrenght _riverStrenght = FlowStrenght._00_)
     {
         ///Essential Data
         name = "Data_Tile(" + _gridPos.x + ":" + _gridPos.y + ")";
@@ -30,7 +30,7 @@ public struct TileData
         type = _type;
         riverStrenght = _riverStrenght;
     }
-    public TileData (int _gridPosX, int _gridPosY, TileType _type = TileType.grass, RiverStrenght _riverStrenght = RiverStrenght._00_)
+    public TileData (int _gridPosX, int _gridPosY, TileType _type = TileType.grass, FlowStrenght _riverStrenght = FlowStrenght._00_)
     {
         ///Essential Data
         name = "Data_Tile(" + _gridPosX + ":" + _gridPosY + ")";
@@ -56,13 +56,13 @@ public struct TileData
     }
     #endregion
 
-    public void Save(GameTile tile)
+    public void LoadToGametile(GameTile tile)
     {
         this = tile.data;
         for (int i = 0; i < 8; i++)
         {
-            flowIn_Neighbors[i] = tile.IsLinkInDir(new Direction((DirectionEnum)i), true);
-            flowOut_Neighbors[i] = tile.IsLinkInDir(new Direction((DirectionEnum)i), true);
+            flowIn_Neighbors[i] = tile.IsLinkInDir(new Direction((DirectionEnum)i), FlowType.flowIn);
+            flowOut_Neighbors[i] = tile.IsLinkInDir(new Direction((DirectionEnum)i), FlowType.flowOut);
         }
     }
 

@@ -2,14 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GameGrid : MonoBehaviour
+public class GameGrid : Singleton<GameGrid>
 {
     public static GameGrid instance;
 
     [Header("Parameter")]
     public float cellSize = 1;
     public Vector2Int size = new Vector2Int(10, 10);
-    public Vector2 offSet = new Vector2Int(-5, -5);
+    public Vector2 offSet = new Vector2Int(0,0);
+
     [Space(10)]
     [Header("Data")]
     public Transform gridContainer;
@@ -102,7 +103,7 @@ public class GameGrid : MonoBehaviour
         {
             for (int x = 0; x < size.x; x++)
             {
-                FillNeighbor(GetTile(x, y).gridPos);
+                GetTile(x, y).FillNeighbor();
             }
         }
     }
@@ -133,33 +134,6 @@ public class GameGrid : MonoBehaviour
                 }
             }
         }
-    }
-    private void FillNeighbor(Vector2Int pos)
-    {
-        Vector2Int temp = pos;
-        Direction dir = new Direction(0);
-
-        GetTile(pos).neighbors = new GameTile[8];
-        for (int i = 0; i < 8; i++)
-        {
-            dir = new Direction((DirectionEnum)i);
-            temp = pos + dir.dirValue;
-
-            if(temp.x < 0 || temp.y < 0)
-            {
-                GetTile(pos).neighbors[i] = null;
-            }
-            else
-            if (temp.x > size.x - 1 || temp.y > size.y - 1)
-            {
-                GetTile(pos).neighbors[i] =  null;
-            }
-            else
-            {
-                GetTile(pos).neighbors[i] = GetTile(temp);
-            }
-        }
-
     }
 
     /// <summary>

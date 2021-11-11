@@ -10,7 +10,7 @@ public enum FlowType
     flowIn,
     flowOut
 }
-public enum RiverStrenght
+public enum FlowStrenght
 {
     _00_,
     _25_,

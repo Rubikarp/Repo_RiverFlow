@@ -10,38 +10,19 @@ public class DigingLine : MonoBehaviour
     public GameGrid grid;
     public LineRenderer line;
 
-    void Start()
-    {
-        input.onLeftClickDown.AddListener(OnLeftClickPress);
-        input.onLeftClicking.AddListener(OnLeftClicking);
-        input.onLeftClickUp.AddListener(OnLeftClickRelease);
-
-        dig.digMove.AddListener(OnDigMove);
-    }
-
     void Update()
     {
-        
-    }
+        if (dig.startSelectTilePos != null)
+        {
+            line.positionCount = 2;
 
-    public void OnLeftClickPress()
-    {
-        line.positionCount = 1;
-        line.SetPosition(0, input.startSelectTilePos);
-    }
-    public void OnLeftClicking()
-    {
-        line.positionCount = 2;
-        line.SetPosition(1, input.dragPos);
-    }
-    public void OnLeftClickRelease()
-    {
-        line.positionCount = 0;
-    }
+            line.SetPosition(0, dig.startSelectTilePos);
+            line.SetPosition(1, dig.dragPos);
+        }
+        else
+        {
+            line.positionCount = 0;
+        }
 
-    public void OnDigMove(GameTile startSelectTile, GameTile endSelectTile)
-    {
-        line.SetPosition(0, grid.TileToPos(endSelectTile.data.gridPos));
     }
-
 }

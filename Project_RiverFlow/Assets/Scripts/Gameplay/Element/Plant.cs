@@ -44,7 +44,7 @@ public class Plant : Element
     private bool IsAlive { get { return currentState != PlantState.Dead; } }
 
     public List<int> closeRivers;
-    private RiverStrenght bestRiverStrenght = 0;
+    private FlowStrenght bestRiverStrenght = 0;
     
     [Header("Living")]
     [Range(0f,1f)] public float timer = 1.0f;
@@ -107,9 +107,9 @@ public class Plant : Element
         isIrrigated = VerifyIrrigation(bestRiverStrenght);
     }
 
-    private bool VerifyIrrigation(RiverStrenght _bestRiverStrenght)
+    private bool VerifyIrrigation(FlowStrenght _bestRiverStrenght)
     {
-        if(_bestRiverStrenght > RiverStrenght._00_)
+        if(_bestRiverStrenght > FlowStrenght._00_)
         {
             return tileOn.type <= (TileType)_bestRiverStrenght;
         }
