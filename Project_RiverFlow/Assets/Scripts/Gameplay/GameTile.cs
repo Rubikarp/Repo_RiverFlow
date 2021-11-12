@@ -165,84 +165,70 @@ public class GameTile : MonoBehaviour
         receivedFlow = (FlowStrenght)Mathf.Clamp((int)receivedFlow, 0, (int)FlowStrenght._100_);
         SetFlow();
         //Check for FlowOut
-        if(linkAmount > 1)
+        if (linkAmount == 2)
         {
-            if (linkAmount == 2 && flowOut.Count != flowIn.Count)
+            //Link
+            if (flowOut.Count > flowIn.Count)
             {
-                if (flowOut.Count > flowIn.Count)
-                {
-                    //flowOut.Count = 2
-                    GameTile neighborA = Neighbor(flowOut[0]);
-                    GameTile neighborB = Neighbor(flowOut[1]);
+                //flowOut.Count = 2
+                GameTile neighborA = GetNeighbor(flowOut[0]);
+                GameTile neighborB = GetNeighbor(flowOut[1]);
 
-                    if (neighborA.riverStrenght > neighborB.riverStrenght)
-                    {
-                        UnLinkFrom(neighborA);
-                        neighborA.LinkTo(this);
-                    }
-                    else
-                    {
-                        UnLinkFrom(neighborB);
-                        neighborB.LinkTo(this);
-                    }
+                if (neighborA.riverStrenght > neighborB.riverStrenght)
+                {
+                    InverseLink(neighborA);
                 }
                 else
-                if (flowOut.Count < flowIn.Count)
+                if (neighborA.riverStrenght < neighborB.riverStrenght)
                 {
-                    //flowIn.Count = 2
-                    GameTile neighborA = Neighbor(flowIn[0]);
-                    GameTile neighborB = Neighbor(flowIn[1]);
-
-                    if (neighborA.riverStrenght > neighborB.riverStrenght)
-                    {
-                        neighborB.UnLinkFrom(this);
-                        LinkTo(neighborB);
-                    }
-                    else
-                    {
-                        neighborA.UnLinkFrom(this);
-                        LinkTo(neighborA);
-                    }
+                    InverseLink(neighborB);
+                }
+                else
+                {
+                    //neighborA.riverStrenght == neighborB.riverStrenght
+                    //noeud
                 }
             }
-            /*
             else
-            if (linkAmount > 2 && flowOut.Count < 1 && flowIn.Count < 1)
+            if (flowOut.Count < flowIn.Count)
             {
-                //oh fuck comment  je  fais quand il y en a 3?
-                // pot'être en check qu'il y a  au moins une entrée et une  sortie
-                if (flowOut.Count < 1)
-                {
-                    GameTile weakRiver = Neighbor(flowIn[0]);
-                    for (int i = 1; i < flowIn.Count; i++)
-                    {
-                        if(Neighbor(flowIn[i]).riverStrenght < weakRiver.riverStrenght)
-                        {
-                            weakRiver = Neighbor(flowIn[i]);
-                        }
-                    }
+                //flowIn.Count = 2
+                GameTile neighborA = GetNeighbor(flowIn[0]);
+                GameTile neighborB = GetNeighbor(flowIn[1]);
 
-                    weakRiver.UnLinkFrom(this);
-                    LinkTo(weakRiver);
+                if (neighborA.riverStrenght > neighborB.riverStrenght)
+                {
+                    InverseLink(neighborB);
                 }
                 else
-                if (flowIn.Count < 1)
+                if (neighborA.riverStrenght < neighborB.riverStrenght)
                 {
-                    GameTile weakRiver = Neighbor(flowOut[0]);
-                    for (int i = 1; i < flowOut.Count; i++)
-                    {
-                        if (Neighbor(flowOut[i]).riverStrenght < weakRiver.riverStrenght)
-                        {
-                            weakRiver = Neighbor(flowOut[i]);
-                        }
-                    }
-
-                    weakRiver.UnLinkFrom(this);
-                    LinkTo(weakRiver);
+                    InverseLink(neighborA);
                 }
-
+                else
+                {
+                    //neighborA.riverStrenght == neighborB.riverStrenght
+                    //noeud
+                }
             }
-            */
+            else
+            {
+                //flowOut.Count == flowIn.Count
+                //Du coup it's okay
+            }
+        }
+        else 
+        if (linkAmount > 2)
+        {
+            //check si une entrée vide
+            for (int i = 0; i < flowIn.Count; i++)
+            {
+                if (GetNeighbor(flowIn[i]).riverStrenght == FlowStrenght._00_)
+                {
+                    //Became Flow Out
+                    InverseLink(GetNeighbor(flowIn[i]));
+                }
+            }
         }
         //Send Water to neighbor
         if (SendWater())
@@ -253,38 +239,38 @@ public class GameTile : MonoBehaviour
             switch (flowOut.Count)
             {
                 case 1:
-                    Neighbor(flowOut[0]).receivedFlow += Mathf.FloorToInt(riverPower / riverSplits);
+                    GetNeighbor(flowOut[0]).receivedFlow += Mathf.FloorToInt(riverPower / riverSplits);
                     break;
                 case 2:
                     if ((int)riverStrenght % 2 == 0)
                     {
-                        Neighbor(flowOut[0]).receivedFlow += Mathf.FloorToInt(riverPower / riverSplits);
-                        Neighbor(flowOut[1]).receivedFlow += Mathf.FloorToInt(riverPower / riverSplits);
+                        GetNeighbor(flowOut[0]).receivedFlow += Mathf.FloorToInt(riverPower / riverSplits);
+                        GetNeighbor(flowOut[1]).receivedFlow += Mathf.FloorToInt(riverPower / riverSplits);
                     }
                     else
                     {
-                        Neighbor(flowOut[0]).receivedFlow += Mathf.FloorToInt(riverPower / riverSplits);
-                        Neighbor(flowOut[1]).receivedFlow += Mathf.CeilToInt(riverPower / riverSplits);
+                        GetNeighbor(flowOut[0]).receivedFlow += Mathf.CeilToInt(riverPower / riverSplits);
+                        GetNeighbor(flowOut[1]).receivedFlow += Mathf.FloorToInt(riverPower / riverSplits);
                     }
                     break;
                 case 3:
                     if ((int)riverStrenght % 3 == 0)
                     {
-                        Neighbor(flowOut[0]).receivedFlow += Mathf.FloorToInt(riverPower / riverSplits);
-                        Neighbor(flowOut[1]).receivedFlow += Mathf.FloorToInt(riverPower / riverSplits);
-                        Neighbor(flowOut[2]).receivedFlow += Mathf.FloorToInt(riverPower / riverSplits);
+                        GetNeighbor(flowOut[0]).receivedFlow += Mathf.FloorToInt(riverPower / riverSplits);
+                        GetNeighbor(flowOut[1]).receivedFlow += Mathf.FloorToInt(riverPower / riverSplits);
+                        GetNeighbor(flowOut[2]).receivedFlow += Mathf.FloorToInt(riverPower / riverSplits);
                     }
                     else
                     {
-                        Neighbor(flowOut[0]).receivedFlow += Mathf.FloorToInt(riverPower / riverSplits);
-                        Neighbor(flowOut[1]).receivedFlow += Mathf.FloorToInt(riverPower / riverSplits);
-                        Neighbor(flowOut[2]).receivedFlow += Mathf.CeilToInt(riverPower / riverSplits);
+                        GetNeighbor(flowOut[0]).receivedFlow += Mathf.CeilToInt(riverPower / riverSplits);
+                        GetNeighbor(flowOut[1]).receivedFlow += Mathf.FloorToInt(riverPower / riverSplits);
+                        GetNeighbor(flowOut[2]).receivedFlow += Mathf.FloorToInt(riverPower / riverSplits);
                     }
                     break;
                 default:
                     for (int i = 0; i < flowOut.Count; i++)
                     {
-                        Neighbor(flowOut[1]).receivedFlow += Mathf.FloorToInt(riverPower / riverSplits);
+                        GetNeighbor(flowOut[1]).receivedFlow += Mathf.FloorToInt(riverPower / riverSplits);
                     }
                     break;
             }
@@ -302,8 +288,9 @@ public class GameTile : MonoBehaviour
     }
     public void SetFlow()
     {
-        riverStrenght++;
-        riverStrenght = (FlowStrenght)Mathf.Clamp((int)riverStrenght, 0, (int)receivedFlow);
+        //riverStrenght++;
+        //riverStrenght = (FlowStrenght)Mathf.Clamp((int)riverStrenght, 0, (int)receivedFlow);
+        riverStrenght = receivedFlow;
     }
     public void StopFlow()
     {
@@ -313,13 +300,18 @@ public class GameTile : MonoBehaviour
     }
 
     //LINK
+    public void InverseLink(GameTile tile)
+    {
+        UnLinkFrom(tile);
+        LinkTo(tile);
+    }
     public void LinkTo(GameTile tile)
     {
         Vector2Int tileToMe = tile.gridPos - gridPos;
         Direction dir = new Direction(tileToMe);
 
         AddLinkedTile(dir, FlowType.flowOut);
-        Neighbor(dir).AddLinkedTile(Direction.Inverse(dir), FlowType.flowIn);
+        GetNeighbor(dir).AddLinkedTile(Direction.Inverse(dir), FlowType.flowIn);
     }
     public void UnLinkFrom(GameTile tile)
     {
@@ -365,12 +357,12 @@ public class GameTile : MonoBehaviour
         //Flow In
         for (int i = 0; i < flowIn.Count; i++)
         {
-            UnLinkFrom(Neighbor(flowIn[i]));
+            UnLinkFrom(GetNeighbor(flowIn[i]));
         }
         //Flow Out
         for (int i = 0; i < flowOut.Count; i++)
         {
-            UnLinkFrom(Neighbor(flowOut[i]));
+            UnLinkFrom(GetNeighbor(flowOut[i]));
         }
 
         riverStrenght = FlowStrenght._00_;
@@ -417,7 +409,7 @@ public class GameTile : MonoBehaviour
         Debug.LogError("Linked tile " + tile.gridPos + " n'est pas un voisin de " + this.gridPos + ".", this);
         return 8;
     }
-    public GameTile Neighbor(Direction dir)
+    public GameTile GetNeighbor(Direction dir)
     {
         return neighbors[(int)dir.dirEnum];
     }

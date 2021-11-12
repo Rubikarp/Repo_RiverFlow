@@ -91,15 +91,34 @@ public class DigingHandler : MonoBehaviour
                 {
                     if (shovelHit > 0)
                     {
-                        //Make the Link
-                        startSelectTile.LinkTo(endSelectTile);
+                        Vector2Int tileToMe = endSelectTile.gridPos - startSelectTile.gridPos;
+                        Direction linkDir = new Direction(tileToMe);
 
-                        //Event
-                        onLink?.Invoke(startSelectTile, endSelectTile);
-                        shovelHit--;
+                        if (startSelectTile.IsLinkInDir(linkDir, FlowType.flowOut))
+                        {
+                            ///link in the same sens
+                            //Do nothing
+                        }
+                        else
+                        if (startSelectTile.IsLinkInDir(linkDir, FlowType.flowIn))
+                        {
+                            ///TODO : link in the opposite sens
+                            startSelectTile.InverseLink(endSelectTile);
+                            //Event
+                            onLink?.Invoke(startSelectTile, endSelectTile);
+
+                        }
+                        else
+                        {
+                            //Make the Link
+                            startSelectTile.LinkTo(endSelectTile);
+
+                            //Event
+                            onLink?.Invoke(startSelectTile, endSelectTile);
+                            shovelHit--;
+                        }
                     }
                 }
-
             }
             
             //End became the new start
@@ -135,7 +154,6 @@ public class DigingHandler : MonoBehaviour
             eraserSelectTile.RemoveAllLinkedTile();
         }
     }
-
     public void OnRightClickRelease()
     {
         eraserSelectTile = null;

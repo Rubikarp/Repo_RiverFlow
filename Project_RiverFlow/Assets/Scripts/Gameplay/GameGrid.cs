@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using NaughtyAttributes;
 
 public class GameGrid : Singleton<GameGrid>
 {
@@ -108,6 +109,23 @@ public class GameGrid : Singleton<GameGrid>
         }
     }
     
+    [Button("Reeboot")]
+    void Reboot()
+    {
+        for (int y = 0; y < size.y; y++)
+        {
+            for (int x = 0; x < size.x; x++)
+            {
+                if (GetTile(x, y) != null)
+                {
+                    GetTile(x, y).riverStrenght = 0;
+                    GetTile(x, y).receivedFlow = 0;
+                }
+            }
+        }
+    }
+
+
     [ContextMenu("Clear The GameGrid")]
     private void ClearGrid()
     {

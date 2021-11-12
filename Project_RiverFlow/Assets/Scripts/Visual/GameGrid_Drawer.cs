@@ -76,7 +76,7 @@ public class GameGrid_Drawer : MonoBehaviour
             time = Mathf.Clamp01(time);
             colorTime = Mathf.Clamp01(colorTime);
 
-            rend.color = Color.Lerp(baseColor, eraserColor, Mathf.Pow(colorTime, 3));
+            rend.color = Color.Lerp(baseColor, rend.color, Mathf.Pow(colorTime, 3));
         }
 
         //permet d'overide les param sans modif le mat ou créer d'instance
