@@ -54,8 +54,12 @@ public class Plant : Element
     [Header("Event")]
     public UnityEvent onStateChange;
 
+    public GameTime gameTime;
+
     private void Start()
     {
+        gameTime = GameTime.Instance;
+
         if (tileOn.isElement)
         {
             tileOn.element = this;
@@ -64,7 +68,7 @@ public class Plant : Element
 
     void Update()
     {
-        if (IsAlive)
+        if (IsAlive && !gameTime.isPaused)
         {
             CheckNeighboringRivers();
             StateUpdate();
@@ -117,17 +121,17 @@ public class Plant : Element
         {
             return false;
         }
-    } 
+    }
 
     private void StateUpdate()
     {
         if (isIrrigated)
         {
-            timer += Time.deltaTime * (1/stateUpgradeTime);
+            timer += Time.deltaTime * (1 / stateUpgradeTime) * gameTime.gameTimeSpeed;
         }
         else
         {
-            timer -= Time.deltaTime * (1/stateDowngradeTime);
+            timer -= Time.deltaTime * (1 / stateDowngradeTime) * gameTime.gameTimeSpeed;
         }
 
         //Lvl Drop
@@ -142,7 +146,7 @@ public class Plant : Element
         if (timer > 1)
         {
             //Si pas au niveau max
-            if(currentState < PlantState.Senior)
+            if (currentState < PlantState.Senior)
             {
                 timer -= 1f;
                 currentState = (PlantState)Mathf.Clamp((int)(currentState + 1), 0, (int)PlantState.Senior);

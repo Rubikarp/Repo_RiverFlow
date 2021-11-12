@@ -69,7 +69,6 @@ public class GameTile : MonoBehaviour
     public List<Direction> flowOut = new List<Direction>();
     [Space(8)]
     public int nearestSourceDistance = -1;
-
     #region Getter / Setter
     public bool isElement
     {
@@ -128,20 +127,21 @@ public class GameTile : MonoBehaviour
     }
     #endregion
 
-    [SerializeField] float timer;
+    public GameTime gameTime;
+
     void Start()
     {
-
+        gameTime = GameTime.Instance;
+        gameTime.onWaterSimulationStep.AddListener(FlowStep);
     }
 
     void Update()
     {
-        timer += Time.deltaTime;
-        if (timer > simulStepDur)
-        {
-            FlowStep();
-            timer = 0f;
-        }
+
+    }
+    private void OnDestroy()
+    {
+        gameTime.onWaterSimulationStep.RemoveListener(FlowStep);
     }
 
     //Flow
@@ -294,9 +294,14 @@ public class GameTile : MonoBehaviour
     }
     public void StopFlow()
     {
+        /*
         riverStrenght--;
         riverStrenght = (FlowStrenght)Mathf.Max((int)riverStrenght, 0);
         receivedFlow = FlowStrenght._00_;
+        */
+
+        receivedFlow = FlowStrenght._00_;
+        riverStrenght = FlowStrenght._00_;
     }
 
     //LINK
@@ -364,9 +369,6 @@ public class GameTile : MonoBehaviour
         {
             UnLinkFrom(GetNeighbor(flowOut[i]));
         }
-
-        riverStrenght = FlowStrenght._00_;
-        receivedFlow = FlowStrenght._00_;
     }
 
     //Help

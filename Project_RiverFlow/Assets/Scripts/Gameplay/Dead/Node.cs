@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class Node : MonoBehaviour
 {
+    public List<Direction> flowIn = new List<Direction>();
+    public List<Direction> flowOut = new List<Direction>();
+    
     void Start()
     {
         
