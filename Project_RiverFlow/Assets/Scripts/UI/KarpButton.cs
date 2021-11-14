@@ -43,6 +43,7 @@ public class KarpButton : MonoBehaviour
     public void OnClick()
     {
         selfImage.color = clickedColor;
+        buttonClick?.Invoke();
     }
 
     /*public void OnDrag(BaseEventData bed)

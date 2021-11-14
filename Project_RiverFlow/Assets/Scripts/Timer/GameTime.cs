@@ -39,6 +39,15 @@ public class GameTime : Singleton<GameTime>
     {
         isPaused = !isPaused;
     }
+    public void SetPause(bool state)
+    {
+        isPaused = state;
+    }
+    public void SetSpeed(float speed)
+    {
+        gameTimeSpeed = speed;
+    }
+
 
     public void WaterSimulation()
     {
