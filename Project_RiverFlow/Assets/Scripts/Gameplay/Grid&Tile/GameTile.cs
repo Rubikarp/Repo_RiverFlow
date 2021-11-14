@@ -68,6 +68,10 @@ public class GameTile : MonoBehaviour
     public List<Direction> flowIn = new List<Direction>();
     public List<Direction> flowOut = new List<Direction>();
     [Space(8)]
+    public List<Direction> linkedTile = new List<Direction>();
+    public List<Canal> canalsIn = new List<Canal>();
+    [Space(8)]
+
     public int nearestSourceDistance = -1;
     #region Getter / Setter
     public bool isElement
