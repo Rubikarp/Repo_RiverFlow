@@ -14,6 +14,11 @@ public class ElementHandler : MonoBehaviour
     public Transform elementContainer;
 
     [Header("Tool"), HorizontalLine]
+    public List<Plant> allPlants = new List<Plant>();
+    [Space(10)]
+    public List<WaterSource> allSources = new List<WaterSource>();
+
+    [Header("Tool"), HorizontalLine]
     [SerializeField] int posX;
     [SerializeField] int posY;
 
@@ -39,8 +44,10 @@ public class ElementHandler : MonoBehaviour
             if (plant == null)
             {
                 Debug.LogError("can't Find Plant on the object", go);
+                return;
             }
 
+            allPlants.Add(plant);
             //Link Element and Tile
             plant.tileOn = grid.GetTile(grisPos);
             grid.GetTile(grisPos).element = plant;
