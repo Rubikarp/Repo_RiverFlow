@@ -11,10 +11,12 @@ public class DigingHandler : MonoBehaviour
     [Header("Reférence")]
     public InputHandler input;
     public GameGrid grid;
+    public GameTime timer;
 
     [Header("Event")]
     public LinkEvent onLink;
     public TileEvent onBreak;
+    
 
     [Header("Digging")]
     [SerializeField] public GameTile startSelectTile;
@@ -31,6 +33,7 @@ public class DigingHandler : MonoBehaviour
 
     [Header("Variable")]
     public int shovelHit = 3;
+    public int weeklyShovels = 0;
 
     void Start()
     {
@@ -40,6 +43,8 @@ public class DigingHandler : MonoBehaviour
 
         input.onRightClicking.AddListener(OnRighClicking);
         input.onRightClickUp.AddListener(OnRightClickRelease);
+
+        timer.getMoreDig.AddListener(AddDigAmmo);
     }
 
     void Update()
@@ -157,6 +162,11 @@ public class DigingHandler : MonoBehaviour
     public void OnRightClickRelease()
     {
         eraserSelectTile = null;
+    }
+
+    private void AddDigAmmo()
+    {
+        shovelHit += weeklyShovels;
     }
 
 }
