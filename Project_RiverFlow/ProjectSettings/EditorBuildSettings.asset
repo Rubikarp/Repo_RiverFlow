@@ -5,7 +5,13 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
+  - enabled: 0
+    path: 
+    guid: 00000000000000000000000000000000
   - enabled: 1
-    path: Assets/Scenes/PoC_SceneTest.unity
-    guid: e5330f2c2d86c9d41bec72e6185246fb
+    path: Assets/Scenes/Louis/Menu.unity
+    guid: 12d0be7962269e843bd2df54d3fe0d97
+  - enabled: 1
+    path: Assets/Scenes/Karp/Test_Karp.unity
+    guid: 378e3ea0a0e2a304d8ac87af556c655c
   m_configObjects: {}
