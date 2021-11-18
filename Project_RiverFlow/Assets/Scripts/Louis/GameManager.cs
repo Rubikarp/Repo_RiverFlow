@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : Singleton<GameManager>
 {
-    // Start is called before the first frame update
+    public List<LevelSO> levelList;
     void Start()
     {
         
