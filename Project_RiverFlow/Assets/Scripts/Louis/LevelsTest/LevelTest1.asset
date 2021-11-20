@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b29908123b7277242a9c96854f780ebc, type: 3}
   m_Name: LevelTest1
   m_EditorClassIdentifier: 
-  levelSceneName: 
+  levelSceneName: Assets/Scenes/Karp/Test_Karp.unity
   levelNumber: 1
   name: "For\xE9"
   score: 0

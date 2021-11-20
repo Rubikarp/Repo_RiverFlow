@@ -31,4 +31,9 @@ public class LevelDisplay : MonoBehaviour
         levelNumber = level.levelNumber;
         levelNumberText.text = "Level " + levelNumber.ToString();
     }
+
+    public void GoToScene()
+    {
+        GameManager.Instance.ChangeScene(level.levelSceneName);
+    }
 }
