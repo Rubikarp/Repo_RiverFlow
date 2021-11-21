@@ -25709,6 +25709,9 @@ MonoBehaviour:
   onWaterSimulationStep:
     m_PersistentCalls:
       m_Calls: []
+  getMoreDig:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!4 &357762605
 Transform:
   m_ObjectHideFlags: 0
@@ -41828,7 +41831,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.9, y: 0.9}
   m_AnchorMax: {x: 0.96, y: 0.95}
-  m_AnchoredPosition: {x: 0, y: -27.190002}
+  m_AnchoredPosition: {x: 0, y: -27.189941}
   m_SizeDelta: {x: 0, y: 54.38}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &612585167
@@ -84124,6 +84127,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   input: {fileID: 1930227713}
   grid: {fileID: 925749903}
+  timer: {fileID: 357762604}
   onLink:
     m_PersistentCalls:
       m_Calls: []
@@ -84138,6 +84142,7 @@ MonoBehaviour:
   dragVect: {x: 0, y: 0, z: 0}
   eraserSelectTile: {fileID: 0}
   shovelHit: 50
+  weeklyShovels: 0
 --- !u!1 &1167000194
 GameObject:
   m_ObjectHideFlags: 0
@@ -92550,6 +92555,8 @@ MonoBehaviour:
   waterSource_Template: {fileID: 5375811947892556009, guid: 70baebe00357fc94991eb1ce0d0a1738, type: 3}
   plant_Template: {fileID: 7129485572310087032, guid: 5a8552f0c1487f74bb441c5c837d2071, type: 3}
   elementContainer: {fileID: 1297783541}
+  allPlants: []
+  allSources: []
   posX: 17
   posY: 21
 --- !u!1 &1300339909

@@ -109,6 +109,10 @@ public class DigingHandler : MonoBehaviour
                         {
                             ///TODO : link in the opposite sens
                             startSelectTile.InverseLink(endSelectTile);
+
+                            startSelectTile.linkedTile.Add(endSelectTile);
+                            endSelectTile.linkedTile.Add(startSelectTile);
+
                             //Event
                             onLink?.Invoke(startSelectTile, endSelectTile);
 
@@ -117,6 +121,9 @@ public class DigingHandler : MonoBehaviour
                         {
                             //Make the Link
                             startSelectTile.LinkTo(endSelectTile);
+
+                            startSelectTile.linkedTile.Add(endSelectTile);
+                            endSelectTile.linkedTile.Add(startSelectTile);
 
                             //Event
                             onLink?.Invoke(startSelectTile, endSelectTile);
@@ -157,6 +164,7 @@ public class DigingHandler : MonoBehaviour
             onBreak?.Invoke(eraserSelectTile);
 
             eraserSelectTile.RemoveAllLinkedTile();
+
         }
     }
     public void OnRightClickRelease()

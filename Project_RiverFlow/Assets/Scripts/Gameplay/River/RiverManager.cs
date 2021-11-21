@@ -224,6 +224,7 @@ namespace Obselite
             {
                 canal.canalTiles.Add(canal.endNode);
 
+                Debug.Log(canal.endNode.ToString() + " To " + addedTile.gridPos.ToString());
                 canal.endNode = addedTile.gridPos;
                 addedTile.canalsIn.Add(canal);
             }
@@ -347,22 +348,26 @@ namespace Obselite
                         {
                             if (i > 0)
                             {
-                                grid.GetTile(canal.canalTiles[i]).linkedTile.Remove(new Direction((DirectionEnum)grid.GetTile(canal.canalTiles[i]).NeighborIndex(grid.GetTile(canal.canalTiles[i - 1]))));
+                                //grid.GetTile(canal.canalTiles[i]).linkedTile.Remove(new Direction((DirectionEnum)grid.GetTile(canal.canalTiles[i]).NeighborIndex(grid.GetTile(canal.canalTiles[i - 1]))));
+                                grid.GetTile(canal.canalTiles[i]).linkedTile.Remove(grid.GetTile(canal.canalTiles[i - 1]));
                             }
                             else
                             {
-                                grid.GetTile(canal.canalTiles[i]).linkedTile.Remove(new Direction((DirectionEnum)grid.GetTile(canal.canalTiles[i]).NeighborIndex(grid.GetTile(canal.startNode))));
+                                //grid.GetTile(canal.canalTiles[i]).linkedTile.Remove(new Direction((DirectionEnum)grid.GetTile(canal.canalTiles[i]).NeighborIndex(grid.GetTile(canal.startNode))));
+                                grid.GetTile(canal.canalTiles[i]).linkedTile.Remove(grid.GetTile(canal.startNode));
                             }
                             grid.GetTile(canal.canalTiles[i]).canalsIn.Remove(canal);
                         }
 
                         if (canal.canalTiles.Count > 0)
                         {
-                            grid.GetTile(canal.endNode).linkedTile.Remove(new Direction((DirectionEnum)grid.GetTile(canal.endNode).NeighborIndex(grid.GetTile(canal.canalTiles[canal.canalTiles.Count - 1]))));
+                            //grid.GetTile(canal.endNode).linkedTile.Remove(new Direction((DirectionEnum)grid.GetTile(canal.endNode).NeighborIndex(grid.GetTile(canal.canalTiles[canal.canalTiles.Count - 1]))));
+                            grid.GetTile(canal.endNode).linkedTile.Remove(grid.GetTile(canal.canalTiles[canal.canalTiles.Count - 1]));
                         }
                         else
                         {
-                            grid.GetTile(canal.endNode).linkedTile.Remove(new Direction((DirectionEnum)grid.GetTile(canal.endNode).NeighborIndex(grid.GetTile(canal.startNode))));
+                            //grid.GetTile(canal.endNode).linkedTile.Remove(new Direction((DirectionEnum)grid.GetTile(canal.endNode).NeighborIndex(grid.GetTile(canal.canalTiles[canal.canalTiles.Count - 1]))));
+                            grid.GetTile(canal.endNode).linkedTile.Remove(grid.GetTile(canal.canalTiles[canal.canalTiles.Count - 1]));
                         }
 
                         grid.GetTile(canal.endNode).canalsIn.Remove(canal);
@@ -441,17 +446,17 @@ namespace Obselite
             {
                 if (canals[i].canalTiles.Count > 0)
                 {
-                    Debug.DrawLine(grid.TileToPos(canals[i].startNode), grid.TileToPos(canals[i].canalTiles[0]), Color.blue);
+                    Debug.DrawLine(grid.TileToPos(canals[i].startNode), grid.TileToPos(canals[i].canalTiles[0]), Color.green);
                     for (int j = 0; j < canals[i].canalTiles.Count - 1; j++)
                     {
-                        Debug.DrawLine(grid.TileToPos(canals[i].canalTiles[j]), grid.TileToPos(canals[i].canalTiles[j + 1]), Color.blue);
+                        Debug.DrawLine(grid.TileToPos(canals[i].canalTiles[j]), grid.TileToPos(canals[i].canalTiles[j + 1]), Color.red);
                     }
-                    Debug.DrawLine(grid.TileToPos(canals[i].canalTiles[canals[i].canalTiles.Count-1]), grid.TileToPos(canals[i].endNode), Color.blue);
+                    Debug.DrawLine(grid.TileToPos(canals[i].canalTiles[canals[i].canalTiles.Count-1]), grid.TileToPos(canals[i].endNode), Color.green);
 
                 }
                 else
                 {
-                    Debug.DrawLine(grid.TileToPos(canals[i].startNode), grid.TileToPos(canals[i].endNode), Color.blue);
+                    Debug.DrawLine(grid.TileToPos(canals[i].startNode), grid.TileToPos(canals[i].endNode), Color.green);
                 }
             }
         }

@@ -68,7 +68,7 @@ public class GameTile : MonoBehaviour
     public List<Direction> flowIn = new List<Direction>();
     public List<Direction> flowOut = new List<Direction>();
     [Space(8)]
-    public List<Direction> linkedTile = new List<Direction>();
+    public List<GameTile> linkedTile = new List<GameTile>();
     public List<Canal> canalsIn = new List<Canal>();
     [Space(8)]
 
@@ -330,12 +330,20 @@ public class GameTile : MonoBehaviour
         if (flowIn.Contains(dir))
         {
             tile.RemoveLinkedTile(Direction.Inverse(dir), FlowType.flowOut);
+
+            linkedTile.Remove(tile);
+            tile.linkedTile.Remove(this);
+
             flowIn.Remove(dir);
         }
         else 
         if (flowOut.Contains(dir))
         {
             tile.RemoveLinkedTile(Direction.Inverse(dir), FlowType.flowIn);
+
+            linkedTile.Remove(tile);
+            tile.linkedTile.Remove(this);
+
             flowOut.Remove(dir);
         }
     }
@@ -367,6 +375,7 @@ public class GameTile : MonoBehaviour
         for (int i = 0; i < flowIn.Count; i++)
         {
             UnLinkFrom(GetNeighbor(flowIn[i]));
+
         }
         //Flow Out
         for (int i = 0; i < flowOut.Count; i++)
