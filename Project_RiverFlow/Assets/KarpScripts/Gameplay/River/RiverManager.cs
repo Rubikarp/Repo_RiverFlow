@@ -144,11 +144,13 @@ namespace Obselite
                     //Check Prolonging an existing linkCanal (start or End have than 2 link)
                     if (startTile.linkedTile.Count == 2)
                     {
-                        ExtendCanal(startTile.canalsIn[0], startTile, endTile);
+                        Canal extendCanal = canals.Find(x => x.canalTiles.Equals(startTile.canalsIn[0].canalTiles));
+                        ExtendCanal(ref extendCanal, startTile, endTile);
                     }
                     if (endTile.linkedTile.Count == 2)
                     {
-                        ExtendCanal(endTile.canalsIn[0], endTile, startTile);
+                        Canal extendCanal = canals.Find(x => x.canalTiles.Equals(endTile.canalsIn[0].canalTiles));
+                        ExtendCanal(ref extendCanal, endTile, startTile);
                     }
 
                     bool haveAddCanal = false;
@@ -158,7 +160,7 @@ namespace Obselite
                         if (!haveAddCanal)
                         {
                             //Split
-                            ///TODO
+                            SplitCanal(startTile.canalsIn[0], startTile);
 
                             //The new Part
                             canals.Add(linkCanal);
@@ -173,14 +175,15 @@ namespace Obselite
                         if (!haveAddCanal)
                         {
                             //Split
-                            ///TODO
+                            SplitCanal(endTile.canalsIn[0], endTile);
 
 
                             //The new Part
                             //Extend Something ?
                             if (grid.GetTile(linkCanal.startNode).linkedTile.Count >= 2)
                             {
-                                ExtendCanal(startTile.canalsIn[0], startTile, endTile);
+                                Canal extendCanal = canals.Find(x => x.canalTiles.Equals(startTile.canalsIn[0].canalTiles));
+                                ExtendCanal( ref extendCanal, startTile, endTile);
                             }
                             else
                             {
@@ -207,7 +210,7 @@ namespace Obselite
 
         }
         
-        public void ExtendCanal(Canal canal, GameTile extremumTile, GameTile addedTile)
+        public void ExtendCanal( ref Canal canal, GameTile extremumTile, GameTile addedTile)
         {
             if (canal.startNode == extremumTile.gridPos)
             {
@@ -223,8 +226,6 @@ namespace Obselite
             if (canal.endNode == extremumTile.gridPos)
             {
                 canal.canalTiles.Add(canal.endNode);
-
-                Debug.Log(canal.endNode.ToString() + " To " + addedTile.gridPos.ToString());
                 canal.endNode = addedTile.gridPos;
                 addedTile.canalsIn.Add(canal);
             }
@@ -377,7 +378,48 @@ namespace Obselite
                 }
             }
         }
-        
+
+        public void SplitCanal(Canal canal, GameTile splitTile)
+        {
+            //ErrorCheck
+            if (canal.canalTiles.Count < 1)
+            {
+                Debug.LogError("Can't Split an empty canal");
+            }
+
+            //StartSpliting
+            int index = canal.canalTiles.IndexOf(splitTile.gridPos);
+
+            #region SecondPart
+            List<Vector2Int> _newCanalTiles = new List<Vector2Int>();
+            // index + 1 car index start node donc index + 1 première tile
+            for (int i = index + 1; i < canal.canalTiles.Count; i++)
+            {
+                _newCanalTiles.Add(canal.canalTiles[i]);
+            }
+
+            Canal secondaryCanal = new Canal(canal.canalTiles[index], canal.endNode, _newCanalTiles);
+            canals.Add(secondaryCanal);
+
+            //Updates Canals In
+            grid.GetTile(secondaryCanal.startNode).canalsIn.Add(secondaryCanal);
+            for (int i = 0; i < secondaryCanal.canalTiles.Count; i++)
+            {
+                grid.GetTile(secondaryCanal.canalTiles[i]).canalsIn.Add(secondaryCanal);
+                //Not link to canal anymore
+                grid.GetTile(secondaryCanal.canalTiles[i]).canalsIn.Remove(canal);
+            }
+            grid.GetTile(secondaryCanal.endNode).canalsIn.Add(secondaryCanal);
+            //Not link to canal anymore
+            grid.GetTile(secondaryCanal.endNode).canalsIn.Remove(canal);
+
+            #endregion
+            #region FirstPart
+            ShortenCanal(canal, grid.GetTile(canal.canalTiles[index + 1]));
+            #endregion
+
+        }
+
         public bool InCanals(Vector2Int tilePos)
         {
             bool result = false;

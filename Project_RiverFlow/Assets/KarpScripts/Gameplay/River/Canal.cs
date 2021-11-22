@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [Serializable]
-public struct Canal
+public class Canal
 {
     [Header("Data")]
     public Vector2Int startNode;
@@ -13,6 +13,14 @@ public struct Canal
     [Space(10)]
     public FlowStrenght riverStrenght;
 
+    public Canal()
+    {
+        startNode = Vector2Int.zero;
+        endNode = Vector2Int.zero;
+        canalTiles = new List<Vector2Int>();
+        riverStrenght = FlowStrenght._00_;
+
+    }
     public Canal(Canal canal)
     {
         startNode = canal.startNode;
