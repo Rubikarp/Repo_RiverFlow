@@ -71,6 +71,15 @@ public class template : MonoBehaviour
 
 }
 
+//Si combinatoire [System.Flags]
+public enum TemplateEnum
+{
+    A = 1,
+    B = 2,
+    C = 3,
+    D = 4,
+}
+
 [System.Serializable]
 struct templateStruct
 {
@@ -79,12 +88,6 @@ struct templateStruct
     {
 
     }
-}
-
-[CreateAssetMenu(fileName = "NewSCO", menuName = "ScriptableObjects/ScriptableObjectTemplate")]
-public class ScriptableObjectTemplate : ScriptableObject
-{
-
 }
 
 #pragma warning restore 0414
