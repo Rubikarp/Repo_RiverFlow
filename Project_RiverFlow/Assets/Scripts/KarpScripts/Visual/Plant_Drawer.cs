@@ -22,7 +22,8 @@ public class Plant_Drawer : MonoBehaviour
     [Header("Tweening")]
     //public AnimationCurve TreeCurve;
     private bool increase =true;
-
+    [Header("Particles")]
+    public ParticleSystem Leafs;
     void Start()
     {
         cam = Camera.main;
@@ -81,7 +82,7 @@ public class Plant_Drawer : MonoBehaviour
 
                 break;
             case PlantState.Young:
-
+                Leafs.Play(true);
                 transform.localScale = new Vector3(0.3f, 0, 0);
                 yield return new WaitForSecondsRealtime(0.1f);
                 transform.DOScaleY(1f, 0.5f).SetEase(Ease.OutQuart);
@@ -90,19 +91,13 @@ public class Plant_Drawer : MonoBehaviour
 
                 break;
             case PlantState.Adult:
-
-                transform.localScale = new Vector3(0.3f, 0, 0);
-                yield return new WaitForSecondsRealtime(0.1f);
-                transform.DOScaleY(1f, 0.5f).SetEase(Ease.OutQuart);
+                Leafs.Play(true);
                 yield return new WaitForSecondsRealtime(0.1f);
                 transform.DOScaleX(1f, 1.3f).SetEase(Ease.OutElastic);
 
                 break;
             case PlantState.Senior:
-
-                transform.localScale = new Vector3(0.3f, 0, 0);
-                yield return new WaitForSecondsRealtime(0.1f);
-                transform.DOScaleY(1f, 0.5f).SetEase(Ease.OutElastic);
+                Leafs.Play(true);
                 yield return new WaitForSecondsRealtime(0.1f);
                 transform.DOScaleX(1f, 1.3f).SetEase(Ease.OutElastic);
 
@@ -142,22 +137,22 @@ public class Plant_Drawer : MonoBehaviour
                     break;
 
                 case PlantState.Young:
-                    transform.DOScaleY(0.01f, 0.4f).SetEase(Ease.InElastic);
-                    transform.DOScaleX(0.01f, 0.4f).SetEase(Ease.InElastic);
+
+                    transform.DOScaleX(0.4f, 0.4f).SetEase(Ease.InElastic);
                     yield return new WaitForSecondsRealtime(0.4f);
                     sprRender.sprite = visual.GetSprite(plant.currentState, plant.tileOn.type);
                     break;
 
                 case PlantState.Adult:
-                    transform.DOScaleY(0.01f, 0.4f).SetEase(Ease.InElastic);
-                    transform.DOScaleX(0.01f, 0.4f).SetEase(Ease.InElastic);
+
+                    transform.DOScaleX(0.4f, 0.4f).SetEase(Ease.InElastic);
                     yield return new WaitForSecondsRealtime(0.4f);
                     sprRender.sprite = visual.GetSprite(plant.currentState, plant.tileOn.type);
                     break;
 
                 case PlantState.Senior:
-                    transform.DOScaleY(0.01f, 0.4f).SetEase(Ease.InElastic);
-                    transform.DOScaleX(0.01f, 0.4f).SetEase(Ease.InElastic);
+
+                    transform.DOScaleX(0.4f, 0.4f).SetEase(Ease.InElastic);
                     yield return new WaitForSecondsRealtime(0.4f);
                     sprRender.sprite = visual.GetSprite(plant.currentState, plant.tileOn.type);
                     break;
@@ -194,6 +189,7 @@ public class Plant_Drawer : MonoBehaviour
                     break;
 
                 case PlantState.Young:
+
                     transform.DOScaleY(0.01f, 0.4f).SetEase(Ease.InElastic);
                     transform.DOScaleX(0.01f, 0.4f).SetEase(Ease.InElastic);
                     yield return new WaitForSecondsRealtime(0.4f);
@@ -201,15 +197,13 @@ public class Plant_Drawer : MonoBehaviour
                     break;
 
                 case PlantState.Adult:
-                    transform.DOScaleY(0.01f, 0.4f).SetEase(Ease.InElastic);
-                    transform.DOScaleX(0.01f, 0.4f).SetEase(Ease.InElastic);
+                    transform.DOScaleX(0.4f, 0.4f).SetEase(Ease.InElastic);
                     yield return new WaitForSecondsRealtime(0.4f);
                     sprRender.sprite = visual.GetSprite(plant.currentState, plant.tileOn.type);
                     break;
 
                 case PlantState.Senior:
-                    transform.DOScaleY(0.01f, 0.4f).SetEase(Ease.InElastic);
-                    transform.DOScaleX(0.01f, 0.4f).SetEase(Ease.InElastic);
+                    transform.DOScaleX(0.4f, 0.4f).SetEase(Ease.InElastic);
                     yield return new WaitForSecondsRealtime(0.4f);
                     sprRender.sprite = visual.GetSprite(plant.currentState, plant.tileOn.type);
                     
