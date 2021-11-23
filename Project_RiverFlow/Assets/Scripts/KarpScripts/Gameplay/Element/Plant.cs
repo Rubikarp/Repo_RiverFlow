@@ -3,6 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
+[System.Serializable]
+public class BoolEvent : UnityEvent<bool>
+{ }
+
 public class Plant : Element
 {
     #region Element
@@ -52,7 +56,7 @@ public class Plant : Element
     public float stateDowngradeTime = 15f;
 
     [Header("Event")]
-    public UnityEvent onStateChange;
+    public BoolEvent onStateChange;
 
     public GameTime gameTime;
 
@@ -139,7 +143,8 @@ public class Plant : Element
         {
             timer += 1f;
             currentState = (PlantState)Mathf.Clamp((int)(currentState - 1), 0, (int)PlantState.Senior);
-            onStateChange?.Invoke();
+            onStateChange?.Invoke(false);
+            //Debug.Log("testcridown");
         }
         else
         //Lvl Up
@@ -148,9 +153,10 @@ public class Plant : Element
             //Si pas au niveau max
             if (currentState < PlantState.Senior)
             {
+                //Debug.Log("testcriup");
                 timer -= 1f;
                 currentState = (PlantState)Mathf.Clamp((int)(currentState + 1), 0, (int)PlantState.Senior);
-                onStateChange?.Invoke();
+                onStateChange?.Invoke(true);
             }
             else
             {
