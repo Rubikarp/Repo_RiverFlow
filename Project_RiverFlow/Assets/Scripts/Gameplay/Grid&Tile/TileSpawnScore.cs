@@ -103,6 +103,7 @@ public class TileSpawnScore : MonoBehaviour
         return ruleScore;
     }
 
+    // TODO : Uncomment when "Area Spawning" implemented, replace plantSpawner.currentSpawnArea
     private int EvalSpawnArea()
     {
         int ruleScore = 0;
@@ -123,27 +124,63 @@ public class TileSpawnScore : MonoBehaviour
         return ruleScore;
     }
 
-    // TODO
     private int EvalPlantsNearby()
     {
         int ruleScore = 0;
-        
+        foreach(GameTile iTile in tile.neighbors)
+        {
+            if(iTile.element is Plant)
+            {
+                ruleScore += plantSpawner.scorePlantsNearby;
+            }
+        }
+        ruleScore *= plantSpawner.weightPlantNearby;
         return ruleScore;
     }
 
-    // TODO
+    // TODO : Change TileType.other into "Mountains" when implemented
     private int EvalMountainsNearby()
     {
         int ruleScore = 0;
-        
+        foreach (GameTile iTile in tile.neighbors)
+        {
+            if (iTile.type != TileType.other)
+            {
+                ruleScore += plantSpawner.scoreMountainsNearby;
+            }
+        }
+        ruleScore *= plantSpawner.weightMountainsNearby;
         return ruleScore;
     }
 
-    // TODO
     private int EvalIrrigatedTile()
     {
         int ruleScore = 0;
-
+        foreach (GameTile iTile in tile.neighbors)
+        {
+            switch (iTile.riverStrenght)
+            {
+                case FlowStrenght._100_:
+                    ruleScore = plantSpawner.scoreIrrigatedTile100;
+                    break;
+                case FlowStrenght._75_:
+                    ruleScore = ruleScore > plantSpawner.scoreIrrigatedTile75 ? ruleScore : plantSpawner.scoreIrrigatedTile75;
+                    break;
+                case FlowStrenght._50_:
+                    ruleScore = ruleScore > plantSpawner.scoreIrrigatedTile50 ? ruleScore : plantSpawner.scoreIrrigatedTile50;
+                    break;
+                case FlowStrenght._25_:
+                    ruleScore = ruleScore > plantSpawner.scoreIrrigatedTile25 ? ruleScore : plantSpawner.scoreIrrigatedTile25;
+                    break;
+                case FlowStrenght._00_:
+                    ruleScore = ruleScore > plantSpawner.scoreIrrigatedTile0 ? ruleScore : plantSpawner.scoreIrrigatedTile0;
+                    break;
+                default:
+                    ruleScore = ruleScore > plantSpawner.scoreIrrigatedTile0 ? ruleScore : plantSpawner.scoreIrrigatedTile0;
+                    break;
+            }
+        }
+        ruleScore *= plantSpawner.weightIrrigatedTile;
         return ruleScore;
     }
 
@@ -204,10 +241,17 @@ public class TileSpawnScore : MonoBehaviour
         return output;
     }
 
-    // TODO
+    // TODO : Replace "Lake" when implemented
     private bool IsNextToLake()
     {
-        return false;
+        bool output = false;
+        /*
+        foreach (GameTile iTile in tile.neighbors)
+        {
+            output |= (iTile.element is Lake);
+        }
+        */
+        return output;
     }
 
     // TODO

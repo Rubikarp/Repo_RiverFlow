@@ -18,12 +18,19 @@ public class PlantSpawner : MonoBehaviour
     public int scoreTerrainIsSand = 1;
     public int scoreTerrainIsOther = 0;
     public int weightTerrainType = 1;
-    public int scoreGoodSpawnArea = 1;
+    public int scoreGoodSpawnArea = 3;
     public int scoreBadSpawnArea = 1;
     public int weightSpawnArea = 1;
-    public int scorePlantsNearby = 1; // Unused
-    public int scoreMountainsNearby = 1; // Unused
-    public int scoreIrrigatedTile = 1; // Unused
+    public int scorePlantsNearby = 1;
+    public int weightPlantNearby = 1;
+    public int scoreMountainsNearby = 1;
+    public int weightMountainsNearby = 1;
+    public int scoreIrrigatedTile100 = 4;
+    public int scoreIrrigatedTile75 = 4;
+    public int scoreIrrigatedTile50 = 3;
+    public int scoreIrrigatedTile25 = 2;
+    public int scoreIrrigatedTile0 = 0;
+    public int weightIrrigatedTile = 1;
 
     public int currentSpawnArea = 1;
     public ThreatState threatState = ThreatState.NEUTRAL;
