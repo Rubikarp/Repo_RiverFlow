@@ -6,34 +6,34 @@ using UnityEngine;
 public struct SplinePoint
 {
 	[Header("Data")]
-	public Vector3 point;
+	public Vector3 pos;
 
 	[Header("Tengente")]
 	public Vector3 tangDir;
 	public float tangStrenght;
 
 	#region Constructor
-	public SplinePoint(Vector3 point)
+	public SplinePoint(Vector3 pos)
 	{
-		this.point = point;
-		this.tangDir = Vector3.right;
-		this.tangStrenght = 1;
-	}
-	public SplinePoint(Vector2 point)
-	{
-		this.point = point;
+		this.pos = pos;
 		this.tangDir = Vector3.right;
 		this.tangStrenght = 0.5f;
 	}
-	public SplinePoint(Vector3 point, Vector3 tangent)
+	public SplinePoint(Vector2 pos)
 	{
-		this.point = point;
+		this.pos = pos;
+		this.tangDir = Vector3.right;
+		this.tangStrenght = 0.5f;
+	}
+	public SplinePoint(Vector3 pos, Vector3 tangent)
+	{
+		this.pos = pos;
 		this.tangDir = tangent.normalized;
 		this.tangStrenght = tangent.magnitude * 0.5f;
 	}
-	public SplinePoint(Vector3 point, Vector3 tangent, float tangentMagnitude)
+	public SplinePoint(Vector3 pos, Vector3 tangent, float tangentMagnitude)
 	{
-		this.point = point;
+		this.pos = pos;
 		this.tangDir = tangent.normalized;
 		this.tangStrenght = tangentMagnitude;
 	}
@@ -42,15 +42,15 @@ public struct SplinePoint
 	#region Operator
 	public static SplinePoint operator +(SplinePoint a, SplinePoint b)
 	{
-		return new SplinePoint(a.point + b.point, (a.tangDir + b.tangDir).normalized, (a.tangStrenght + b.tangStrenght)*0.5f);
+		return new SplinePoint(a.pos + b.pos, (a.tangDir + b.tangDir).normalized, (a.tangStrenght + b.tangStrenght)*0.5f);
 	}
 	public static SplinePoint operator -(SplinePoint a, SplinePoint b)
 	{
-		return new SplinePoint(a.point - b.point, (a.tangDir - b.tangDir).normalized, Mathf.Abs((a.tangStrenght - b.tangStrenght) * 0.5f));
+		return new SplinePoint(a.pos - b.pos, (a.tangDir - b.tangDir).normalized, Mathf.Abs((a.tangStrenght - b.tangStrenght) * 0.5f));
 	}
 	public static SplinePoint operator *(float b, SplinePoint a)
 	{
-		return new SplinePoint(a.point * b, a.tangDir, a.tangStrenght * b * 0.5f);
+		return new SplinePoint(a.pos * b, a.tangDir, a.tangStrenght * b * 0.5f);
 	}
 	#endregion
 }
