@@ -13,25 +13,35 @@ public enum ThreatState
 
 public class PlantSpawner : MonoBehaviour
 {
+    [Header("Scores & Weights")]
+    [Header("Terrain Type")]
     public int scoreTerrainIsGrass = 5;
     public int scoreTerrainIsClay = 3;
     public int scoreTerrainIsSand = 1;
     public int scoreTerrainIsOther = 0;
     public int weightTerrainType = 1;
+    [Space(8)]
+    [Header("Spawn Area")]
     public int scoreGoodSpawnArea = 3;
     public int scoreBadSpawnArea = 1;
     public int weightSpawnArea = 1;
+    [Space(8)]
+    [Header("Plant Nearby")]
     public int scorePlantsNearby = 1;
     public int weightPlantNearby = 1;
+    [Space(8)]
+    [Header("Mountains Nearby")]
     public int scoreMountainsNearby = 1;
     public int weightMountainsNearby = 1;
     public int scoreIrrigatedTile100 = 4;
+    [Space(8)]
+    [Header("Irrigated Tiles")]
     public int scoreIrrigatedTile75 = 4;
     public int scoreIrrigatedTile50 = 3;
     public int scoreIrrigatedTile25 = 2;
     public int scoreIrrigatedTile0 = 0;
     public int weightIrrigatedTile = 1;
-
+    [Space(10)]
     public int currentSpawnArea = 1;
     public ThreatState threatState = ThreatState.NEUTRAL;
 
