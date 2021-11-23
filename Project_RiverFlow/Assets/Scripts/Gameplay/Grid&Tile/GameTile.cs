@@ -132,11 +132,13 @@ public class GameTile : MonoBehaviour
     #endregion
 
     public GameTime gameTime;
+    public TileSpawnScore spawnScore;
 
     void Start()
     {
         gameTime = GameTime.Instance;
         gameTime.onWaterSimulationStep.AddListener(FlowStep);
+        spawnScore = GetComponent<TileSpawnScore>();
     }
 
     void Update()

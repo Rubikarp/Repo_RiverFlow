@@ -2,6 +2,20 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+public class TileInfoScore
+{
+    public GameTile tile;
+    public int score;
+    public bool spawnable;
+
+    public TileInfoScore(GameTile tile, int score, bool spawnable)
+    {
+        this.tile = tile;
+        this.score = score;
+        this.spawnable = spawnable;
+    }
+}
+
 public class TileSpawnScore : MonoBehaviour
 {
     public int scoreValue = 0;
@@ -16,7 +30,7 @@ public class TileSpawnScore : MonoBehaviour
         plantSpawner = GetComponent<PlantSpawner>();
     }
 
-    public void Evaluate()
+    public TileInfoScore Evaluate()
     {
         spawnable = true;
         scoreValue = 0;
@@ -28,6 +42,8 @@ public class TileSpawnScore : MonoBehaviour
         scoreValue += EvalIrrigatedTile() * CastThreatToInt(1, 0);
 
         spawnable = EvalForbiddenCase();
+
+        return new TileInfoScore(tile,scoreValue,spawnable);
     }
 
     private int CastThreatToInt()
