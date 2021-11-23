@@ -254,9 +254,20 @@ public class TileSpawnScore : MonoBehaviour
         return output;
     }
 
-    // TODO
     private bool IsNextToThreeSproutNearby()
     {
-        return false;
+        bool output = false;
+        for(int i=0;i<=8;i+=2)
+        {
+            if ((tile.neighbors[i-1 % 8].element is Plant) && (tile.neighbors[i % 8].element is Plant) && (tile.neighbors[i+1 % 8].element is Plant))
+            {
+                output |= true;
+            }
+            else
+            {
+                output |= false;
+            }
+        }
+        return output;
     }
 }
