@@ -40,7 +40,7 @@ public class Plant : Element
 
     [Header("Plant Data")]
     public PlantState currentState = PlantState.Young;
-    [SerializeField] bool isIrrigated = false;
+    public bool isIrrigated = false;
     private bool IsAlive { get { return currentState != PlantState.Dead; } }
 
     public List<int> closeRivers;
@@ -108,19 +108,7 @@ public class Plant : Element
         }
 
         //Determine if irrigated
-        isIrrigated = VerifyIrrigation(bestRiverStrenght);
-    }
-
-    private bool VerifyIrrigation(FlowStrenght _bestRiverStrenght)
-    {
-        if(_bestRiverStrenght > FlowStrenght._00_)
-        {
-            return tileOn.type <= (TileType)_bestRiverStrenght;
-        }
-        else
-        {
-            return false;
-        }
+        isIrrigated = tileOn.IsIrrigate;
     }
 
     private void StateUpdate()

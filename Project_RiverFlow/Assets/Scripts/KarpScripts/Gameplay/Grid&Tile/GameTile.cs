@@ -129,6 +129,33 @@ public class GameTile : MonoBehaviour
             return false;
         }
     }
+    public bool IsIrrigate
+    {
+        get
+        {
+            foreach(GameTile neighbor in neighbors)
+            {
+                if(neighbor.riverStrenght > 0)
+                {
+                    return true;
+                }
+                foreach (GameTile neighborOfNeighbor in neighbor.neighbors)
+                {
+                    if (neighborOfNeighbor.isElement)
+                    {
+                        if (neighborOfNeighbor.element is Lake)
+                        {
+                            if (neighborOfNeighbor.isRiver)
+                            {
+                                return true;
+                            }
+                        }
+                    }
+                }
+            }
+            return false;
+        }
+    }
     #endregion
 
     public GameTime gameTime;
