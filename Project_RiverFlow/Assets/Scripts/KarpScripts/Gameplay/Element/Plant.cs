@@ -69,6 +69,7 @@ public class Plant : Element
     [Header("MagicTree")]
     private int plantsForMagicTree = 0;
     public GameObject magicTree;
+    private bool hasMagicTree = false;
 
     [Header("Event")]
     public BoolEvent onStateChange;
@@ -90,6 +91,8 @@ public class Plant : Element
         {
             irrigatedNeighbors[x] = false;
         }
+
+        elementHandler = GetComponentInParent<ElementHandler>();
     }
 
     void Update()
@@ -104,7 +107,7 @@ public class Plant : Element
                 FruitSpawn();
             }
 
-            if (currentState >= PlantState.Young)
+            if (currentState >= PlantState.Young && hasMagicTree == false)
             {
                 MagicTreeVerif();
             }
@@ -256,17 +259,28 @@ public class Plant : Element
     {
         if (tileOn.neighbors[3].element is Plant && tileOn.neighbors[7].element is Plant && tileOn.neighbors[1].element == null)
         {
-            for (int g = 0; g < tileOn.neighbors[1].neighbors.Length; g++)
+            if (tileOn.neighbors[3].element.GetComponent<Plant>().currentState >= PlantState.Young && tileOn.neighbors[3].element.GetComponent<Plant>().currentState >= PlantState.Young)
             {
-                if (tileOn.neighbors[1].neighbors[g].element is Plant)
+                for (int g = 0; g < tileOn.neighbors[1].neighbors.Length; g++)
                 {
-                    plantsForMagicTree++;
+                    if (tileOn.neighbors[1].neighbors[g].element is Plant)
+                    {
+                        if(tileOn.neighbors[1].neighbors[g].element.GetComponent<Plant>().currentState >= PlantState.Young)
+                        {
+                            plantsForMagicTree++;
+                        }
+                    }
                 }
             }
 
             if (plantsForMagicTree == 8)
             {
                 Instantiate(magicTree, tileOn.neighbors[1].worldPos, Quaternion.identity, elementHandler.transform);
+                hasMagicTree = true;
+            }
+            else
+            {
+                plantsForMagicTree = 0;
             }
         }
             
