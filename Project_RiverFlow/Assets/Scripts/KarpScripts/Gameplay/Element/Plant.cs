@@ -55,6 +55,21 @@ public class Plant : Element
     public float stateUpgradeTime = 60f;
     public float stateDowngradeTime = 15f;
 
+    [Header("FruitTree")]
+    private bool isFruitTree = false;
+    private float fruitTimer;
+    public float fruitSpawnTime = 20;
+    private bool[] irrigatedNeighbors;
+    private int goodTilesForFruit;
+    private int chosenTileForFruit;
+    public ElementHandler elementHandler;
+    private bool spawnTileFound = false;
+    public int closeRiverTilesNeeded = 3;
+
+    [Header("MagicTree")]
+    private int plantsForMagicTree = 0;
+    public GameObject magicTree;
+
     [Header("Event")]
     public BoolEvent onStateChange;
 
@@ -68,6 +83,13 @@ public class Plant : Element
         {
             tileOn.element = this;
         }
+
+        irrigatedNeighbors = new bool[tileOn.neighbors.Length];
+
+        for (int x = 0; x < irrigatedNeighbors.Length; x++)
+        {
+            irrigatedNeighbors[x] = false;
+        }
     }
 
     void Update()
@@ -76,6 +98,16 @@ public class Plant : Element
         {
             CheckNeighboringRivers();
             StateUpdate();
+
+            if (isFruitTree == true)
+            {
+                FruitSpawn();
+            }
+
+            if (currentState >= PlantState.Young)
+            {
+                MagicTreeVerif();
+            }
         }
     }
 
@@ -133,6 +165,11 @@ public class Plant : Element
             currentState = (PlantState)Mathf.Clamp((int)(currentState - 1), 0, (int)PlantState.Senior);
             onStateChange?.Invoke(false);
             //Debug.Log("testcridown");
+
+            if (isFruitTree == true)
+            {
+                isFruitTree = false;
+            }
         }
         else
         //Lvl Up
@@ -145,11 +182,93 @@ public class Plant : Element
                 timer -= 1f;
                 currentState = (PlantState)Mathf.Clamp((int)(currentState + 1), 0, (int)PlantState.Senior);
                 onStateChange?.Invoke(true);
+
+                if (closeRivers.Count >= closeRiverTilesNeeded && isFruitTree == false && currentState == PlantState.Senior)
+                {
+                    isFruitTree = true;
+
+                    Debug.Log("Evolution !");
+                }
             }
             else
             {
                 timer = 1f;
+
+                if (closeRivers.Count >= closeRiverTilesNeeded && isFruitTree == false)
+                {
+                    isFruitTree = true;
+
+                    Debug.Log("Evolution !");
+                }
             }
         }
+    }
+
+    private void FruitSpawn()
+    {
+        fruitTimer += Time.deltaTime * gameTime.gameTimeSpeed;
+
+        if (fruitTimer >= fruitSpawnTime)
+        {
+            for (int a = 0; a < tileOn.neighbors.Length; a++)
+            {
+                if (tileOn.neighbors[a].linkedTile.Count == 0 && tileOn.neighbors[a].element == null)
+                {
+                    for (int b = 0; b < tileOn.neighbors[a].neighbors.Length; b++)
+                    {
+                        if (tileOn.neighbors[a].neighbors[b].receivedFlow >= FlowStrenght._25_)
+                        {
+                            irrigatedNeighbors[a] = true;
+
+                            goodTilesForFruit++;
+                        }
+                    }
+                }
+            }
+
+            if (goodTilesForFruit > 0)
+            {
+                while (spawnTileFound == false)
+                {
+                    chosenTileForFruit = Random.Range(0, tileOn.neighbors.Length);
+
+                    if (irrigatedNeighbors[chosenTileForFruit] == true)
+                    {
+                        spawnTileFound = true;
+                    }
+                }
+
+                elementHandler.SpawnPlantAt(tileOn.neighbors[chosenTileForFruit].gridPos);
+
+                spawnTileFound = false;
+                fruitTimer = 0;
+                goodTilesForFruit = 0;
+            }
+
+            for (int y = 0; y < irrigatedNeighbors.Length; y++)
+            {
+                irrigatedNeighbors[y] = false;
+            }
+        }
+    }
+
+    private void MagicTreeVerif()
+    {
+        if (tileOn.neighbors[3].element is Plant && tileOn.neighbors[7].element is Plant && tileOn.neighbors[1].element == null)
+        {
+            for (int g = 0; g < tileOn.neighbors[1].neighbors.Length; g++)
+            {
+                if (tileOn.neighbors[1].neighbors[g].element is Plant)
+                {
+                    plantsForMagicTree++;
+                }
+            }
+
+            if (plantsForMagicTree == 8)
+            {
+                Instantiate(magicTree, tileOn.neighbors[1].worldPos, Quaternion.identity, elementHandler.transform);
+            }
+        }
+            
     }
 }

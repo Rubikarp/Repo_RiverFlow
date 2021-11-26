@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class FruitTree : MonoBehaviour
 {
-
     public Plant plantScript;
     private bool transformed = false;
     public GameTile[] closeTiles;
