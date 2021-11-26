@@ -53,8 +53,9 @@ public class RiverSplineInspector : Editor
                 Vector3 tangDir = currentPointTangDir.vector3Value;
                 Vector3 inverseTangDir = -1f * currentPointTangDir.vector3Value;
                 float strength = currentPointTangStrength.floatValue;
-
+                
                 #region Tangente
+                /*
                 Handles.color = Color.red;
 
                 tangDir = currentPointTangDir.vector3Value;
@@ -82,6 +83,7 @@ public class RiverSplineInspector : Editor
                 currentPointTangStrength.floatValue = strength;
                 //draw the line
                 Handles.DrawLine(position, position + inverseTangDir, 0.5f * zoomScaler);
+                */
                 #endregion
 
                 #region Position

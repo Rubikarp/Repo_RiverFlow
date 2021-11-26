@@ -12,8 +12,8 @@ public class River_Drawer : MonoBehaviour
     [SerializeField] TilePalette_SCO palette;
 
     [Header("Parameter")]
-    public GameObject lineRendererTemplate;
-    public List<LineRenderer> linesRender = new List<LineRenderer>();
+    public GameObject riverRendererTemplate;
+    public List<RiverSpline> riverRender = new List<RiverSpline>();
     public List<Vector3[]> riverLine = new List<Vector3[]>();
 
     Vector3[] _tempRiver;
@@ -31,38 +31,41 @@ public class River_Drawer : MonoBehaviour
     public void RiverGeneration()
     {
         //Faudra faire du pooling
-        if (linesRender.Count < riverHandler.canals.Count)
+        if (riverRender.Count < riverHandler.canals.Count)
         {
-            linesRender.Add(Instantiate(lineRendererTemplate, transform.position, Quaternion.identity, transform).GetComponent<LineRenderer>());
+            riverRender.Add(Instantiate(riverRendererTemplate, transform.position, Quaternion.identity, transform).GetComponent<RiverSpline>());
         }
         else
-        if (linesRender.Count > riverHandler.canals.Count)
+        if (riverRender.Count > riverHandler.canals.Count)
         {
-            for (int i = riverHandler.canals.Count; i < linesRender.Count; i++)
+            for (int i = riverHandler.canals.Count; i < riverRender.Count; i++)
             {
-                Destroy(linesRender[i].gameObject);
+                Destroy(riverRender[i].gameObject);
             }
         }
     }
     public void RiverCurve()
     {
-        for (int i = 0; i < linesRender.Count; i++)
+        for (int i = 0; i < riverRender.Count; i++)
         {
             //Tiles.Count + 2 => (tiles + startNode + endNode)
-            int lineSize = riverHandler.canals[i].canalTiles.Count + 2;
-            linesRender[i].positionCount = lineSize;
-            _tempRiver = new Vector3[lineSize];
+            riverRender[i].SetPointCount(riverHandler.canals[i].canalTiles.Count + 2);
 
-            //Set points
-            _tempRiver[0] = grid.GetTile(riverHandler.canals[i].startNode).worldPos;
+            //Set First Point
+            riverRender[i].DefinePoint(0,
+                grid.GetTile(riverHandler.canals[i].startNode).worldPos,
+                grid.GetTile(riverHandler.canals[i].startNode).riverStrenght);
+            //Set Middle Point
             for (int j = 0; j < riverHandler.canals[i].canalTiles.Count; j++)
             {
-                _tempRiver[j+1] = grid.GetTile(riverHandler.canals[i].canalTiles[j]).worldPos;
-
+                riverRender[i].DefinePoint(j + 1,
+                        grid.GetTile(riverHandler.canals[i].canalTiles[j]).worldPos,
+                        grid.GetTile(riverHandler.canals[i].canalTiles[j]).riverStrenght);
             }
-            _tempRiver[_tempRiver.Length-1] = grid.GetTile(riverHandler.canals[i].endNode).worldPos;
-
-            linesRender[i].SetPositions(_tempRiver);
+            //Set Last Point
+            riverRender[i].DefinePoint(riverRender[i].points.Count - 1,
+                    grid.GetTile(riverHandler.canals[i].endNode).worldPos,
+                    grid.GetTile(riverHandler.canals[i].endNode).riverStrenght);
         }
     }
 }
