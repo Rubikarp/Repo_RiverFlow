@@ -138,13 +138,12 @@ public class TileSpawnScore : MonoBehaviour
         return ruleScore;
     }
 
-    // TODO : Change TileType.other into "Mountains" when implemented
     private int EvalMountainsNearby()
     {
         int ruleScore = 0;
         foreach (GameTile iTile in tile.neighbors)
         {
-            if (iTile.type != TileType.other)
+            if (iTile.type != TileType.mountain)
             {
                 ruleScore += plantSpawner.scoreMountainsNearby;
             }
@@ -199,21 +198,19 @@ public class TileSpawnScore : MonoBehaviour
         return boolOutput;
     }
 
-    // TODO : Change TileType.other into "Mountains" when implemented
     private bool AreAllTilesAroundOccupied()
     {
         bool output = false;
         foreach(GameTile iTile in tile.neighbors)
         {
-            output |= (iTile.isDuged || (iTile.type == TileType.other));
+            output |= (iTile.isDuged || (iTile.type == TileType.mountain));
         }
         return output;
     }
 
-    // TODO : Change TileType.other into "Mountains" when implemented
     private bool IsMountain()
     {
-        return (tile.type == TileType.other);
+        return (tile.type == TileType.mountain);
     }
 
     private bool IsDugged()
@@ -241,16 +238,13 @@ public class TileSpawnScore : MonoBehaviour
         return output;
     }
 
-    // TODO : Replace "Lake" when implemented
     private bool IsNextToLake()
     {
         bool output = false;
-        /*
         foreach (GameTile iTile in tile.neighbors)
         {
             output |= (iTile.element is Lake);
         }
-        */
         return output;
     }
 
