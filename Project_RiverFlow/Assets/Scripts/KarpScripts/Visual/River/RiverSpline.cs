@@ -5,31 +5,35 @@ using Shapes;
 
 public class RiverSpline : MonoBehaviour
 {
-    public List<RiverPoint> points = new List<RiverPoint>() {new RiverPoint(Vector2.zero,Vector3.up), new RiverPoint(Vector2.zero, Vector3.up) };
+    public List<RiverPoint> points = new List<RiverPoint>() { new RiverPoint(Vector2.zero, Vector3.up), new RiverPoint(Vector2.zero, Vector3.up) };
     public RiverPalette_SCO riverData;
     public float lineThicknessFactor = 1f;
-    //public int pointPerLine = 8;
+    [Range(1, 16)] public int pointPerLine = 8;
     //
     PolylinePath path;
-
     //
     public Camera cam;
 
     void Awake()
     {
         cam = Camera.main;
-
-        Draw.PolylineGeometry = PolylineGeometry.Flat2D;
-        PathCalc(out path);
-        Draw.Polyline(path, false, lineThicknessFactor, PolylineJoins.Round, Color.white);
     }
 
     void Update()
     {
-        PathCalc(out path);
-        using (Draw.Command(cam))
+    }
+
+    void OnDrawGizmos()
+    {
+        Draw.PolylineGeometry = PolylineGeometry.Flat2D;
+        using (var path = new PolylinePath())
         {
-            Draw.Polyline(path, closed : false, lineThicknessFactor, PolylineJoins.Round, Color.white);
+            path.AddPoint(points[0].ToPolyLine());
+            for (int i = 1; i < points.Count; i++)
+            {
+                path.AddPoints(MultiplyLine(points[i - 1], points[i], pointPerLine));
+            }
+            Draw.Polyline(path, false, lineThicknessFactor, PolylineJoins.Round, Color.white);
         }
 
         #region Bezier
@@ -58,28 +62,18 @@ public class RiverSpline : MonoBehaviour
         }
         */
         #endregion
+
     }
 
-    void OnDrawGizmos()
+    private PolylinePoint[] MultiplyLine(RiverPoint lastPoint, RiverPoint newPoint, int iter)
     {
-        Draw.PolylineGeometry = PolylineGeometry.Flat2D;
-        using (var path = new PolylinePath())
+        PolylinePoint[] result = new  PolylinePoint[iter];
+        float step = 1f / (float)iter;
+        for (int i = 0; i < iter; i++)
         {
-            for (int i = 0; i < points.Count; i++)
-            {
-                path.AddPoint(points[i].pos, points[i].thickness, points[i].color);
-            }
-            Draw.Polyline(path, false, lineThicknessFactor, PolylineJoins.Round, Color.white);
+            result[i] = RiverPoint.Lerp(lastPoint, newPoint, (i+1) * step).ToPolyLine();
         }
-    }
-
-    private void PathCalc(out PolylinePath path)
-    {
-        path = new PolylinePath();
-        for (int i = 0; i < points.Count; i++)
-        {
-            path.AddPoint(points[i].pos, points[i].thickness, points[i].color);
-        }
+        return result;
     }
 
     public void SetPointCount(int pointNbr)

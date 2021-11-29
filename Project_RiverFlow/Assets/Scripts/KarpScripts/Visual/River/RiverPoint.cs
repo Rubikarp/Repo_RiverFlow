@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Shapes;
 
 [System.Serializable]
 public struct RiverPoint
@@ -109,5 +110,19 @@ public struct RiverPoint
 		this.tangStrenght = tangentMagnitude;
 	}
 	#endregion
+
+	public PolylinePoint ToPolyLine()
+    {
+		return new PolylinePoint(this.pos, this.color, this.thickness);
+    }
+	public static RiverPoint Lerp(RiverPoint a, RiverPoint b, float t)
+	{
+		return new RiverPoint(	Vector3.Lerp(a.pos,b.pos,t),
+								Vector3.Lerp(a.tangDir, b.tangDir, t),
+								Color.Lerp(a.color, b.color, t),
+								Mathf.Lerp(a.tangStrenght,b.tangStrenght,t), 
+								Mathf.Lerp(a.thickness, b.thickness, t)
+								);
+	}
 
 }

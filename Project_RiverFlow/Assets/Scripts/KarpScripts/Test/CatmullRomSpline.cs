@@ -7,8 +7,10 @@ public class CatmullRomSpline : MonoBehaviour
 
 	[Range(0, 1)] public float alpha = 0.5f;
 	int PointCount => transform.childCount;
-	int SegmentCount => PointCount - 3;
+	public int SegmentCount => PointCount - 3;
 	Vector2 GetPoint(int i) => transform.GetChild(i).position;
+
+	public int detail = 32;
 
 	CatmullRomCurve GetCurve(int i)
 	{
@@ -23,7 +25,6 @@ public class CatmullRomSpline : MonoBehaviour
 
 	void DrawCurveSegment(CatmullRomCurve curve)
 	{
-		const int detail = 32;
 		Vector2 prev = curve.p1;
 		for (int i = 1; i < detail; i++)
 		{
