@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Shapes;
 
 public class DigingLine : MonoBehaviour
 {
@@ -8,21 +9,17 @@ public class DigingLine : MonoBehaviour
     public DigingHandler dig;
     [Space(10)]
     public GameGrid grid;
-    public LineRenderer line;
+    public Line line;
 
     void Update()
     {
         if (dig.startSelectTilePos != null)
         {
-            line.positionCount = 2;
-
-            line.SetPosition(0, dig.startSelectTilePos);
-            line.SetPosition(1, dig.dragPos);
-        }
-        else
-        {
-            line.positionCount = 0;
+            line.Start = dig.startSelectTilePos;
+            line.End = dig.dragPos;
         }
 
+        line.DashOffset += Time.deltaTime;
+        line.DashOffset %= 1f;
     }
 }

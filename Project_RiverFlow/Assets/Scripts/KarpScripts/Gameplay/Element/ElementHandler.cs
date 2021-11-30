@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEditor;
 using NaughtyAttributes;
 
 public class ElementHandler : MonoBehaviour
@@ -36,7 +37,8 @@ public class ElementHandler : MonoBehaviour
     {
         if (!grid.GetTile(grisPos).isElement)
         {
-            GameObject go = Instantiate(plant_Template, grid.TileToPos(new Vector2Int(grisPos.x, grisPos.y)), Quaternion.identity, elementContainer);
+            GameObject go = PrefabUtility.InstantiatePrefab(plant_Template, elementContainer)as GameObject;
+            go.transform.position = grid.TileToPos(new Vector2Int(grisPos.x, grisPos.y));
             go.name = "Plant_" + grisPos;
 
             //Check if Plant
@@ -57,7 +59,8 @@ public class ElementHandler : MonoBehaviour
     {
         if (!grid.GetTile(grisPos).isElement)
         {
-            GameObject go = Instantiate(waterSource_Template, grid.TileToPos(new Vector2Int(grisPos.x, grisPos.y)), Quaternion.identity, elementContainer);
+            GameObject go = PrefabUtility.InstantiatePrefab(waterSource_Template, elementContainer) as GameObject;
+            go.transform.position = grid.TileToPos(new Vector2Int(grisPos.x, grisPos.y));
             go.name = "Source_" + grisPos;
 
             //Check if Plant
@@ -67,6 +70,7 @@ public class ElementHandler : MonoBehaviour
                 Debug.LogError("can't Find WaterSource on the object", go);
             }
 
+            allSources.Add(source);
             //Link Element and Tile
             source.tileOn = grid.GetTile(grisPos);
             grid.GetTile(grisPos).element = source;

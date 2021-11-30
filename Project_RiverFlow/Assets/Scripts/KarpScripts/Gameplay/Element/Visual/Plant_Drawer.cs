@@ -37,8 +37,7 @@ public class Plant_Drawer : MonoBehaviour
 
     void Update()
     {
-       // imgTiller.fillAmount = plant.timer;
-        
+       imgTiller.fillAmount = plant.timer;
     }
 
     private void UpdateSkin(bool isUp)
