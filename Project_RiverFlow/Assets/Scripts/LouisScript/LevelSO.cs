@@ -11,7 +11,8 @@ public class LevelSO : ScriptableObject
     public int levelNumber;
     public new string name;
     //public string description;
-    public int score;
-
+    public int recordScore;
+    public int scoreUnlock;
+    public LevelSO LockLvl;
 
 }

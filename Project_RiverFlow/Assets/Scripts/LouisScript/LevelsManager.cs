@@ -30,6 +30,7 @@ public class LevelsManager : MonoBehaviour
             LevelDisplay newleveldisplay = Instantiate(levelButton, levelSelectionPanelTransform);
             newleveldisplay.level = currentLevels[i];
             levelDisplays.Add(newleveldisplay);
+
         }
         levelSelectionPanelTransform.sizeDelta = new Vector2((currentLevels.Count - 1) * (levelButton.GetComponent<RectTransform>().sizeDelta.x + levelSelectionPanelTransform.GetComponent<HorizontalLayoutGroup>().spacing), levelSelectionPanelTransform.sizeDelta.y);
         levelSelectionPanelTransform.GetComponent<ScrollRect>().normalizedPosition = Vector2.zero;
