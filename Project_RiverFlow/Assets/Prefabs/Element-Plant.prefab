@@ -280,6 +280,10 @@ MonoBehaviour:
   timer: 1
   stateUpgradeTime: 15
   stateDowngradeTime: 20
+  fruitSpawnTime: 20
+  elementHandler: {fileID: 0}
+  closeRiverTilesNeeded: 3
+  magicTree: {fileID: 9077409752301440309, guid: 77b610b596ddfa04194d032776e418c3, type: 3}
   onStateChange:
     m_PersistentCalls:
       m_Calls: []
@@ -301,6 +305,12 @@ MonoBehaviour:
   cam: {fileID: 0}
   canvas: {fileID: 4102402895808794355}
   imgTiller: {fileID: 1606261058841424763}
+  TreeCurve:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
   Leafs: {fileID: 4497268701671101756}
 --- !u!1001 &943581888506805443
 PrefabInstance:
