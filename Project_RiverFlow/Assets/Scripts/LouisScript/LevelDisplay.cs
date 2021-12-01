@@ -14,6 +14,7 @@ public class LevelDisplay : MonoBehaviour
     public Image scoreImage;
     public Text levelNumberText;
     public int levelNumber;
+    [SerializeField]
     private Button self;
     void Start()
     {
@@ -31,7 +32,8 @@ public class LevelDisplay : MonoBehaviour
         //descriptionText.text = level.description;
         levelNumber = level.levelNumber;
         levelNumberText.text = "Level " + levelNumber.ToString();
-        self = 
+        Unlock();
+        
     }
 
     public void GoToScene()
@@ -42,7 +44,13 @@ public class LevelDisplay : MonoBehaviour
     {
         if(level.scoreUnlock <= level.LockLvl.recordScore)
         {
-            
+            //unlocked
+            self.interactable =true;
+        }
+        else
+        {
+            self.interactable = false;
+;
         }
     }
 }
