@@ -40,6 +40,7 @@ public class RiverSpline : MonoBehaviour
                         points[1].pos,
                         points[2].pos)
                     , points[0], points[1]));
+
                 for (int i = 1; i < points.Count - 2; i++)
                 {
                     path.AddPoints(DrawCurveSegment(GetCurve(i), points[i], points[i + 1]));
@@ -68,9 +69,17 @@ public class RiverSpline : MonoBehaviour
             {
                 Debug.LogWarning("Need more point", this);
             }
+
             //EndCap
             Draw.Disc(points[0].pos, Vector3.back, points[0].thickness * 0.5f * lineThicknessFactor, (DiscColors)points[0].color);
             Draw.Disc(points[points.Count-1].pos, Vector3.back, points[points.Count - 1].thickness * 0.5f * lineThicknessFactor, (DiscColors)points[points.Count - 1].color);
+
+            //Arrow
+            Vector2 dir = points[1].pos - points[0].pos;
+            //Rotation un peu foireuse
+            Quaternion rot = new Quaternion(1,0,Vector2.Dot(Vector2.right,dir),1);
+            Draw.Cone(points[1].pos, rot.normalized, 0.5f * lineThicknessFactor, 1f);
+
             Draw.Polyline(path, false, lineThicknessFactor, PolylineJoins.Round, Color.white);
         }
 

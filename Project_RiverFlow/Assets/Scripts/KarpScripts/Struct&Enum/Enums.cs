@@ -3,7 +3,8 @@ public enum TileType
     other,
     grass,
     clay,
-    sand
+    sand,
+    mountain
 }
 public enum FlowType
 {

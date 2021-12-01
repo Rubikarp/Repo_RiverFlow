@@ -17,6 +17,7 @@ public class DragElement : MonoBehaviour,
     public void OnBeginDrag(PointerEventData eventData)
     {
         //initialize pointer visual
+        preview.gameObject.SetActive(true);
     }
 
     //Call on Event update
@@ -31,6 +32,7 @@ public class DragElement : MonoBehaviour,
         //Init the linked object on grid
         elementManage.SpawnPlantAt(grid.PosToTile(input.GetHitPos()));
         preview.position = Vector3.zero;
+        preview.gameObject.SetActive(false);
     }
 
     void Start()
