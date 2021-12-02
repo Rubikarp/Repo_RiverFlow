@@ -13,25 +13,24 @@ public class LevelDisplay : MonoBehaviour
 
     public Image scoreImage;
     public Text levelNumberText;
+    public Text levelRecordText;
     public int levelNumber;
     [SerializeField]
     private Button self;
-    void Start()
-    {
-        UpdateDisplay();
-    }
+
 
     // Update is called once per frame
     void Update()
     {
         
     }
-    public void UpdateDisplay()
+    public void UpdateDisplay(int record)
     {
         nameText.text = level.name;
         //descriptionText.text = level.description;
         levelNumber = level.levelNumber;
         levelNumberText.text = "Level " + levelNumber.ToString();
+        levelRecordText.text = record.ToString();
         Unlock();
         
     }

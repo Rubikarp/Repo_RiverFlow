@@ -18,6 +18,7 @@ public class LevelsManager : MonoBehaviour
     }
     public void InitializeSelectionPanel()
     {
+
         levelDisplays.Clear();
         while (levelSelectionPanelTransform.childCount != 0)
         {
@@ -28,6 +29,7 @@ public class LevelsManager : MonoBehaviour
         for (int i = 0; i < currentLevels.Count; i++)
         {
             LevelDisplay newleveldisplay = Instantiate(levelButton, levelSelectionPanelTransform);
+            newleveldisplay.UpdateDisplay(GameManager.Instance.levelSaves[i].levelRecord);
             newleveldisplay.level = currentLevels[i];
             levelDisplays.Add(newleveldisplay);
 

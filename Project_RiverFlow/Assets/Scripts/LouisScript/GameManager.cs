@@ -6,9 +6,23 @@ using UnityEngine.SceneManagement;
 public class GameManager : Singleton<GameManager>
 {
     public List<LevelSO> levelList;
+    [HideInInspector]
+    public List<LevelSave> levelSaves;
     void Start()
     {
-        
+        levelSaves = Save.LoadSave();
+        //si on a pas de saves
+        if (levelSaves == null)
+        {
+            //creer des fichiers ou tt les scores max sont à 0
+            levelSaves = new List<LevelSave>();
+            for (int i=0; i<levelList.Count; i++)
+            {
+                levelSaves.Add(new LevelSave(0));
+            }
+            //on les save
+            Save.SaveLevel(levelSaves);
+        }
     }
 
     // Update is called once per frame
@@ -25,5 +39,9 @@ public class GameManager : Singleton<GameManager>
     {
         Application.Quit();
         Debug.Log("Quit");
+    }
+    public void SaveLevels()
+    {
+        Save.SaveLevel(levelSaves);
     }
 }
