@@ -15,4 +15,6 @@ MonoBehaviour:
   levelSceneName: 
   levelNumber: 2
   name: dessert
-  score: 0
+  recordScore: 0
+  scoreUnlock: 50
+  LockLvl: {fileID: 11400000, guid: dfb255225e6354f41a4f27526680a3e0, type: 2}

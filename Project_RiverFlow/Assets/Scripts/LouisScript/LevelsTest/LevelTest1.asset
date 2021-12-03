@@ -15,4 +15,6 @@ MonoBehaviour:
   levelSceneName: Assets/Scenes/Karp/Test_Karp.unity
   levelNumber: 1
   name: "For\xE9"
-  score: 0
+  recordScore: 0
+  scoreUnlock: 0
+  LockLvl: {fileID: 11400000}

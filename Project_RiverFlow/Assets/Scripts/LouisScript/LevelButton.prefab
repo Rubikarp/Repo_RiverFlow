@@ -232,6 +232,7 @@ MonoBehaviour:
   scoreImage: {fileID: 301909891145341906}
   levelNumberText: {fileID: 301909890052889355}
   levelNumber: 0
+  self: {fileID: 301909890580975402}
 --- !u!1 &301909891145341904
 GameObject:
   m_ObjectHideFlags: 0
