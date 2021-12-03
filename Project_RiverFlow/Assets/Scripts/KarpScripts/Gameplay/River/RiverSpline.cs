@@ -75,9 +75,10 @@ public class RiverSpline : MonoBehaviour
             Draw.Disc(points[points.Count-1].pos, Vector3.back, points[points.Count - 1].thickness * 0.5f * lineThicknessFactor, (DiscColors)points[points.Count - 1].color);
 
             //Arrow
-            Vector2 dir = points[1].pos - points[0].pos;
-            //Rotation un peu foireuse
-            Quaternion rot = new Quaternion(1,0,Vector2.Dot(Vector2.right,dir),1);
+            Vector2 dir = ( points[1].pos - points[0].pos).normalized * Mathf.PI;
+            dir.y = dir.y * -1; //trouver un meilleur fix
+            float angle = Vector2.SignedAngle(Vector2.right, dir);
+            Quaternion rot = new Quaternion(Mathf.Sin(angle * Mathf.Deg2Rad), Mathf.Cos(angle * Mathf.Deg2Rad), 0, 1).normalized;
             Draw.Cone(points[1].pos, rot.normalized, 0.5f * lineThicknessFactor, 1f);
 
             Draw.Polyline(path, false, lineThicknessFactor, PolylineJoins.Round, Color.white);
