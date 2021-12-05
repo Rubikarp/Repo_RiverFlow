@@ -283,7 +283,7 @@ MonoBehaviour:
   fruitSpawnTime: 20
   elementHandler: {fileID: 0}
   closeRiverTilesNeeded: 3
-  magicTree: {fileID: 9077409752301440309, guid: 77b610b596ddfa04194d032776e418c3, type: 3}
+  magicTree: {fileID: 9077409752301440309, guid: b9b7ff63b0430e7478b2cfd76f01484d, type: 3}
   onStateChange:
     m_PersistentCalls:
       m_Calls: []
