@@ -26,12 +26,13 @@ public class LevelDisplay : MonoBehaviour
     }
     public void UpdateDisplay(int record)
     {
+        
         nameText.text = level.name;
         //descriptionText.text = level.description;
         levelNumber = level.levelNumber;
         levelNumberText.text = "Level " + levelNumber.ToString();
-        levelRecordText.text = record.ToString();
-        Unlock();
+        levelRecordText.text = "Score " + record.ToString();
+        Unlock(GameManager.Instance.levelList.IndexOf(level.LockLvl));
         
     }
 
@@ -39,9 +40,9 @@ public class LevelDisplay : MonoBehaviour
     {
         GameManager.Instance.ChangeScene(level.levelSceneName);
     }
-    public void Unlock()
+    public void Unlock(int lockerPos)
     {
-        if(level.scoreUnlock <= level.LockLvl.recordScore)
+        if(level.scoreUnlock <= GameManager.Instance.levelSaves[lockerPos].levelRecord)
         {
             //unlocked
             self.interactable =true;
