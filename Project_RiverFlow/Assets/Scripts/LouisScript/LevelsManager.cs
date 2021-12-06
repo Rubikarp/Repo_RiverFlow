@@ -29,9 +29,11 @@ public class LevelsManager : MonoBehaviour
         for (int i = 0; i < currentLevels.Count; i++)
         {
             LevelDisplay newleveldisplay = Instantiate(levelButton, levelSelectionPanelTransform);
-            newleveldisplay.UpdateDisplay(GameManager.Instance.levelSaves[i].levelRecord);
             newleveldisplay.level = currentLevels[i];
+            newleveldisplay.UpdateDisplay(GameManager.Instance.levelSaves[i].levelRecord);
+
             levelDisplays.Add(newleveldisplay);
+
 
         }
         levelSelectionPanelTransform.sizeDelta = new Vector2((currentLevels.Count - 1) * (levelButton.GetComponent<RectTransform>().sizeDelta.x + levelSelectionPanelTransform.GetComponent<HorizontalLayoutGroup>().spacing), levelSelectionPanelTransform.sizeDelta.y);
