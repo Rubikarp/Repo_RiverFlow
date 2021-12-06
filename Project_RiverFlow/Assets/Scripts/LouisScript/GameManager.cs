@@ -10,6 +10,7 @@ public class GameManager : Singleton<GameManager>
     public List<LevelSave> levelSaves;
     void Start()
     {
+        MakeSingleton(true);
         levelSaves = Save.LoadSave();
         //si on a pas de saves
         if (levelSaves == null)

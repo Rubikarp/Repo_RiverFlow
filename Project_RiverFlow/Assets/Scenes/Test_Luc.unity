@@ -147402,6 +147402,14 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8549408420085817797, guid: 6219252059cfba546823a4578dde4603, type: 3}
+      propertyPath: level
+      value: 
+      objectReference: {fileID: 11400000, guid: 7c2049fdedf69144cad32cfa3e02e7ff, type: 2}
+    - target: {fileID: 8549408420085817797, guid: 6219252059cfba546823a4578dde4603, type: 3}
+      propertyPath: menuPath
+      value: Assets/Scenes/Louis/Menu.unity
+      objectReference: {fileID: 0}
+    - target: {fileID: 8549408420085817797, guid: 6219252059cfba546823a4578dde4603, type: 3}
       propertyPath: elementHandler
       value: 
       objectReference: {fileID: 1160074050}

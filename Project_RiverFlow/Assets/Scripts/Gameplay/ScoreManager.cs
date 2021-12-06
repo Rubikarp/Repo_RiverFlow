@@ -18,11 +18,15 @@ public class ScoreManager : MonoBehaviour
     public int youngTreeScoring;
     public int adultTreeScoring;
     public int seniorTreeScoring;
+    private GameManager gameManager;
+    public LevelSO level;
+    public string menuPath;
 
     // Start is called before the first frame update
     void Start()
     {
         gameTime = GameTime.Instance;
+        gameManager = GameManager.Instance;
 
         gameOverText.SetActive(false);
     }
@@ -98,5 +102,9 @@ public class ScoreManager : MonoBehaviour
     {
         gameTime.isPaused = true;
         gameOverText.SetActive(true);
+
+        gameManager.levelSaves[gameManager.levelList.IndexOf(level)].levelRecord = gameScore;
+        gameManager.SaveLevels();
+        gameManager.ChangeScene(menuPath);
     }
 }
