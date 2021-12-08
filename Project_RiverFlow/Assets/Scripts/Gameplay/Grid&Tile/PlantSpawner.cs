@@ -44,6 +44,8 @@ public class PlantSpawner : MonoBehaviour
     [Space(10)]
     public int currentSpawnArea = 1;
     public ThreatState threatState = ThreatState.NEUTRAL;
+    [Space(10)]
+    public Element plantGameObject;
 
     private GameGrid gameGrid;
     private List<TileInfoScore> tileScores;
@@ -51,6 +53,12 @@ public class PlantSpawner : MonoBehaviour
     private void Start()
     {
         gameGrid = GameObject.Find("Grid").GetComponent<GameGrid>();
+    }
+
+    public void SpawnPlant()
+    {
+        this.EvaluateTiles();
+        tileScores[0].tile.element = plantGameObject;
     }
 
     public void EvaluateTiles()
