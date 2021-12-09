@@ -27,7 +27,7 @@ public class TileSpawnScore : MonoBehaviour
     private void Start()
     {
         tile = GetComponent<GameTile>();
-        plantSpawner = GetComponent<PlantSpawner>();
+        plantSpawner = GameObject.Find("PlantSpawner").GetComponent<PlantSpawner>();
     }
 
     public TileInfoScore Evaluate()
@@ -129,9 +129,12 @@ public class TileSpawnScore : MonoBehaviour
         int ruleScore = 0;
         foreach(GameTile iTile in tile.neighbors)
         {
-            if(iTile.element is Plant)
+            if(iTile != null)
             {
-                ruleScore += plantSpawner.scorePlantsNearby;
+                if (iTile.element is Plant)
+                {
+                    ruleScore += plantSpawner.scorePlantsNearby;
+                }
             }
         }
         ruleScore *= plantSpawner.weightPlantNearby;
@@ -143,9 +146,12 @@ public class TileSpawnScore : MonoBehaviour
         int ruleScore = 0;
         foreach (GameTile iTile in tile.neighbors)
         {
-            if (iTile.type != TileType.mountain)
+            if (iTile != null)
             {
-                ruleScore += plantSpawner.scoreMountainsNearby;
+                if (iTile.type != TileType.mountain)
+                {
+                    ruleScore += plantSpawner.scoreMountainsNearby;
+                }
             }
         }
         ruleScore *= plantSpawner.weightMountainsNearby;
@@ -157,32 +163,36 @@ public class TileSpawnScore : MonoBehaviour
         int ruleScore = 0;
         foreach (GameTile iTile in tile.neighbors)
         {
-            switch (iTile.riverStrenght)
+            if (iTile != null)
             {
-                case FlowStrenght._100_:
-                    ruleScore = plantSpawner.scoreIrrigatedTile100;
-                    break;
-                case FlowStrenght._75_:
-                    ruleScore = ruleScore > plantSpawner.scoreIrrigatedTile75 ? ruleScore : plantSpawner.scoreIrrigatedTile75;
-                    break;
-                case FlowStrenght._50_:
-                    ruleScore = ruleScore > plantSpawner.scoreIrrigatedTile50 ? ruleScore : plantSpawner.scoreIrrigatedTile50;
-                    break;
-                case FlowStrenght._25_:
-                    ruleScore = ruleScore > plantSpawner.scoreIrrigatedTile25 ? ruleScore : plantSpawner.scoreIrrigatedTile25;
-                    break;
-                case FlowStrenght._00_:
-                    ruleScore = ruleScore > plantSpawner.scoreIrrigatedTile0 ? ruleScore : plantSpawner.scoreIrrigatedTile0;
-                    break;
-                default:
-                    ruleScore = ruleScore > plantSpawner.scoreIrrigatedTile0 ? ruleScore : plantSpawner.scoreIrrigatedTile0;
-                    break;
+                switch (iTile.riverStrenght)
+                {
+                    case FlowStrenght._100_:
+                        ruleScore = plantSpawner.scoreIrrigatedTile100;
+                        break;
+                    case FlowStrenght._75_:
+                        ruleScore = ruleScore > plantSpawner.scoreIrrigatedTile75 ? ruleScore : plantSpawner.scoreIrrigatedTile75;
+                        break;
+                    case FlowStrenght._50_:
+                        ruleScore = ruleScore > plantSpawner.scoreIrrigatedTile50 ? ruleScore : plantSpawner.scoreIrrigatedTile50;
+                        break;
+                    case FlowStrenght._25_:
+                        ruleScore = ruleScore > plantSpawner.scoreIrrigatedTile25 ? ruleScore : plantSpawner.scoreIrrigatedTile25;
+                        break;
+                    case FlowStrenght._00_:
+                        ruleScore = ruleScore > plantSpawner.scoreIrrigatedTile0 ? ruleScore : plantSpawner.scoreIrrigatedTile0;
+                        break;
+                    default:
+                        ruleScore = ruleScore > plantSpawner.scoreIrrigatedTile0 ? ruleScore : plantSpawner.scoreIrrigatedTile0;
+                        break;
+                }
             }
         }
         ruleScore *= plantSpawner.weightIrrigatedTile;
         return ruleScore;
     }
 
+    // IsNextToThreeSproutNearby commented : Uncomment when index are fixed
     private bool EvalForbiddenCase()
     {
         bool boolOutput = false;
@@ -193,9 +203,9 @@ public class TileSpawnScore : MonoBehaviour
         boolOutput |= HasSource();
         boolOutput |= IsNextToSource();
         boolOutput |= IsNextToLake();
-        boolOutput |= IsNextToThreeSproutNearby();
+        //boolOutput |= IsNextToThreeSproutNearby();
 
-        return boolOutput;
+        return !boolOutput;
     }
 
     private bool AreAllTilesAroundOccupied()
@@ -203,7 +213,10 @@ public class TileSpawnScore : MonoBehaviour
         bool output = false;
         foreach(GameTile iTile in tile.neighbors)
         {
-            output |= (iTile.isDuged || (iTile.type == TileType.mountain));
+            if (iTile != null)
+            {
+                output |= (iTile.isDuged || (iTile.type == TileType.mountain));
+            }
         }
         return output;
     }
@@ -233,7 +246,10 @@ public class TileSpawnScore : MonoBehaviour
         bool output = false;
         foreach (GameTile iTile in tile.neighbors)
         {
-            output |= (iTile.element is WaterSource);
+            if (iTile != null)
+            {
+                output |= (iTile.element is WaterSource);
+            }
         }
         return output;
     }
@@ -243,7 +259,10 @@ public class TileSpawnScore : MonoBehaviour
         bool output = false;
         foreach (GameTile iTile in tile.neighbors)
         {
-            output |= (iTile.element is Lake);
+            if (iTile != null)
+            {
+                output |= (iTile.element is Lake);
+            }
         }
         return output;
     }
@@ -253,7 +272,7 @@ public class TileSpawnScore : MonoBehaviour
         bool output = false;
         for(int i=0;i<=8;i+=2)
         {
-            if ((tile.neighbors[i-1 % 8].element is Plant) && (tile.neighbors[i % 8].element is Plant) && (tile.neighbors[i+1 % 8].element is Plant))
+            if ((tile.neighbors[i - 1 % 8].element is Plant) && (tile.neighbors[i % 8].element is Plant) && (tile.neighbors[i + 1 % 8].element is Plant))
             {
                 output |= true;
             }

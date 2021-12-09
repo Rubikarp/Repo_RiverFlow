@@ -49,16 +49,20 @@ public class PlantSpawner : MonoBehaviour
 
     private GameGrid gameGrid;
     private List<TileInfoScore> tileScores;
+    private ElementHandler elementHandler;
 
     private void Start()
     {
         gameGrid = GameObject.Find("Grid").GetComponent<GameGrid>();
+        tileScores = new List<TileInfoScore>();
+        elementHandler = GameObject.Find("Element").GetComponent<ElementHandler>();
     }
 
     public void SpawnPlant()
     {
         this.EvaluateTiles();
-        tileScores[0].tile.element = plantGameObject;
+        Debug.Log(this.tileScores[0].tile.gridPos);
+        elementHandler.SpawnPlantAt(this.tileScores[0].tile.gridPos);
     }
 
     public void EvaluateTiles()
