@@ -7,11 +7,11 @@ using UnityEngine.UI;
 public class Digging_UI : MonoBehaviour
 {
     public TextMeshProUGUI textGUI;
-
-    public DigingHandler dig;
+    public InventoryManager Inventory;
+    //public DigingHandler dig;
 
     void Update()
     {
-        textGUI.text = dig.shovelHit.ToString() + " Coup de pelle";
+        textGUI.text = Inventory.digAmmount.ToString() + " Coup de pelle";
     }
 }

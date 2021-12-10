@@ -31,9 +31,8 @@ public class DigingHandler : MonoBehaviour
     [Header("Eraser")]
     [SerializeField] public GameTile eraserSelectTile;
 
-    [Header("Variable")]
-    public int shovelHit = 3;
-    public int weeklyShovels = 0;
+    [Header("Digging")]
+    public InventoryManager Inventory;
 
     void Start()
     {
@@ -44,7 +43,6 @@ public class DigingHandler : MonoBehaviour
         input.onRightClicking.AddListener(OnRighClicking);
         input.onRightClickUp.AddListener(OnRightClickRelease);
 
-        timer.getMoreDig.AddListener(AddDigAmmo);
     }
 
     void Update()
@@ -94,7 +92,7 @@ public class DigingHandler : MonoBehaviour
             {
                 if (startSelectTile.isLinkable && endSelectTile.isLinkable)
                 {
-                    if (shovelHit > 0)
+                    if (Inventory.digAmmount > 0)
                     {
                         Vector2Int tileToMe = endSelectTile.gridPos - startSelectTile.gridPos;
                         Direction linkDir = new Direction(tileToMe);
@@ -127,7 +125,7 @@ public class DigingHandler : MonoBehaviour
 
                             //Event
                             onLink?.Invoke(startSelectTile, endSelectTile);
-                            shovelHit--;
+                            Inventory.digAmmount--;
                         }
                     }
                 }
@@ -159,7 +157,7 @@ public class DigingHandler : MonoBehaviour
 
         if (eraserSelectTile.linkAmount > 0)
         {
-            shovelHit += eraserSelectTile.linkAmount;
+            Inventory.digAmmount += eraserSelectTile.linkAmount;
 
             onBreak?.Invoke(eraserSelectTile);
 
@@ -172,9 +170,6 @@ public class DigingHandler : MonoBehaviour
         eraserSelectTile = null;
     }
 
-    private void AddDigAmmo()
-    {
-        shovelHit += weeklyShovels;
-    }
+
 
 }
