@@ -348,7 +348,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8549408420085817796}
-  - component: {fileID: 8549408420085817797}
+  - component: {fileID: 7158169607246245338}
   m_Layer: 0
   m_Name: ScoreManager
   m_TagString: Untagged
@@ -371,7 +371,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &8549408420085817797
+--- !u!114 &7158169607246245338
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -380,14 +380,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 8549408420085817819}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6339c903320315540ac151b9a550d8ec, type: 3}
+  m_Script: {fileID: 11500000, guid: f017638494b2c924fb143dbf8bd0390e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scoreUI: {fileID: 8549408419415346962}
-  gameOverText: {fileID: 8549408418943584176}
+  scoreUI: {fileID: 0}
+  gameOverText: {fileID: 0}
   gameTime: {fileID: 0}
-  scoringTick: 5
+  scoringTick: 0
   elementHandler: {fileID: 0}
-  youngTreeScoring: 1
-  adultTreeScoring: 2
-  seniorTreeScoring: 4
+  youngTreeScoring: 0
+  adultTreeScoring: 0
+  seniorTreeScoring: 0
+  level: {fileID: 0}
+  menuPath: 
