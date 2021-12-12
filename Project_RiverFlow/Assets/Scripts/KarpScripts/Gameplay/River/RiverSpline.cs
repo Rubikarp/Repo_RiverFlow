@@ -5,7 +5,7 @@ using Shapes;
 
 public class RiverSpline : MonoBehaviour
 {
-    [Header("shapes")]
+    [Header("Shapes")]
     public Polyline line;
     [Space(5)]
     public Cone cone;
@@ -13,7 +13,7 @@ public class RiverSpline : MonoBehaviour
     public Disc startDisk;
     public Disc endDisk;
 
-    [Header("data")]
+    [Header("Data")]
     [Range(2, 16)] public int pointPerSegment = 8;
     public RiverPalette_SCO riverData;
     public List<RiverPoint> points = new List<RiverPoint>() {};

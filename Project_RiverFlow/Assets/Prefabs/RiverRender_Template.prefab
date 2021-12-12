@@ -422,14 +422,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3bd32828c040a5a42853b7762797c336, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cam: {fileID: 0}
   line: {fileID: 2378695613167214450}
   cone: {fileID: 8300869875371312128}
   startDisk: {fileID: 8682154733520231574}
   endDisk: {fileID: 7183107739479947689}
-  points: []
-  riverData: {fileID: 11400000, guid: 41848361330582a4c99fa9e0185c69e5, type: 2}
   pointPerSegment: 8
+  riverData: {fileID: 11400000, guid: 41848361330582a4c99fa9e0185c69e5, type: 2}
+  points: []
 --- !u!114 &2378695613167214450
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -508,5 +507,5 @@ MeshRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 100
   m_AdditionalVertexStreams: {fileID: 0}
