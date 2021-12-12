@@ -12,6 +12,6 @@ public class Digging_UI : MonoBehaviour
 
     void Update()
     {
-        textGUI.text = Inventory.digAmmount.ToString() + " Coup de pelle";
+        textGUI.text = Inventory.digAmmount.ToString();
     }
 }

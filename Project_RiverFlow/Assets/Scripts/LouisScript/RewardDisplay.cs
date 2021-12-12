@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using TMPro;
 
 public class RewardDisplay : MonoBehaviour
 {
     
 
-    public Text digNumber;
-    public Text itemNumber;
+    public TextMeshProUGUI digNumber;
     public InventoryManager Inventory;
     public int digBonus;
     public int cloudBonus;
@@ -22,7 +22,6 @@ public class RewardDisplay : MonoBehaviour
     {
         Inventory = this.gameObject.GetComponentInParent<RewardManager>().Inventory;
         digNumber.text = digBonus.ToString();
-        itemNumber.text = cloudBonus + sourceBonus + lakeBonus+tunnelBonus.ToString();
     }
     public void Reward()
     {
