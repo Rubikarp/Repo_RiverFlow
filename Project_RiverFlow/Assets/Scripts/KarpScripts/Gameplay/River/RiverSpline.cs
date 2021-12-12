@@ -5,112 +5,25 @@ using Shapes;
 
 public class RiverSpline : MonoBehaviour
 {
-    public List<RiverPoint> points = new List<RiverPoint>() { new RiverPoint(Vector2.zero), new RiverPoint(Vector2.zero) };
-    public RiverPalette_SCO riverData;
-    public float lineThicknessFactor = 1f;
-    [Range(2, 16)] public int pointPerLine = 8;
-    //
-    PolylinePath path;
-    //
-    public Camera cam;
+    [Header("shapes")]
+    public Polyline line;
+    [Space(5)]
+    public Cone cone;
+    [Space(5)]
+    public Disc startDisk;
+    public Disc endDisk;
 
-    void Awake()
-    {
-        cam = Camera.main;
-    }
+    [Header("data")]
+    [Range(2, 16)] public int pointPerSegment = 8;
+    public RiverPalette_SCO riverData;
+    public List<RiverPoint> points = new List<RiverPoint>() {};
 
     void Update()
     {
-    }
-
-    void OnDrawGizmos()
-    {
-        Draw.PolylineGeometry = PolylineGeometry.Flat2D;
-        using (var path = new PolylinePath())
+        if(points.Count != line.points.Count)
         {
-            //Line
-            if (points.Count > 2)
-            {
-
-                path.AddPoint(points[0].ToPolyLine());
-                path.AddPoints(DrawCurveSegment(
-                    new CatmullRiverSegment(
-                        points[0].pos + (points[1].pos - points[0].pos),
-                        points[0].pos,
-                        points[1].pos,
-                        points[2].pos)
-                    , points[0], points[1]));
-
-                for (int i = 1; i < points.Count - 2; i++)
-                {
-                    path.AddPoints(DrawCurveSegment(GetCurve(i), points[i], points[i + 1]));
-                }
-
-                path.AddPoints(DrawCurveSegment(
-                     new CatmullRiverSegment(
-                         points[points.Count - 3].pos,
-                         points[points.Count - 2].pos,
-                         points[points.Count - 1].pos,
-                         points[points.Count - 1].pos + (points[points.Count - 1].pos - points[points.Count - 2].pos))
-                       , points[points.Count - 2], points[points.Count - 1]));
-            }
-            else if (points.Count == 2)
-            {
-                path.AddPoint(points[0].ToPolyLine());
-                path.AddPoints(DrawCurveSegment(
-                    new CatmullRiverSegment(
-                        points[0].pos + (points[1].pos - points[0].pos),
-                        points[0].pos,
-                        points[1].pos,
-                        points[1].pos + (points[0].pos - points[1].pos))
-                    , points[0], points[1]));
-            }
-            else
-            {
-                Debug.LogWarning("Need more point", this);
-            }
-
-            //EndCap
-            Draw.Disc(points[0].pos, Vector3.back, points[0].thickness * 0.5f * lineThicknessFactor, (DiscColors)points[0].color);
-            Draw.Disc(points[points.Count-1].pos, Vector3.back, points[points.Count - 1].thickness * 0.5f * lineThicknessFactor, (DiscColors)points[points.Count - 1].color);
-
-            //Arrow
-            Vector2 dir = ( points[1].pos - points[0].pos).normalized * Mathf.PI;
-            dir.y = dir.y * -1; //trouver un meilleur fix
-            float angle = Vector2.SignedAngle(Vector2.right, dir);
-            Quaternion rot = new Quaternion(Mathf.Sin(angle * Mathf.Deg2Rad), Mathf.Cos(angle * Mathf.Deg2Rad), 0, 1).normalized;
-            Draw.Cone(points[1].pos, rot.normalized, 0.5f * lineThicknessFactor, 1f);
-
-            Draw.Polyline(path, false, lineThicknessFactor, PolylineJoins.Round, Color.white);
+            ReCalculCurve();
         }
-
-        #region Bezier
-        /*
-        Draw.PolylineGeometry = PolylineGeometry.Flat2D;
-        using (var path = new PolylinePath())
-        {
-
-            path.AddPoint(points[0].pos, points[0].thickness, points[0].color);
-            for (int i = 0; i < points.Count; i++)
-            {
-                if ((i + 1) < points.Count)
-                {
-                    int next = (i + 1);
-
-                    Vector3 startTangPos = points[i + 0].pos + points[i + 0].tangDir * points[i + 0].tangStrenght;
-                    Vector3 endTangPos = points[i + 1].pos - points[i + 1].tangDir * points[i + 1].tangStrenght;
-
-                    //Draw the path
-                    path.BezierTo(startTangPos, endTangPos, points[next].pos, pointPerLine);
-
-                    Draw.Polyline(path, false, lineThicknessFactor, PolylineJoins.Round);
-
-                }
-            }
-        }
-        */
-        #endregion
-
     }
 
     private PolylinePoint[] LinerInterpolation(RiverPoint lastPoint, RiverPoint newPoint, int iter)
@@ -123,55 +36,109 @@ public class RiverSpline : MonoBehaviour
         }
         return result;
     }
+    private PolylinePoint[] BezierInterpolation(CatmullRiverSegment curve, RiverPoint From, RiverPoint To)
+    {
+        PolylinePoint[] result = new PolylinePoint[pointPerSegment - 1];
+        RiverPoint temp = From;
 
-    CatmullRiverSegment GetCurve(int i)
-    {
-        return new CatmullRiverSegment(points[i-1].pos, points[i].pos, points[i + 1].pos, points[i + 2].pos);
+        for (int i = 1; i < pointPerSegment; i++)
+        {
+            float t = i / (pointPerSegment - 1f);
+
+            //TODOBezier
+            temp = RiverPoint.Lerp(From, To, t);
+            temp.pos = curve.GetPointPos(t);
+
+            result[i - 1] = temp.ToPolyLine();
+        }
+        return result;
     }
-    private PolylinePoint[] DrawCurveSegment(CatmullRiverSegment curve, RiverPoint From, RiverPoint To)
+    private PolylinePoint[] CatmullInterpolation(CatmullRiverSegment curve, RiverPoint From, RiverPoint To)
     {
-        PolylinePoint[] result = new PolylinePoint[pointPerLine - 1];
+        PolylinePoint[] result = new PolylinePoint[pointPerSegment - 1];
 
         RiverPoint temp = From;
 
-        for (int i = 1; i < pointPerLine; i++)
+        for (int i = 1; i < pointPerSegment; i++)
         {
-            float t = i / (pointPerLine - 1f);
+            float t = i / (pointPerSegment - 1f);
             temp = RiverPoint.Lerp(From, To, t);
             temp.pos = curve.GetPointPos(t);
             result[i-1] = temp.ToPolyLine();
         }
         return result;
     }
-
-    private PolylinePoint[] DrawCurveSegmentRatio(CatmullRiverSegment curve, RiverPoint From, RiverPoint To)
+    private CatmullRiverSegment GetCurve(int i)
     {
-        //Position
-        Vector3[] resultPoses = new Vector3[pointPerLine - 1];
-        for (int i = 1; i < pointPerLine; i++)
+        return new CatmullRiverSegment(points[i-1].pos, points[i].pos, points[i + 1].pos, points[i + 2].pos);
+    }
+    //
+    public void ReCalculCurve()
+    {
+        line.points.Clear();
+        if (points.Count > 2)
         {
-            float t = i / (pointPerLine - 1f);
-            resultPoses[i - 1] = curve.GetPointPos(t);
+            line.AddPoint(points[0].ToPolyLine());
+            line.AddPoints(CatmullInterpolation(
+                new CatmullRiverSegment(
+                    points[0].pos + (points[1].pos - points[0].pos),
+                    points[0].pos,
+                    points[1].pos,
+                    points[2].pos)
+                , points[0], points[1]));
+
+            for (int i = 1; i < points.Count - 2; i++)
+            {
+                line.AddPoints(CatmullInterpolation(GetCurve(i), points[i], points[i + 1]));
+            }
+
+            line.AddPoints(CatmullInterpolation(
+                 new CatmullRiverSegment(
+                     points[points.Count - 3].pos,
+                     points[points.Count - 2].pos,
+                     points[points.Count - 1].pos,
+                     points[points.Count - 1].pos + (points[points.Count - 1].pos - points[points.Count - 2].pos))
+                   , points[points.Count - 2], points[points.Count - 1]));
+        }
+        else if (points.Count == 2)
+        {
+            line.AddPoint(points[0].ToPolyLine());
+            line.AddPoints(CatmullInterpolation(
+                new CatmullRiverSegment(
+                    points[0].pos + (points[1].pos - points[0].pos),
+                    points[0].pos,
+                    points[1].pos,
+                    points[1].pos + (points[0].pos - points[1].pos))
+                , points[0], points[1]));
+        }
+        else
+        {
+            Debug.LogWarning("Need more point", this);
         }
 
-        //Points
-        float totDist = 0;
-        for (int i = 0; i < resultPoses.Length-1; i++)
-        {
-            totDist += (resultPoses[i + 1] - resultPoses[i]).magnitude;
-        }
-        float step = 1f/ totDist;
+        UpdateEndPoint();
+        ArrowFlowDir();
+    }
+    public void UpdateEndPoint()
+    {
+        startDisk.Radius = points[0].thickness * 0.5f * line.Thickness;
+        startDisk.Color = points[0].color;
+        startDisk.transform.position = points[0].pos;
 
-        PolylinePoint[] result = new PolylinePoint[pointPerLine - 1];
-        RiverPoint temp = From;
-        for (int i = 0; i < resultPoses.Length; i++)
-        {
-            temp = RiverPoint.Lerp(From, To, i*step/totDist);
-            temp.pos = resultPoses[i];
-            result[i] = temp.ToPolyLine();
-        }
-
-        return result;
+        endDisk.Radius = points[points.Count - 1].thickness * 0.5f * line.Thickness;
+        endDisk.Color = points[points.Count - 1].color;
+        endDisk.transform.position = points[points.Count - 1].pos;
+    }
+    public void ArrowFlowDir()
+    {
+        Vector2 dir = (points[1].pos - points[0].pos).normalized * Mathf.PI;
+        dir.y = dir.y * -1; //trouver un meilleur fix
+        float angle = Vector2.SignedAngle(Vector2.right, dir);
+        Quaternion rot = new Quaternion(Mathf.Sin(angle * Mathf.Deg2Rad), Mathf.Cos(angle * Mathf.Deg2Rad), 0, 1).normalized;
+        cone.Radius = 0.3f * line.Thickness;
+        cone.Length = 0.6f;
+        cone.transform.position = points[1].pos;
+        cone.transform.rotation = rot.normalized;
     }
     //
     public void SetPointCount(int pointNbr)
