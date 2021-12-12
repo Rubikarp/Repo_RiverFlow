@@ -48,6 +48,8 @@ public class WaterSource : Element
     }
 
     public Direction flowOut;
+    public Sprite[] spriteDirections;
+    private SpriteRenderer chosenSprite;
 
     void Start()
     {
@@ -55,10 +57,26 @@ public class WaterSource : Element
         {
             tileOn.element = this;
         }
+
+        chosenSprite = GetComponent < SpriteRenderer>();
     }
 
     void Update()
     {
-        
+        VerifySpriteDirection();
+    }
+
+    private void VerifySpriteDirection()
+    {
+        if (tileOn.linkedTile.Count == 1)
+        {
+            for (int i = 0; i < tileOn.neighbors.Length; i++)
+            {
+                if (tileOn.linkedTile[0] == tileOn.neighbors[i])
+                {
+                    chosenSprite.sprite = spriteDirections[i];
+                }
+            }
+        }
     }
 }
