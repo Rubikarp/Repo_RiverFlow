@@ -204,9 +204,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: LevelDisplay, Assembly-CSharp
-        m_MethodName: GoToScene
+      - m_Target: {fileID: 2848760089627443386}
+        m_TargetAssemblyTypeName: RewardDisplay, Assembly-CSharp
+        m_MethodName: Reward
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -231,10 +231,10 @@ MonoBehaviour:
   digNumber: {fileID: 301909890052889355}
   itemNumber: {fileID: 4968362473930899518}
   Inventory: {fileID: 0}
-  digBonus: 0
+  digBonus: 10
   cloudBonus: 0
   sourceBonus: 0
-  lakeBonus: 0
+  lakeBonus: 1
   tunnelBonus: 0
 --- !u!1 &301909891145341904
 GameObject:

@@ -10,7 +10,7 @@ public class GameTime : Singleton<GameTime>
     public bool isPaused = false;
     [SerializeField] float gameTimer = 0;
     public float gameTimeSpeed = 1f;
-    [Range(60, 360)] public float weekDuration = 180f;
+    [Range(10, 360)] public float weekDuration = 180f;
     private int weekNumber = 1;
 
     [Header("FlowSimulation")]
@@ -36,9 +36,11 @@ public class GameTime : Singleton<GameTime>
 
             if (gameTimer > (weekDuration * weekNumber))
             {
+                
                 getMoreDig?.Invoke();
-
+                
                 weekNumber++;
+                Pause();
             }
         }
     }

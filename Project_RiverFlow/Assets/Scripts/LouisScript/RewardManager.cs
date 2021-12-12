@@ -18,7 +18,7 @@ public class RewardManager : MonoBehaviour
 
     void Start()
     {
-    rewardDisplays = new List<GameObject>();
+        rewardDisplays = new List<GameObject>();
     }
 
 
@@ -27,6 +27,14 @@ public class RewardManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space))
         {
             InitializeSelectionPanel();
+        }
+    }
+
+    public void EmptySelectionPanel()
+    {
+        while (rewardSelectionPanelTransform.childCount != 0)
+        {
+            DestroyImmediate(rewardSelectionPanelTransform.GetChild(0).gameObject);
         }
     }
     public void InitializeSelectionPanel()

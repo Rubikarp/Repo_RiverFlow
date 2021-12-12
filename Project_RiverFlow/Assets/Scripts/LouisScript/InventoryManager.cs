@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class InventoryManager : MonoBehaviour
 {
-    public GameTime timer;
     public int cloudsAmmount;
     public int sourcesAmmount;
     public int lakesAmmount;
@@ -14,7 +13,7 @@ public class InventoryManager : MonoBehaviour
     void Start()
     {
         digAmmount = 30;
-        //timer.getMoreDig.AddListener(AddDigAmmo());
+
     }
 
     private void AddDigAmmo(int bonusDig)
