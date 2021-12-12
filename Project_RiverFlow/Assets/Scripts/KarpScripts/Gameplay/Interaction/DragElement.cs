@@ -55,13 +55,18 @@ public class DragElement : MonoBehaviour,
                 }
                 break;
             case Items.Source:
-                if (Inventory.cloudsAmmount > 0)
+                if (Inventory.sourcesAmmount > 0)
                 {
                     elementManage.SpawnWaterSourceAt(grid.PosToTile(input.GetHitPos()));
                     Inventory.sourcesAmmount--;
                 }
                 break;
             case Items.Lake:
+                if (Inventory.lakesAmmount > 0)
+                {
+                    elementManage.SpawnLakeAt(grid.PosToTile(input.GetHitPos()));
+                    Inventory.lakesAmmount--;
+                }
                 break;
             default:
                 break;
@@ -105,7 +110,7 @@ public class DragElement : MonoBehaviour,
                 else
                 {
                     SelfImage.color = new Color32(255, 255, 255, 255);
-                    textGUI.text = Inventory.cloudsAmmount.ToString();
+                    textGUI.text = Inventory.sourcesAmmount.ToString();
                     //    SelfButton.interactable = true;
                 }
                 break;
@@ -115,13 +120,13 @@ public class DragElement : MonoBehaviour,
                 {
                     SelfImage.color = new Color32(255, 255, 255, 0);
                     textGUI.text = Inventory.lakesAmmount.ToString();
-                    textGUI.text = Inventory.cloudsAmmount.ToString();
+
                     //    SelfButton.interactable = false;
                 }
                 else
                 {
                     SelfImage.color = new Color32(255, 255, 255, 255);
-                    textGUI.text = Inventory.cloudsAmmount.ToString();
+                    textGUI.text = Inventory.lakesAmmount.ToString();
                     //   SelfButton.interactable = true;
                 }
                 break;
