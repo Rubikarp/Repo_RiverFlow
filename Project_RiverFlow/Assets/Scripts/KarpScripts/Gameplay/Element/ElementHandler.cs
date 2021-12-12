@@ -10,6 +10,7 @@ public class ElementHandler : MonoBehaviour
     public GameGrid grid;
     [Space(10)]
     public GameObject waterSource_Template;
+    public GameObject cloud_Template;
     public GameObject plant_Template;
     [Space(10)]
     public Transform elementContainer;
@@ -18,6 +19,8 @@ public class ElementHandler : MonoBehaviour
     public List<Plant> allPlants = new List<Plant>();
     [Space(10)]
     public List<WaterSource> allSources = new List<WaterSource>();
+    [Space(10)]
+    public List<Cloud> allClouds = new List<Cloud>();
 
     [Header("Tool"), HorizontalLine]
     [SerializeField] int posX;
@@ -74,6 +77,27 @@ public class ElementHandler : MonoBehaviour
             //Link Element and Tile
             source.tileOn = grid.GetTile(grisPos);
             grid.GetTile(grisPos).element = source;
+        }
+    }
+    public void SpawnCloudAt(Vector2Int grisPos)
+    {
+        if (!grid.GetTile(grisPos).isElement)
+        {
+            GameObject go = PrefabUtility.InstantiatePrefab(cloud_Template, elementContainer) as GameObject;
+            go.transform.position = grid.TileToPos(new Vector2Int(grisPos.x, grisPos.y));
+            go.name = "Cloud_" + grisPos;
+
+            //Check if Plant
+            Cloud cloud = go.GetComponent<Cloud>();
+            if (cloud == null)
+            {
+                Debug.LogError("can't Find WaterSource on the object", go);
+            }
+
+            allClouds.Add(cloud);
+            //Link Element and Tile
+            cloud.tileOn = grid.GetTile(grisPos);
+            grid.GetTile(grisPos).element = cloud;
         }
     }
 

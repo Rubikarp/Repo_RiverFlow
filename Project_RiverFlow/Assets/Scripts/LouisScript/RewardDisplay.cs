@@ -31,5 +31,7 @@ public class RewardDisplay : MonoBehaviour
         Inventory.sourcesAmmount = Inventory.sourcesAmmount + sourceBonus;
         Inventory.lakesAmmount = Inventory.lakesAmmount + lakeBonus;
         Inventory.tunnelsAmmount = Inventory.tunnelsAmmount + tunnelBonus;
+        GameTime.Instance.Pause();
+        this.gameObject.GetComponentInParent<RewardManager>().EmptySelectionPanel();
     }
 }

@@ -46,7 +46,7 @@ public class DragElement : MonoBehaviour,
         switch (Item)
         {
             case Items.Cloud:
-                //elementManage.SpawnPlantAt(grid.PosToTile(input.GetHitPos()));
+                elementManage.SpawnCloudAt(grid.PosToTile(input.GetHitPos()));
                 break;
             case Items.Source:
                 elementManage.SpawnWaterSourceAt(grid.PosToTile(input.GetHitPos()));
