@@ -23,7 +23,6 @@ public class RiverManager : Singleton<RiverManager>
 
     private void OnLink(GameTile startTile, GameTile endTile)
     {
-        /*
         //Check if isloate (no tile have more than 2 link)
         if (startTile.linkedTile.Count < 1 && endTile.linkedTile.Count < 1)
         {
@@ -199,7 +198,6 @@ public class RiverManager : Singleton<RiverManager>
                 }
             }
         }
-            */
     }
     private void OnBreak(GameTile erasedTile)
     {

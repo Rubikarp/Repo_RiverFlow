@@ -366,8 +366,6 @@ public class GameTile : MonoBehaviour
 
     public void AddLinkedTile(Direction addedDir, FlowType flow)
     {
-        Debug.Log("Hello wolrd");
-
         if (flow == FlowType.flowIn)
         {
             flowIn.Add(addedDir);
