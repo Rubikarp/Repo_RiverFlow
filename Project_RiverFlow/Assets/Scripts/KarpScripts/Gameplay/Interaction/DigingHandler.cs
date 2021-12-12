@@ -17,7 +17,6 @@ public class DigingHandler : MonoBehaviour
     public LinkEvent onLink;
     public TileEvent onBreak;
     
-
     [Header("Digging")]
     [SerializeField] public GameTile startSelectTile;
     [SerializeField] public Vector3 startSelectTilePos;
@@ -32,11 +31,10 @@ public class DigingHandler : MonoBehaviour
     [SerializeField] public GameTile eraserSelectTile;
 
     [Header("Digging")]
-    public InventoryManager Inventory;
+    public InventoryManager inventory;
 
     void Start()
     {
-
         input.onLeftClickDown.AddListener(OnLeftClick);
         input.onLeftClicking.AddListener(OnLeftClicking);
         input.onLeftClickUp.AddListener(OnLeftClickRelease);
@@ -44,11 +42,6 @@ public class DigingHandler : MonoBehaviour
         input.onRightClicking.AddListener(OnRighClicking);
         input.onRightClickUp.AddListener(OnRightClickRelease);
 
-    }
-
-    void Update()
-    {
-        
     }
 
     private void OnDestroy()
@@ -93,7 +86,7 @@ public class DigingHandler : MonoBehaviour
             {
                 if (startSelectTile.isLinkable && endSelectTile.isLinkable)
                 {
-                    if (Inventory.digAmmount > 0)
+                    if (inventory.digAmmount > 0)
                     {
                         Vector2Int tileToMe = endSelectTile.gridPos - startSelectTile.gridPos;
                         Direction linkDir = new Direction(tileToMe);
@@ -107,13 +100,13 @@ public class DigingHandler : MonoBehaviour
                         if (startSelectTile.IsLinkInDir(linkDir, FlowType.flowIn))
                         {
                             ///TODO : link in the opposite sens
-                            ///
+                            //Do nothing
                         }
                         else
                         {
                             //Event
                             onLink?.Invoke(startSelectTile, endSelectTile);
-                            Inventory.digAmmount--;
+                            inventory.digAmmount--;
                         }
                     }
                 }
@@ -145,12 +138,8 @@ public class DigingHandler : MonoBehaviour
 
         if (eraserSelectTile.linkAmount > 0)
         {
-            Inventory.digAmmount += eraserSelectTile.linkAmount;
-
+            inventory.digAmmount += eraserSelectTile.linkAmount;
             onBreak?.Invoke(eraserSelectTile);
-
-            eraserSelectTile.RemoveAllLinkedTile();
-
         }
     }
     public void OnRightClickRelease()

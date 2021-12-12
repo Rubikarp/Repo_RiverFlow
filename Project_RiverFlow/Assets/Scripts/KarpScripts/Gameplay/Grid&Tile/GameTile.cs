@@ -358,6 +358,21 @@ public class GameTile : MonoBehaviour
         tileA.linkedTile.Remove(tileB);
         tileB.linkedTile.Remove(tileA);
     }
+    public static void UnLinkAll(GameTile tileA)
+    {
+        //Flow In
+        for (int i = 0; i < tileA.flowIn.Count; i++)
+        {
+            GameTile neighB = tileA.GetNeighbor(tileA.flowIn[i]);
+            UnLink(neighB, tileA);
+        }
+        //Flow Out
+        for (int i = 0; i < tileA.flowOut.Count; i++)
+        {
+            GameTile neighB = tileA.GetNeighbor(tileA.flowOut[i]);
+            UnLink(tileA, neighB);
+        }
+    }
     public static void InverseLink(GameTile tileA, GameTile tileB)
     {
         UnLink(tileA, tileB);
@@ -473,5 +488,22 @@ public class GameTile : MonoBehaviour
                 flowOut.Add(Direction.DirFromInt(i));
             }
         }
+    }
+
+    private void OnDrawGizmos()
+    {
+        Vector3 vec;
+        for (int i = 0; i < flowOut.Count; i++)
+        {
+            vec = new Vector3(flowOut[i].dirValue.x, flowOut[i].dirValue.y);
+
+            Debug.DrawRay(worldPos - Vector3.Cross(vec, Vector3.forward).normalized * 0.1f, vec, Color.cyan);
+        }
+        for (int i = 0; i < flowIn.Count; i++)
+        {
+            vec = new Vector3(flowIn[i].dirValue.x, flowIn[i].dirValue.y);
+            Debug.DrawRay(worldPos + Vector3.Cross(vec, Vector3.back).normalized * 0.1f, vec, Color.magenta);
+        }
+
     }
 }

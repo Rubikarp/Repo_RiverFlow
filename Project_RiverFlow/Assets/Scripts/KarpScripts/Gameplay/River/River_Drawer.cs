@@ -50,24 +50,27 @@ public class River_Drawer : MonoBehaviour
     {
         for (int i = 0; i < riverRender.Count; i++)
         {
-            //Tiles.Count + 2 => (tiles + startNode + endNode)
-            riverRender[i].SetPointCount(riverHandler.canals[i].canalTiles.Count + 2);
-
-            //Set First Point
-            riverRender[i].DefinePoint(0,
-                grid.GetTile(riverHandler.canals[i].startNode).worldPos,
-                grid.GetTile(riverHandler.canals[i].startNode).riverStrenght);
-            //Set Middle Point
-            for (int j = 0; j < riverHandler.canals[i].canalTiles.Count; j++)
+            if (riverHandler.canals[i] != null)
             {
-                riverRender[i].DefinePoint(j + 1,
-                        grid.GetTile(riverHandler.canals[i].canalTiles[j]).worldPos,
-                        grid.GetTile(riverHandler.canals[i].canalTiles[j]).riverStrenght);
+                //Tiles.Count + 2 => (tiles + startNode + endNode)
+                riverRender[i].SetPointCount(riverHandler.canals[i].canalTiles.Count + 2);
+
+                //Set First Point
+                riverRender[i].DefinePoint(0,
+                    grid.GetTile(riverHandler.canals[i].startNode).worldPos,
+                    grid.GetTile(riverHandler.canals[i].startNode).riverStrenght);
+                //Set Middle Point
+                for (int j = 0; j < riverHandler.canals[i].canalTiles.Count; j++)
+                {
+                    riverRender[i].DefinePoint(j + 1,
+                            grid.GetTile(riverHandler.canals[i].canalTiles[j]).worldPos,
+                            grid.GetTile(riverHandler.canals[i].canalTiles[j]).riverStrenght);
+                }
+                //Set Last Point
+                riverRender[i].DefinePoint(riverRender[i].points.Count - 1,
+                        grid.GetTile(riverHandler.canals[i].endNode).worldPos,
+                        grid.GetTile(riverHandler.canals[i].endNode).riverStrenght);
             }
-            //Set Last Point
-            riverRender[i].DefinePoint(riverRender[i].points.Count - 1,
-                    grid.GetTile(riverHandler.canals[i].endNode).worldPos,
-                    grid.GetTile(riverHandler.canals[i].endNode).riverStrenght);
         }
     }
 }

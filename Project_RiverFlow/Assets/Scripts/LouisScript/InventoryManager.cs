@@ -1,19 +1,19 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class InventoryManager : MonoBehaviour
 {
+    [Header("Pelle")]
+    public int digAmmount;
+    
+    [Header("Item")]
     public int cloudsAmmount;
     public int sourcesAmmount;
     public int lakesAmmount;
     public int tunnelsAmmount;
-    public int digAmmount;
 
     void Start()
     {
         digAmmount = 30;
-
     }
 
     private void AddDigAmmo(int bonusDig)

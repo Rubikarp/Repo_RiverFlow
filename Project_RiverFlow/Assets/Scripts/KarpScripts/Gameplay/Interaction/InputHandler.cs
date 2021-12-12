@@ -28,11 +28,6 @@ public class InputHandler : MonoBehaviour
     [SerializeField] public float hitDist = 0f;
     [SerializeField] public Vector3 hitPoint = Vector3.zero;
 
-
-    private void Start()
-    {
-    }
-
     void Update()
     {
         CheckInput();
