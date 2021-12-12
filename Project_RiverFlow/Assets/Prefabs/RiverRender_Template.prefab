@@ -129,7 +129,7 @@ MeshRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: -100
   m_AdditionalVertexStreams: {fileID: 0}
 --- !u!1 &2647190750287782043
 GameObject:
@@ -260,7 +260,7 @@ MeshRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: -100
   m_AdditionalVertexStreams: {fileID: 0}
 --- !u!1 &3897219354555085276
 GameObject:
@@ -371,7 +371,7 @@ MeshRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 100
   m_AdditionalVertexStreams: {fileID: 0}
 --- !u!1 &8909883473942522786
 GameObject:
@@ -507,5 +507,5 @@ MeshRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 100
+  m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}

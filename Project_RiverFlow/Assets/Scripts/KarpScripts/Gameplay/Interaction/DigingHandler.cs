@@ -36,6 +36,7 @@ public class DigingHandler : MonoBehaviour
 
     void Start()
     {
+
         input.onLeftClickDown.AddListener(OnLeftClick);
         input.onLeftClicking.AddListener(OnLeftClicking);
         input.onLeftClickUp.AddListener(OnLeftClickRelease);
@@ -106,23 +107,10 @@ public class DigingHandler : MonoBehaviour
                         if (startSelectTile.IsLinkInDir(linkDir, FlowType.flowIn))
                         {
                             ///TODO : link in the opposite sens
-                            startSelectTile.InverseLink(endSelectTile);
-
-                            startSelectTile.linkedTile.Add(endSelectTile);
-                            endSelectTile.linkedTile.Add(startSelectTile);
-
-                            //Event
-                            onLink?.Invoke(startSelectTile, endSelectTile);
-
+                            ///
                         }
                         else
                         {
-                            //Make the Link
-                            startSelectTile.LinkTo(endSelectTile);
-
-                            startSelectTile.linkedTile.Add(endSelectTile);
-                            endSelectTile.linkedTile.Add(startSelectTile);
-
                             //Event
                             onLink?.Invoke(startSelectTile, endSelectTile);
                             Inventory.digAmmount--;

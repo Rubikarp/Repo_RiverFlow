@@ -70,9 +70,6 @@ public class GameTile : MonoBehaviour
     [Space(8)]
     public List<GameTile> linkedTile = new List<GameTile>();
     public List<Canal> canalsIn = new List<Canal>();
-    [Space(8)]
-
-    public int nearestSourceDistance = -1;
     #region Getter / Setter
     public bool isElement
     {
@@ -158,6 +155,7 @@ public class GameTile : MonoBehaviour
     }
     #endregion
 
+    [Space(8)]
     public GameTime gameTime;
     public TileSpawnScore spawnScore;
 
@@ -209,12 +207,12 @@ public class GameTile : MonoBehaviour
 
                 if (neighborA.riverStrenght > neighborB.riverStrenght)
                 {
-                    InverseLink(neighborA);
+                    InverseLink(this,neighborA);
                 }
                 else
                 if (neighborA.riverStrenght < neighborB.riverStrenght)
                 {
-                    InverseLink(neighborB);
+                    InverseLink(this,neighborB);
                 }
                 else
                 {
@@ -231,12 +229,12 @@ public class GameTile : MonoBehaviour
 
                 if (neighborA.riverStrenght > neighborB.riverStrenght)
                 {
-                    InverseLink(neighborB);
+                    InverseLink(this,neighborB);
                 }
                 else
                 if (neighborA.riverStrenght < neighborB.riverStrenght)
                 {
-                    InverseLink(neighborA);
+                    InverseLink(this,neighborA);
                 }
                 else
                 {
@@ -259,7 +257,7 @@ public class GameTile : MonoBehaviour
                 if (GetNeighbor(flowIn[i]).riverStrenght == FlowStrenght._00_)
                 {
                     //Became Flow Out
-                    InverseLink(GetNeighbor(flowIn[i]));
+                    GameTile.InverseLink(this,GetNeighbor(flowIn[i]));
                 }
             }
         }
@@ -338,46 +336,38 @@ public class GameTile : MonoBehaviour
     }
 
     //LINK
-    public void InverseLink(GameTile tile)
+    public static void Link(GameTile tileA, GameTile tileB)
     {
-        UnLinkFrom(tile);
-        LinkTo(tile);
-    }
-    public void LinkTo(GameTile tile)
-    {
-        Vector2Int tileToMe = tile.gridPos - gridPos;
+        Vector2Int tileToMe = tileB.gridPos - tileA.gridPos;
         Direction dir = new Direction(tileToMe);
 
-        AddLinkedTile(dir, FlowType.flowOut);
-        GetNeighbor(dir).AddLinkedTile(Direction.Inverse(dir), FlowType.flowIn);
+        tileA.AddLinkedTile(dir, FlowType.flowOut);
+        tileB.AddLinkedTile(Direction.Inverse(dir), FlowType.flowIn);
+
+        tileA.linkedTile.Add(tileB);
+        tileB.linkedTile.Add(tileA);
     }
-    public void UnLinkFrom(GameTile tile)
+    public static void UnLink(GameTile tileA, GameTile tileB)
     {
-        Vector2Int tileToMe = tile.gridPos - gridPos;
+        Vector2Int tileToMe = tileB.gridPos - tileA.gridPos;
         Direction dir = new Direction(tileToMe);
 
-        if (flowIn.Contains(dir))
-        {
-            tile.RemoveLinkedTile(Direction.Inverse(dir), FlowType.flowOut);
+        tileA.RemoveLinkedTile(dir, FlowType.flowOut);
+        tileB.RemoveLinkedTile(Direction.Inverse(dir), FlowType.flowIn);
 
-            linkedTile.Remove(tile);
-            tile.linkedTile.Remove(this);
-
-            flowIn.Remove(dir);
-        }
-        else 
-        if (flowOut.Contains(dir))
-        {
-            tile.RemoveLinkedTile(Direction.Inverse(dir), FlowType.flowIn);
-
-            linkedTile.Remove(tile);
-            tile.linkedTile.Remove(this);
-
-            flowOut.Remove(dir);
-        }
+        tileA.linkedTile.Remove(tileB);
+        tileB.linkedTile.Remove(tileA);
     }
+    public static void InverseLink(GameTile tileA, GameTile tileB)
+    {
+        UnLink(tileA, tileB);
+        Link(tileB, tileA);
+    }
+
     public void AddLinkedTile(Direction addedDir, FlowType flow)
     {
+        Debug.Log("Hello wolrd");
+
         if (flow == FlowType.flowIn)
         {
             flowIn.Add(addedDir);
@@ -403,17 +393,16 @@ public class GameTile : MonoBehaviour
         //Flow In
         for (int i = 0; i < flowIn.Count; i++)
         {
-            UnLinkFrom(GetNeighbor(flowIn[i]));
-
+            UnLink(this, GetNeighbor(flowIn[i]));
         }
         //Flow Out
         for (int i = 0; i < flowOut.Count; i++)
         {
-            UnLinkFrom(GetNeighbor(flowOut[i]));
+            UnLink(this, GetNeighbor(flowOut[i]));
         }
     }
 
-    //Help
+    //Helper
     public void FillNeighbor()
     {
         Vector2Int temp = gridPos;

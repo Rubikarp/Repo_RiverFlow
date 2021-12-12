@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 5446814402908427166}
   - component: {fileID: 6129579272483592476}
   - component: {fileID: 825307937645406591}
-  - component: {fileID: 4087104903862289866}
   - component: {fileID: 8699113070979175645}
   m_Layer: 0
   m_Name: GameTile-Template
@@ -114,24 +113,6 @@ MonoBehaviour:
   nearestSourceDistance: -1
   gameTime: {fileID: 0}
   spawnScore: {fileID: 0}
---- !u!114 &4087104903862289866
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5375811947892556009}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7efe48a7badca8540a49a5af9b8b0d9d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  tile: {fileID: 825307937645406591}
-  rend: {fileID: 6129579272483592476}
-  grid: {fileID: 0}
-  lineRendererTemplate: {fileID: 8909883473942522786, guid: 128afd9d17ba140459f8a85ac3f53961, type: 3}
-  lines: []
-  palette: {fileID: 11400000, guid: 490d2554b53e93640bed8c1ce746c7ec, type: 2}
 --- !u!114 &8699113070979175645
 MonoBehaviour:
   m_ObjectHideFlags: 0

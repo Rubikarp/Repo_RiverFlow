@@ -13,10 +13,10 @@ public class Canal
     [Space(10)]
     public FlowStrenght riverStrenght;
 
-    public Canal()
+    public Canal(Vector2Int _startNode, Vector2Int _endNode)
     {
-        startNode = Vector2Int.zero;
-        endNode = Vector2Int.zero;
+        startNode = _startNode;
+        endNode = _endNode;
         canalTiles = new List<Vector2Int>();
         riverStrenght = FlowStrenght._00_;
 
@@ -44,8 +44,7 @@ public class Canal
     }
     public static Canal Merge(Canal startCanalEnd1, Canal startCanalEnd2)
     {
-        Canal mergeCanal = new Canal();
-        mergeCanal = new Canal(startCanalEnd1.startNode, startCanalEnd1.endNode, new List<Vector2Int>(startCanalEnd1.canalTiles), startCanalEnd1.riverStrenght);
+        Canal mergeCanal = new Canal(startCanalEnd1);
 
         //add endNode to the end linkCanal
         mergeCanal.canalTiles.Add(startCanalEnd1.endNode);
