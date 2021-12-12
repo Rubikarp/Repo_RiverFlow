@@ -11,6 +11,7 @@ public class ElementHandler : MonoBehaviour
     [Space(10)]
     public GameObject waterSource_Template;
     public GameObject cloud_Template;
+    public GameObject lake_Template;
     public GameObject plant_Template;
     [Space(10)]
     public Transform elementContainer;
@@ -21,6 +22,8 @@ public class ElementHandler : MonoBehaviour
     public List<WaterSource> allSources = new List<WaterSource>();
     [Space(10)]
     public List<Cloud> allClouds = new List<Cloud>();
+    [Space(10)]
+    public List<Lake> allLakes = new List<Lake>();
 
     [Header("Tool"), HorizontalLine]
     [SerializeField] int posX;
@@ -99,6 +102,86 @@ public class ElementHandler : MonoBehaviour
             cloud.tileOn = grid.GetTile(grisPos);
             grid.GetTile(grisPos).element = cloud;
         }
+    }
+    public void SpawnLakeAt(Vector2Int grisPos)
+    {
+       
+            bool buildable = false;
+            bool vertical = false;
+            
+            GameTile CurrentTile = grid.GetTile(grisPos);
+        Debug.Log(grid.GetTile(grisPos));
+            
+        if (CurrentTile.receivedFlow > FlowStrenght._00_)
+            {
+
+            Debug.Log("flow in tiles");
+            if (CurrentTile.linkedTile.Count == 2)
+                {
+                    //check if vertical
+                    if ((CurrentTile.neighbors[1] == CurrentTile.linkedTile[0] && CurrentTile.neighbors[5] == CurrentTile.linkedTile[1]) || (CurrentTile.neighbors[5] == CurrentTile.linkedTile[0] && CurrentTile.neighbors[1] == CurrentTile.linkedTile[1]))
+                    {
+                        buildable = true;
+                        vertical = true;
+                    Debug.Log("vertical");
+                }
+                    //check if horizontal
+                    else if ((CurrentTile.neighbors[3] == CurrentTile.linkedTile[0] && CurrentTile.neighbors[7] == CurrentTile.linkedTile[1]) || (CurrentTile.neighbors[7] == CurrentTile.linkedTile[0] && CurrentTile.neighbors[3] == CurrentTile.linkedTile[1]))
+                    {
+                        buildable = true;
+                        vertical = false;
+                    Debug.Log("horizontal");
+                }
+
+
+
+
+                    if (buildable == true)
+                    {
+                    Debug.Log("build");
+                    GameObject go = PrefabUtility.InstantiatePrefab(lake_Template, elementContainer) as GameObject;
+                    go.transform.position = grid.TileToPos(new Vector2Int(grisPos.x, grisPos.y));
+                    go.name = "Lake_" + grisPos;
+                    //Check if Plant
+                    Lake lake = go.GetComponent<Lake>();
+                        if (lake == null)
+                        {
+                            Debug.LogError("can't Find WaterSource on the object", go);
+                        }
+
+                        allLakes.Add(lake);
+                        //Link Element and Tile
+                        lake.tileOn = grid.GetTile(grisPos);
+                        //lake get les tiles
+                        grid.GetTile(grisPos).element = lake;
+                        if (vertical == true)
+                        {
+                            lake.isVertical = true;
+                            lake.allTilesOn = new GameTile[3];
+                            lake.allTilesOn[0] = CurrentTile.neighbors[1];
+                            lake.allTilesOn[1] = CurrentTile;
+                            lake.allTilesOn[2] = CurrentTile.neighbors[5];
+                        }
+                        else
+                        {
+                            lake.isVertical = false;
+                            lake.allTilesOn = new GameTile[3];
+                            lake.allTilesOn[0] = CurrentTile.neighbors[3];
+                            lake.allTilesOn[1] = CurrentTile;
+                            lake.allTilesOn[2] = CurrentTile.neighbors[7];
+                        }
+                        //assigner le lac au tiles
+                        for (int i = 0; i < lake.allTilesOn.Length; i++)
+                        {
+                            lake.allTilesOn[i].element = lake;
+                        }
+                    }
+
+                }
+
+            }
+
+        
     }
 
 #if UNITY_EDITOR

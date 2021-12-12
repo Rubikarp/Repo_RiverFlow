@@ -12,6 +12,7 @@ public class RewardManager : MonoBehaviour
     //public GameObject RewardLake;
     List<GameObject> rewardDisplays;
     public RewardDisplay rewardButton;
+    public GameObject Newday;
     public RectTransform rewardSelectionPanelTransform;
     public InventoryManager Inventory;
 
@@ -24,22 +25,25 @@ public class RewardManager : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            InitializeSelectionPanel();
-        }
+        //if (Input.GetKeyDown(KeyCode.Space))
+        //{
+        //    InitializeSelectionPanel();
+        //}
     }
 
     public void EmptySelectionPanel()
     {
         while (rewardSelectionPanelTransform.childCount != 0)
         {
+            Newday.SetActive(false);
             DestroyImmediate(rewardSelectionPanelTransform.GetChild(0).gameObject);
             rewardSelectionPanelTransform.sizeDelta = new Vector2(0,0);
         }
     }
     public void InitializeSelectionPanel()
     {
+        Newday.SetActive(true);
+        EmptySelectionPanel();
         // faire le random
         List<GameObject> Temporary = new List<GameObject>();
            if (usedButtons.Count > 0)
