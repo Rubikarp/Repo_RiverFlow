@@ -40,7 +40,9 @@ public class River_Drawer : MonoBehaviour
         {
             for (int i = riverHandler.canals.Count; i < riverRender.Count; i++)
             {
-                Destroy(riverRender[i].gameObject);
+                GameObject go = riverRender[i].gameObject;
+                riverRender.Remove(riverRender[i]);
+                Destroy(go);
             }
         }
     }

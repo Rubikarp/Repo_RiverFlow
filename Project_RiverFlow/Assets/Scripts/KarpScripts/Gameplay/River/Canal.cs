@@ -36,26 +36,6 @@ public class Canal
         riverStrenght = _riverStrengfht;
     }
 
-    public static Canal Inverse(Canal canal)
-    {
-        List<Vector2Int> temp = new List<Vector2Int>(canal.canalTiles);
-        temp.Reverse();
-        return new Canal(canal.endNode, canal.startNode, canal.canalTiles, canal.riverStrenght);
-    }
-    public static Canal Merge(Canal startCanalEnd1, Canal startCanalEnd2)
-    {
-        Canal mergeCanal = new Canal(startCanalEnd1);
-
-        //add endNode to the end linkCanal
-        mergeCanal.canalTiles.Add(startCanalEnd1.endNode);
-
-        //add start linkCanal to the end linkCanal
-        mergeCanal.canalTiles.Add(startCanalEnd2.startNode);
-        mergeCanal.canalTiles.AddRange(startCanalEnd2.canalTiles);
-        mergeCanal.endNode = startCanalEnd2.endNode;
-
-        return mergeCanal;
-    }
     public int IndexOf(Vector2Int checkPos)
     {
         if (this.startNode == checkPos)

@@ -26,111 +26,83 @@ public class RiverManager : Singleton<RiverManager>
         //Check if isloate (no tile have link)
         if (startTile.linkedTile.Count < 1 && endTile.linkedTile.Count < 1)
         {
-            GenerateCanal(startTile.gridPos, endTile.gridPos);
+            GenerateRiverCanal(startTile.gridPos, endTile.gridPos);
         }
         //Check link between to extremum (merge canal)
         else if (startTile.linkedTile.Count == 1 && endTile.linkedTile.Count == 1)
         {
-            startTile.linkedTile.Add(endTile);
-            endTile.linkedTile.Add(startTile);
+            if (startTile.gridPos == startTile.canalsIn[0].endNode)
+            {
+                if (endTile.gridPos ==  endTile.canalsIn[0].startNode)
+                {
+                    Merge(startTile.canalsIn[0], endTile.canalsIn[0]);
 
-            ///TODO : merge cCanal
+                    for (int i = 0; i < canals.Count; i++)
+                    {
+                        if (endTile.canalsIn[0] == canals[i])
+                        {
+                            AddCanalRef(canals[i], startTile.canalsIn[0]);
+                            RemoveCanalRef(canals[i], canals[i]);
+
+                            canals.Remove(canals[i]);
+                        }
+                    }
+                }
+                else
+                if (endTile.gridPos == endTile.canalsIn[0].endNode)
+                {
+                    Inverse(endTile.canalsIn[0]);
+                    Merge(startTile.canalsIn[0], endTile.canalsIn[0]);
+
+                    for (int i = 0; i < canals.Count; i++)
+                    {
+                        if (endTile.canalsIn[0] == canals[i])
+                        {
+                            AddCanalRef(canals[i], startTile.canalsIn[0]);
+                            RemoveCanalRef(canals[i], canals[i]);
+
+                            canals.Remove(canals[i]);
+                        }
+                    }
+                }
+            }
+            else
             if (startTile.gridPos == startTile.canalsIn[0].startNode)
             {
                 if (endTile.gridPos == endTile.canalsIn[0].startNode)
                 {
-                    Canal reverseStartCanal = Canal.Inverse(startTile.canalsIn[0]);
-                    Canal mergeCanal = Canal.Merge(reverseStartCanal, endTile.canalsIn[0]);
+                    Inverse(startTile.canalsIn[0]);
+                    Merge(startTile.canalsIn[0], endTile.canalsIn[0]);
 
-                    //startTile.canalsIn[0].startNode.canalsIn.Remove(startTile.canalsIn[0]);
-                    grid.GetTile(endTile.canalsIn[0].endNode).canalsIn.Remove(endTile.canalsIn[0]);
-                    canals.RemoveAt(canals.IndexOf(startTile.canalsIn[0]));
-                    canals.RemoveAt(canals.IndexOf(endTile.canalsIn[0]));
-
-                    grid.GetTile(mergeCanal.startNode).canalsIn.Remove(startTile.canalsIn[0]);
-
-                    grid.GetTile(mergeCanal.startNode).canalsIn.Add(mergeCanal);
-                    grid.GetTile(mergeCanal.endNode).canalsIn.Add(mergeCanal);
-                    for (int i = 0; i < mergeCanal.canalTiles.Count; i++)
+                    for (int i = 0; i < canals.Count; i++)
                     {
-                        grid.GetTile(mergeCanal.canalTiles[i]).canalsIn = new List<Canal>();
-                        grid.GetTile(mergeCanal.canalTiles[i]).canalsIn.Add(mergeCanal);
-                    }
+                        if (endTile.canalsIn[0] == canals[i])
+                        {
+                            AddCanalRef(canals[i], startTile.canalsIn[0]);
+                            RemoveCanalRef(canals[i], canals[i]);
 
-                    canals.Add(mergeCanal);
+                            canals.Remove(canals[i]);
+                        }
+                    }
                 }
                 else
                 if (endTile == grid.GetTile(endTile.canalsIn[0].endNode))
                 {
-                    Canal reverseStartCanal = Canal.Inverse(startTile.canalsIn[0]);
-                    Canal reverseEndCanal = Canal.Inverse(endTile.canalsIn[0]);
+                    Inverse(startTile.canalsIn[0]);
+                    Inverse(endTile.canalsIn[0]);
 
-                    Canal mergeCanal = Canal.Merge(reverseStartCanal, endTile.canalsIn[0]);
+                    Merge(startTile.canalsIn[0], endTile.canalsIn[0]);
 
-                    //startTile.canalsIn[0].startNode.canalsIn.Remove(startTile.canalsIn[0]);
-                    //endTile.canalsIn[0].endNode.canalsIn.Remove(endTile.canalsIn[0]);
-                    canals.RemoveAt(canals.IndexOf(startTile.canalsIn[0]));
-                    canals.RemoveAt(canals.IndexOf(endTile.canalsIn[0]));
-
-                    grid.GetTile(mergeCanal.startNode).canalsIn.Remove(startTile.canalsIn[0]);
-                    grid.GetTile(mergeCanal.endNode).canalsIn.Remove(endTile.canalsIn[0]);
-
-                    grid.GetTile(mergeCanal.startNode).canalsIn.Add(mergeCanal);
-                    grid.GetTile(mergeCanal.endNode).canalsIn.Add(mergeCanal);
-                    for (int i = 0; i < mergeCanal.canalTiles.Count; i++)
+                    for (int i = 0; i < canals.Count; i++)
                     {
-                        grid.GetTile(mergeCanal.canalTiles[i]).canalsIn = new List<Canal>();
-                        grid.GetTile(mergeCanal.canalTiles[i]).canalsIn.Add(mergeCanal);
+                        if (endTile.canalsIn[0] == canals[i])
+                        {
+                            AddCanalRef(canals[i], startTile.canalsIn[0]);
+                            RemoveCanalRef(canals[i], canals[i]);
+
+                            canals.Remove(canals[i]);
+                        }
                     }
-
-                    canals.Add(mergeCanal);
-                }
-            }
-            else
-            if (startTile == grid.GetTile(startTile.canalsIn[0].endNode))
-            {
-                if (endTile == grid.GetTile(endTile.canalsIn[0].startNode))
-                {
-                    //merge Canal = start
-                    Canal mergeCanal = Canal.Merge(startTile.canalsIn[0], endTile.canalsIn[0]);
-
-                    grid.GetTile(startTile.canalsIn[0].startNode).canalsIn.Remove(startTile.canalsIn[0]);
-                    grid.GetTile(endTile.canalsIn[0].endNode).canalsIn.Remove(endTile.canalsIn[0]);
-                    canals.RemoveAt(canals.IndexOf(startTile.canalsIn[0]));
-                    canals.RemoveAt(canals.IndexOf(endTile.canalsIn[0]));
-
-                    grid.GetTile(mergeCanal.startNode).canalsIn.Add(mergeCanal);
-                    grid.GetTile(mergeCanal.endNode).canalsIn.Add(mergeCanal);
-                    for (int i = 0; i < mergeCanal.canalTiles.Count; i++)
-                    {
-                        grid.GetTile(mergeCanal.canalTiles[i]).canalsIn = new List<Canal>();
-                        grid.GetTile(mergeCanal.canalTiles[i]).canalsIn.Add(mergeCanal);
-                    }
-
-                    canals.Add(mergeCanal);
-                }
-                else
-                if (endTile == grid.GetTile(endTile.canalsIn[0].endNode))
-                {
-                    Canal reverseEndCanal = Canal.Inverse(endTile.canalsIn[0]);
-                    Canal mergeCanal = Canal.Merge(startTile.canalsIn[0], reverseEndCanal);
-
-                    grid.GetTile(startTile.canalsIn[0].startNode).canalsIn.Remove(startTile.canalsIn[0]);
-                    //endTile.canalsIn[0].endNode.canalsIn.RemoveAt(indexEndCanal);
-                    canals.RemoveAt(canals.IndexOf(startTile.canalsIn[0]));
-                    canals.RemoveAt(canals.IndexOf(endTile.canalsIn[0]));
-
-                    grid.GetTile(mergeCanal.endNode).canalsIn.Remove(endTile.canalsIn[0]);
-
-                    grid.GetTile(mergeCanal.startNode).canalsIn.Add(mergeCanal);
-                    grid.GetTile(mergeCanal.endNode).canalsIn.Add(mergeCanal);
-                    for (int i = 0; i < mergeCanal.canalTiles.Count; i++)
-                    {
-                        grid.GetTile(mergeCanal.canalTiles[i]).canalsIn = new List<Canal>();
-                        grid.GetTile(mergeCanal.canalTiles[i]).canalsIn.Add(mergeCanal);
-                    }
-
-                    canals.Add(mergeCanal);
                 }
             }
         }
@@ -167,7 +139,7 @@ public class RiverManager : Singleton<RiverManager>
                 //Split
                 SplitCanal(startTile.canalsIn[0], startTile);
                 //The new Part
-                GenerateCanal(startTile.gridPos, endTile.gridPos);
+                GenerateRiverCanal(startTile.gridPos, endTile.gridPos);
             }
             else
             if (endTile.linkedTile.Count >= 2)     //create confluence
@@ -179,7 +151,7 @@ public class RiverManager : Singleton<RiverManager>
                 //Extend Something ?
                 if (grid.GetTile(startTile.gridPos).linkedTile.Count < 1)
                 {
-                    GenerateCanal(startTile.gridPos, endTile.gridPos);
+                    GenerateRiverCanal(startTile.gridPos, endTile.gridPos);
                 }
                 else
                 {
@@ -191,7 +163,6 @@ public class RiverManager : Singleton<RiverManager>
                         }
                     }
                 }
-
             }
         }
     }
@@ -209,7 +180,7 @@ public class RiverManager : Singleton<RiverManager>
 
     }
 
-    private void GenerateCanal(Vector2Int _startNode, Vector2Int _endNode)
+    private void GenerateRiverCanal(Vector2Int _startNode, Vector2Int _endNode)
     {
         Canal linkCanal = new Canal(_startNode, _endNode);
 
@@ -226,6 +197,29 @@ public class RiverManager : Singleton<RiverManager>
         RemoveCanalRef(canal,canal);
     }
 
+    public void Merge(Canal canalA, Canal canalB)
+    {
+
+
+        //add endNode to the end linkCanal
+        canalA.canalTiles.Add(canalA.endNode);
+        //add start linkCanal to the end linkCanal
+        canalA.canalTiles.Add(canalB.startNode);
+        canalA.canalTiles.AddRange(canalB.canalTiles);
+
+        //add endNode to the end  
+        canalA.endNode = canalB.endNode;
+    }
+    public void Inverse(Canal canal)
+    {
+        List<Vector2Int> invTile = new List<Vector2Int>(canal.canalTiles);
+        invTile.Reverse();
+        canal.canalTiles = invTile;
+
+        Vector2Int start = canal.startNode;
+        canal.startNode = canal.endNode;
+        canal.endNode = start;
+    }
     private void ExtendCanal(Canal canal, GameTile extremumTile, GameTile addedTile)
     {
         if (canal.startNode == extremumTile.gridPos)
@@ -254,7 +248,6 @@ public class RiverManager : Singleton<RiverManager>
             Debug.LogError("added tile isnot at  any extremum", this);
         }
     }
-
     private void ShortenCanal(Canal canal, GameTile erasedTile)
     {
         if (grid.GetTile(canal.startNode) == erasedTile)
@@ -329,6 +322,23 @@ public class RiverManager : Singleton<RiverManager>
         CutCanalTo(canal, grid.GetTile(canal.canalTiles[index]));
         #endregion
 
+    }
+    private void CutCanalTo(Canal canal, GameTile to)
+    {
+        if (!canal.Contains(to.gridPos))
+        {
+            Debug.LogError(canal + "don't contain" + to, this);
+            return;
+        }
+
+        for (int i = canal.IndexOf(to.gridPos); i < canal.canalTiles.Count; i++)
+        {
+            grid.GetTile(canal.canalTiles[i]).canalsIn.Remove(canal);
+        }
+        grid.GetTile(canal.endNode).canalsIn.Remove(canal);
+
+        canal.canalTiles = canal.canalTiles.GetRange(0, canal.IndexOf(to.gridPos) - 1);
+        canal.endNode = to.gridPos;
     }
     private void BreakCanalin2(Canal canal, GameTile breakTile)
     {
@@ -436,23 +446,6 @@ public class RiverManager : Singleton<RiverManager>
                 #endregion
             }
         }
-    }
-    private void CutCanalTo(Canal canal, GameTile to)
-    {
-        if (!canal.Contains(to.gridPos))
-        {
-            Debug.LogError(canal + "don't contain" + to, this);
-            return;
-        }
-
-        for (int i = canal.IndexOf(to.gridPos); i < canal.canalTiles.Count; i++)
-        {
-            grid.GetTile(canal.canalTiles[i]).canalsIn.Remove(canal);
-        }
-        grid.GetTile(canal.endNode).canalsIn.Remove(canal);
-
-        canal.canalTiles = canal.canalTiles.GetRange(0, canal.IndexOf(to.gridPos) - 1);
-        canal.endNode = to.gridPos;
     }
 
     private bool InCanals(Vector2Int tilePos)
