@@ -35579,8 +35579,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b24dcc67a0c1c54ca584f80540f7e85, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cloudsAmmount: 0
-  sourcesAmmount: 0
+  cloudsAmmount: 1
+  sourcesAmmount: 1
   lakesAmmount: 0
   tunnelsAmmount: 0
   digAmmount: 50
@@ -85034,7 +85034,7 @@ MonoBehaviour:
   dragPos: {x: 0, y: 0, z: 0}
   dragVect: {x: 0, y: 0, z: 0}
   eraserSelectTile: {fileID: 0}
-  Inventory: {fileID: 0}
+  Inventory: {fileID: 510528751}
 --- !u!1 &1167000194
 GameObject:
   m_ObjectHideFlags: 0
@@ -93438,6 +93438,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   grid: {fileID: 925749903}
   waterSource_Template: {fileID: 5375811947892556009, guid: 70baebe00357fc94991eb1ce0d0a1738, type: 3}
+  cloud_Template: {fileID: 2355860190061058659, guid: 6d0b592cca5388149943480ff75e23aa, type: 3}
   plant_Template: {fileID: 7129485572310087032, guid: 5a8552f0c1487f74bb441c5c837d2071, type: 3}
   elementContainer: {fileID: 1297783541}
   allPlants:
@@ -93449,6 +93450,7 @@ MonoBehaviour:
   allSources:
   - {fileID: 1512118752}
   - {fileID: 488588291}
+  allClouds: []
   posX: 21
   posY: 16
 --- !u!1 &1300339909
@@ -114671,7 +114673,7 @@ MonoBehaviour:
     m_Right: 0
     m_Top: 0
     m_Bottom: 0
-  m_ChildAlignment: 5
+  m_ChildAlignment: 4
   m_Spacing: 100
   m_ChildForceExpandWidth: 0
   m_ChildForceExpandHeight: 0

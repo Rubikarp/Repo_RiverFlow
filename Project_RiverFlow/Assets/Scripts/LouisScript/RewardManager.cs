@@ -35,6 +35,7 @@ public class RewardManager : MonoBehaviour
         while (rewardSelectionPanelTransform.childCount != 0)
         {
             DestroyImmediate(rewardSelectionPanelTransform.GetChild(0).gameObject);
+            rewardSelectionPanelTransform.sizeDelta = new Vector2(0,0);
         }
     }
     public void InitializeSelectionPanel()
