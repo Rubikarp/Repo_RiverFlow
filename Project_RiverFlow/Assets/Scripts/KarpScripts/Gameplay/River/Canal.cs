@@ -56,6 +56,41 @@ public class Canal
 
         return mergeCanal;
     }
+    public int IndexOf(Vector2Int checkPos)
+    {
+        if (this.startNode == checkPos)
+        {
+            return 0;
+        }
+        if (this.canalTiles.Contains(checkPos))
+        {
+            return 1 +canalTiles.IndexOf(checkPos);
+        }
+        if (this.endNode == (checkPos))
+        {
+            return canalTiles.Count + 1  /* +2 - 1*/;
+        }
+
+        Debug.Log("don't contain");
+        return -1;
+    }
+    public bool Contains(Vector2Int checkPos)
+    {
+        if (this.startNode == checkPos)
+        {
+            return true;
+        }
+        if (this.canalTiles.Contains(checkPos))
+        {
+            return true;
+        }
+        if (this.endNode == (checkPos))
+        {
+            return true;
+        }
+
+        return false;
+    }
 
     public void ChangeFlowStrenght(FlowStrenght newRiverStrenght, GameGrid grid)
     {
