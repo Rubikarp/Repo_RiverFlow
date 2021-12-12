@@ -18364,7 +18364,7 @@ GameObject:
   - component: {fileID: 263947468}
   - component: {fileID: 263947467}
   m_Layer: 5
-  m_Name: ButtonDragCloud (1)
+  m_Name: ButtonDragLake
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -25869,7 +25869,7 @@ MonoBehaviour:
   isPaused: 0
   gameTimer: 0
   gameTimeSpeed: 1
-  weekDuration: 10
+  weekDuration: 126.1
   simulTimer: 0
   iterationStepDur: 0.25
   onWaterSimulationStep:
@@ -35293,7 +35293,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cloudsAmmount: 1
   sourcesAmmount: 1
-  lakesAmmount: 0
+  lakesAmmount: 10
   tunnelsAmmount: 0
   digAmmount: 50
 --- !u!4 &510528752
@@ -93421,7 +93421,7 @@ MonoBehaviour:
   grid: {fileID: 925749903}
   waterSource_Template: {fileID: 5375811947892556009, guid: 70baebe00357fc94991eb1ce0d0a1738, type: 3}
   cloud_Template: {fileID: 2355860190061058659, guid: 6d0b592cca5388149943480ff75e23aa, type: 3}
-  lake_Template: {fileID: 0}
+  lake_Template: {fileID: 4143323418627759852, guid: 5f37c1a1512afad43b928d29679a85a0, type: 3}
   plant_Template: {fileID: 7129485572310087032, guid: 5a8552f0c1487f74bb441c5c837d2071, type: 3}
   elementContainer: {fileID: 1297783541}
   allPlants:
@@ -146249,7 +146249,7 @@ GameObject:
   - component: {fileID: 2121001162}
   - component: {fileID: 2121001161}
   m_Layer: 5
-  m_Name: NumberClouds
+  m_Name: NumberLakes
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
