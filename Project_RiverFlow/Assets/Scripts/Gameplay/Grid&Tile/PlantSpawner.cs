@@ -87,6 +87,7 @@ public class PlantSpawner : MonoBehaviour
 
     public void EvaluateTiles()
     {
+        tileScores.Clear();
         Debug.Log(gameGrid.tiles.Length);
         foreach(GameTile iTile in gameGrid.tiles)
         {
