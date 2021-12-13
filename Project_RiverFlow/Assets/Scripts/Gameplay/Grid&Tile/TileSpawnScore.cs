@@ -6,20 +6,20 @@ public class TileInfoScore
 {
     public GameTile tile;
     public int score;
-    public bool spawnable;
+    public bool spawn;
 
     public TileInfoScore(GameTile tile, int score, bool spawnable)
     {
         this.tile = tile;
         this.score = score;
-        this.spawnable = spawnable;
+        this.spawn = spawnable;
     }
 }
 
 public class TileSpawnScore : MonoBehaviour
 {
     public int scoreValue = 0;
-    public bool spawnable = true;
+    public bool spawnable = false;
     
     private GameTile tile;
     private PlantSpawner plantSpawner;
@@ -33,22 +33,33 @@ public class TileSpawnScore : MonoBehaviour
     public TileInfoScore Evaluate()
     {
 
-        spawnable = true;
+        spawnable = false;
         scoreValue = 0;
+        
+            if (tile.spawnArea <= plantSpawner.currentSpawnArea && tile.spawnArea != 0)
+            {
 
-        if (tile.spawnArea <= plantSpawner.currentSpawnArea && tile.spawnArea != 0)
-        {
-            Debug.Log("evaluate");
-            scoreValue += EvalSpawnArea() * CastThreatToInt(1, 0);
-            scoreValue += EvalTerrainType() * CastThreatToInt(1, 0);
-            scoreValue += EvalPlantsNearby() * CastThreatToInt(1, 0);
-            scoreValue += EvalMountainsNearby() * CastThreatToInt(1, 0);
-            scoreValue += EvalIrrigatedTile() * CastThreatToInt(1, 0);
-            scoreValue += EvalNoise();
+                Debug.Log("evaluate");
+                switch (plantSpawner.threatState)
+                {
+                    case ThreatState.NEWZONE:
+                        scoreValue += EvalSpawnArea() * CastThreatToInt(1, 0);
+                        break;
+                    default:
+
+                        break;
+                }
+
+                scoreValue += EvalTerrainType() * CastThreatToInt(1, 0);
+                scoreValue += EvalPlantsNearby() * CastThreatToInt(1, 0);
+                scoreValue += EvalMountainsNearby() * CastThreatToInt(1, 0);
+                scoreValue += EvalIrrigatedTile() * CastThreatToInt(1, 0);
+                scoreValue += EvalNoise();
+            
         }
 
         spawnable = EvalForbiddenCase();
-
+        
         return new TileInfoScore(tile,scoreValue,spawnable);
     }
 

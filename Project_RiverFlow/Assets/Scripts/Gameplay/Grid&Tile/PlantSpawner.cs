@@ -9,7 +9,8 @@ public enum ThreatState
     CALM,
     NEUTRAL,
     THREATENING,
-    CHAOTIC
+    CHAOTIC,
+    NEWZONE
 }
 
 public class PlantSpawner : MonoBehaviour
@@ -60,12 +61,22 @@ public class PlantSpawner : MonoBehaviour
         elementHandler = GameObject.Find("Element").GetComponent<ElementHandler>();
     }
 
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            EvaluateTiles();
+        }
+    }
+
     public void SpawnPlant()
     {
-        this.EvaluateTiles();
+        EvaluateTiles();
         for (int i = this.tileScores.Count - 1; i>0;i--)
         {
-            if(this.tileScores[i].spawnable)
+            Debug.Log(tileScores[i].spawn);
+            Debug.Log(tileScores[i].score);
+            if (this.tileScores[i].spawn)
             {
                 Debug.Log(this.tileScores[i].tile.gridPos);
                 elementHandler.SpawnPlantAt(this.tileScores[i].tile.gridPos);
@@ -81,7 +92,7 @@ public class PlantSpawner : MonoBehaviour
         {
             //Debug.Log(iTile);
             TileInfoScore tmp = iTile.spawnScore.Evaluate();
-            if(tmp.spawnable)
+            if(tmp.spawn)
             {
                 tileScores.Add(tmp);
             }
