@@ -13,6 +13,7 @@ public class ElementHandler : MonoBehaviour
     public GameObject cloud_Template;
     public GameObject lake_Template;
     public GameObject plant_Template;
+    public GameObject magicTree_Template;
     [Space(10)]
     public Transform elementContainer;
 
@@ -24,6 +25,8 @@ public class ElementHandler : MonoBehaviour
     public List<Cloud> allClouds = new List<Cloud>();
     [Space(10)]
     public List<Lake> allLakes = new List<Lake>();
+    [Space(10)]
+    public List<MagicTree> allMagicTrees = new List<MagicTree>();
 
     [Header("Tool"), HorizontalLine]
     [SerializeField] int posX;
@@ -103,6 +106,29 @@ public class ElementHandler : MonoBehaviour
             grid.GetTile(grisPos).element = cloud;
         }
     }
+
+    public void SpawnMagicTreeAt(Vector2Int grisPos)
+    {
+        if (!grid.GetTile(grisPos).isElement)
+        {
+            GameObject go = PrefabUtility.InstantiatePrefab(magicTree_Template, elementContainer) as GameObject;
+            go.transform.position = grid.TileToPos(new Vector2Int(grisPos.x, grisPos.y));
+            go.name = "MagicTree_" + grisPos;
+
+            //Check if MagicTree
+            MagicTree magicTree = go.GetComponent<MagicTree>();
+            if (magicTree == null)
+            {
+                Debug.LogError("can't Find WaterSource on the object", go);
+            }
+
+            allMagicTrees.Add(magicTree);
+            //Link Element and Tile
+            magicTree.tileOn = grid.GetTile(grisPos);
+            grid.GetTile(grisPos).element = magicTree;
+        }
+    }
+
     public void SpawnLakeAt(Vector2Int grisPos)
     {
        

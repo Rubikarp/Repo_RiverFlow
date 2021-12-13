@@ -17856,6 +17856,7 @@ MonoBehaviour:
   cloud_Template: {fileID: 2355860190061058659, guid: 6d0b592cca5388149943480ff75e23aa, type: 3}
   lake_Template: {fileID: 4143323418627759852, guid: 5f37c1a1512afad43b928d29679a85a0, type: 3}
   plant_Template: {fileID: 7129485572310087032, guid: 5a8552f0c1487f74bb441c5c837d2071, type: 3}
+  magicTree_Template: {fileID: 9077409752301440309, guid: b9b7ff63b0430e7478b2cfd76f01484d, type: 3}
   elementContainer: {fileID: 253911911}
   allPlants:
   - {fileID: 530147092}
@@ -17868,6 +17869,7 @@ MonoBehaviour:
   - {fileID: 1804785297}
   allClouds: []
   allLakes: []
+  allMagicTrees: []
   posX: 21
   posY: 16
 --- !u!4 &253911911
@@ -17888,6 +17890,7 @@ Transform:
   - {fileID: 8403995}
   - {fileID: 637648756}
   - {fileID: 128968412}
+  - {fileID: 349938995}
   m_Father: {fileID: 936634181}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -24238,6 +24241,72 @@ Transform:
   m_Father: {fileID: 722511968}
   m_RootOrder: 300
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &349938994
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 253911911}
+    m_Modifications:
+    - target: {fileID: 3374265121519838973, guid: b9b7ff63b0430e7478b2cfd76f01484d, type: 3}
+      propertyPath: tileOn
+      value: 
+      objectReference: {fileID: 456441326}
+    - target: {fileID: 9077409752301440308, guid: b9b7ff63b0430e7478b2cfd76f01484d, type: 3}
+      propertyPath: m_RootOrder
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 9077409752301440308, guid: b9b7ff63b0430e7478b2cfd76f01484d, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 4.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 9077409752301440308, guid: b9b7ff63b0430e7478b2cfd76f01484d, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 2.39
+      objectReference: {fileID: 0}
+    - target: {fileID: 9077409752301440308, guid: b9b7ff63b0430e7478b2cfd76f01484d, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9077409752301440308, guid: b9b7ff63b0430e7478b2cfd76f01484d, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9077409752301440308, guid: b9b7ff63b0430e7478b2cfd76f01484d, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9077409752301440308, guid: b9b7ff63b0430e7478b2cfd76f01484d, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9077409752301440308, guid: b9b7ff63b0430e7478b2cfd76f01484d, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9077409752301440308, guid: b9b7ff63b0430e7478b2cfd76f01484d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9077409752301440308, guid: b9b7ff63b0430e7478b2cfd76f01484d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9077409752301440308, guid: b9b7ff63b0430e7478b2cfd76f01484d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9077409752301440309, guid: b9b7ff63b0430e7478b2cfd76f01484d, type: 3}
+      propertyPath: m_Name
+      value: Element-MagicTree
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: b9b7ff63b0430e7478b2cfd76f01484d, type: 3}
+--- !u!4 &349938995 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 9077409752301440308, guid: b9b7ff63b0430e7478b2cfd76f01484d, type: 3}
+  m_PrefabInstance: {fileID: 349938994}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &350084285
 GameObject:
   m_ObjectHideFlags: 0
@@ -31970,11 +32039,11 @@ MonoBehaviour:
   data:
     name: Data_Tile(20:18)
     gridPos: {x: 20, y: 18}
-    type: 1
+    type: 3
     riverStrenght: 0
     flowIn_Neighbors: 0000000000000000
     flowOut_Neighbors: 0000000000000000
-  element: {fileID: 0}
+  element: {fileID: 1722725383}
   neighbors:
   - {fileID: 1349786692}
   - {fileID: 17611103}
@@ -116693,6 +116762,17 @@ Transform:
   m_Father: {fileID: 722511968}
   m_RootOrder: 243
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1722725383 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3374265121519838973, guid: b9b7ff63b0430e7478b2cfd76f01484d, type: 3}
+  m_PrefabInstance: {fileID: 349938994}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 54aa9957ad033f0419fdfae4865ae8d2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1722771492
 GameObject:
   m_ObjectHideFlags: 0

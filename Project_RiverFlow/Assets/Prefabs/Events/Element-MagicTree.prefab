@@ -180,7 +180,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &5914612884163025176
 Transform:
   m_ObjectHideFlags: 0
@@ -292,6 +292,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 54aa9957ad033f0419fdfae4865ae8d2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  tileOn: {fileID: 0}
   forestSprite: {fileID: 7902284155574265534}
   savanaSprite: {fileID: 4933319876423251737}
   desertSprite: {fileID: 7041710654413921008}

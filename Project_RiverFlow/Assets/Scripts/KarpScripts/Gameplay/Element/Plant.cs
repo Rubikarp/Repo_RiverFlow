@@ -230,6 +230,13 @@ public class Plant : Element
 
                     Debug.Log("Evolution !");
                 }
+                else if (closeRivers.Count < closeRiverTilesNeeded && isFruitTree == true)
+                {
+                    isFruitTree = false;
+
+                    currentState = (PlantState)Mathf.Clamp((int)(currentState - 1), 0, (int)PlantState.FruitTree);
+                    onStateChange?.Invoke(true);
+                }
             }
         }
     }
@@ -302,7 +309,7 @@ public class Plant : Element
 
             if (plantsForMagicTree == 8)
             {
-                Instantiate(magicTree, tileOn.neighbors[1].worldPos, Quaternion.identity, elementHandler.transform);
+                elementHandler.SpawnMagicTreeAt(tileOn.neighbors[1].gridPos);
                 hasMagicTree = true;
             }
             else
