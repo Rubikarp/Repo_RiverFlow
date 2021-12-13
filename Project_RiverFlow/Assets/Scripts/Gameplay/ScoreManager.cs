@@ -18,6 +18,8 @@ public class ScoreManager : MonoBehaviour
     public int youngTreeScoring;
     public int adultTreeScoring;
     public int seniorTreeScoring;
+    public int magicTreeScoring;
+    public int lakeFishesScoring;
     private GameManager gameManager;
     public LevelSO level;
     public string menuPath;
@@ -57,6 +59,7 @@ public class ScoreManager : MonoBehaviour
 
     private void UpdateScore()
     {
+        Debug.Log("Update");
         for (int x = 0; x < elementHandler.allPlants.Count; x++)
         {
             if (elementHandler.allPlants[x].currentState == PlantState.Young)
@@ -71,11 +74,28 @@ public class ScoreManager : MonoBehaviour
             {
                 moreScore += seniorTreeScoring;
             }
-
-            gameScore += moreScore;
-            moreScore = 0;
-            scoreUI.text = gameScore.ToString();
         }
+
+        for (int y = 0; y < elementHandler.allMagicTrees.Count; y++)
+        {
+            if (elementHandler.allMagicTrees.Count != 0)
+            {
+                moreScore += magicTreeScoring;
+            }
+            Debug.Log("MagicTree");
+        }
+
+        for (int w = 0; w < elementHandler.allLakes.Count; w++)
+        {
+            if (elementHandler.allLakes[w].hasFish == true)
+            {
+                moreScore += lakeFishesScoring;
+            }
+        }
+
+        gameScore += moreScore;
+        moreScore = 0;
+        scoreUI.text = gameScore.ToString();
     }
 
     private void VerifyDefeat()

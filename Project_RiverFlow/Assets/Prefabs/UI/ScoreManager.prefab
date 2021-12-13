@@ -383,13 +383,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f017638494b2c924fb143dbf8bd0390e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scoreUI: {fileID: 0}
-  gameOverText: {fileID: 0}
+  scoreUI: {fileID: 8549408419415346962}
+  gameOverText: {fileID: 8549408418943584176}
   gameTime: {fileID: 0}
   scoringTick: 0
   elementHandler: {fileID: 0}
   youngTreeScoring: 0
   adultTreeScoring: 0
   seniorTreeScoring: 0
+  magicTreeScoring: 0
   level: {fileID: 0}
   menuPath: 

@@ -17869,7 +17869,8 @@ MonoBehaviour:
   - {fileID: 1804785297}
   allClouds: []
   allLakes: []
-  allMagicTrees: []
+  allMagicTrees:
+  - {fileID: 1722725383}
   posX: 21
   posY: 16
 --- !u!4 &253911911
@@ -101798,6 +101799,95 @@ Transform:
   m_Father: {fileID: 722511968}
   m_RootOrder: 365
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &1471718023
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 7158169607246245338, guid: 9ea8a374b92f4e740a7acaf42f681eb6, type: 3}
+      propertyPath: gameTime
+      value: 
+      objectReference: {fileID: 1810504991}
+    - target: {fileID: 7158169607246245338, guid: 9ea8a374b92f4e740a7acaf42f681eb6, type: 3}
+      propertyPath: scoringTick
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7158169607246245338, guid: 9ea8a374b92f4e740a7acaf42f681eb6, type: 3}
+      propertyPath: elementHandler
+      value: 
+      objectReference: {fileID: 253911910}
+    - target: {fileID: 7158169607246245338, guid: 9ea8a374b92f4e740a7acaf42f681eb6, type: 3}
+      propertyPath: adultTreeScoring
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7158169607246245338, guid: 9ea8a374b92f4e740a7acaf42f681eb6, type: 3}
+      propertyPath: magicTreeScoring
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 7158169607246245338, guid: 9ea8a374b92f4e740a7acaf42f681eb6, type: 3}
+      propertyPath: youngTreeScoring
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7158169607246245338, guid: 9ea8a374b92f4e740a7acaf42f681eb6, type: 3}
+      propertyPath: lakeFishesScoring
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 7158169607246245338, guid: 9ea8a374b92f4e740a7acaf42f681eb6, type: 3}
+      propertyPath: seniorTreeScoring
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 8549408420085817796, guid: 9ea8a374b92f4e740a7acaf42f681eb6, type: 3}
+      propertyPath: m_RootOrder
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 8549408420085817796, guid: 9ea8a374b92f4e740a7acaf42f681eb6, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 7.2490406
+      objectReference: {fileID: 0}
+    - target: {fileID: 8549408420085817796, guid: 9ea8a374b92f4e740a7acaf42f681eb6, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 2.993425
+      objectReference: {fileID: 0}
+    - target: {fileID: 8549408420085817796, guid: 9ea8a374b92f4e740a7acaf42f681eb6, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -11.867097
+      objectReference: {fileID: 0}
+    - target: {fileID: 8549408420085817796, guid: 9ea8a374b92f4e740a7acaf42f681eb6, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8549408420085817796, guid: 9ea8a374b92f4e740a7acaf42f681eb6, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8549408420085817796, guid: 9ea8a374b92f4e740a7acaf42f681eb6, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8549408420085817796, guid: 9ea8a374b92f4e740a7acaf42f681eb6, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8549408420085817796, guid: 9ea8a374b92f4e740a7acaf42f681eb6, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8549408420085817796, guid: 9ea8a374b92f4e740a7acaf42f681eb6, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8549408420085817796, guid: 9ea8a374b92f4e740a7acaf42f681eb6, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8549408420085817819, guid: 9ea8a374b92f4e740a7acaf42f681eb6, type: 3}
+      propertyPath: m_Name
+      value: ScoreManager
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 9ea8a374b92f4e740a7acaf42f681eb6, type: 3}
 --- !u!1 &1471806810
 GameObject:
   m_ObjectHideFlags: 0
