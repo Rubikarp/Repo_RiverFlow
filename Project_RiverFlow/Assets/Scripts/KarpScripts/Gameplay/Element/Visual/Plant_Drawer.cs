@@ -112,6 +112,12 @@ public class Plant_Drawer : MonoBehaviour
                 transform.DOScaleX(1f, 1.3f).SetEase(Ease.OutElastic);
 
                 break;
+            case PlantState.FruitTree:
+                Leafs.Play(true);
+                yield return new WaitForSecondsRealtime(0.1f);
+                transform.DOScaleX(1f, 1.3f).SetEase(Ease.OutElastic);
+
+                break;
 
             default:
                 
@@ -168,8 +174,14 @@ public class Plant_Drawer : MonoBehaviour
                     sprRender.sprite = visual.GetSprite(plant.currentState, plant.tileOn.type);
                     break;
 
+                case PlantState.FruitTree:
+
+                    transform.DOScaleX(0.4f, 0.4f).SetEase(Ease.InElastic);
+                    yield return new WaitForSecondsRealtime(0.3f);
+                    sprRender.sprite = visual.GetSprite(plant.currentState, plant.tileOn.type);
+                    break;
+
                 default:
-                    ;
                     break;
             
             }
@@ -218,6 +230,13 @@ public class Plant_Drawer : MonoBehaviour
                     yield return new WaitForSecondsRealtime(0.3f);
                     sprRender.sprite = visual.GetSprite(plant.currentState, plant.tileOn.type);
                     
+                    break;
+
+                case PlantState.FruitTree:
+                    transform.DOScaleX(0.4f, 0.4f).SetEase(Ease.InElastic);
+                    yield return new WaitForSecondsRealtime(0.3f);
+                    sprRender.sprite = visual.GetSprite(plant.currentState, plant.tileOn.type);
+
                     break;
 
                 default:

@@ -49,6 +49,7 @@ public class Plant : Element
 
     public List<int> closeRivers;
     private FlowStrenght bestRiverStrenght = 0;
+    private Plant_Drawer plantDrawer;
     
     [Header("Living")]
     [Range(0f,1f)] public float timer = 1.0f;
@@ -76,8 +77,14 @@ public class Plant : Element
 
     public GameTime gameTime;
 
+    [Header("FX")]
+    public bool previousIrrigation;
+    public ParticleSystem WaveIrrigate;
+
     private void Start()
     {
+        previousIrrigation = isIrrigated;
+
         gameTime = GameTime.Instance;
 
         if (tileOn.isElement)
@@ -93,6 +100,7 @@ public class Plant : Element
         }
 
         elementHandler = GetComponentInParent<ElementHandler>();
+        plantDrawer = GetComponent<Plant_Drawer>();
     }
 
     void Update()
@@ -148,6 +156,19 @@ public class Plant : Element
 
         //Determine if irrigated
         isIrrigated = tileOn.IsIrrigate;
+
+        //Determine si on vient de changer d'etat
+        if(previousIrrigation != isIrrigated)
+        {
+            //determine si on vient d'etre irrigué
+            if (isIrrigated == true)
+            {
+                WaveIrrigate.Play();
+            }
+
+            previousIrrigation = isIrrigated;
+        }
+
     }
 
     private void StateUpdate()
@@ -190,6 +211,9 @@ public class Plant : Element
                 {
                     isFruitTree = true;
 
+                    currentState = (PlantState)Mathf.Clamp((int)(currentState + 1), 0, (int)PlantState.FruitTree);
+                    onStateChange?.Invoke(true);
+
                     Debug.Log("Evolution !");
                 }
             }
@@ -201,7 +225,17 @@ public class Plant : Element
                 {
                     isFruitTree = true;
 
+                    currentState = (PlantState)Mathf.Clamp((int)(currentState + 1), 0, (int)PlantState.FruitTree);
+                    onStateChange?.Invoke(true);
+
                     Debug.Log("Evolution !");
+                }
+                else if (closeRivers.Count < closeRiverTilesNeeded && isFruitTree == true)
+                {
+                    isFruitTree = false;
+
+                    currentState = (PlantState)Mathf.Clamp((int)(currentState - 1), 0, (int)PlantState.FruitTree);
+                    onStateChange?.Invoke(true);
                 }
             }
         }
@@ -275,7 +309,7 @@ public class Plant : Element
 
             if (plantsForMagicTree == 8)
             {
-                Instantiate(magicTree, tileOn.neighbors[1].worldPos, Quaternion.identity, elementHandler.transform);
+                elementHandler.SpawnMagicTreeAt(tileOn.neighbors[1].gridPos);
                 hasMagicTree = true;
             }
             else

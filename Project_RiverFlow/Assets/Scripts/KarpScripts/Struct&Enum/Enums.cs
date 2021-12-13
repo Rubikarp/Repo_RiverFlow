@@ -39,5 +39,6 @@ public enum PlantState
     Baby = 2,
     Young = 3,
     Adult = 4,
-    Senior = 5
+    Senior = 5,
+    FruitTree = 6
 }
