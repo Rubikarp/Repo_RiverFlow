@@ -158,6 +158,7 @@ public class GameTile : MonoBehaviour
     [Space(8)]
     public GameTime gameTime;
     public TileSpawnScore spawnScore;
+    public int spawnArea = 1;
 
     void Start()
     {

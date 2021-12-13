@@ -40,6 +40,7 @@ public class TileSpawnScore : MonoBehaviour
         scoreValue += EvalPlantsNearby() * CastThreatToInt(1, 0);
         scoreValue += EvalMountainsNearby() * CastThreatToInt(1, 0);
         scoreValue += EvalIrrigatedTile() * CastThreatToInt(1, 0);
+        scoreValue += EvalNoise();
 
         spawnable = EvalForbiddenCase();
 
@@ -107,9 +108,7 @@ public class TileSpawnScore : MonoBehaviour
     private int EvalSpawnArea()
     {
         int ruleScore = 0;
-        /* tile.spawnArea is not defined yet
-         * Uncomment this when implemented to use "area spawning" in generation scoring
-        
+
         if(tile.spawnArea == plantSpawner.currentSpawnArea)
         {
             ruleScore = plantSpawner.scoreGoodSpawnArea;
@@ -120,7 +119,6 @@ public class TileSpawnScore : MonoBehaviour
         }
         ruleScore *= plantSpawner.weightSpawnArea;
 
-        */
         return ruleScore;
     }
 
@@ -190,6 +188,11 @@ public class TileSpawnScore : MonoBehaviour
         }
         ruleScore *= plantSpawner.weightIrrigatedTile;
         return ruleScore;
+    }
+
+    private int EvalNoise()
+    {
+        return Random.Range(-10, 11);
     }
 
     // IsNextToThreeSproutNearby commented : Uncomment when index are fixed
