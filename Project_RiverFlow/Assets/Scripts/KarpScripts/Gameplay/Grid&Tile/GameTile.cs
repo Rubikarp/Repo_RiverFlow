@@ -162,7 +162,7 @@ public class GameTile : MonoBehaviour
     void Start()
     {
         gameTime = GameTime.Instance;
-        //gameTime.onWaterSimulationStep.AddListener(FlowStep);
+        gameTime.onWaterSimulationStep.AddListener(FlowStep);
         spawnScore = GetComponent<TileSpawnScore>();
     }
 
@@ -172,7 +172,7 @@ public class GameTile : MonoBehaviour
     }
     private void OnDestroy()
     {
-        //gameTime.onWaterSimulationStep.RemoveListener(FlowStep);
+        gameTime.onWaterSimulationStep.RemoveListener(FlowStep);
     }
 
     //Flow

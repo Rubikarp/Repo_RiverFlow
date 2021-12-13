@@ -458,7 +458,7 @@ MonoBehaviour:
   geometry: 0
   joins: 1
   closed: 0
-  thickness: 1
+  thickness: 0.5
   thicknessSpace: 0
 --- !u!33 &7404154306908698621
 MeshFilter:

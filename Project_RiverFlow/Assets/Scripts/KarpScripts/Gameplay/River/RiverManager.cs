@@ -16,11 +16,6 @@ public class RiverManager : Singleton<RiverManager>
         digging.onBreak.AddListener(OnBreak);
     }
 
-    void Update()
-    {
-
-    }
-
     private void OnLink(GameTile startTile, GameTile endTile)
     {
         //Check if isloate (no tile have link)
@@ -210,10 +205,9 @@ public class RiverManager : Singleton<RiverManager>
 
     public void Merge(Canal canalA, Canal canalB)
     {
-
-
         //add endNode to the end linkCanal
         canalA.canalTiles.Add(canalA.endNode);
+        GameTile.Link(grid.GetTile(canalA.endNode), grid.GetTile(canalB.startNode));
         //add start linkCanal to the end linkCanal
         canalA.canalTiles.Add(canalB.startNode);
         canalA.canalTiles.AddRange(canalB.canalTiles);
