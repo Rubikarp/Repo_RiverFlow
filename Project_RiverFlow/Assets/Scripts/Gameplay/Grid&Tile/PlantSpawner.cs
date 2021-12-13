@@ -74,11 +74,11 @@ public class PlantSpawner : MonoBehaviour
         EvaluateTiles();
         for (int i = this.tileScores.Count - 1; i>0;i--)
         {
-            Debug.Log(tileScores[i].spawn);
-            Debug.Log(tileScores[i].score);
+            //Debug.Log(tileScores[i].spawn);
+            //Debug.Log(tileScores[i].score);
             if (this.tileScores[i].spawn)
             {
-                Debug.Log(this.tileScores[i].tile.gridPos);
+                //Debug.Log(this.tileScores[i].tile.gridPos);
                 elementHandler.SpawnPlantAt(this.tileScores[i].tile.gridPos);
                 break;
             }
@@ -88,7 +88,7 @@ public class PlantSpawner : MonoBehaviour
     public void EvaluateTiles()
     {
         tileScores.Clear();
-        Debug.Log(gameGrid.tiles.Length);
+        //Debug.Log(gameGrid.tiles.Length);
         foreach(GameTile iTile in gameGrid.tiles)
         {
             //Debug.Log(iTile);

@@ -39,7 +39,7 @@ public class TileSpawnScore : MonoBehaviour
             if (tile.spawnArea <= plantSpawner.currentSpawnArea && tile.spawnArea != 0)
             {
 
-                Debug.Log("evaluate");
+                //Debug.Log("evaluate");
                 switch (plantSpawner.threatState)
                 {
                     case ThreatState.NEWZONE:
