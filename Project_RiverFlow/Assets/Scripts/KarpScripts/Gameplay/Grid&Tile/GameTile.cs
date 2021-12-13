@@ -156,13 +156,10 @@ public class GameTile : MonoBehaviour
     #endregion
 
     [Space(8)]
-    public GameTime gameTime;
     public TileSpawnScore spawnScore;
 
     void Start()
     {
-        gameTime = GameTime.Instance;
-        gameTime.onWaterSimulationStep.AddListener(FlowStep);
         spawnScore = GetComponent<TileSpawnScore>();
     }
 
@@ -170,32 +167,40 @@ public class GameTile : MonoBehaviour
     {
 
     }
-    private void OnDestroy()
-    {
-        gameTime.onWaterSimulationStep.RemoveListener(FlowStep);
-    }
+
 
     //Flow
     public void FlowStep()
     {
-        //Check For Water
-        if (!ReceiveWater())
-        {
-            StopFlow();
-            return;
-        }
-        //Set Flow
-        if (element != null)
+        //Reset receivedFlow
+        receivedFlow = FlowStrenght._00_;
+
+        //Check received Water
+        if (flowIn.Count > 0 || element is WaterSource)
         {
             if (element is WaterSource)
             {
                 receivedFlow = FlowStrenght._100_;
             }
+            else
+            {
+                for (int i = 0; i < flowIn.Count; i++)
+                {
+                    receivedFlow += (int)GetNeighbor(flowIn[i]).AskForWater(this);
+                }
+                receivedFlow = (FlowStrenght)Mathf.Clamp((int)receivedFlow, 0, (int)FlowStrenght._100_);
+            }
+
+            //SetFlow
+            riverStrenght = receivedFlow;
         }
-        //Clamp FlowStrenght
-        receivedFlow = (FlowStrenght)Mathf.Clamp((int)receivedFlow, 0, (int)FlowStrenght._100_);
-        SetFlow();
-        //Check for FlowOut
+        else
+        {
+            StopFlow();
+            return;
+        }
+
+        //Check for contradictory flow
         if (linkAmount == 2)
         {
             //Link
@@ -216,8 +221,7 @@ public class GameTile : MonoBehaviour
                 }
                 else
                 {
-                    //neighborA.riverStrenght == neighborB.riverStrenght
-                    //noeud
+
                 }
             }
             else
@@ -238,8 +242,7 @@ public class GameTile : MonoBehaviour
                 }
                 else
                 {
-                    //neighborA.riverStrenght == neighborB.riverStrenght
-                    //noeud
+
                 }
             }
             else
@@ -251,90 +254,65 @@ public class GameTile : MonoBehaviour
         else 
         if (linkAmount > 2)
         {
-            //check si une entrée vide
-            for (int i = 0; i < flowIn.Count; i++)
+            if(flowIn.Count >= 2)
             {
-                if (GetNeighbor(flowIn[i]).riverStrenght == FlowStrenght._00_)
+                int maxFlow = 0;
+
+                for (int i = 0; i < flowIn.Count; i++)
                 {
-                    //Became Flow Out
-                    GameTile.InverseLink(this,GetNeighbor(flowIn[i]));
+                    maxFlow = Mathf.Max(maxFlow, (int)GetNeighbor(flowIn[i]).riverStrenght);
                 }
+
+                //TODO
             }
         }
-        //Send Water to neighbor
-        if (SendWater())
+    }
+    public FlowStrenght AskForWater(GameTile asker)
+    {
+        Vector2Int tileToMe = asker.gridPos - gridPos;
+        Direction dir = new Direction(tileToMe);
+
+        if (flowOut.Contains(dir))
         {
             // Envoie l'eau Thierry !
             float riverPower = (int)riverStrenght;
             float riverSplits = (float)flowOut.Count;
-            switch (flowOut.Count)
+
+            if(flowOut.Count == 1)
             {
-                case 1:
-                    GetNeighbor(flowOut[0]).receivedFlow += Mathf.FloorToInt(riverPower / riverSplits);
-                    break;
-                case 2:
-                    if ((int)riverStrenght % 2 == 0)
-                    {
-                        GetNeighbor(flowOut[0]).receivedFlow += Mathf.FloorToInt(riverPower / riverSplits);
-                        GetNeighbor(flowOut[1]).receivedFlow += Mathf.FloorToInt(riverPower / riverSplits);
-                    }
-                    else
-                    {
-                        GetNeighbor(flowOut[0]).receivedFlow += Mathf.CeilToInt(riverPower / riverSplits);
-                        GetNeighbor(flowOut[1]).receivedFlow += Mathf.FloorToInt(riverPower / riverSplits);
-                    }
-                    break;
-                case 3:
-                    if ((int)riverStrenght % 3 == 0)
-                    {
-                        GetNeighbor(flowOut[0]).receivedFlow += Mathf.FloorToInt(riverPower / riverSplits);
-                        GetNeighbor(flowOut[1]).receivedFlow += Mathf.FloorToInt(riverPower / riverSplits);
-                        GetNeighbor(flowOut[2]).receivedFlow += Mathf.FloorToInt(riverPower / riverSplits);
-                    }
-                    else
-                    {
-                        GetNeighbor(flowOut[0]).receivedFlow += Mathf.CeilToInt(riverPower / riverSplits);
-                        GetNeighbor(flowOut[1]).receivedFlow += Mathf.FloorToInt(riverPower / riverSplits);
-                        GetNeighbor(flowOut[2]).receivedFlow += Mathf.FloorToInt(riverPower / riverSplits);
-                    }
-                    break;
-                default:
-                    for (int i = 0; i < flowOut.Count; i++)
-                    {
-                        GetNeighbor(flowOut[1]).receivedFlow += Mathf.FloorToInt(riverPower / riverSplits);
-                    }
-                    break;
+                return (FlowStrenght)riverPower;
             }
+            else 
+            if (flowOut.Count > 1)
+            {
+                if ((int)riverStrenght % 2 == 0)
+                {
+                    return (FlowStrenght)Mathf.FloorToInt((int)riverStrenght / (float)flowOut.Count);
+                }
+                else
+                {
+                    if(flowOut.IndexOf(dir) == 0)
+                    {
+                        return (FlowStrenght)Mathf.CeilToInt((int)riverStrenght / (float)flowOut.Count);
+                    }
+                    else
+                    {
+                        return (FlowStrenght)Mathf.FloorToInt((int)riverStrenght / (float)flowOut.Count);
+                    }
+                }
+            }
+            return FlowStrenght._00_;
         }
-        //Reset receivedFlow
-        receivedFlow = FlowStrenght._00_;
-    }
-    public bool ReceiveWater()
-    {
-        return flowIn.Count > 0 || element is WaterSource;
-    }
-    public bool SendWater()
-    {
-        return flowOut.Count > 0;
-    }
-    public void SetFlow()
-    {
-        //riverStrenght++;
-        //riverStrenght = (FlowStrenght)Mathf.Clamp((int)riverStrenght, 0, (int)receivedFlow);
-        riverStrenght = receivedFlow;
+        else
+        {
+            return FlowStrenght._00_;
+        }
     }
     public void StopFlow()
     {
-        /*
-        riverStrenght--;
-        riverStrenght = (FlowStrenght)Mathf.Max((int)riverStrenght, 0);
-        receivedFlow = FlowStrenght._00_;
-        */
-
-        receivedFlow = FlowStrenght._00_;
         riverStrenght = FlowStrenght._00_;
+        receivedFlow = FlowStrenght._00_;
     }
-
     //LINK
     public static void Link(GameTile tileA, GameTile tileB)
     {
@@ -375,30 +353,65 @@ public class GameTile : MonoBehaviour
     }
     public static void InverseLink(GameTile tileA, GameTile tileB)
     {
-        UnLink(tileA, tileB);
-        Link(tileB, tileA);
+        Vector2Int tileToMe = tileB.gridPos - tileA.gridPos;
+        Direction dir = new Direction(tileToMe);
+
+        tileA.RemoveLinkedTile(dir, FlowType.flowIn);
+        tileB.RemoveLinkedTile(Direction.Inverse(dir), FlowType.flowOut);
+
+        tileA.AddLinkedTile(dir, FlowType.flowOut);
+        tileB.AddLinkedTile(Direction.Inverse(dir), FlowType.flowIn);
+
     }
 
     public void AddLinkedTile(Direction addedDir, FlowType flow)
     {
         if (flow == FlowType.flowIn)
         {
-            flowIn.Add(addedDir);
+            if (!flowIn.Contains(addedDir))
+            {
+                flowIn.Add(addedDir);
+            }
+            else
+            {
+                Debug.LogError("oupsie", this);
+            }
         }
         else
         {
-            flowOut.Add(addedDir);
+            if (!flowOut.Contains(addedDir))
+            {
+                flowOut.Add(addedDir);
+            }
+            else
+            {
+                Debug.LogError("oupsie", this);
+            }
         }
     }
     public void RemoveLinkedTile(Direction removeDir, FlowType flow)
     {
         if (flow == FlowType.flowIn)
         {
-            flowIn.Remove(removeDir);
+            if (flowIn.Contains(removeDir))
+            {
+                flowIn.Remove(removeDir);
+            }
+            else 
+            {
+                Debug.LogError("oupsie", this);
+            }
         }
         else
         {
-            flowOut.Remove(removeDir);
+            if (flowOut.Contains(removeDir))
+            {
+                flowOut.Remove(removeDir);
+            }
+            else
+            {
+                Debug.LogError("oupsie", this);
+            }
         }
     }
     public void RemoveAllLinkedTile()

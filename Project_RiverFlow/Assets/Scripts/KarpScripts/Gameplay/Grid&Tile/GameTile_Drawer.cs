@@ -11,9 +11,12 @@ public class GameTile_Drawer : MonoBehaviour
     [Header("Ground")]
     [SerializeField] TilePalette_SCO palette;
 
+    [ContextMenu("Start")]
     private void Start()
     {
         grid = GameGrid.instance;
+        tile = gameObject.GetComponent<GameTile>();
+        rend = gameObject.GetComponent<SpriteRenderer>();
     }
 
     void FixedUpdate()
