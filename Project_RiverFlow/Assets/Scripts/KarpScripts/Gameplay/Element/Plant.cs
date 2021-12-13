@@ -49,6 +49,7 @@ public class Plant : Element
 
     public List<int> closeRivers;
     private FlowStrenght bestRiverStrenght = 0;
+    private Plant_Drawer plantDrawer;
     
     [Header("Living")]
     [Range(0f,1f)] public float timer = 1.0f;
@@ -99,6 +100,7 @@ public class Plant : Element
         }
 
         elementHandler = GetComponentInParent<ElementHandler>();
+        plantDrawer = GetComponent<Plant_Drawer>();
     }
 
     void Update()
@@ -209,6 +211,9 @@ public class Plant : Element
                 {
                     isFruitTree = true;
 
+                    currentState = (PlantState)Mathf.Clamp((int)(currentState + 1), 0, (int)PlantState.FruitTree);
+                    onStateChange?.Invoke(true);
+
                     Debug.Log("Evolution !");
                 }
             }
@@ -219,6 +224,9 @@ public class Plant : Element
                 if (closeRivers.Count >= closeRiverTilesNeeded && isFruitTree == false)
                 {
                     isFruitTree = true;
+
+                    currentState = (PlantState)Mathf.Clamp((int)(currentState + 1), 0, (int)PlantState.FruitTree);
+                    onStateChange?.Invoke(true);
 
                     Debug.Log("Evolution !");
                 }

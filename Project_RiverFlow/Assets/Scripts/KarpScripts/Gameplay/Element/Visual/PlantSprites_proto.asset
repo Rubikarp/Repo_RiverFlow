@@ -19,6 +19,7 @@ MonoBehaviour:
     youngSprite: {fileID: 21300000, guid: 5f1d928c4cd5e854fb63a24628902a15, type: 3}
     adultSprite: {fileID: 21300000, guid: 3c325cdc19ddbeb4883c1f17adde95e1, type: 3}
     seniorSprite: {fileID: 21300000, guid: 0584da852c49d45458dce8b6cd3a3063, type: 3}
+    fruitSprite: {fileID: 21300000, guid: e6dd6ebf45c6b3346b4c61ec26b2b7f4, type: 3}
   clay_plantGrowth:
     deadSprite: {fileID: 21300000, guid: 7cd0e215aa04b6540bf4c60d7a0479d2, type: 3}
     agonySprite: {fileID: 21300000, guid: 9bacee108d699ed40b32d48caef49bee, type: 3}
@@ -26,6 +27,7 @@ MonoBehaviour:
     youngSprite: {fileID: 21300000, guid: ff6dfcc0eb93273479bdc72252dea918, type: 3}
     adultSprite: {fileID: 21300000, guid: 60033aca410484e46a32946679c12e18, type: 3}
     seniorSprite: {fileID: 21300000, guid: 64b3b261f82c8ff478ad9df56f24e62f, type: 3}
+    fruitSprite: {fileID: 21300000, guid: 28d54a21882cc734ba8c4c3eaa0bb576, type: 3}
   sand_plantGrowth:
     deadSprite: {fileID: 21300000, guid: f6a8bcde42d95df40a2284c67e7e58f4, type: 3}
     agonySprite: {fileID: 21300000, guid: 5043aa4992e8c6844addef1ede78dfa4, type: 3}
@@ -33,3 +35,4 @@ MonoBehaviour:
     youngSprite: {fileID: 21300000, guid: 6b2d33ef0dfe5fe4bb1720cf3dee2204, type: 3}
     adultSprite: {fileID: 21300000, guid: 6419cd5b867cc7d46a4a28f127624314, type: 3}
     seniorSprite: {fileID: 21300000, guid: 78ae08fb7b6344c448ac2f30897d7ce2, type: 3}
+    fruitSprite: {fileID: 21300000, guid: 114481e9cbbb34a478a739d174593742, type: 3}

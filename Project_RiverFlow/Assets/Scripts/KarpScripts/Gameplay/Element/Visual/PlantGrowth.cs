@@ -10,6 +10,7 @@ public struct PlantGrowth
     public Sprite youngSprite;
     public Sprite adultSprite;
     public Sprite seniorSprite;
+    public Sprite fruitSprite;
 
     public Sprite StateSprite(PlantState state)
     {
@@ -27,6 +28,8 @@ public struct PlantGrowth
                 return adultSprite;
             case PlantState.Senior:
                 return seniorSprite;
+            case PlantState.FruitTree:
+                return fruitSprite;
             default:
                 return null;
         }
