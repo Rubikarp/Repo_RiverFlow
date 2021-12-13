@@ -165,6 +165,14 @@ public class GameTile : MonoBehaviour
         gameTime = GameTime.Instance;
         gameTime.onWaterSimulationStep.AddListener(FlowStep);
         spawnScore = GetComponent<TileSpawnScore>();
+        if (spawnArea == 1)
+        {
+            this.gameObject.GetComponent<SpriteRenderer>().color = new Color(255, 255, 0, 255);
+        }
+        else if (spawnArea == 2)
+        {
+            this.gameObject.GetComponent<SpriteRenderer>().color = new Color(255, 0, 0, 255);
+        }
     }
 
     void Update()

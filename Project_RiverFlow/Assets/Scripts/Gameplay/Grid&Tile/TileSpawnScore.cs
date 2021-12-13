@@ -32,15 +32,20 @@ public class TileSpawnScore : MonoBehaviour
 
     public TileInfoScore Evaluate()
     {
+
         spawnable = true;
         scoreValue = 0;
 
-        scoreValue += EvalTerrainType() * CastThreatToInt(1,0);
-        scoreValue += EvalSpawnArea() * CastThreatToInt(1, 0);
-        scoreValue += EvalPlantsNearby() * CastThreatToInt(1, 0);
-        scoreValue += EvalMountainsNearby() * CastThreatToInt(1, 0);
-        scoreValue += EvalIrrigatedTile() * CastThreatToInt(1, 0);
-        scoreValue += EvalNoise();
+        if (tile.spawnArea <= plantSpawner.currentSpawnArea && tile.spawnArea != 0)
+        {
+            Debug.Log("evaluate");
+            scoreValue += EvalSpawnArea() * CastThreatToInt(1, 0);
+            scoreValue += EvalTerrainType() * CastThreatToInt(1, 0);
+            scoreValue += EvalPlantsNearby() * CastThreatToInt(1, 0);
+            scoreValue += EvalMountainsNearby() * CastThreatToInt(1, 0);
+            scoreValue += EvalIrrigatedTile() * CastThreatToInt(1, 0);
+            scoreValue += EvalNoise();
+        }
 
         spawnable = EvalForbiddenCase();
 
@@ -104,12 +109,12 @@ public class TileSpawnScore : MonoBehaviour
         return ruleScore;
     }
 
-    // TODO : Uncomment when "Area Spawning" implemented, replace plantSpawner.currentSpawnArea
+    //TODO : Uncomment when "Area Spawning" implemented, replace plantSpawner.currentSpawnArea
     private int EvalSpawnArea()
     {
         int ruleScore = 0;
 
-        if(tile.spawnArea == plantSpawner.currentSpawnArea)
+        if (tile.spawnArea == plantSpawner.currentSpawnArea)
         {
             ruleScore = plantSpawner.scoreGoodSpawnArea;
         }
