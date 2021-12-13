@@ -6,6 +6,8 @@ using UnityEngine.UI;
 public class RewardManager : MonoBehaviour
 {
     public List<GameObject> usedButtons;
+    public GameObject SourceButton;
+    public int sourceTurn;
     //public GameObject RewardDig;
     //public GameObject RewardCloud;
     //public GameObject RewardSource;
@@ -15,6 +17,7 @@ public class RewardManager : MonoBehaviour
     public GameObject Newday;
     public RectTransform rewardSelectionPanelTransform;
     public InventoryManager Inventory;
+    public GameTime Timer;
 
 
     void Start()
@@ -61,13 +64,30 @@ public class RewardManager : MonoBehaviour
             DestroyImmediate(rewardSelectionPanelTransform.GetChild(0).gameObject);
         }
         //tirage 
-        for (int i = 0; i < 2; i++)
+        if (Timer.weekNumber % sourceTurn == 0)
         {
-            int pull = Random.Range(0, Temporary.Count);
-            GameObject newRewardDisplay = Instantiate(Temporary[pull], rewardSelectionPanelTransform);
-            rewardDisplays.Add(newRewardDisplay);
-            Temporary.RemoveAt(pull);
+
+                int pull = Random.Range(0, Temporary.Count);
+                GameObject newRewardDisplay = Instantiate(Temporary[pull], rewardSelectionPanelTransform);
+                rewardDisplays.Add(newRewardDisplay);
+                Temporary.RemoveAt(pull);
+                GameObject SourceRewardDisplay = Instantiate(SourceButton, rewardSelectionPanelTransform);
+                rewardDisplays.Add(SourceRewardDisplay);
+           
+
+
         }
+        else
+        {
+            for (int i = 0; i < 2; i++)
+            {
+                int pull = Random.Range(0, Temporary.Count);
+                GameObject newRewardDisplay = Instantiate(Temporary[pull], rewardSelectionPanelTransform);
+                rewardDisplays.Add(newRewardDisplay);
+                Temporary.RemoveAt(pull);
+            }
+        }
+        
         rewardSelectionPanelTransform.sizeDelta = new Vector2((rewardDisplays.Count - 1) * (rewardButton.GetComponent<RectTransform>().sizeDelta.x + rewardSelectionPanelTransform.GetComponent<HorizontalLayoutGroup>().spacing), rewardSelectionPanelTransform.sizeDelta.y);
 
 

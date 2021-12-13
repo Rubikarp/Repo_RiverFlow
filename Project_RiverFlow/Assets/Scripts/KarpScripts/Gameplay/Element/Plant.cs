@@ -76,8 +76,14 @@ public class Plant : Element
 
     public GameTime gameTime;
 
+    [Header("FX")]
+    public bool previousIrrigation;
+    public ParticleSystem WaveIrrigate;
+
     private void Start()
     {
+        previousIrrigation = isIrrigated;
+
         gameTime = GameTime.Instance;
 
         if (tileOn.isElement)
@@ -148,6 +154,19 @@ public class Plant : Element
 
         //Determine if irrigated
         isIrrigated = tileOn.IsIrrigate;
+
+        //Determine si on vient de changer d'etat
+        if(previousIrrigation != isIrrigated)
+        {
+            //determine si on vient d'etre irrigué
+            if (isIrrigated == true)
+            {
+                WaveIrrigate.Play();
+            }
+
+            previousIrrigation = isIrrigated;
+        }
+
     }
 
     private void StateUpdate()
