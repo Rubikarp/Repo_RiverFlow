@@ -17,13 +17,21 @@ public class GameTime : Singleton<GameTime>
     [SerializeField] float simulTimer = 0;
     [Range(0.1f, 1.2f)] public float iterationStepDur = 0.2f;
 
+    [Header("Plant Spawning")]
+    public float plantSpawnRate = 10;
+    private float nextPlantSpawn;
+    private PlantSpawner plantSpawner;
+    public List<int> timingsZones;
+
     [Header("Event")]
     public UnityEvent onWaterSimulationStep;
     public UnityEvent getMoreDig;
 
+
     void Start()
     {
-        
+        plantSpawner = GameObject.Find("PlantSpawner").GetComponent<PlantSpawner>();
+        nextPlantSpawn = plantSpawnRate;
     }
 
     void Update()
@@ -40,8 +48,27 @@ public class GameTime : Singleton<GameTime>
                 getMoreDig?.Invoke();
                 
                 weekNumber++;
+                if (weekNumber == timingsZones[plantSpawner.currentSpawnArea-1])
+                {
+                    plantSpawner.threatState = ThreatState.NEWZONE;
+                    plantSpawner.currentSpawnArea++;
+                }
+                else
+                {
+                    plantSpawner.threatState = ThreatState.PEACEFUL;
+                }
+
                 Pause();
             }
+
+            nextPlantSpawn -= Time.deltaTime;
+            if (nextPlantSpawn < 0)
+            {
+                nextPlantSpawn = plantSpawnRate;
+                plantSpawner.SpawnPlant();
+
+            }
+            
         }
     }
 

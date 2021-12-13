@@ -33,6 +33,8 @@ public class Plant_Drawer : MonoBehaviour
 
         sprRender.sprite = visual.GetSprite(plant.currentState, plant.tileOn.type);
         plant.onStateChange.AddListener(UpdateSkin);
+        //apparition
+        StartCoroutine(Apparition());
     }
 
     void Update()
@@ -48,7 +50,15 @@ public class Plant_Drawer : MonoBehaviour
         //StopAllCoroutines();
         StartCoroutine(SproutSkouiz(plant.currentState));
     }
-
+    IEnumerator Apparition()
+    {
+        transform.localScale = new Vector3(0, 0, 0);
+        yield return new WaitForSecondsRealtime(0.1f);
+        transform.DOScaleY(1f, 1.3f).SetEase(Ease.OutElastic);
+        yield return new WaitForSecondsRealtime(0.1f);
+        transform.DOScaleX(1f, 1.3f).SetEase(Ease.OutElastic);
+        Leafs.Play(true);
+    }
     IEnumerator TreeSkouiz(PlantState state)
     {
 

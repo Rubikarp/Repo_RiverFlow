@@ -157,10 +157,19 @@ public class GameTile : MonoBehaviour
 
     [Space(8)]
     public TileSpawnScore spawnScore;
+    public int spawnArea = 1;
 
     void Start()
     {
         spawnScore = GetComponent<TileSpawnScore>();
+        if (spawnArea == 1)
+        {
+            this.gameObject.GetComponent<SpriteRenderer>().color = new Color(255, 255, 0, 255);
+        }
+        else if (spawnArea == 2)
+        {
+            this.gameObject.GetComponent<SpriteRenderer>().color = new Color(255, 0, 0, 255);
+        }
     }
 
     void Update()
