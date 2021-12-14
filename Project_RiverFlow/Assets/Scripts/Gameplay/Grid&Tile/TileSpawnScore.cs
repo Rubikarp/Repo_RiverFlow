@@ -202,7 +202,7 @@ public class TileSpawnScore : MonoBehaviour
 
     private int EvalNoise()
     {
-        return Random.Range(-10, 11);
+        return Random.Range(-4, 4);
     }
 
     // IsNextToThreeSproutNearby commented : Uncomment when index are fixed

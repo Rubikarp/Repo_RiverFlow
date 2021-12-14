@@ -8761,7 +8761,7 @@ MonoBehaviour:
   linkedTile: []
   canalsIn: []
   spawnScore: {fileID: 0}
-  spawnArea: 11
+  spawnArea: 1
 --- !u!114 &282133038
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12282,7 +12282,7 @@ MonoBehaviour:
   linkedTile: []
   canalsIn: []
   spawnScore: {fileID: 0}
-  spawnArea: 11
+  spawnArea: 1
 --- !u!114 &379356531
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -39377,7 +39377,7 @@ MonoBehaviour:
   linkedTile: []
   canalsIn: []
   spawnScore: {fileID: 0}
-  spawnArea: 11
+  spawnArea: 1
 --- !u!114 &1185346466
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -58159,7 +58159,7 @@ MonoBehaviour:
   scoreIrrigatedTile50: 2
   scoreIrrigatedTile25: 1
   scoreIrrigatedTile0: 4
-  weightIrrigatedTile: 1
+  weightIrrigatedTile: 2
   currentSpawnArea: 1
   threatState: 2
   plantGameObject: {fileID: 4751209323767118212, guid: 5a8552f0c1487f74bb441c5c837d2071, type: 3}

@@ -78,7 +78,7 @@ public class PlantSpawner : MonoBehaviour
             //Debug.Log(tileScores[i].score);
             if (this.tileScores[i].spawn)
             {
-                //Debug.Log(this.tileScores[i].tile.gridPos);
+                Debug.Log(this.tileScores[i].tile.gridPos);
                 elementHandler.SpawnPlantAt(this.tileScores[i].tile.gridPos);
                 break;
             }
