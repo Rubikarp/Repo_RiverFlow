@@ -52,7 +52,7 @@ public class PlantSpawner : MonoBehaviour
     private GameGrid gameGrid;
     private List<TileInfoScore> tileScores;
     private ElementHandler elementHandler;
-    /*
+
     private void Start()
     {
         gameGrid = GameObject.Find("Grid").GetComponent<GameGrid>();
@@ -68,7 +68,7 @@ public class PlantSpawner : MonoBehaviour
             EvaluateTiles();
         }
     }
-    */
+
     public void SpawnPlant()
     {
         EvaluateTiles();
@@ -87,11 +87,12 @@ public class PlantSpawner : MonoBehaviour
 
     public void EvaluateTiles()
     {
+        //tileScores = new List<TileInfoScore>();
         tileScores.Clear();
         //Debug.Log(gameGrid.tiles.Length);
         foreach(GameTile iTile in gameGrid.tiles)
         {
-            Debug.Log(iTile);
+            //Debug.Log(iTile);
             TileInfoScore tmp = iTile.spawnScore.Evaluate();
             if(tmp.spawn)
             {
