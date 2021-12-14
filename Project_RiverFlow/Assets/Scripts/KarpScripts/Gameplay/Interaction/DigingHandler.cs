@@ -223,6 +223,7 @@ public class DigingHandler : MonoBehaviour
             element.TileOn = null;
 
             Destroy(element.gameObject);
+            inventory.cloudsAmmount++;
         }
         else if (element is Lake)
         {
@@ -233,7 +234,7 @@ public class DigingHandler : MonoBehaviour
 
                 Destroy(element.gameObject);
             }
+            inventory.lakesAmmount++;
         }
-        inventory.lakesAmmount++;
     }
 }

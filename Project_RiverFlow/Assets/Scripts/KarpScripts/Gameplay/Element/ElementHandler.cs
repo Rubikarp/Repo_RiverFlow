@@ -6,7 +6,6 @@ using NaughtyAttributes;
 
 public class ElementHandler : MonoBehaviour
 {
-
     public GameGrid grid;
     [Space(10)]
     public GameObject waterSource_Template;
@@ -46,7 +45,12 @@ public class ElementHandler : MonoBehaviour
     {
         if (!grid.GetTile(grisPos).isElement)
         {
+#if UNITY_EDITOR
             GameObject go = PrefabUtility.InstantiatePrefab(plant_Template, elementContainer)as GameObject;
+#else
+            GameObject go = Instantiate(plant_Template, elementContainer);
+#endif 
+
             go.transform.position = grid.TileToPos(new Vector2Int(grisPos.x, grisPos.y));
             go.name = "Plant_" + grisPos;
 
@@ -69,7 +73,11 @@ public class ElementHandler : MonoBehaviour
     {
         if (!grid.GetTile(grisPos).isElement)
         {
+#if UNITY_EDITOR
             GameObject go = PrefabUtility.InstantiatePrefab(waterSource_Template, elementContainer) as GameObject;
+#else
+            GameObject go = Instantiate(waterSource_Template, elementContainer);
+#endif 
             go.transform.position = grid.TileToPos(new Vector2Int(grisPos.x, grisPos.y));
             go.name = "Source_" + grisPos;
 
@@ -90,7 +98,11 @@ public class ElementHandler : MonoBehaviour
     {
         if (!grid.GetTile(grisPos).isElement)
         {
+#if UNITY_EDITOR
             GameObject go = PrefabUtility.InstantiatePrefab(cloud_Template, elementContainer) as GameObject;
+#else
+            GameObject go = Instantiate(cloud_Template, elementContainer);
+#endif 
             go.transform.position = grid.TileToPos(new Vector2Int(grisPos.x, grisPos.y));
             go.name = "Cloud_" + grisPos;
 
@@ -112,7 +124,11 @@ public class ElementHandler : MonoBehaviour
     {
         if (!grid.GetTile(grisPos).isElement)
         {
+#if UNITY_EDITOR
             GameObject go = PrefabUtility.InstantiatePrefab(magicTree_Template, elementContainer) as GameObject;
+#else
+            GameObject go = Instantiate(magicTree_Template, elementContainer);
+#endif 
             go.transform.position = grid.TileToPos(new Vector2Int(grisPos.x, grisPos.y));
             go.name = "MagicTree_" + grisPos;
 
@@ -140,8 +156,11 @@ public class ElementHandler : MonoBehaviour
             if (CurrentTile.linkedTile.Count == 2)
             {
 
-                Debug.Log("build");
+#if UNITY_EDITOR
                 GameObject go = PrefabUtility.InstantiatePrefab(lake_Template, elementContainer) as GameObject;
+#else
+            GameObject go = Instantiate(lake_Template, elementContainer);
+#endif 
                 go.transform.position = grid.TileToPos(new Vector2Int(grisPos.x, grisPos.y));
                 go.name = "Lake_" + grisPos;
                 //Check if Plant

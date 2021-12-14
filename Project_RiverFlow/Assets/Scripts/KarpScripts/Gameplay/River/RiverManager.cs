@@ -596,7 +596,7 @@ public class RiverManager : Singleton<RiverManager>
 
     private void OnBreak(GameTile erasedTile)
     {
-        if (erasedTile.isElement && !(erasedTile.element is WaterSource))
+        if (erasedTile.isElement && !(erasedTile.element is WaterSource) && !( erasedTile.element is Plant))
         {
             digging.RemoveElement(erasedTile.element);
         }
