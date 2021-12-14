@@ -223,12 +223,27 @@ public class Plant : Element
 
                 if (closeRivers.Count >= closeRiverTilesNeeded && isFruitTree == false)
                 {
-                    isFruitTree = true;
+                    bool neighborHasFruit =false;
+                    for(int i = 0; i < tileOn.neighbors.Length;i++)
+                    {
+                        if (tileOn.neighbors[i].element is Plant)
+                        {
+                            if (tileOn.neighbors[i].element.GetComponent<Plant>().isFruitTree == true)
+                            {
+                                neighborHasFruit = true;
+                            }
+                        }
+                    }
+                    if (neighborHasFruit == false)
+                    {
+                        isFruitTree = true;
 
-                    currentState = (PlantState)Mathf.Clamp((int)(currentState + 1), 0, (int)PlantState.FruitTree);
-                    onStateChange?.Invoke(true);
+                        currentState = (PlantState)Mathf.Clamp((int)(currentState + 1), 0, (int)PlantState.FruitTree);
+                        onStateChange?.Invoke(true);
 
-                    Debug.Log("Evolution !");
+                        Debug.Log("Evolution !");
+                    }
+
                 }
                 else if (closeRivers.Count < closeRiverTilesNeeded && isFruitTree == true)
                 {
