@@ -108,6 +108,8 @@ public class DragElement : MonoBehaviour,
             default:
                 break;
         }
+
+            RiverManager.Instance.FlowStep();
         }
         preview.position = Vector3.zero;
         preview.gameObject.SetActive(false);

@@ -22,15 +22,15 @@ public enum FlowStrenght
 
 public enum DirectionEnum
 {
-    upLeft,
-    up,
-    upRight,
-    right,
-    downRight,
-    down,
-    downLeft,
-    left,
-    center
+    upLeft = 0,
+    up = 1,
+    upRight = 2,
+    right = 3,
+    downRight = 4,
+    down = 5,
+    downLeft = 6,
+    left = 7,
+    center =8
 }
 public enum PlantState
 {

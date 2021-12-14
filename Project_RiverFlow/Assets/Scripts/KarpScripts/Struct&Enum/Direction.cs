@@ -153,6 +153,10 @@ public struct Direction
     }
 
     //Methode
+    public static bool IsDiagonal(Direction dir)
+    {
+        return ((int)dir.dirEnum % 2) == 0;
+    }
     public static Direction Inverse(Direction dir)
     {
         return new Direction(dir.dirValue * (-Vector2Int.one));
