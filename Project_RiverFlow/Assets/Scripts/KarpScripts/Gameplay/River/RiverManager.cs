@@ -277,16 +277,7 @@ public class RiverManager : Singleton<RiverManager>
                                 {
                                     Merge(startTile.canalsIn[0], endTile.canalsIn[0]);
 
-                                    for (int i = 0; i < canals.Count; i++)
-                                    {
-                                        if (endTile.canalsIn[0] == canals[i])
-                                        {
-                                            AddCanalRef(canals[i], startTile.canalsIn[0]);
-                                            RemoveCanalRef(canals[i], canals[i]);
-
-                                            canals.Remove(canals[i]);
-                                        }
-                                    }
+                                    ReplaceCanal(endTile.canalsIn[0], startTile.canalsIn[0]);
                                 }
                                 else
                                 if (endTile.gridPos == endTile.canalsIn[0].endNode)
@@ -294,16 +285,7 @@ public class RiverManager : Singleton<RiverManager>
                                     Inverse(endTile.canalsIn[0]);
                                     Merge(startTile.canalsIn[0], endTile.canalsIn[0]);
 
-                                    for (int i = 0; i < canals.Count; i++)
-                                    {
-                                        if (endTile.canalsIn[0] == canals[i])
-                                        {
-                                            AddCanalRef(canals[i], startTile.canalsIn[0]);
-                                            RemoveCanalRef(canals[i], canals[i]);
-
-                                            canals.Remove(canals[i]);
-                                        }
-                                    }
+                                    ReplaceCanal(endTile.canalsIn[0], startTile.canalsIn[0]);
                                 }
                             }
                             else if (startTile.gridPos == startTile.canalsIn[0].startNode)
@@ -313,16 +295,7 @@ public class RiverManager : Singleton<RiverManager>
                                     Inverse(startTile.canalsIn[0]);
                                     Merge(startTile.canalsIn[0], endTile.canalsIn[0]);
 
-                                    for (int i = 0; i < canals.Count; i++)
-                                    {
-                                        if (endTile.canalsIn[0] == canals[i])
-                                        {
-                                            AddCanalRef(canals[i], startTile.canalsIn[0]);
-                                            RemoveCanalRef(canals[i], canals[i]);
-
-                                            canals.Remove(canals[i]);
-                                        }
-                                    }
+                                    ReplaceCanal(endTile.canalsIn[0], startTile.canalsIn[0]);
                                 }
                                 else
                                 if (endTile == grid.GetTile(endTile.canalsIn[0].endNode))
@@ -332,16 +305,7 @@ public class RiverManager : Singleton<RiverManager>
 
                                     Merge(startTile.canalsIn[0], endTile.canalsIn[0]);
 
-                                    for (int i = 0; i < canals.Count; i++)
-                                    {
-                                        if (endTile.canalsIn[0] == canals[i])
-                                        {
-                                            AddCanalRef(canals[i], startTile.canalsIn[0]);
-                                            RemoveCanalRef(canals[i], canals[i]);
-
-                                            canals.Remove(canals[i]);
-                                        }
-                                    }
+                                    ReplaceCanal(endTile.canalsIn[0], startTile.canalsIn[0]);
                                 }
                             }
 
@@ -357,16 +321,7 @@ public class RiverManager : Singleton<RiverManager>
 
                                     Merge(endTile.canalsIn[0], startTile.canalsIn[0]);
 
-                                    for (int i = 0; i < canals.Count; i++)
-                                    {
-                                        if (startTile.canalsIn[0] == canals[i])
-                                        {
-                                            AddCanalRef(canals[i], endTile.canalsIn[0]);
-                                            RemoveCanalRef(canals[i], canals[i]);
-
-                                            canals.Remove(canals[i]);
-                                        }
-                                    }
+                                    ReplaceCanal(startTile.canalsIn[0], endTile.canalsIn[0]);
                                 }
                                 else
                                 if (endTile.gridPos == endTile.canalsIn[0].endNode)
@@ -374,16 +329,7 @@ public class RiverManager : Singleton<RiverManager>
                                     Inverse(startTile.canalsIn[0]);
                                     Merge(endTile.canalsIn[0], startTile.canalsIn[0]);
 
-                                    for (int i = 0; i < canals.Count; i++)
-                                    {
-                                        if (startTile.canalsIn[0] == canals[i])
-                                        {
-                                            AddCanalRef(canals[i], endTile.canalsIn[0]);
-                                            RemoveCanalRef(canals[i], canals[i]);
-
-                                            canals.Remove(canals[i]);
-                                        }
-                                    }
+                                    ReplaceCanal(startTile.canalsIn[0], endTile.canalsIn[0]);
                                 }
                             }
                             else
@@ -394,32 +340,14 @@ public class RiverManager : Singleton<RiverManager>
                                     Inverse(endTile.canalsIn[0]);
                                     Merge(endTile.canalsIn[0], startTile.canalsIn[0]);
 
-                                    for (int i = 0; i < canals.Count; i++)
-                                    {
-                                        if (startTile.canalsIn[0] == canals[i])
-                                        {
-                                            AddCanalRef(canals[i], endTile.canalsIn[0]);
-                                            RemoveCanalRef(canals[i], canals[i]);
-
-                                            canals.Remove(canals[i]);
-                                        }
-                                    }
+                                    ReplaceCanal(startTile.canalsIn[0], endTile.canalsIn[0]);
                                 }
                                 else
                                 if (endTile == grid.GetTile(endTile.canalsIn[0].endNode))
                                 {
                                     Merge(endTile.canalsIn[0], startTile.canalsIn[0]);
 
-                                    for (int i = 0; i < canals.Count; i++)
-                                    {
-                                        if (startTile.canalsIn[0] == canals[i])
-                                        {
-                                            AddCanalRef(canals[i], endTile.canalsIn[0]);
-                                            RemoveCanalRef(canals[i], canals[i]);
-
-                                            canals.Remove(canals[i]);
-                                        }
-                                    }
+                                    ReplaceCanal(startTile.canalsIn[0], endTile.canalsIn[0]);
                                 }
                             }
                         }
@@ -698,6 +626,19 @@ public class RiverManager : Singleton<RiverManager>
         FlowStep();
     }
 
+    public void ReplaceCanal(Canal oldCanal, Canal newCanal)
+    {
+        bool doOnce = true;
+        for (int i = 0; i < canals.Count; i++)
+        {
+            if (oldCanal == canals[i] && doOnce)
+            {
+                AddCanalRef(canals[i], newCanal);
+                ErasedCanal(canals[i]);
+                doOnce = false;
+            }
+        }
+    }
     public void FlowStep()
     {
         for (int i = 0; i < canals.Count; i++)
