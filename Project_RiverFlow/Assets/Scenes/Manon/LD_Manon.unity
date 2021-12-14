@@ -16242,7 +16242,7 @@ MonoBehaviour:
   digAmmount: 20
   cloudsAmmount: 0
   sourcesAmmount: 0
-  lakesAmmount: 1
+  lakesAmmount: 0
   tunnelsAmmount: 0
 --- !u!4 &510528752
 Transform:
@@ -27070,6 +27070,14 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7564991290427099071, guid: cd445d0706ef4dc4b90ef5c004eaa61f, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7564991290515428028, guid: cd445d0706ef4dc4b90ef5c004eaa61f, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -100.61792
+      objectReference: {fileID: 0}
+    - target: {fileID: 7564991290515428028, guid: cd445d0706ef4dc4b90ef5c004eaa61f, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
