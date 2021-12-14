@@ -147,19 +147,19 @@ public class GameTile : MonoBehaviour
                     switch (data.type)
                     {
                         case TileType.grass:
-                            if (receivedFlow >= FlowStrenght._25_)
+                            if (neighbor.riverStrenght >= FlowStrenght._25_)
                             {
                                 return true;
                             }
                             break;
                         case TileType.clay:
-                            if (receivedFlow >= FlowStrenght._50_)
+                            if (neighbor.riverStrenght >= FlowStrenght._50_)
                             {
                                 return true;
                             }
                             break;
                         case TileType.sand:
-                            if (receivedFlow >= FlowStrenght._75_)
+                            if (neighbor.riverStrenght >= FlowStrenght._75_)
                             {
                                 return true;
                             }
@@ -180,19 +180,19 @@ public class GameTile : MonoBehaviour
                                 switch (data.type)
                                 {
                                     case TileType.grass:
-                                        if (receivedFlow >=FlowStrenght._25_)
+                                        if (neighborOfNeighbor.riverStrenght >=FlowStrenght._25_)
                                         {
                                             return true;
                                         }
                                         break;
                                     case TileType.clay:
-                                        if (receivedFlow >= FlowStrenght._50_)
+                                        if (neighborOfNeighbor.riverStrenght >= FlowStrenght._50_)
                                         {
                                             return true;
                                         }
                                         break;
                                     case TileType.sand:
-                                        if (receivedFlow >= FlowStrenght._75_)
+                                        if (neighborOfNeighbor.riverStrenght >= FlowStrenght._75_)
                                         {
                                             return true;
                                         }
