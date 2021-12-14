@@ -147,7 +147,30 @@ public class GameTile : MonoBehaviour
                         {
                             if (neighborOfNeighbor.isRiver)
                             {
-                                return true;
+                                switch (data.type)
+                                {
+                                    case TileType.grass:
+                                        if (receivedFlow >=FlowStrenght._25_)
+                                        {
+                                            return true;
+                                        }
+                                        break;
+                                    case TileType.clay:
+                                        if (receivedFlow >= FlowStrenght._50_)
+                                        {
+                                            return true;
+                                        }
+                                        break;
+                                    case TileType.sand:
+                                        if (receivedFlow >= FlowStrenght._75_)
+                                        {
+                                            return true;
+                                        }
+                                        break;
+                                    default:
+                                        break;
+                                }
+
                             }
                         }
                     }
