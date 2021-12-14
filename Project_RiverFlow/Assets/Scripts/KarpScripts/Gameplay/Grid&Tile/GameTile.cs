@@ -89,8 +89,11 @@ public class GameTile : MonoBehaviour
                     return false;
                 }
             }
-            else
             if (linkAmount >= maxConnection) //Si la tile n'est pas saturé
+            {
+                return false;
+            }
+            if(data.type == TileType.mountain) //Si la tile est une montagne
             {
                 return false;
             }
