@@ -86,27 +86,31 @@ public class DigingHandler : MonoBehaviour
             {
                 if (startSelectTile.isLinkable && endSelectTile.isLinkable)
                 {
-                    if (inventory.digAmmount > 0)
+                    if (!CheckCrossADiagonal(startSelectTile, endSelectTile))
                     {
-                        Vector2Int tileToMe = endSelectTile.gridPos - startSelectTile.gridPos;
-                        Direction linkDir = new Direction(tileToMe);
 
-                        if (startSelectTile.IsLinkInDir(linkDir, FlowType.flowOut))
+                        if (inventory.digAmmount > 0)
                         {
-                            ///link in the same sens
-                            //Do nothing
-                        }
-                        else
-                        if (startSelectTile.IsLinkInDir(linkDir, FlowType.flowIn))
-                        {
-                            ///TODO : link in the opposite sens
-                            //Do nothing
-                        }
-                        else
-                        {
-                            //Event
-                            onLink?.Invoke(startSelectTile, endSelectTile);
-                            inventory.digAmmount--;
+                            Vector2Int tileToMe = endSelectTile.gridPos - startSelectTile.gridPos;
+                            Direction linkDir = new Direction(tileToMe);
+
+                            if (startSelectTile.IsLinkInDir(linkDir, FlowType.flowOut))
+                            {
+                                ///link in the same sens
+                                //Do nothing
+                            }
+                            else
+                            if (startSelectTile.IsLinkInDir(linkDir, FlowType.flowIn))
+                            {
+                                ///TODO : link in the opposite sens
+                                //Do nothing
+                            }
+                            else
+                            {
+                                //Event
+                                onLink?.Invoke(startSelectTile, endSelectTile);
+                                inventory.digAmmount--;
+                            }
                         }
                     }
                 }
@@ -117,6 +121,56 @@ public class DigingHandler : MonoBehaviour
             startSelectTilePos = grid.TileToPos(startSelectTile.gridPos);
         }
     }
+
+    private bool CheckCrossADiagonal(GameTile tileA, GameTile tileB)
+    {
+        Vector2Int A2B = tileB.gridPos - tileA.gridPos;
+        Direction dir = new Direction(A2B);
+        if (!Direction.IsDiagonal(dir))
+        {
+            return false;
+        }
+        else
+        {
+            bool cross = false;
+            switch (dir.dirEnum)
+            {
+                case DirectionEnum.upLeft:
+                    cross = tileA.GetNeighbor(
+                            new Direction(DirectionEnum.up)).
+                            IsLinkTo(tileA.GetNeighbor(
+                            new Direction(DirectionEnum.left)
+                            ));
+                    break;
+                case DirectionEnum.upRight:
+                    cross = tileA.GetNeighbor(
+                            new Direction(DirectionEnum.up)).
+                            IsLinkTo(tileA.GetNeighbor(
+                            new Direction(DirectionEnum.right)
+                            ));
+                    break;
+                case DirectionEnum.downRight:
+                    cross = tileA.GetNeighbor(
+                            new Direction(DirectionEnum.down)).
+                            IsLinkTo(tileA.GetNeighbor(
+                            new Direction(DirectionEnum.right)
+                            ));
+                    break;
+                case DirectionEnum.downLeft:
+                    cross = tileA.GetNeighbor(
+                            new Direction(DirectionEnum.down)).
+                            IsLinkTo(tileA.GetNeighbor(
+                            new Direction(DirectionEnum.left)
+                            ));
+                    break;
+                default:
+                    Debug.LogError("ça va pas");
+                    break;
+            }
+            return cross;
+        }
+    }
+
     private void OnLeftClickRelease()
     {
         //Reset

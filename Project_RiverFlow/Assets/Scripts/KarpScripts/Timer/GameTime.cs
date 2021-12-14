@@ -40,15 +40,20 @@ public class GameTime : Singleton<GameTime>
 
         if (!isPaused)
         {
-            WaterSimulation();
-
             gameTimer += Time.deltaTime;
 
-            if (gameTimer >= timingsZones[plantSpawner.currentSpawnArea - 1]&&plantSpawner.newZone==false)
+            if (timingsZones.Count > 0)
             {
-                plantSpawner.currentSpawnArea++;
-                plantSpawner.newZone = true;
+                if (((weekDuration * (weekNumber - 1)) + gameTimer) >= timingsZones[plantSpawner.currentSpawnArea - 1] && plantSpawner.newZone == false)
+                {
+                    plantSpawner.currentSpawnArea++;
+                    plantSpawner.newZone = true;
 
+                }
+            }
+            else
+            {
+                Debug.LogWarning("timingsZones not set",this);
             }
             if (gameTimer > (weekDuration * weekNumber))
             {
@@ -89,17 +94,4 @@ public class GameTime : Singleton<GameTime>
     {
         gameTimeSpeed = speed;
     }
-
-
-    public void WaterSimulation()
-    {
-        simulTimer += Time.deltaTime;
-
-        if (simulTimer > iterationStepDur)
-        {
-            onWaterSimulationStep?.Invoke();
-            simulTimer = 0f;
-        }
-    }
-
 }

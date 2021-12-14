@@ -24,10 +24,13 @@ public class River_Drawer : MonoBehaviour
 
     void Update()
     {
+        UpdateRiverVisual();
+    }
+    public void UpdateRiverVisual()
+    {
         RiverGeneration();
         RiverCurve();
     }
-
     public void RiverGeneration()
     {
         //Faudra faire du pooling

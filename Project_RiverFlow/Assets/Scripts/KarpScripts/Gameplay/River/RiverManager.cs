@@ -694,9 +694,10 @@ public class RiverManager : Singleton<RiverManager>
             }
             erasedTile.StopFlow();
         }
+        FlowStep();
     }
 
-    private void FlowStep()
+    public void FlowStep()
     {
         for (int i = 0; i < canals.Count; i++)
         {

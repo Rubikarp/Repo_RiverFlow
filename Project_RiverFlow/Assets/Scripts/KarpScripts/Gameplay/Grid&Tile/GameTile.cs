@@ -50,7 +50,14 @@ public class GameTile : MonoBehaviour
     {
         get
         {
-            return data.riverStrenght;
+            if(element is WaterSource)
+            {
+                return FlowStrenght._100_;
+            }
+            else
+            {
+                return data.riverStrenght;
+            }
         }
         set
         {
@@ -211,23 +218,7 @@ public class GameTile : MonoBehaviour
     void Start()
     {
         spawnScore = GetComponent<TileSpawnScore>();
-        /*
-        if (spawnArea == 1)
-        {
-            this.gameObject.GetComponent<SpriteRenderer>().color = new Color(255, 255, 0, 255);
-        }
-        else if (spawnArea == 2)
-        {
-            this.gameObject.GetComponent<SpriteRenderer>().color = new Color(255, 0, 0, 255);
-        }
-        */
     }
-
-    void Update()
-    {
-
-    }
-
 
     //Flow
     public void FlowStep()
@@ -247,6 +238,10 @@ public class GameTile : MonoBehaviour
                 for (int i = 0; i < flowIn.Count; i++)
                 {
                     receivedFlow += (int)GetNeighbor(flowIn[i]).AskForWater(this);
+                }
+                if (element is Cloud)
+                {
+                    receivedFlow += (int)FlowStrenght._25_;
                 }
                 receivedFlow = (FlowStrenght)Mathf.Clamp((int)receivedFlow, 0, (int)FlowStrenght._100_);
             }
@@ -532,6 +527,10 @@ public class GameTile : MonoBehaviour
     {
         return neighbors[(int)dir.dirEnum];
     }
+    public bool IsLinkTo(GameTile tile)
+    {
+        return linkedTile.Contains(tile);
+    }
     public bool IsLinkInDir(Direction dir, FlowType flow)
     {
         if (flow == FlowType.flowIn)
@@ -542,6 +541,18 @@ public class GameTile : MonoBehaviour
         {
             return flowOut.Contains(dir);
         }
+    }
+    public bool IsLinkInDir(Direction dir)
+    {
+        if (flowIn.Contains(dir))
+        {
+            return true;
+        }
+        if (flowOut.Contains(dir))
+        {
+            return true;
+        }
+        return false;
     }
 
     //GameTile to Data
