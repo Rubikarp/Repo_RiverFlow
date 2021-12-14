@@ -485,6 +485,7 @@ public class RiverManager : Singleton<RiverManager>
                         }
                         break;
                     default: //x >= 2
+                        /*
                         if (startTile.canalsIn.Count == 1)
                         {
                             //Split
@@ -590,8 +591,7 @@ public class RiverManager : Singleton<RiverManager>
                         else
                         {
                             //je m'imisse sans soucis
-                        }
-
+                        }*/
                         Debug.LogError("TODO");
                         break;
                 }
@@ -599,7 +599,6 @@ public class RiverManager : Singleton<RiverManager>
         }
 
         FlowStep();
-        grid.HotFix();
     }
 
     private void OnBreak(GameTile erasedTile)
@@ -632,7 +631,6 @@ public class RiverManager : Singleton<RiverManager>
             erasedTile.StopFlow();
         }
         FlowStep();
-        grid.HotFix();
     }
 
     public void ReplaceCanal(Canal oldCanal, Canal newCanal)
