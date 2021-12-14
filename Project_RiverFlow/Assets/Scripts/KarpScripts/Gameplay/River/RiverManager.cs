@@ -676,8 +676,9 @@ public class RiverManager : Singleton<RiverManager>
         {
             List<Canal> canals = new List<Canal>();
             canals = erasedTile.canalsIn;
+            int temp = canals.Count;
 
-            while (canals.Count >= 1)
+            for (int i = 0; i < temp; i++)
             {
                 if (canals[canals.Count-1].Contains(erasedTile.gridPos))
                 {
@@ -979,42 +980,20 @@ public class RiverManager : Singleton<RiverManager>
                     }
                     else
                     {
-                        grid.GetTile(canal.startNode).RemoveAllLinkedTile();
+                        GameTile.UnLink(grid.GetTile(canal.startNode), grid.GetTile(canal.canalTiles[0]));
                         //toute les canalTiles avant on les suppr
                         for (int j = 0; j < index; j++)
                         {
-                            grid.GetTile(canal.canalTiles[j]).RemoveAllLinkedTile();
-                        }
-                        for (int j = index; j < canal.canalTiles.Count; j++)
-                        {
-                            if (j > 0)
-                            {
-                                grid.GetTile(canal.canalTiles[j]).linkedTile.Remove(grid.GetTile(canal.canalTiles[j - 1]));
-                            }
-                            else
-                            {
-                                grid.GetTile(canal.canalTiles[j]).linkedTile.Remove(grid.GetTile(canal.startNode));
-                            }
-                            grid.GetTile(canal.canalTiles[j]).canalsIn.Remove(canal);
+                            GameTile.UnLink(grid.GetTile(canal.canalTiles[j]), grid.GetTile(canal.canalTiles[j+1]));
                         }
 
-                        if (canal.canalTiles.Count > 0)
-                        {
-                            grid.GetTile(canal.endNode).linkedTile.Remove(grid.GetTile(canal.canalTiles[canal.canalTiles.Count - 1]));
-                        }
-                        else
-                        {
-                            grid.GetTile(canal.endNode).linkedTile.Remove(grid.GetTile(canal.canalTiles[canal.canalTiles.Count - 1]));
-                        }
-
-                        grid.GetTile(canal.endNode).canalsIn.Remove(canal);
+                        ErasedCanal(canal);
                     }
                     #endregion
                 }
             }
         }
         GameTile.UnLinkAll(breakTile);
-
     }
 
     private bool InCanals(Vector2Int tilePos)
