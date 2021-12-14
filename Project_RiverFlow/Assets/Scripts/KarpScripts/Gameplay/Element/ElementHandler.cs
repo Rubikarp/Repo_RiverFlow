@@ -59,6 +59,7 @@ public class ElementHandler : MonoBehaviour
             }
 
             allPlants.Add(plant);
+
             //Link Element and Tile
             plant.tileOn = grid.GetTile(grisPos);
             grid.GetTile(grisPos).element = plant;
