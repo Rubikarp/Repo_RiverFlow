@@ -17,11 +17,8 @@ public class GameTile_Drawer : MonoBehaviour
         grid = GameGrid.instance;
         tile = gameObject.GetComponent<GameTile>();
         rend = gameObject.GetComponent<SpriteRenderer>();
-    }
 
-    void FixedUpdate()
-    {
-        //UpdateTileColor();
+        UpdateTileColor();
     }
 
     public void UpdateTileColor()

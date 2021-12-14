@@ -18,10 +18,11 @@ public class DigingHandler : MonoBehaviour
     public TileEvent onBreak;
     
     [Header("Digging")]
+    [SerializeField] public bool canDig = true;
     [SerializeField] public GameTile startSelectTile;
     [SerializeField] public Vector3 startSelectTilePos;
     [Space(10)]
-    [SerializeField] public GameTile endSelectTile;
+    [SerializeField] private GameTile endSelectTile;
     [SerializeField] public Vector3 endSelectPos;
     [Space(10)]
     [SerializeField] public Vector3 dragPos;
@@ -29,6 +30,7 @@ public class DigingHandler : MonoBehaviour
 
     [Header("Eraser")]
     [SerializeField] public GameTile eraserSelectTile;
+    private GameTile lastEraserSelectTile;
 
     [Header("Digging")]
     public InventoryManager inventory;
@@ -56,14 +58,13 @@ public class DigingHandler : MonoBehaviour
     }
 
     //Digging
-    public void OnLeftClick()
+    private void OnLeftClick()
     {
         //Initialise start select
         startSelectTile = grid.GetTile(grid.PosToTile(input.GetHitPos()));
         startSelectTilePos = grid.TileToPos(startSelectTile.gridPos);
     }
-
-    public void OnLeftClicking()
+    private void OnLeftClicking()
     {
         dragPos = input.GetHitPos();
         dragVect = (dragPos - startSelectTilePos);
@@ -81,8 +82,7 @@ public class DigingHandler : MonoBehaviour
             endSelectTile = grid.GetTile(grid.PosToTile(startSelectTilePos + drag));
             endSelectPos = dragPos;
 
-            //Si j'ai bien 2 tile linkable
-            if (startSelectTile != null && endSelectTile != null)
+            if (canDig)
             {
                 if (startSelectTile.isLinkable && endSelectTile.isLinkable)
                 {
@@ -110,15 +110,14 @@ public class DigingHandler : MonoBehaviour
                         }
                     }
                 }
+
             }
-            
             //End became the new start
             startSelectTile = endSelectTile;
             startSelectTilePos = grid.TileToPos(startSelectTile.gridPos);
         }
     }
-
-    public void OnLeftClickRelease()
+    private void OnLeftClickRelease()
     {
         //Reset
         startSelectTile = null;
@@ -132,21 +131,55 @@ public class DigingHandler : MonoBehaviour
     }
 
     //Undigging
-    public void OnRighClicking()
+    private void OnRighClicking()
     {
-        eraserSelectTile = grid.GetTile(grid.PosToTile(input.GetHitPos()));
-
-        if (eraserSelectTile.linkAmount > 0)
+        if (canDig)
         {
-            inventory.digAmmount += eraserSelectTile.linkAmount;
-            onBreak?.Invoke(eraserSelectTile);
+            eraserSelectTile = grid.GetTile(grid.PosToTile(input.GetHitPos()));
+
+            if (eraserSelectTile.linkAmount > 0 || eraserSelectTile.isElement)
+            {
+                if (lastEraserSelectTile != eraserSelectTile)
+                {
+                    lastEraserSelectTile = eraserSelectTile;
+                    inventory.digAmmount += eraserSelectTile.linkAmount;
+
+                    onBreak?.Invoke(eraserSelectTile);
+                }
+            }
         }
     }
-    public void OnRightClickRelease()
+    private void OnRightClickRelease()
     {
         eraserSelectTile = null;
     }
 
+    public void RemoveElement(Element element)
+    {
+        if (element is WaterSource || element is Plant)
+        {
+            Debug.LogError("Nope tu peux pas");
+        }
+        else if (element is Cloud)
+        {
+            element.TileOn = null;
+            element.TileOn = null;
+
+            inventory.cloudsAmmount++;
+            Destroy(element.gameObject);
+        }
+        else if (element is Lake)
+        {
+            for (int i = 0; i < element.TilesOn.Length; i++)
+            {
+                element.TilesOn[i].element = null;
+                element.TilesOn[i] = null;
+
+                inventory.lakesAmmount++;
+                Destroy(element.gameObject);
+            }
+        }
+    }
 
 
 }

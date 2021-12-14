@@ -668,26 +668,32 @@ public class RiverManager : Singleton<RiverManager>
 
     private void OnBreak(GameTile erasedTile)
     {
-        List<Canal> canals = new List<Canal>();
-        canals = erasedTile.canalsIn;
-
-        for (int i = 0; i < canals.Count; i++)
+        if (erasedTile.isElement && !(erasedTile.element is WaterSource))
         {
-            if (canals[i].Contains(erasedTile.gridPos))
+            digging.RemoveElement(erasedTile.element);
+        }
+        else
+        {
+            List<Canal> canals = new List<Canal>();
+            canals = erasedTile.canalsIn;
+
+            for (int i = 0; i < canals.Count; i++)
             {
-                int indexInCanal = canals[i].IndexOf(erasedTile.gridPos);
-                if (indexInCanal == 0 || indexInCanal == canals[i].canalTiles.Count + 1)
+                if (canals[i].Contains(erasedTile.gridPos))
                 {
-                    ShortenCanal(canals[i], erasedTile);
-                }
-                else
-                {
-                    BreakCanalIn2(canals[i], erasedTile);
+                    int indexInCanal = canals[i].IndexOf(erasedTile.gridPos);
+                    if (indexInCanal == 0 || indexInCanal == canals[i].canalTiles.Count + 1)
+                    {
+                        ShortenCanal(canals[i], erasedTile);
+                    }
+                    else
+                    {
+                        BreakCanalIn2(canals[i], erasedTile);
+                    }
                 }
             }
+            erasedTile.StopFlow();
         }
-        erasedTile.StopFlow();
-
     }
 
     private void FlowStep()

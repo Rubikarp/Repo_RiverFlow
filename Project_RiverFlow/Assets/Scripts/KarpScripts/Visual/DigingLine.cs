@@ -13,10 +13,13 @@ public class DigingLine : MonoBehaviour
 
     void Update()
     {
-        if (dig.startSelectTilePos != null)
+        if (dig.canDig)
         {
-            line.Start = dig.startSelectTilePos;
-            line.End = dig.dragPos;
+            if (dig.startSelectTilePos != null)
+            {
+                line.Start = dig.startSelectTilePos;
+                line.End = dig.dragPos;
+            }
         }
 
         line.DashOffset += Time.deltaTime;

@@ -4,14 +4,15 @@ using UnityEngine;
 
 public class Cloud : Element
 {
-    public GameTile tileOn;
     private GameTime gameTime;
 
+    public GameTile tileOn;
     public override GameTile TileOn
     {
         get { return tileOn; }
         set { tileOn = value; }
     }
+
 
     public override bool isLinkable { get { return true; } }
 

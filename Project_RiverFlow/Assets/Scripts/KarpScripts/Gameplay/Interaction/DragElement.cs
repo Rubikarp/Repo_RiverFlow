@@ -17,13 +17,16 @@ public class DragElement : MonoBehaviour,
 {
     public ElementHandler elementManage;
     public InputHandler input;
+    public DigingHandler dig;
     public GameGrid grid;
+    [Space(10)]
     public Transform preview;
     public TextMeshProUGUI textGUI;
     [SerializeField]
     private Items Item;
     //[SerializeField]
     //private Button SelfButton;
+    [Space(10)]
     [SerializeField]
     private Image SelfImage;
     [SerializeField]
@@ -35,6 +38,7 @@ public class DragElement : MonoBehaviour,
     {
         //initialize pointer visual
         preview.gameObject.SetActive(true);
+        dig.canDig = false;
     }
 
     //Call on Event update
@@ -46,8 +50,11 @@ public class DragElement : MonoBehaviour,
     //Call Once
     public void OnEndDrag(PointerEventData eventData)
     {
-        //Init the linked object on grid
-        switch (Item)
+        GameTile dropTile = grid.GetTile(grid.PosToTile(input.GetHitPos()));
+        if (!dropTile.isElement)
+        {
+            //Init the linked object on grid
+            switch (Item)
         {
             case Items.Cloud:
                 if (Inventory.cloudsAmmount >0)
@@ -74,15 +81,16 @@ public class DragElement : MonoBehaviour,
             default:
                 break;
         }
+        }
         preview.position = Vector3.zero;
         preview.gameObject.SetActive(false);
+        dig.canDig = true;
     }
 
-    void Start()
+    private void Start()
     {
-
+        preview.gameObject.SetActive(false);
     }
-
     void Update()
     {
         switch (Item)

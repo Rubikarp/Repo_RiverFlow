@@ -8,7 +8,17 @@ public class Lake : Element
     public GameTile[] allTilesOn;
     public override GameTile TileOn
     {
-        get { return tileOn; }
+        get 
+        {
+            if (tileOn != null)
+            {
+                return tileOn;
+            }
+            else
+            {
+                return TilesOn[0];
+            }
+        }
         set { tileOn = value; }
     }
     public override GameTile[] TilesOn
