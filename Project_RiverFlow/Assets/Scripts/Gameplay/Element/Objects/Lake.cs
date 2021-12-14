@@ -32,15 +32,23 @@ public class Lake : Element
     public override bool isLinkable { get { return true; } }
     public bool hasFish = false;
     private int neededTrees = 0;
+    public GameObject lakeMainBodySprite;
+    private bool isTurned = false;
 
     // Start is called before the first frame update
-    void Awake()
+    void Start()
     {
 
     }
 
     private void Update()
     {
+        if (isTurned == false && isVertical == true)
+        {
+            lakeMainBodySprite.transform.localRotation = Quaternion.Euler(0,0,90);
+            isTurned = true;
+        }
+
         VerifyFish();
     }
 

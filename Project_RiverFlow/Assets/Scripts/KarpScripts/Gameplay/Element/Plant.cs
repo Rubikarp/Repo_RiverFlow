@@ -66,6 +66,7 @@ public class Plant : Element
     public ElementHandler elementHandler;
     private bool spawnTileFound = false;
     public int closeRiverTilesNeeded = 3;
+    private bool neighborHasFruit = false;
 
     [Header("MagicTree")]
     private int plantsForMagicTree = 0;
@@ -209,12 +210,27 @@ public class Plant : Element
 
                 if (closeRivers.Count >= closeRiverTilesNeeded && isFruitTree == false && currentState == PlantState.Senior)
                 {
-                    isFruitTree = true;
+                    neighborHasFruit = false;
+                    for (int i = 0; i < tileOn.neighbors.Length; i++)
+                    {
+                        if (tileOn.neighbors[i].element is Plant)
+                        {
+                            if (tileOn.neighbors[i].element.GetComponent<Plant>().isFruitTree == true)
+                            {
+                                Debug.Log("FRUITS!");
+                                neighborHasFruit = true;
+                            }
+                        }
+                    }
+                    if (neighborHasFruit == false)
+                    {
+                        isFruitTree = true;
 
-                    currentState = (PlantState)Mathf.Clamp((int)(currentState + 1), 0, (int)PlantState.FruitTree);
-                    onStateChange?.Invoke(true);
+                        currentState = (PlantState)Mathf.Clamp((int)(currentState + 1), 0, (int)PlantState.FruitTree);
+                        onStateChange?.Invoke(true);
 
-                    Debug.Log("Evolution !");
+                        Debug.Log("Evolution !");
+                    }
                 }
             }
             else
@@ -223,13 +239,14 @@ public class Plant : Element
 
                 if (closeRivers.Count >= closeRiverTilesNeeded && isFruitTree == false)
                 {
-                    bool neighborHasFruit =false;
-                    for(int i = 0; i < tileOn.neighbors.Length;i++)
+                    neighborHasFruit = false;
+                    for(int i = 0; i < tileOn.neighbors.Length; i++)
                     {
                         if (tileOn.neighbors[i].element is Plant)
                         {
                             if (tileOn.neighbors[i].element.GetComponent<Plant>().isFruitTree == true)
                             {
+                                Debug.Log("FRUITS!");
                                 neighborHasFruit = true;
                             }
                         }

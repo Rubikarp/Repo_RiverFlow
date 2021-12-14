@@ -124,6 +124,8 @@ public class ScoreManager : MonoBehaviour
         {
             gameOn = false;
         }
+
+        deadPlants = 0;
     }
 
     private void EndGame()

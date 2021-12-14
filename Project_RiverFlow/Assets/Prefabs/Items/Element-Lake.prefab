@@ -49,6 +49,7 @@ MonoBehaviour:
   allTilesOn: []
   isVertical: 0
   hasFish: 0
+  lakeMainBodySprite: {fileID: 4403952290143895613}
 --- !u!1 &4403952290143895613
 GameObject:
   m_ObjectHideFlags: 0
