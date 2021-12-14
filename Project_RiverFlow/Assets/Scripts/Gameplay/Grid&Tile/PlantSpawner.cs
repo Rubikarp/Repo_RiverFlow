@@ -9,8 +9,7 @@ public enum ThreatState
     CALM,
     NEUTRAL,
     THREATENING,
-    CHAOTIC,
-    NEWZONE
+    CHAOTIC
 }
 
 public class PlantSpawner : MonoBehaviour
@@ -52,6 +51,7 @@ public class PlantSpawner : MonoBehaviour
     private GameGrid gameGrid;
     private List<TileInfoScore> tileScores;
     private ElementHandler elementHandler;
+    public bool newZone;
 
     private void Start()
     {
@@ -67,6 +67,7 @@ public class PlantSpawner : MonoBehaviour
         {
             EvaluateTiles();
         }
+        Debug.Log(newZone);
     }
 
     public void SpawnPlant()

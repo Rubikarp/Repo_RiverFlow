@@ -19,7 +19,7 @@ MonoBehaviour:
     youngSprite: {fileID: 21300000, guid: 5f1d928c4cd5e854fb63a24628902a15, type: 3}
     adultSprite: {fileID: 21300000, guid: 3c325cdc19ddbeb4883c1f17adde95e1, type: 3}
     seniorSprite: {fileID: 21300000, guid: 0584da852c49d45458dce8b6cd3a3063, type: 3}
-    fruitSprite: {fileID: 21300000, guid: e6dd6ebf45c6b3346b4c61ec26b2b7f4, type: 3}
+    fruitSprite: {fileID: 21300000, guid: 90a9fa936aa43474a9659ed1d80cb709, type: 3}
   clay_plantGrowth:
     deadSprite: {fileID: 21300000, guid: 7cd0e215aa04b6540bf4c60d7a0479d2, type: 3}
     agonySprite: {fileID: 21300000, guid: 9bacee108d699ed40b32d48caef49bee, type: 3}
