@@ -30,6 +30,10 @@ public class DragElement : MonoBehaviour,
     [SerializeField]
     private Image SelfImage;
     [SerializeField]
+    private Sprite on;
+    [SerializeField]
+    private Sprite off;
+    [SerializeField]
     private GameObject Text;
     public InventoryManager Inventory;
 
@@ -99,7 +103,7 @@ public class DragElement : MonoBehaviour,
                 if(Inventory.cloudsAmmount <= 0)
                 {
                     Text.SetActive(false);
-                    SelfImage.color = new Color32(255, 255, 255, 0);
+                    SelfImage.sprite = off;
                     textGUI.text = Inventory.cloudsAmmount.ToString();
                 
                 //SelfButton.interactable = false;
@@ -107,7 +111,7 @@ public class DragElement : MonoBehaviour,
                 else
                 {
                     Text.SetActive(true);
-                    SelfImage.color = new Color32(255, 255, 255, 255);
+                    SelfImage.sprite = on;
                     textGUI.text = Inventory.cloudsAmmount.ToString();
                     //SelfButton.interactable = true;
                 }
@@ -117,14 +121,14 @@ public class DragElement : MonoBehaviour,
                 if (Inventory.sourcesAmmount <= 0)
                 {
                     Text.SetActive(false);
-                    SelfImage.color = new Color32(255, 255, 255, 0);
+                    SelfImage.sprite = off;
                     textGUI.text = Inventory.sourcesAmmount.ToString();
                     //    SelfButton.interactable = false;
                 }
                 else
                 {
                     Text.SetActive(true);
-                    SelfImage.color = new Color32(255, 255, 255, 255);
+                    SelfImage.sprite = on;
                     textGUI.text = Inventory.sourcesAmmount.ToString();
                     //    SelfButton.interactable = true;
                 }
@@ -134,7 +138,7 @@ public class DragElement : MonoBehaviour,
                 if (Inventory.lakesAmmount <= 0)
                 {
                     Text.SetActive(false);
-                    SelfImage.color = new Color32(255, 255, 255, 0);
+                    SelfImage.sprite = off;
                     textGUI.text = Inventory.lakesAmmount.ToString();
 
                     //    SelfButton.interactable = false;
@@ -142,7 +146,7 @@ public class DragElement : MonoBehaviour,
                 else
                 {
                     Text.SetActive(true);
-                    SelfImage.color = new Color32(255, 255, 255, 255);
+                    SelfImage.sprite = on;
                     textGUI.text = Inventory.lakesAmmount.ToString();
                     //   SelfButton.interactable = true;
                 }
