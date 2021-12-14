@@ -677,18 +677,18 @@ public class RiverManager : Singleton<RiverManager>
             List<Canal> canals = new List<Canal>();
             canals = erasedTile.canalsIn;
 
-            for (int i = 0; i < canals.Count; i++)
+            while (canals.Count >= 1)
             {
-                if (canals[i].Contains(erasedTile.gridPos))
+                if (canals[canals.Count-1].Contains(erasedTile.gridPos))
                 {
-                    int indexInCanal = canals[i].IndexOf(erasedTile.gridPos);
-                    if (indexInCanal == 0 || indexInCanal == canals[i].canalTiles.Count + 1)
+                    int indexInCanal = canals[canals.Count - 1].IndexOf(erasedTile.gridPos);
+                    if (indexInCanal == 0 || indexInCanal == canals[canals.Count - 1].canalTiles.Count + 1)
                     {
-                        ShortenCanal(canals[i], erasedTile);
+                        ShortenCanal(canals[canals.Count - 1], erasedTile);
                     }
                     else
                     {
-                        BreakCanalIn2(canals[i], erasedTile);
+                        BreakCanalIn2(canals[canals.Count - 1], erasedTile);
                     }
                 }
             }
