@@ -213,13 +213,13 @@ public class DigingHandler : MonoBehaviour
         if (element is WaterSource || element is Plant)
         {
             Debug.LogError("Nope tu peux pas");
+            return;
         }
         else if (element is Cloud)
         {
             element.TileOn = null;
             element.TileOn = null;
 
-            inventory.cloudsAmmount++;
             Destroy(element.gameObject);
         }
         else if (element is Lake)
@@ -229,11 +229,9 @@ public class DigingHandler : MonoBehaviour
                 element.TilesOn[i].element = null;
                 element.TilesOn[i] = null;
 
-                inventory.lakesAmmount++;
                 Destroy(element.gameObject);
             }
         }
+        inventory.lakesAmmount++;
     }
-
-
 }

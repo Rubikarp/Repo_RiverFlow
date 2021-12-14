@@ -31,11 +31,19 @@ public class ScoreManager : MonoBehaviour
         gameManager = GameManager.Instance;
 
         gameOverText.SetActive(false);
+
     }
 
     // Update is called once per frame
     void Update()
     {
+
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            gameManager.levelSaves[gameManager.levelList.IndexOf(level)].levelRecord = gameScore;
+            gameManager.SaveLevels();
+            gameManager.ChangeScene(menuPath);
+        }
         if (!gameTime.isPaused)
         {
             VerifyDefeat();

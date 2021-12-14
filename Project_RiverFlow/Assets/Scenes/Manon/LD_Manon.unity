@@ -16242,7 +16242,7 @@ MonoBehaviour:
   digAmmount: 20
   cloudsAmmount: 0
   sourcesAmmount: 0
-  lakesAmmount: 0
+  lakesAmmount: 1
   tunnelsAmmount: 0
 --- !u!4 &510528752
 Transform:
@@ -27969,6 +27969,108 @@ MonoBehaviour:
   rend: {fileID: 0}
   grid: {fileID: 0}
   palette: {fileID: 11400000, guid: 490d2554b53e93640bed8c1ce746c7ec, type: 2}
+--- !u!1001 &862234320
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 1930227711}
+    m_Modifications:
+    - target: {fileID: 7158169607246245338, guid: 9ea8a374b92f4e740a7acaf42f681eb6, type: 3}
+      propertyPath: level
+      value: 
+      objectReference: {fileID: 11400000, guid: dfb255225e6354f41a4f27526680a3e0, type: 2}
+    - target: {fileID: 7158169607246245338, guid: 9ea8a374b92f4e740a7acaf42f681eb6, type: 3}
+      propertyPath: gameTime
+      value: 
+      objectReference: {fileID: 357762604}
+    - target: {fileID: 7158169607246245338, guid: 9ea8a374b92f4e740a7acaf42f681eb6, type: 3}
+      propertyPath: menuPath
+      value: Assets/Scenes/Louis/Menu.unity
+      objectReference: {fileID: 0}
+    - target: {fileID: 7158169607246245338, guid: 9ea8a374b92f4e740a7acaf42f681eb6, type: 3}
+      propertyPath: scoringTick
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 7158169607246245338, guid: 9ea8a374b92f4e740a7acaf42f681eb6, type: 3}
+      propertyPath: elementHandler
+      value: 
+      objectReference: {fileID: 1297783542}
+    - target: {fileID: 7158169607246245338, guid: 9ea8a374b92f4e740a7acaf42f681eb6, type: 3}
+      propertyPath: adultTreeScoring
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7158169607246245338, guid: 9ea8a374b92f4e740a7acaf42f681eb6, type: 3}
+      propertyPath: magicTreeScoring
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 7158169607246245338, guid: 9ea8a374b92f4e740a7acaf42f681eb6, type: 3}
+      propertyPath: youngTreeScoring
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7158169607246245338, guid: 9ea8a374b92f4e740a7acaf42f681eb6, type: 3}
+      propertyPath: lakeFishesScoring
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 7158169607246245338, guid: 9ea8a374b92f4e740a7acaf42f681eb6, type: 3}
+      propertyPath: seniorTreeScoring
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 8549408420085817796, guid: 9ea8a374b92f4e740a7acaf42f681eb6, type: 3}
+      propertyPath: m_RootOrder
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 8549408420085817796, guid: 9ea8a374b92f4e740a7acaf42f681eb6, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 7.2490406
+      objectReference: {fileID: 0}
+    - target: {fileID: 8549408420085817796, guid: 9ea8a374b92f4e740a7acaf42f681eb6, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 2.993425
+      objectReference: {fileID: 0}
+    - target: {fileID: 8549408420085817796, guid: 9ea8a374b92f4e740a7acaf42f681eb6, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -11.867097
+      objectReference: {fileID: 0}
+    - target: {fileID: 8549408420085817796, guid: 9ea8a374b92f4e740a7acaf42f681eb6, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8549408420085817796, guid: 9ea8a374b92f4e740a7acaf42f681eb6, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8549408420085817796, guid: 9ea8a374b92f4e740a7acaf42f681eb6, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8549408420085817796, guid: 9ea8a374b92f4e740a7acaf42f681eb6, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8549408420085817796, guid: 9ea8a374b92f4e740a7acaf42f681eb6, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8549408420085817796, guid: 9ea8a374b92f4e740a7acaf42f681eb6, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8549408420085817796, guid: 9ea8a374b92f4e740a7acaf42f681eb6, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8549408420085817819, guid: 9ea8a374b92f4e740a7acaf42f681eb6, type: 3}
+      propertyPath: m_Name
+      value: ScoreManager
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 9ea8a374b92f4e740a7acaf42f681eb6, type: 3}
+--- !u!4 &862234321 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8549408420085817796, guid: 9ea8a374b92f4e740a7acaf42f681eb6, type: 3}
+  m_PrefabInstance: {fileID: 862234320}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &865298791
 GameObject:
   m_ObjectHideFlags: 0
@@ -42306,14 +42408,10 @@ MonoBehaviour:
   cloud_Template: {fileID: 2355860190061058659, guid: 6d0b592cca5388149943480ff75e23aa, type: 3}
   lake_Template: {fileID: 4143323418627759852, guid: 5f37c1a1512afad43b928d29679a85a0, type: 3}
   plant_Template: {fileID: 7129485572310087032, guid: 5a8552f0c1487f74bb441c5c837d2071, type: 3}
-  magicTree_Template: {fileID: 0}
+  magicTree_Template: {fileID: 9077409752301440309, guid: b9b7ff63b0430e7478b2cfd76f01484d, type: 3}
   elementContainer: {fileID: 1297783541}
   allPlants:
   - {fileID: 1357660628}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
   allSources:
   - {fileID: 0}
   - {fileID: 488588291}
@@ -63343,6 +63441,7 @@ Transform:
   - {fileID: 1288366431}
   - {fileID: 1731651121}
   - {fileID: 510528752}
+  - {fileID: 862234321}
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

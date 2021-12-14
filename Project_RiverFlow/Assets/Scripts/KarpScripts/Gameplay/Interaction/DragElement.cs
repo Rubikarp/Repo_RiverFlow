@@ -85,16 +85,16 @@ public class DragElement : MonoBehaviour,
                             if (testedTile.linkedTile.Count == 2)
                             {
                                 //check if vertical
-                                if ((testedTile.linkedTile[0] == testedTile.neighbors[1] == testedTile.linkedTile[0] && testedTile.linkedTile[0] == testedTile.neighbors[5])
-                                 || (testedTile.linkedTile[0] == testedTile.neighbors[5] == testedTile.linkedTile[0] && testedTile.linkedTile[0] == testedTile.neighbors[1]))
+                                if ((testedTile.linkedTile[0] == testedTile.neighbors[1] && testedTile.linkedTile[1] == testedTile.neighbors[5])
+                                 || (testedTile.linkedTile[0] == testedTile.neighbors[5] && testedTile.linkedTile[1] == testedTile.neighbors[1]))
                                 {
                                     elementManage.SpawnLakeAt(testedTile.gridPos, vertical: true);
                                     Inventory.lakesAmmount--;
                                 }
                                 //check if horizontal
                                 else 
-                                if ((testedTile.linkedTile[0] == testedTile.neighbors[3] && testedTile.linkedTile[0] == testedTile.neighbors[7])
-                                 || (testedTile.linkedTile[0] == testedTile.neighbors[7] && testedTile.linkedTile[0] == testedTile.neighbors[3]))
+                                if ((testedTile.linkedTile[0] == testedTile.neighbors[3] && testedTile.linkedTile[1] == testedTile.neighbors[7])
+                                 || (testedTile.linkedTile[0] == testedTile.neighbors[7] && testedTile.linkedTile[1] == testedTile.neighbors[3]))
                                 {
                                     elementManage.SpawnLakeAt(testedTile.gridPos, vertical: false);
                                     Inventory.lakesAmmount--;

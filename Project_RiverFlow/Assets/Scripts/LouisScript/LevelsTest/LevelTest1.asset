@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b29908123b7277242a9c96854f780ebc, type: 3}
   m_Name: LevelTest1
   m_EditorClassIdentifier: 
-  levelSceneName: Assets/Scenes/Karp/Test_Karp.unity
+  levelSceneName: Assets/Scenes/Manon/LD_Manon.unity
   levelNumber: 1
-  name: "For\xE9"
+  name: Niveau 1
   recordScore: 0
   scoreUnlock: 0
   LockLvl: {fileID: 11400000}
