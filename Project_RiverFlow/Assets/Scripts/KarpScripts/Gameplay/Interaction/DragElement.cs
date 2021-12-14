@@ -94,7 +94,7 @@ public class DragElement : MonoBehaviour,
                                 //check if horizontal
                                 else 
                                 if ((testedTile.linkedTile[0] == testedTile.neighbors[3] && testedTile.linkedTile[0] == testedTile.neighbors[7])
-                                 || (testedTile.linkedTile[0] == testedTile.neighbors[7] && testedTile.linkedTile[0] == testedTile.neighbors[3])
+                                 || (testedTile.linkedTile[0] == testedTile.neighbors[7] && testedTile.linkedTile[0] == testedTile.neighbors[3]))
                                 {
                                     elementManage.SpawnLakeAt(testedTile.gridPos, vertical: false);
                                     Inventory.lakesAmmount--;
