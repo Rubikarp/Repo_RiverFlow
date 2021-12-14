@@ -76,11 +76,34 @@ public class DragElement : MonoBehaviour,
                 }
                 break;
             case Items.Lake:
-                if (Inventory.lakesAmmount > 0)
-                {
-                    elementManage.SpawnLakeAt(grid.PosToTile(input.GetHitPos()));
-                    Inventory.lakesAmmount--;
-                }
+                    if (Inventory.lakesAmmount > 0)
+                    {
+                        GameTile testedTile = grid.GetTile(grid.PosToTile(input.GetHitPos()));
+
+                        if (testedTile.receivedFlow > FlowStrenght._00_)
+                        {
+                            if (testedTile.linkedTile.Count == 2)
+                            {
+                                //check if vertical
+                                if ((testedTile.linkedTile[0] == testedTile.neighbors[1] == testedTile.linkedTile[0] && testedTile.linkedTile[0] == testedTile.neighbors[5])
+                                 || (testedTile.linkedTile[0] == testedTile.neighbors[5] == testedTile.linkedTile[0] && testedTile.linkedTile[0] == testedTile.neighbors[1]))
+                                {
+                                    elementManage.SpawnLakeAt(testedTile.gridPos, vertical: true);
+                                    Inventory.lakesAmmount--;
+                                }
+                                //check if horizontal
+                                else 
+                                if ((testedTile.linkedTile[0] == testedTile.neighbors[3] && testedTile.linkedTile[0] == testedTile.neighbors[7])
+                                 || (testedTile.linkedTile[0] == testedTile.neighbors[7] && testedTile.linkedTile[0] == testedTile.neighbors[3])
+                                {
+                                    elementManage.SpawnLakeAt(testedTile.gridPos, vertical: false);
+                                    Inventory.lakesAmmount--;
+                                }
+
+                            }
+
+                        }
+                    }
                 break;
             default:
                 break;

@@ -19,7 +19,9 @@ public class WaterSource : Element
             return tileOn;
         }
         set
-        { tileOn = value; }
+        { 
+            tileOn = value;
+        }
     }
     public override GameTile[] TilesOn 
     {
@@ -34,11 +36,7 @@ public class WaterSource : Element
         } 
         set { tileOn = value[0]; } 
     }
-    public override bool isLinkable { get { return true; } }
-    public override bool IsLinkable()
-    {
-        return true;
-    }
+    public override bool isLinkable { get { return tileOn.linkedTile.Count < 1; } }
     #endregion
 
     public override void AddLink(Direction dir) 
