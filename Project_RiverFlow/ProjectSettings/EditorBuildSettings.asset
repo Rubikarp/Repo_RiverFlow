@@ -17,4 +17,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Manon/LD_Manon.unity
     guid: 59658369b3ecf4747accda09abeb8873
+  - enabled: 1
+    path: Assets/Scenes/Manon/LD_Manon 1.unity
+    guid: b7559889ac1ca4a4aa12616a9f5274c7
   m_configObjects: {}

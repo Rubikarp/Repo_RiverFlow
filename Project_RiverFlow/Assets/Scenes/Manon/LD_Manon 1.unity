@@ -1325,7 +1325,7 @@ MonoBehaviour:
   linkedTile: []
   canalsIn: []
   spawnScore: {fileID: 0}
-  spawnArea: 0
+  spawnArea: 10
 --- !u!114 &44280449
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1468,7 +1468,7 @@ MonoBehaviour:
   linkedTile: []
   canalsIn: []
   spawnScore: {fileID: 0}
-  spawnArea: 0
+  spawnArea: 11
 --- !u!114 &44461030
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2040,7 +2040,7 @@ MonoBehaviour:
   linkedTile: []
   canalsIn: []
   spawnScore: {fileID: 0}
-  spawnArea: 0
+  spawnArea: 11
 --- !u!114 &60447072
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2469,7 +2469,7 @@ MonoBehaviour:
   linkedTile: []
   canalsIn: []
   spawnScore: {fileID: 0}
-  spawnArea: 0
+  spawnArea: 11
 --- !u!114 &78123421
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3756,7 +3756,7 @@ MonoBehaviour:
   linkedTile: []
   canalsIn: []
   spawnScore: {fileID: 0}
-  spawnArea: 0
+  spawnArea: 11
 --- !u!114 &121750013
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5758,7 +5758,7 @@ MonoBehaviour:
   linkedTile: []
   canalsIn: []
   spawnScore: {fileID: 0}
-  spawnArea: 0
+  spawnArea: 11
 --- !u!114 &183564329
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6473,7 +6473,7 @@ MonoBehaviour:
   linkedTile: []
   canalsIn: []
   spawnScore: {fileID: 0}
-  spawnArea: 0
+  spawnArea: 8
 --- !u!114 &202806143
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10577,7 +10577,7 @@ MonoBehaviour:
   linkedTile: []
   canalsIn: []
   spawnScore: {fileID: 0}
-  spawnArea: 0
+  spawnArea: 8
 --- !u!114 &324574027
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10924,7 +10924,7 @@ MonoBehaviour:
   linkedTile: []
   canalsIn: []
   spawnScore: {fileID: 0}
-  spawnArea: 11
+  spawnArea: 7
 --- !u!114 &342381030
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11067,7 +11067,7 @@ MonoBehaviour:
   linkedTile: []
   canalsIn: []
   spawnScore: {fileID: 0}
-  spawnArea: 0
+  spawnArea: 11
 --- !u!114 &343748246
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11353,7 +11353,7 @@ MonoBehaviour:
   linkedTile: []
   canalsIn: []
   spawnScore: {fileID: 0}
-  spawnArea: 0
+  spawnArea: 8
 --- !u!114 &353105475
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12139,7 +12139,7 @@ MonoBehaviour:
   linkedTile: []
   canalsIn: []
   spawnScore: {fileID: 0}
-  spawnArea: 11
+  spawnArea: 7
 --- !u!114 &375509035
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14525,7 +14525,7 @@ MonoBehaviour:
   linkedTile: []
   canalsIn: []
   spawnScore: {fileID: 0}
-  spawnArea: 8
+  spawnArea: 11
 --- !u!114 &464945465
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -16114,7 +16114,7 @@ MonoBehaviour:
   linkedTile: []
   canalsIn: []
   spawnScore: {fileID: 0}
-  spawnArea: 7
+  spawnArea: 11
 --- !u!114 &504952317
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -16305,7 +16305,7 @@ MonoBehaviour:
   linkedTile: []
   canalsIn: []
   spawnScore: {fileID: 0}
-  spawnArea: 7
+  spawnArea: 11
 --- !u!114 &515132848
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -16591,7 +16591,7 @@ MonoBehaviour:
   linkedTile: []
   canalsIn: []
   spawnScore: {fileID: 0}
-  spawnArea: 0
+  spawnArea: 11
 --- !u!114 &521678663
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -17020,7 +17020,7 @@ MonoBehaviour:
   linkedTile: []
   canalsIn: []
   spawnScore: {fileID: 0}
-  spawnArea: 0
+  spawnArea: 10
 --- !u!114 &532248158
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -19451,7 +19451,7 @@ MonoBehaviour:
   linkedTile: []
   canalsIn: []
   spawnScore: {fileID: 0}
-  spawnArea: 0
+  spawnArea: 11
 --- !u!114 &610132987
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -20151,7 +20151,7 @@ MonoBehaviour:
   linkedTile: []
   canalsIn: []
   spawnScore: {fileID: 0}
-  spawnArea: 0
+  spawnArea: 11
 --- !u!114 &617657806
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -20866,7 +20866,7 @@ MonoBehaviour:
   linkedTile: []
   canalsIn: []
   spawnScore: {fileID: 0}
-  spawnArea: 11
+  spawnArea: 7
 --- !u!114 &635807096
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -21009,7 +21009,7 @@ MonoBehaviour:
   linkedTile: []
   canalsIn: []
   spawnScore: {fileID: 0}
-  spawnArea: 11
+  spawnArea: 7
 --- !u!114 &637447362
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -21581,7 +21581,7 @@ MonoBehaviour:
   linkedTile: []
   canalsIn: []
   spawnScore: {fileID: 0}
-  spawnArea: 11
+  spawnArea: 7
 --- !u!114 &660982578
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -22439,7 +22439,7 @@ MonoBehaviour:
   linkedTile: []
   canalsIn: []
   spawnScore: {fileID: 0}
-  spawnArea: 0
+  spawnArea: 10
 --- !u!114 &704544309
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -23297,7 +23297,7 @@ MonoBehaviour:
   linkedTile: []
   canalsIn: []
   spawnScore: {fileID: 0}
-  spawnArea: 8
+  spawnArea: 11
 --- !u!114 &731425762
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -24298,7 +24298,7 @@ MonoBehaviour:
   linkedTile: []
   canalsIn: []
   spawnScore: {fileID: 0}
-  spawnArea: 11
+  spawnArea: 7
 --- !u!114 &763398491
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -25156,7 +25156,7 @@ MonoBehaviour:
   linkedTile: []
   canalsIn: []
   spawnScore: {fileID: 0}
-  spawnArea: 7
+  spawnArea: 11
 --- !u!114 &790867769
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -27987,7 +27987,7 @@ PrefabInstance:
     - target: {fileID: 7158169607246245338, guid: 9ea8a374b92f4e740a7acaf42f681eb6, type: 3}
       propertyPath: level
       value: 
-      objectReference: {fileID: 11400000, guid: dfb255225e6354f41a4f27526680a3e0, type: 2}
+      objectReference: {fileID: 11400000, guid: 7c2049fdedf69144cad32cfa3e02e7ff, type: 2}
     - target: {fileID: 7158169607246245338, guid: 9ea8a374b92f4e740a7acaf42f681eb6, type: 3}
       propertyPath: gameTime
       value: 
@@ -28841,7 +28841,7 @@ MonoBehaviour:
   linkedTile: []
   canalsIn: []
   spawnScore: {fileID: 0}
-  spawnArea: 0
+  spawnArea: 10
 --- !u!114 &901893834
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -31671,7 +31671,7 @@ MonoBehaviour:
   linkedTile: []
   canalsIn: []
   spawnScore: {fileID: 0}
-  spawnArea: 0
+  spawnArea: 11
 --- !u!114 &976601573
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -31814,7 +31814,7 @@ MonoBehaviour:
   linkedTile: []
   canalsIn: []
   spawnScore: {fileID: 0}
-  spawnArea: 0
+  spawnArea: 11
 --- !u!114 &980761765
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -32672,7 +32672,7 @@ MonoBehaviour:
   linkedTile: []
   canalsIn: []
   spawnScore: {fileID: 0}
-  spawnArea: 7
+  spawnArea: 11
 --- !u!114 &1008293963
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -36104,7 +36104,7 @@ MonoBehaviour:
   linkedTile: []
   canalsIn: []
   spawnScore: {fileID: 0}
-  spawnArea: 8
+  spawnArea: 11
 --- !u!114 &1091643425
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -37746,7 +37746,7 @@ MonoBehaviour:
   linkedTile: []
   canalsIn: []
   spawnScore: {fileID: 0}
-  spawnArea: 11
+  spawnArea: 7
 --- !u!114 &1131861215
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -38032,7 +38032,7 @@ MonoBehaviour:
   linkedTile: []
   canalsIn: []
   spawnScore: {fileID: 0}
-  spawnArea: 11
+  spawnArea: 7
 --- !u!114 &1132309688
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -40631,7 +40631,7 @@ MonoBehaviour:
   linkedTile: []
   canalsIn: []
   spawnScore: {fileID: 0}
-  spawnArea: 0
+  spawnArea: 8
 --- !u!114 &1229884395
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -41775,7 +41775,7 @@ MonoBehaviour:
   linkedTile: []
   canalsIn: []
   spawnScore: {fileID: 0}
-  spawnArea: 0
+  spawnArea: 11
 --- !u!114 &1283958559
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -45637,7 +45637,7 @@ MonoBehaviour:
   linkedTile: []
   canalsIn: []
   spawnScore: {fileID: 0}
-  spawnArea: 0
+  spawnArea: 10
 --- !u!114 &1399139054
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -48926,7 +48926,7 @@ MonoBehaviour:
   linkedTile: []
   canalsIn: []
   spawnScore: {fileID: 0}
-  spawnArea: 7
+  spawnArea: 11
 --- !u!114 &1503433580
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -51786,7 +51786,7 @@ MonoBehaviour:
   linkedTile: []
   canalsIn: []
   spawnScore: {fileID: 0}
-  spawnArea: 0
+  spawnArea: 8
 --- !u!114 &1562942015
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -51929,7 +51929,7 @@ MonoBehaviour:
   linkedTile: []
   canalsIn: []
   spawnScore: {fileID: 0}
-  spawnArea: 0
+  spawnArea: 11
 --- !u!114 &1568012754
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -53676,7 +53676,7 @@ MonoBehaviour:
   linkedTile: []
   canalsIn: []
   spawnScore: {fileID: 0}
-  spawnArea: 11
+  spawnArea: 7
 --- !u!114 &1612461602
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -56536,7 +56536,7 @@ MonoBehaviour:
   linkedTile: []
   canalsIn: []
   spawnScore: {fileID: 0}
-  spawnArea: 7
+  spawnArea: 11
 --- !u!114 &1695572779
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -57966,7 +57966,7 @@ MonoBehaviour:
   linkedTile: []
   canalsIn: []
   spawnScore: {fileID: 0}
-  spawnArea: 0
+  spawnArea: 11
 --- !u!114 &1728157787
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -59712,7 +59712,7 @@ MonoBehaviour:
   linkedTile: []
   canalsIn: []
   spawnScore: {fileID: 0}
-  spawnArea: 0
+  spawnArea: 11
 --- !u!114 &1797443256
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -59855,7 +59855,7 @@ MonoBehaviour:
   linkedTile: []
   canalsIn: []
   spawnScore: {fileID: 0}
-  spawnArea: 8
+  spawnArea: 7
 --- !u!114 &1799705781
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -62031,7 +62031,7 @@ MonoBehaviour:
   linkedTile: []
   canalsIn: []
   spawnScore: {fileID: 0}
-  spawnArea: 7
+  spawnArea: 11
 --- !u!114 &1900258448
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -62317,7 +62317,7 @@ MonoBehaviour:
   linkedTile: []
   canalsIn: []
   spawnScore: {fileID: 0}
-  spawnArea: 0
+  spawnArea: 11
 --- !u!114 &1906758786
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -62603,7 +62603,7 @@ MonoBehaviour:
   linkedTile: []
   canalsIn: []
   spawnScore: {fileID: 0}
-  spawnArea: 8
+  spawnArea: 11
 --- !u!114 &1918867528
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -63175,7 +63175,7 @@ MonoBehaviour:
   linkedTile: []
   canalsIn: []
   spawnScore: {fileID: 0}
-  spawnArea: 0
+  spawnArea: 10
 --- !u!114 &1926875689
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -63535,7 +63535,7 @@ MonoBehaviour:
   linkedTile: []
   canalsIn: []
   spawnScore: {fileID: 0}
-  spawnArea: 0
+  spawnArea: 11
 --- !u!114 &1930489504
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -63678,7 +63678,7 @@ MonoBehaviour:
   linkedTile: []
   canalsIn: []
   spawnScore: {fileID: 0}
-  spawnArea: 7
+  spawnArea: 11
 --- !u!114 &1938556508
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -63964,7 +63964,7 @@ MonoBehaviour:
   linkedTile: []
   canalsIn: []
   spawnScore: {fileID: 0}
-  spawnArea: 0
+  spawnArea: 11
 --- !u!114 &1949032354
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -66109,7 +66109,7 @@ MonoBehaviour:
   linkedTile: []
   canalsIn: []
   spawnScore: {fileID: 0}
-  spawnArea: 0
+  spawnArea: 11
 --- !u!114 &2007618949
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -67681,7 +67681,7 @@ MonoBehaviour:
   linkedTile: []
   canalsIn: []
   spawnScore: {fileID: 0}
-  spawnArea: 11
+  spawnArea: 7
 --- !u!114 &2058813393
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -68253,7 +68253,7 @@ MonoBehaviour:
   linkedTile: []
   canalsIn: []
   spawnScore: {fileID: 0}
-  spawnArea: 0
+  spawnArea: 11
 --- !u!114 &2069564986
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -68767,7 +68767,7 @@ MonoBehaviour:
   Cam: {fileID: 2083589401}
   Timer: {fileID: 357762604}
   minZoom: 5
-  maxZoom: 8
+  maxZoom: 7
   zoomIncrement: 1
 --- !u!1 &2086480257
 GameObject:
@@ -69102,7 +69102,7 @@ MonoBehaviour:
   linkedTile: []
   canalsIn: []
   spawnScore: {fileID: 0}
-  spawnArea: 0
+  spawnArea: 8
 --- !u!114 &2094478043
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -71533,7 +71533,7 @@ MonoBehaviour:
   linkedTile: []
   canalsIn: []
   spawnScore: {fileID: 0}
-  spawnArea: 11
+  spawnArea: 7
 --- !u!114 &2145281135
 MonoBehaviour:
   m_ObjectHideFlags: 0

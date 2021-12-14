@@ -48,6 +48,7 @@ public class GameTime : Singleton<GameTime>
                 {
                     plantSpawner.currentSpawnArea++;
                     plantSpawner.newZone = true;
+                    Debug.Log(plantSpawner.newZone);
 
                 }
             }
