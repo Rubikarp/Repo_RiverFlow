@@ -125,6 +125,28 @@ public class GameGrid : Singleton<GameGrid>
         }
     }
 
+    public void HotFix()
+    {
+        for (int y = 0; y < size.y; y++)
+        {
+            for (int x = 0; x < size.x; x++)
+            {
+                GameTile tile = GetTile(x, y);
+                if (tile.flowOut.Count + tile.flowIn.Count >0 && tile.canalsIn.Count == 0)
+                {
+                    tile.RemoveAllLinkedTile();
+                }
+
+                for (int i = 0; i < tile.canalsIn.Count; i++)
+                {
+                    if (!RiverManager.Instance.canals.Contains(tile.canalsIn[i]))
+                    {
+                        tile.canalsIn.RemoveAt(i);
+                    }
+                }
+            }
+        }
+    }
 
     [ContextMenu("Clear The GameGrid")]
     private void ClearGrid()
