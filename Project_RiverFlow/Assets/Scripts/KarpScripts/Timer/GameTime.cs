@@ -48,7 +48,7 @@ public class GameTime : Singleton<GameTime>
                 getMoreDig?.Invoke();
                 
                 weekNumber++;
-                if (weekNumber == timingsZones[plantSpawner.currentSpawnArea-1])
+                if (((weekDuration * weekNumber)+gameTimer) == timingsZones[plantSpawner.currentSpawnArea-1])
                 {
                     plantSpawner.threatState = ThreatState.NEWZONE;
                     plantSpawner.currentSpawnArea++;

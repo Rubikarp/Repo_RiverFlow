@@ -8,10 +8,24 @@ public class Digging_UI : MonoBehaviour
 {
     public TextMeshProUGUI textGUI;
     public InventoryManager Inventory;
+    public Sprite on;
+    public Sprite off;
+    public Image selfImage;
     //public DigingHandler dig;
 
     void Update()
     {
-        textGUI.text = Inventory.digAmmount.ToString();
+        
+        if (Inventory.digAmmount <= 0)
+        {
+            textGUI.text = string.Empty;
+            selfImage.sprite = off;
+        }
+        else
+        {
+            textGUI.text = Inventory.digAmmount.ToString();
+            selfImage.sprite = on;
+        }
     }
+
 }

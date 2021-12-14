@@ -91,7 +91,7 @@ public class PlantSpawner : MonoBehaviour
         //Debug.Log(gameGrid.tiles.Length);
         foreach(GameTile iTile in gameGrid.tiles)
         {
-            //Debug.Log(iTile);
+            Debug.Log(iTile);
             TileInfoScore tmp = iTile.spawnScore.Evaluate();
             if(tmp.spawn)
             {
