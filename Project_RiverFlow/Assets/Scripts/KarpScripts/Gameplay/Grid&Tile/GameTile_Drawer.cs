@@ -20,9 +20,6 @@ public class GameTile_Drawer : MonoBehaviour
         UpdateTileColor();
     }
 
-        UpdateTileColor();
-    }
-
     public void UpdateTileColor()
     {
         //Tile Coloring
