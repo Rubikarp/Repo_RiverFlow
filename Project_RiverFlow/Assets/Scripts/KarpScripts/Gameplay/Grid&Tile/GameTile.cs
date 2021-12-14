@@ -137,7 +137,30 @@ public class GameTile : MonoBehaviour
             {
                 if(neighbor.riverStrenght > 0)
                 {
-                    return true;
+                    switch (data.type)
+                    {
+                        case TileType.grass:
+                            if (receivedFlow >= FlowStrenght._25_)
+                            {
+                                return true;
+                            }
+                            break;
+                        case TileType.clay:
+                            if (receivedFlow >= FlowStrenght._50_)
+                            {
+                                return true;
+                            }
+                            break;
+                        case TileType.sand:
+                            if (receivedFlow >= FlowStrenght._75_)
+                            {
+                                return true;
+                            }
+                            break;
+                        default:
+                            break;
+                    }
+
                 }
                 foreach (GameTile neighborOfNeighbor in neighbor.neighbors)
                 {
