@@ -206,6 +206,8 @@ public class DigingHandler : MonoBehaviour
     private void OnRightClickRelease()
     {
         eraserSelectTile = null;
+        lastEraserSelectTile = null;
+
     }
 
     public void RemoveElement(Element element)
