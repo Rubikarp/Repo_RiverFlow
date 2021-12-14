@@ -44,7 +44,7 @@ public class GameTime : Singleton<GameTime>
 
             if (timingsZones.Count > 0)
             {
-                if (((weekDuration * (weekNumber - 1)) + gameTimer) >= timingsZones[plantSpawner.currentSpawnArea - 1] && plantSpawner.newZone == false)
+                if ((gameTimer) >= timingsZones[plantSpawner.currentSpawnArea - 1] && plantSpawner.newZone == false)
                 {
                     plantSpawner.currentSpawnArea++;
                     plantSpawner.newZone = true;
