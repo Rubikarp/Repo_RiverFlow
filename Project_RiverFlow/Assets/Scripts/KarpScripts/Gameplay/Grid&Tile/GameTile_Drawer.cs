@@ -17,6 +17,8 @@ public class GameTile_Drawer : MonoBehaviour
         grid = GameGrid.instance;
         tile = gameObject.GetComponent<GameTile>();
         rend = gameObject.GetComponent<SpriteRenderer>();
+        UpdateTileColor();
+    }
 
         UpdateTileColor();
     }
@@ -40,6 +42,10 @@ public class GameTile_Drawer : MonoBehaviour
 
             case TileType.sand:
                 rend.color = palette.groundAride;
+                break;
+
+            case TileType.mountain:
+                rend.color = palette.mountain;
                 break;
 
             default:

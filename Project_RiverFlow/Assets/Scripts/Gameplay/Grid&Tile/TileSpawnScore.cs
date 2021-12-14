@@ -35,32 +35,26 @@ public class TileSpawnScore : MonoBehaviour
 
         spawnable = false;
         scoreValue = 0;
-        
-            if (tile.spawnArea <= plantSpawner.currentSpawnArea && tile.spawnArea != 0)
+
+        if (tile.spawnArea <= plantSpawner.currentSpawnArea && tile.spawnArea != 0)
+        {
+
+            //Debug.Log("evaluate");
+            if (plantSpawner.newZone == true)
             {
+                scoreValue += EvalSpawnArea() * CastThreatToInt(1, 0);
+            }
 
-                //Debug.Log("evaluate");
-                switch (plantSpawner.threatState)
-                {
-                    case ThreatState.NEWZONE:
-                        scoreValue += EvalSpawnArea() * CastThreatToInt(1, 0);
-                        break;
-                    default:
+            scoreValue += EvalTerrainType() * CastThreatToInt(1, 0);
+            scoreValue += EvalPlantsNearby() * CastThreatToInt(1, 0);
+            scoreValue += EvalMountainsNearby() * CastThreatToInt(1, 0);
+            scoreValue += EvalIrrigatedTile() * CastThreatToInt(1, 0);
+            scoreValue += EvalNoise();
+            spawnable = EvalForbiddenCase();
 
-                        break;
-                }
-
-                scoreValue += EvalTerrainType() * CastThreatToInt(1, 0);
-                scoreValue += EvalPlantsNearby() * CastThreatToInt(1, 0);
-                scoreValue += EvalMountainsNearby() * CastThreatToInt(1, 0);
-                scoreValue += EvalIrrigatedTile() * CastThreatToInt(1, 0);
-                scoreValue += EvalNoise();
-            
         }
 
-        spawnable = EvalForbiddenCase();
-        
-        return new TileInfoScore(tile,scoreValue,spawnable);
+        return new TileInfoScore(tile, scoreValue, spawnable);
     }
 
     private int CastThreatToInt()
