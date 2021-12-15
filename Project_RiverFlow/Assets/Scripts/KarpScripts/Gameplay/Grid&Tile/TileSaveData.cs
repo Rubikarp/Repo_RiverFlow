@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [Serializable]
-public struct TileData 
+public struct TileSaveData 
 {
     [Header("Essential Data")]
     public string name;
@@ -18,7 +18,7 @@ public struct TileData
     public bool[] flowOut_Neighbors;
 
     #region Constructor 
-    public TileData (Vector2Int _gridPos, TileType _type = TileType.grass, FlowStrenght _riverStrenght = FlowStrenght._00_)
+    public TileSaveData (Vector2Int _gridPos, TileType _type = TileType.grass, FlowStrenght _riverStrenght = FlowStrenght._00_)
     {
         ///Essential Data
         name = "Data_Tile(" + _gridPos.x + ":" + _gridPos.y + ")";
@@ -30,7 +30,7 @@ public struct TileData
         type = _type;
         riverStrenght = _riverStrenght;
     }
-    public TileData (int _gridPosX, int _gridPosY, TileType _type = TileType.grass, FlowStrenght _riverStrenght = FlowStrenght._00_)
+    public TileSaveData (int _gridPosX, int _gridPosY, TileType _type = TileType.grass, FlowStrenght _riverStrenght = FlowStrenght._00_)
     {
         ///Essential Data
         name = "Data_Tile(" + _gridPosX + ":" + _gridPosY + ")";
@@ -42,7 +42,7 @@ public struct TileData
         type = _type;
         riverStrenght = _riverStrenght;
     }
-    public TileData(TileData tile)
+    public TileSaveData(TileSaveData tile)
     {
         ///Essential Data
         this.name = tile.name;

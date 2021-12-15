@@ -14,12 +14,6 @@ public class TilePalette_SCO : ScriptableObject
     [ColorUsage(true, false)] public Color groundAride = Color.yellow;
     [ColorUsage(true, false)] public Color mountain = Color.gray;
 
-    [Header("River Palette")]
-    [ColorUsage(true, false)] public  Color wat25 = Color.blue;
-    [ColorUsage(true, false)] public Color wat50 = Color.blue;
-    [ColorUsage(true, false)] public Color wat75 = Color.blue;
-    [ColorUsage(true, false)] public Color wat100 = Color.blue;
-
     [Header("BackUp")]
     [ColorUsage(true, false)] public Color errorMat = Color.magenta;
 

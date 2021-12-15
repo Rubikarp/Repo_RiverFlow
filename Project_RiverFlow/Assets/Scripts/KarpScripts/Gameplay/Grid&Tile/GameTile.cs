@@ -8,7 +8,7 @@ public class GameTile : MonoBehaviour
     public static float simulStepDur = 0.3f;
 
     [Header("Essential Data")]
-    public TileData data;
+    public TileSaveData data;
     #region Getter / Setter
     public Vector2Int gridPos
     {
@@ -560,7 +560,7 @@ public class GameTile : MonoBehaviour
     }
 
     //GameTile to Data
-    public void SaveInTileData(TileData data)
+    public void SaveInTileData(TileSaveData data)
     {
         for (int i = 0; i < data.flowIn_Neighbors.Length; i++)
         {

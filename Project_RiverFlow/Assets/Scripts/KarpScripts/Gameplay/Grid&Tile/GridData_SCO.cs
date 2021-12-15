@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using NaughtyAttributes;
 
-[CreateAssetMenu(fileName = "new_proto_GridData", menuName = "GameplaySCO/GridData")]
+[CreateAssetMenu(fileName = "new_proto_GridData", menuName = "Gameplay/GridData")]
 public class GridData_SCO : ScriptableObject
 {
     [Header("Parameter")]
@@ -11,22 +11,22 @@ public class GridData_SCO : ScriptableObject
 
     [Header("Data")]
 
-    public TileData[/*size.x * size.y*/] tilesData;
+    public TileSaveData[/*size.x * size.y*/] tilesData;
 
-    public TileData GetTile(int x, int y)
+    public TileSaveData GetTile(int x, int y)
     {
         return tilesData[x + (y * (size.x))];
     }
-    public TileData GetTile(Vector2Int pos)
+    public TileSaveData GetTile(Vector2Int pos)
     {
         return tilesData[pos.x + (pos.y * (size.x))];
     }
 
-    public void SetTile(int x, int y, TileData value)
+    public void SetTile(int x, int y, TileSaveData value)
     {
         tilesData[x + (y * (size.x))] = value;
     }
-    public void SetTile(Vector2Int pos, TileData value)
+    public void SetTile(Vector2Int pos, TileSaveData value)
     {
         tilesData[pos.x + (pos.y * (size.x))] = value;
     }
@@ -35,12 +35,12 @@ public class GridData_SCO : ScriptableObject
     [Button]
     private void PopulateGrid()
     {
-        tilesData = new TileData[size.x * size.y];
+        tilesData = new TileSaveData[size.x * size.y];
         for (int y = 0; y < size.y; y++)
         {
             for (int x = 0; x < size.x; x++)
             {
-                SetTile(x,y,new TileData(x,y));
+                SetTile(x,y,new TileSaveData(x,y));
             }
         }
     }
