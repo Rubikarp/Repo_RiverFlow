@@ -20,7 +20,9 @@ public class Plant_Drawer : MonoBehaviour
     [SerializeField] Image imgTiller;
 
     [Header("Tweening")]
-    public AnimationCurve TreeCurve;
+    public List <float>twitchFrequency;
+    [SerializeField]
+    private int currentTwitch = 0;
     private bool increase =true;
     [Header("Particles")]
     public ParticleSystem Leafs;
@@ -39,7 +41,12 @@ public class Plant_Drawer : MonoBehaviour
 
     void Update()
     {
-       imgTiller.fillAmount = plant.timer;
+        TwitchTiming();
+        ////imgTiller.fillAmount = plant.timer;
+        //if (Input.GetKeyDown(KeyCode.Space))
+        //{
+        //    StartCoroutine(Twitch());
+        //}
     }
 
     private void UpdateSkin(bool isUp)
@@ -61,6 +68,7 @@ public class Plant_Drawer : MonoBehaviour
     }
     IEnumerator TreeSkouiz(PlantState state)
     {
+        currentTwitch = 0;
 
         switch (state)
         {
@@ -93,6 +101,7 @@ public class Plant_Drawer : MonoBehaviour
                 break;
             case PlantState.Young:
                 Leafs.Play(true);
+
                 transform.localScale = new Vector3(0.3f, 0, 0);
                 yield return new WaitForSecondsRealtime(0.1f);
                 transform.DOScaleY(1f, 0.5f).SetEase(Ease.OutQuart);
@@ -102,18 +111,21 @@ public class Plant_Drawer : MonoBehaviour
                 break;
             case PlantState.Adult:
                 Leafs.Play(true);
+
                 yield return new WaitForSecondsRealtime(0.1f);
                 transform.DOScaleX(1f, 1.3f).SetEase(Ease.OutElastic);
 
                 break;
             case PlantState.Senior:
                 Leafs.Play(true);
+
                 yield return new WaitForSecondsRealtime(0.1f);
                 transform.DOScaleX(1f, 1.3f).SetEase(Ease.OutElastic);
 
                 break;
             case PlantState.FruitTree:
                 Leafs.Play(true);
+
                 yield return new WaitForSecondsRealtime(0.1f);
                 transform.DOScaleX(1f, 1.3f).SetEase(Ease.OutElastic);
 
@@ -247,5 +259,32 @@ public class Plant_Drawer : MonoBehaviour
         StartCoroutine(TreeSkouiz(plant.currentState));
     }
 
+    IEnumerator Twitch()
+    {
+        Debug.Log("Boing");
+        transform.DOScaleY(1.1f, 0.5f).SetEase(Ease.OutElastic);
+        transform.DOScaleX(1.1f, 0.5f).SetEase(Ease.OutElastic);
+        yield return new WaitForSecondsRealtime(0.05f);
+        transform.DOScaleY(1f, 0.5f).SetEase(Ease.OutElastic);
+        transform.DOScaleX(1f, 0.5f).SetEase(Ease.OutElastic);
+    }
+    public void TwitchTiming()
+    {
+        if (plant.isIrrigated)
+        {
+            if (twitchFrequency[currentTwitch] <= plant.timer)
+            {
+                StartCoroutine(Twitch());
+
+                currentTwitch++;
+
+
+
+
+            }
+        }
+
+
+    }
     
 }
