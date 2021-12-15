@@ -217,8 +217,15 @@ public class RiverManager : Singleton<RiverManager>
                         {
                             if (endTile.canalsIn[0] == canals[i])
                             {
-                                ExtendCanal(canals[i], endTile, startTile);
-                                Inverse(canals[i]);
+                                if (canals[i].startNode == endTile.gridPos)
+                                {
+                                    ExtendCanal(canals[i], endTile, startTile);
+                                }
+                                else
+                                {
+                                    ExtendCanal(canals[i], startTile, endTile);
+                                    Inverse(canals[i]);
+                                }
                             }
                         }
                         break;
@@ -728,7 +735,7 @@ public class RiverManager : Singleton<RiverManager>
     {
         if (canal.startNode == extremumTile.gridPos)
         {
-            GameTile.Link(extremumTile, addedTile);
+            GameTile.Link(addedTile, extremumTile);
 
             List<Vector2Int> list = new List<Vector2Int>();
             list.Add(canal.startNode);

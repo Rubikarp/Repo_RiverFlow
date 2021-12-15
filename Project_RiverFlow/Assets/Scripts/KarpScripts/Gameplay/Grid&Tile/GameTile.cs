@@ -56,6 +56,10 @@ public class GameTile : MonoBehaviour
             }
             else
             {
+                if (element is WaterSource)
+                {
+                    return data.riverStrenght + (int)FlowStrenght._25_;
+                }
                 return data.riverStrenght;
             }
         }
