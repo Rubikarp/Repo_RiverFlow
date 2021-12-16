@@ -8,7 +8,7 @@ public class GameTime : Singleton<GameTime>
 {
     [Header("LongTime")]
     public bool isPaused = false;
-    [SerializeField] float gameTimer = 0;
+    [SerializeField] public float gameTimer = 0;
     public float gameTimeSpeed = 1f;
     [Range(10, 360)] public float weekDuration = 180f;
     public int weekNumber = 1;
