@@ -75,22 +75,22 @@ public class GameTime : Singleton<GameTime>
             {
                 switch(plantSpawner.threatState) {
                     case ThreatState.CALM:
-                        nextPlantSpawn = plantSpawnRateCalm + (plantSpawnRateCalm * spawnRateVariation)
+                        nextPlantSpawn = plantSpawnRateCalm + (plantSpawnRateCalm * spawnRateVariation);
                         break;
 
                     case ThreatState.NEUTRAL:
-                        nextPlantSpawn = plantSpawnRateNeutral + (plantSpawnRateNeutral * spawnRateVariation)
+                        nextPlantSpawn = plantSpawnRateNeutral + (plantSpawnRateNeutral * spawnRateVariation);
                         break;
                     
                     case ThreatState.CHAOTIC:
-                        nextPlantSpawn = plantSpawnRateChaotic + (plantSpawnRateChaotic * spawnRateVariation)
+                        nextPlantSpawn = plantSpawnRateChaotic + (plantSpawnRateChaotic * spawnRateVariation);
                         break;
 
                     default:
-                        nextPlantSpawn = plantSpawnRateNeutral + (plantSpawnRateNeutral * spawnRateVariation)
+                        nextPlantSpawn = plantSpawnRateNeutral + (plantSpawnRateNeutral * spawnRateVariation);
                         break;
                 }
-                
+
                 plantSpawner.SpawnPlant();
                 if (plantSpawner.newZone == true)
                 {
