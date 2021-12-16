@@ -58279,7 +58279,7 @@ MonoBehaviour:
   scoreIrrigatedTile0: 4
   weightIrrigatedTile: 2
   currentSpawnArea: 1
-  threatState: 2
+  threatState: 1
   plantGameObject: {fileID: 4751209323767118212, guid: 5a8552f0c1487f74bb441c5c837d2071, type: 3}
   newZone: 0
   inventory: {fileID: 510528751}
