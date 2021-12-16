@@ -5,10 +5,8 @@ using System.Linq;
 
 public enum ThreatState
 {
-    PEACEFUL,
     CALM,
     NEUTRAL,
-    THREATENING,
     CHAOTIC
 }
 
@@ -52,6 +50,9 @@ public class PlantSpawner : MonoBehaviour
     private List<TileInfoScore> tileScores;
     private ElementHandler elementHandler;
     public bool newZone;
+
+    public InventoryManager inventory;
+    private int DifficultyScore;
 
     private void Start()
     {
@@ -141,4 +142,21 @@ public class PlantSpawner : MonoBehaviour
     //    Swap(list, i + 1, high);
     //    return i + 1;
     //}
+
+    private void DifficultyScoreCalcul()
+    {
+        DifficultyScore = 0;
+        DifficultyScore = inventory.digAmmount * 2;
+        foreach(Plant plant in elementHandler.allPlants)
+        {
+            if(plant.currentState == PlantState.Baby || plant.currentState == PlantState.Agony)
+            {
+                DifficultyScore -= 5;
+            } else if(plant.currentState == PlantState.Dead)
+            {
+                DifficultyScore -= 10;
+            }
+        }
+
+    }
 }
