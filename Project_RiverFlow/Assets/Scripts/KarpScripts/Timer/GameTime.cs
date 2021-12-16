@@ -18,7 +18,10 @@ public class GameTime : Singleton<GameTime>
     [Range(0.1f, 1.2f)] public float iterationStepDur = 0.2f;
 
     [Header("Plant Spawning")]
-    public float plantSpawnRate = 10;
+    public float plantSpawnRateCalm = 10;
+    public float plantSpawnRateNeutral = 15;
+    public float plantSpawnRateChaotic = 8;
+    [Range(0.0f,1.0f)] public float spawnRateVariation = 0.2f;
     private float nextPlantSpawn;
     private PlantSpawner plantSpawner;
     public List<int> timingsZones;
@@ -32,7 +35,7 @@ public class GameTime : Singleton<GameTime>
     void Start()
     {
         plantSpawner = GameObject.Find("PlantSpawner").GetComponent<PlantSpawner>();
-        nextPlantSpawn = plantSpawnRate;
+        nextPlantSpawn = 2;
     }
 
     void Update()
@@ -70,7 +73,24 @@ public class GameTime : Singleton<GameTime>
             nextPlantSpawn -= Time.deltaTime;
             if (nextPlantSpawn < 0)
             {
-                nextPlantSpawn = plantSpawnRate;
+                switch(plantSpawner.threatState) {
+                    case ThreatState.CALM:
+                        nextPlantSpawn = plantSpawnRateCalm + (plantSpawnRateCalm * spawnRateVariation)
+                        break;
+
+                    case ThreatState.NEUTRAL:
+                        nextPlantSpawn = plantSpawnRateNeutral + (plantSpawnRateNeutral * spawnRateVariation)
+                        break;
+                    
+                    case ThreatState.CHAOTIC:
+                        nextPlantSpawn = plantSpawnRateChaotic + (plantSpawnRateChaotic * spawnRateVariation)
+                        break;
+
+                    default:
+                        nextPlantSpawn = plantSpawnRateNeutral + (plantSpawnRateNeutral * spawnRateVariation)
+                        break;
+                }
+                
                 plantSpawner.SpawnPlant();
                 if (plantSpawner.newZone == true)
                 {
