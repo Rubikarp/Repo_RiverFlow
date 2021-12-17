@@ -5,22 +5,9 @@ using UnityEngine;
 public class GameTile : MonoBehaviour
 {
     public const int maxConnection = 3;
-    public static float simulStepDur = 0.3f;
 
-    [Header("Essential Data")]
-    public TileSaveData data;
-    #region Getter / Setter
-    public Vector2Int gridPos
-    {
-        get
-        {
-            return data.gridPos;
-        }
-        set
-        {
-            data.gridPos = value;
-        }
-    }
+    [Header("Position")]
+    public Vector2Int gridPos;
     public Vector3 worldPos
     {
         get
@@ -35,44 +22,15 @@ public class GameTile : MonoBehaviour
             return transform.position;
         }
     }
-    public TileType type
-    {
-        get
-        {
-            return data.type;
-        }
-        set
-        {
-            data.type = value;
-        }
-    }
-    public FlowStrenght riverStrenght
-    {
-        get
-        {
-            if(element is WaterSource)
-            {
-                return FlowStrenght._100_;
-            }
-            else
-            {
-                if (element is WaterSource)
-                {
-                    return data.riverStrenght + (int)FlowStrenght._25_;
-                }
-                return data.riverStrenght;
-            }
-        }
-        set
-        {
-            data.riverStrenght = value;
-        }
-    }
-    #endregion
+
+    [Header("State")]
+    public TileType type;
+    public FlowStrenght riverStrenght;
 
     [Header("GameObject Data")]
     public Element element;
     public GameTile[] neighbors = new GameTile[8];
+    public GameTile[] neighborsDist2 = new GameTile[16];
     [Space(8)]
     public FlowStrenght receivedFlow = FlowStrenght._00_;
     [Space(8)]
@@ -104,7 +62,7 @@ public class GameTile : MonoBehaviour
             {
                 return false;
             }
-            if(data.type == TileType.mountain) //Si la tile est une montagne
+            if(type == TileType.mountain) //Si la tile est une montagne
             {
                 return false;
             }
@@ -133,7 +91,7 @@ public class GameTile : MonoBehaviour
     {
         get
         {
-            if (data.riverStrenght > 0 && isDuged)
+            if (riverStrenght > 0 && isDuged)
             {
                 return true;
             }
@@ -148,7 +106,7 @@ public class GameTile : MonoBehaviour
             {
                 if(neighbor.riverStrenght > 0)
                 {
-                    switch (data.type)
+                    switch (type)
                     {
                         case TileType.grass:
                             if (neighbor.riverStrenght >= FlowStrenght._25_)
@@ -181,7 +139,7 @@ public class GameTile : MonoBehaviour
                         {
                             if (neighborOfNeighbor.isRiver)
                             {
-                                switch (data.type)
+                                switch (type)
                                 {
                                     case TileType.grass:
                                         if (neighborOfNeighbor.riverStrenght >=FlowStrenght._25_)
@@ -488,7 +446,7 @@ public class GameTile : MonoBehaviour
     }
 
     //Helper
-    public void FillNeighbor()
+    public void FillNeighbor(GameGrid grid)
     {
         Vector2Int temp = gridPos;
         Direction dir = new Direction(0);
@@ -504,13 +462,68 @@ public class GameTile : MonoBehaviour
                 neighbors[i] = null;
             }
             else
-            if (temp.x > GameGrid.instance.size.x - 1 || temp.y > GameGrid.instance.size.y - 1)
+            if (temp.x > grid.size.x - 1 || temp.y > grid.size.y - 1)
             {
                 neighbors[i] = null;
             }
             else
             {
-                neighbors[i] = GameGrid.instance.GetTile(temp);
+                neighbors[i] = grid.GetTile(temp);
+            }
+        }
+
+        //FillNeighborDist2();
+    }
+    public GameTile[] GetNeighbor()
+    {
+        GameTile[] result = new GameTile[8];
+
+        Vector2Int temp = gridPos;
+        Direction dir = new Direction(0);
+
+        neighbors = new GameTile[8];
+        for (int i = 0; i < 8; i++)
+        {
+            dir = new Direction((DirectionEnum)i);
+            temp = gridPos + dir.dirValue;
+
+            if (temp.x < 0 || temp.y < 0)
+            {
+                result[i] = null;
+            }
+            else
+            if (temp.x > GameGrid.instance.size.x - 1 || temp.y > GameGrid.instance.size.y - 1)
+            {
+                result[i] = null;
+            }
+            else
+            {
+                result[i] = GameGrid.instance.GetTile(temp);
+            }
+        }
+
+        return result;
+    }
+
+    public void FillNeighborDist2()
+    {
+        List<GameTile> pack = new List<GameTile>();
+        pack.AddRange(neighbors[0].GetNeighbor());
+        pack.AddRange(neighbors[2].GetNeighbor());
+        pack.AddRange(neighbors[4].GetNeighbor());
+        pack.AddRange(neighbors[6].GetNeighbor());
+
+        List<GameTile> result = new List<GameTile>();
+
+        neighbors = new GameTile[8];
+        for (int i = 0; i < pack.Count; i++)
+        {
+            if(pack[i] != null && pack[i] != this)
+            {
+                if(NeighborIndex(pack[i]) == -1)
+                {
+
+                }
             }
         }
 
@@ -525,7 +538,7 @@ public class GameTile : MonoBehaviour
             }
         }
         Debug.LogError("Linked tile " + tile.gridPos + " n'est pas un voisin de " + this.gridPos + ".", this);
-        return 8;
+        return -1;
     }
     public GameTile GetNeighbor(Direction dir)
     {

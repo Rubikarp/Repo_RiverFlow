@@ -1,12 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using NaughtyAttributes;
 
 public class GameTile_Drawer : MonoBehaviour
 {
     public GameTile tile;
     public SpriteRenderer rend;
-    public GameGrid grid;
 
     [Header("Ground")]
     [SerializeField] TilePalette_SCO palette;
@@ -14,12 +14,12 @@ public class GameTile_Drawer : MonoBehaviour
     [ContextMenu("Start")]
     private void Start()
     {
-        grid = GameGrid.instance;
         tile = gameObject.GetComponent<GameTile>();
         rend = gameObject.GetComponent<SpriteRenderer>();
         UpdateTileColor();
     }
 
+    [Button("Reeboot")]
     public void UpdateTileColor()
     {
         //Tile Coloring
@@ -49,10 +49,5 @@ public class GameTile_Drawer : MonoBehaviour
                 rend.color = palette.errorMat;
                 break;
         }
-    }
-
-    private void OnDrawGizmos()
-    {
-        //UpdateTileColor();
     }
 }

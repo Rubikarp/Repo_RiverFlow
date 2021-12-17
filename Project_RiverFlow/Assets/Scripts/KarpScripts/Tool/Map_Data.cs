@@ -15,4 +15,13 @@ public class Map_Data : ScriptableObject
 
     public TileType selectedType;
 #endif
+
+    public TileType GetTileType(int x, int y)
+    {
+        return gridFieldType[x + (y * (gridSize.x))];
+    }
+    public TileType GetTileType(Vector2Int pos)
+    {
+        return gridFieldType[pos.x + (pos.y * (gridSize.x))];
+    }
 }

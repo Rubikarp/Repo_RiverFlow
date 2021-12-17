@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 5446814402908427166}
   - component: {fileID: 6129579272483592476}
   - component: {fileID: 825307937645406591}
+  - component: {fileID: 7418900048750647012}
   - component: {fileID: 3412835170295294207}
   m_Layer: 0
   m_Name: GameTile-Template
@@ -96,22 +97,51 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 849e6b0822dde464c9a11d74d7aec89a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  data:
-    name: 
-    gridPos: {x: 0, y: 0}
-    type: 1
-    riverStrenght: 0
-    flowIn_Neighbors: 
-    flowOut_Neighbors: 
+  gridPos: {x: 0, y: 0}
+  type: 0
+  riverStrenght: 0
   element: {fileID: 0}
   neighbors: []
+  neighborsDist2:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   receivedFlow: 0
   flowIn: []
   flowOut: []
   linkedTile: []
   canalsIn: []
-  gameTime: {fileID: 0}
   spawnScore: {fileID: 0}
+  spawnArea: 0
+--- !u!114 &7418900048750647012
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5375811947892556009}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7efe48a7badca8540a49a5af9b8b0d9d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tile: {fileID: 825307937645406591}
+  rend: {fileID: 6129579272483592476}
+  grid: {fileID: 0}
+  palette: {fileID: 11400000, guid: 490d2554b53e93640bed8c1ce746c7ec, type: 2}
 --- !u!114 &3412835170295294207
 MonoBehaviour:
   m_ObjectHideFlags: 0

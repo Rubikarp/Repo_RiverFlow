@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEditor;
 using NaughtyAttributes;
 
 public class GameGrid : Singleton<GameGrid>
@@ -9,13 +10,12 @@ public class GameGrid : Singleton<GameGrid>
 
     [Header("Parameter")]
     public float cellSize = 1;
-    public Vector2Int size = new Vector2Int(10, 10);
+    public Vector2Int size = new Vector2Int(16, 16);
     public Vector2 offSet = new Vector2Int(0,0);
 
     [Space(10)]
     [Header("Data")]
-    public Transform gridContainer;
-    public GameObject tileTemplate;
+    public Map_Data mapData;
     #region Grid-GameTile
     public GameTile[] tiles;
     public GameTile GetTile(int x, int y)
@@ -35,7 +35,9 @@ public class GameGrid : Singleton<GameGrid>
         tiles[pos.x + (pos.y * (size.x))] = value;
     }
     #endregion
-    public GridData_SCO gridData;
+    [Header("Debug")]
+    public Transform gridContainer;
+    public GameObject tileTemplate;
     
     [Header("Debug")]
     public bool showDebug;
@@ -48,17 +50,56 @@ public class GameGrid : Singleton<GameGrid>
 
     void Start()
     {
-        PopulateGrid();
-        SetNeighbor();
+        LoadMap();
     }
 
-    void Update()
+    #region Map Manage
+    [Button]
+    private void LoadMap()
     {
-        
-    }
+        if(mapData == null)
+        {
+            Debug.LogError("No map Data Available");
+            return;
+        }
+        size = mapData.gridSize;
 
-    [ContextMenu("Populate The GameGrid")]
-    private void PopulateGrid()
+        //Clear the map
+        for (int i = 0; i < gridContainer.childCount; i++)
+        {
+#if UNITY_EDITOR
+            DestroyImmediate(gridContainer.GetChild(0).gameObject);
+#else
+            Destroy(gridContainer.GetChild(0).gameObject);
+#endif
+        }
+        ClearGrid();
+
+        PopulateGrid(size);
+        ReferenceTheGrid();
+        SetNeighbor();
+        UpdateGraph(size);
+    }
+    private void ClearGrid()
+    {
+        if (tiles != null)
+        {
+            for (int i = 0; i < tiles.Length; i++)
+            {
+                if (tiles[i] != null)
+                {
+                    GameObject go = tiles[i].gameObject;
+#if UNITY_EDITOR
+                    DestroyImmediate(go);
+#else
+                    Destroy(go);
+#endif
+                }
+            }
+            tiles = null;
+        }
+    }
+    private void PopulateGrid(Vector2Int size)
     {
         if(tiles == null || tiles.Length ==0)
         {
@@ -70,45 +111,72 @@ public class GameGrid : Singleton<GameGrid>
             {
                 if (GetTile(x, y) == null)
                 {
-                    GameObject go = Instantiate(tileTemplate, TileToPos(new Vector2Int(x, y)), Quaternion.identity, gridContainer);
+#if UNITY_EDITOR
+                    GameObject go = PrefabUtility.InstantiatePrefab(tileTemplate, gridContainer) as GameObject;
+#else
+                    GameObject go = Instantiate(tileTemplate, gridContainer);
+#endif 
                     go.name = "Tile_(" + x + "/" + y + ")";
+                    go.transform.position = TileToPos(new Vector2Int(x, y));
 
                     GameTile tile = go.GetComponent<GameTile>();
                     if (tile == null)
                     {
                         Debug.LogError("can't Find Tile on the object");
                     }
-                    tile.data = gridData.GetTile(x, y);
+                    tile.type = mapData.GetTileType(x, y);
                     SetTile(x, y, tile);
                 }
             }
         }
     }
-    
-    [ContextMenu("Reference The GameGrid")]
     private void ReferenceTheGrid()
     {
         for (int y = 0; y < size.y; y++)
         {
             for (int x = 0; x < size.x; x++)
             {
-                GetTile(x,y).data = gridData.GetTile(x, y);
+                GetTile(x,y).type = mapData.GetTileType(x, y);
             }
         }
     }
-
-    [ContextMenu("Set Neighbor")]
     private void SetNeighbor()
     {
         for (int y = 0; y < size.y; y++)
         {
             for (int x = 0; x < size.x; x++)
             {
-                GetTile(x, y).FillNeighbor();
+                GetTile(x, y).FillNeighbor(this);
             }
         }
     }
-    
+    private void UpdateGraph(Vector2Int size)
+    {
+        for (int y = 0; y < size.y; y++)
+        {
+            for (int x = 0; x < size.x; x++)
+            {
+                if (GetTile(x, y) != null)
+                {
+                    GameObject go = GetTile(x, y).gameObject;
+                    GameTile_Drawer tile = go.GetComponent<GameTile_Drawer>();
+                    if (tile == null)
+                    {
+                        Debug.LogError("can't Find Tile on the object");
+                    }
+                    tile.UpdateTileColor();
+                }
+            }
+        }
+    }
+
+    [Button]
+    private void LoadSavedMap()
+    {
+
+    }
+    #endregion
+
     [Button("Reeboot")]
     void Reboot()
     {
@@ -120,35 +188,6 @@ public class GameGrid : Singleton<GameGrid>
                 {
                     GetTile(x, y).riverStrenght = 0;
                     GetTile(x, y).receivedFlow = 0;
-                }
-            }
-        }
-    }
-
-
-    [ContextMenu("Clear The GameGrid")]
-    private void ClearGrid()
-    {
-        if (tiles != null)
-        {
-            for (int y = 0; y < size.y; y++)
-            {
-                for (int x = 0; x < size.x; x++)
-                {
-                    if (GetTile(x, y) != null)
-                    {
-                        GameObject go = GetTile(x, y).gameObject;
-
-                        if (Application.isEditor)
-                        {
-                            DestroyImmediate(go);
-                        }
-                        else
-                        {
-                            Destroy(go);
-                        }
-                        SetTile(x,y,(GameTile)null);
-                    }
                 }
             }
         }

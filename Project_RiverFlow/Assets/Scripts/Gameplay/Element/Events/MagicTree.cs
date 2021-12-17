@@ -43,7 +43,7 @@ public class MagicTree : Element
 
     private void Awake()
     {
-        switch (tileOn.data.type)
+        switch (tileOn.type)
         {
             case TileType.grass:
                 forestSprite.SetActive(true);
