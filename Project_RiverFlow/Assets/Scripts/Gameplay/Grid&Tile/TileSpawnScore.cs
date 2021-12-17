@@ -64,16 +64,16 @@ public class TileSpawnScore : MonoBehaviour
         switch(plantSpawner.threatState)
         {
             case ThreatState.CALM:
-                castInt = 2;
+                castInt = 1;
                 break;
             case ThreatState.NEUTRAL:
-                castInt = 3;
+                castInt = 2;
                 break;
             case ThreatState.CHAOTIC:
-                castInt = 5;
+                castInt = 3;
                 break;
             default:
-                castInt = 3;
+                castInt = 2;
                 break;
         }
         return castInt;
@@ -109,7 +109,6 @@ public class TileSpawnScore : MonoBehaviour
         return ruleScore;
     }
 
-    //TODO : Uncomment when "Area Spawning" implemented, replace plantSpawner.currentSpawnArea
     private int EvalSpawnArea()
     {
         int ruleScore = 0;
@@ -280,7 +279,7 @@ public class TileSpawnScore : MonoBehaviour
         bool output = false;
         for(int i=0;i<=8;i+=2)
         {
-            if ((tile.neighbors[i - 1 % 8].element is Plant) && (tile.neighbors[i % 8].element is Plant) && (tile.neighbors[i + 1 % 8].element is Plant))
+            if ((tile.neighbors[(i - 1) % 8].element is Plant) && (tile.neighbors[i % 8].element is Plant) && (tile.neighbors[(i + 1) % 8].element is Plant))
             {
                 output |= true;
             }
