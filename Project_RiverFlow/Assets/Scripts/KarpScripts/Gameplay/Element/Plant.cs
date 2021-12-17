@@ -24,20 +24,10 @@ public class Plant : Element
             return tileOn;
         }
         set
-        { tileOn = value; }
-    }
-    public override GameTile[] TilesOn
-    {
-        get
         {
-            if (tileOn == null)
-            {
-                Debug.LogError("Can't find the tile where is this WaterSource", this);
-                return new GameTile[1] { null };
-            }
-            return new GameTile[1] { tileOn };
+            gridPos = tileOn.gridPos;
+            tileOn = value; 
         }
-        set { tileOn = value[0]; }
     }
     //Don't overide other methode because is not linkable
     #endregion

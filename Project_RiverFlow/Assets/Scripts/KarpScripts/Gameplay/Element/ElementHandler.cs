@@ -36,11 +36,20 @@ public class ElementHandler : MonoBehaviour
         
     }
 
-    void Update()
+    public void CheckLink(Element  element)
     {
-        
+        if(element.TileOn == null)
+        {
+
+        }
+
+        //Link Element and Tile
+        //element.tileOn = grid.GetTile(grisPos);
+        //grid.GetTile(grisPos).element = plant;
+
     }
 
+    #region Spawn
     public void SpawnPlantAt(Vector2Int grisPos)
     {
         if (!grid.GetTile(grisPos).isElement)
@@ -119,7 +128,6 @@ public class ElementHandler : MonoBehaviour
             grid.GetTile(grisPos).element = cloud;
         }
     }
-
     public void SpawnMagicTreeAt(Vector2Int grisPos)
     {
         if (!grid.GetTile(grisPos).isElement)
@@ -145,7 +153,6 @@ public class ElementHandler : MonoBehaviour
             grid.GetTile(grisPos).element = magicTree;
         }
     }
-
     public void SpawnLakeAt(Vector2Int grisPos, bool vertical)
     {
         GameTile CurrentTile = grid.GetTile(grisPos);
@@ -202,6 +209,7 @@ public class ElementHandler : MonoBehaviour
 
 
     }
+    #endregion
 
 #if UNITY_EDITOR
     [Button("Spawn Plant At")]

@@ -35,6 +35,7 @@ public class GameGrid : Singleton<GameGrid>
         tiles[pos.x + (pos.y * (size.x))] = value;
     }
     #endregion
+
     [Header("Debug")]
     public Transform gridContainer;
     public GameObject tileTemplate;
@@ -176,22 +177,6 @@ public class GameGrid : Singleton<GameGrid>
 
     }
     #endregion
-
-    [Button("Reeboot")]
-    void Reboot()
-    {
-        for (int y = 0; y < size.y; y++)
-        {
-            for (int x = 0; x < size.x; x++)
-            {
-                if (GetTile(x, y) != null)
-                {
-                    GetTile(x, y).riverStrenght = 0;
-                    GetTile(x, y).receivedFlow = 0;
-                }
-            }
-        }
-    }
 
     /// <summary>
     /// Convert a GameGrid Pos to a worldPos
