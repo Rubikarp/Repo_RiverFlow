@@ -5,10 +5,8 @@ using System.Linq;
 
 public enum ThreatState
 {
-    PEACEFUL,
     CALM,
     NEUTRAL,
-    THREATENING,
     CHAOTIC
 }
 
@@ -53,6 +51,21 @@ public class PlantSpawner : MonoBehaviour
     private ElementHandler elementHandler;
     public bool newZone;
 
+    public InventoryManager inventory;
+    private int difficultyScore;
+    private ThreatState lastThreastState;
+    public GameTime gametime;
+
+    [Header("Difficulty Score")]
+    public int digNumberMultiplier;
+    public int nonIrrigatedPlantScore;
+    public int deadPlantScore;
+    public int lastThreatStateCalmScore;
+    public int lastThreatStateNeutralScore;
+    public int lastThreatStateChaoticScore;
+    public int difficultyScoreToPassInNeutral;
+    public int difficultyScoreToPassInChaotic;
+
     private void Start()
     {
         gameGrid = GameObject.Find("Grid").GetComponent<GameGrid>();
@@ -71,6 +84,7 @@ public class PlantSpawner : MonoBehaviour
 
     public void SpawnPlant()
     {
+        DifficultyScoreCalcul();
         EvaluateTiles();
         for (int i = this.tileScores.Count - 1; i>0;i--)
         {
@@ -141,4 +155,60 @@ public class PlantSpawner : MonoBehaviour
     //    Swap(list, i + 1, high);
     //    return i + 1;
     //}
+
+    private void DifficultyScoreCalcul()
+    {
+        lastThreastState = threatState;
+
+        difficultyScore = 0;
+
+        difficultyScore = inventory.digAmmount * digNumberMultiplier;
+
+        foreach(Plant plant in elementHandler.allPlants)
+        {
+            if(plant.currentState == PlantState.Baby || plant.currentState == PlantState.Agony)
+            {
+                difficultyScore -= nonIrrigatedPlantScore;
+            }
+            if (plant.hasDiedRecently == true)
+            {
+                difficultyScore -= deadPlantScore;
+                plant.hasDiedRecently = false;
+            }
+        }
+
+        if(lastThreastState == ThreatState.CALM)
+        {
+            difficultyScore += lastThreatStateCalmScore;
+        }
+        else if (lastThreastState == ThreatState.NEUTRAL)
+        {
+            difficultyScore -= lastThreatStateCalmScore;
+        }
+        else if (lastThreastState == ThreatState.CHAOTIC)
+        {
+            difficultyScore -= lastThreatStateChaoticScore;
+        }
+
+        difficultyScore += (int) Mathf.Sin(gametime.gameTimer*0.03f) * 5 + 5 + (int) gametime.gameTimer;
+        Debug.Log("Score de difficulté actuel " + difficultyScore);
+
+        //ChooseThreadState();
+    }
+
+    private void ChooseThreadState()
+    {
+        if(difficultyScore < difficultyScoreToPassInNeutral)
+        {
+            threatState = ThreatState.CALM;
+        }
+        if (difficultyScoreToPassInNeutral <= difficultyScore)
+        {
+            threatState = ThreatState.NEUTRAL;
+        }
+        if (difficultyScoreToPassInChaotic <= difficultyScore)
+        {
+            threatState = ThreatState.CHAOTIC;
+        }
+    }
 }

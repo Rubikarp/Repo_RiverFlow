@@ -46,6 +46,7 @@ public class Plant : Element
     public PlantState currentState = PlantState.Young;
     public bool isIrrigated = false;
     private bool IsAlive { get { return currentState != PlantState.Dead; } }
+    public bool hasDiedRecently;
 
     public List<int> closeRivers;
     private FlowStrenght bestRiverStrenght = 0;
@@ -188,6 +189,11 @@ public class Plant : Element
         {
             timer += 1f;
             currentState = (PlantState)Mathf.Clamp((int)(currentState - 1), 0, (int)PlantState.Senior);
+
+            if(currentState == PlantState.Dead)
+            {
+                hasDiedRecently = true;
+            }
             onStateChange?.Invoke(false);
             //Debug.Log("testcridown");
 

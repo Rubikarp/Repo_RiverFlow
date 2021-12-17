@@ -27037,6 +27037,18 @@ PrefabInstance:
       propertyPath: Timer
       value: 
       objectReference: {fileID: 357762604}
+    - target: {fileID: 7564991289567366100, guid: cd445d0706ef4dc4b90ef5c004eaa61f, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -26.146698
+      objectReference: {fileID: 0}
+    - target: {fileID: 7564991289567366100, guid: cd445d0706ef4dc4b90ef5c004eaa61f, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 17.862976
+      objectReference: {fileID: 0}
+    - target: {fileID: 7564991289677188740, guid: cd445d0706ef4dc4b90ef5c004eaa61f, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 18.19513
+      objectReference: {fileID: 0}
     - target: {fileID: 7564991290013214242, guid: cd445d0706ef4dc4b90ef5c004eaa61f, type: 3}
       propertyPath: Timer
       value: 
@@ -58267,9 +58279,19 @@ MonoBehaviour:
   scoreIrrigatedTile0: 4
   weightIrrigatedTile: 2
   currentSpawnArea: 1
-  threatState: 2
+  threatState: 1
   plantGameObject: {fileID: 4751209323767118212, guid: 5a8552f0c1487f74bb441c5c837d2071, type: 3}
   newZone: 0
+  inventory: {fileID: 510528751}
+  gametime: {fileID: 357762604}
+  digNumberMultiplier: 2
+  nonIrrigatedPlantScore: 5
+  deadPlantScore: 10
+  lastThreatStateCalmScore: 10
+  lastThreatStateNeutralScore: 0
+  lastThreatStateChaoticScore: 10
+  difficultyScoreToPassInNeutral: 0
+  difficultyScoreToPassInChaotic: 0
 --- !u!1 &1733797242
 GameObject:
   m_ObjectHideFlags: 0

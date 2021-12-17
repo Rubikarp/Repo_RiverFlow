@@ -63,17 +63,11 @@ public class TileSpawnScore : MonoBehaviour
         int castInt = 1;
         switch(plantSpawner.threatState)
         {
-            case ThreatState.PEACEFUL:
-                castInt = 1;
-                break;
             case ThreatState.CALM:
                 castInt = 2;
                 break;
             case ThreatState.NEUTRAL:
                 castInt = 3;
-                break;
-            case ThreatState.THREATENING:
-                castInt = 4;
                 break;
             case ThreatState.CHAOTIC:
                 castInt = 5;
