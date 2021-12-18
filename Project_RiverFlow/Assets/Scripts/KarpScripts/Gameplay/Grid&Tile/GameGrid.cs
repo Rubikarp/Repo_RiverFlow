@@ -44,7 +44,7 @@ public class GameGrid : Singleton<GameGrid>
 
     void Start()
     {
-        LoadMap();
+        //LoadMap();
     }
 
     #region Map Manage
@@ -119,6 +119,8 @@ public class GameGrid : Singleton<GameGrid>
                     {
                         Debug.LogError("can't Find Tile on the object");
                     }
+
+                    tile.gridPos = new Vector2Int(x, y);
                     tile.type = mapData.GetTileType(x, y);
                     SetTile(x, y, tile);
                 }

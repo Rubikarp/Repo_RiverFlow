@@ -24,8 +24,10 @@ public class Plant_Drawer : MonoBehaviour
     [SerializeField]
     private int currentTwitch = 0;
     private bool increase =true;
+
     [Header("Particles")]
     public ParticleSystem Leafs;
+
     void Start()
     {
         cam = Camera.main;
@@ -258,7 +260,6 @@ public class Plant_Drawer : MonoBehaviour
         }
         StartCoroutine(TreeSkouiz(plant.currentState));
     }
-
     IEnumerator Twitch()
     {
         Debug.Log("Boing");
@@ -272,19 +273,13 @@ public class Plant_Drawer : MonoBehaviour
     {
         if (plant.isIrrigated)
         {
-            if (twitchFrequency[currentTwitch] <= plant.timer)
+            if (twitchFrequency[currentTwitch] <= plant.timer%1)
             {
                 StartCoroutine(Twitch());
 
                 currentTwitch++;
-
-
-
-
+                currentTwitch = currentTwitch % (twitchFrequency.Count-1);
             }
         }
-
-
     }
-    
 }

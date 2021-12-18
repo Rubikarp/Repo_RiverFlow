@@ -56,7 +56,7 @@ public class WaterSource : Element
             tileOn.element = this;
         }
 
-        chosenSprite = GetComponent < SpriteRenderer>();
+        chosenSprite = GetComponent <SpriteRenderer>();
     }
 
     void Update()

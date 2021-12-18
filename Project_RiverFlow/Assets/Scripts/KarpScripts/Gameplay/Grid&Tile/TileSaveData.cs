@@ -58,6 +58,7 @@ public struct TileSaveData
 
     public void LoadToGametile(GameTile tile)
     {
+
     }
 
 }

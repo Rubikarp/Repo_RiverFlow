@@ -74,6 +74,7 @@ public class ElementHandler : MonoBehaviour
             allPlants.Add(plant);
 
             //Link Element and Tile
+            plant.gridPos = grisPos;
             plant.tileOn = grid.GetTile(grisPos);
             grid.GetTile(grisPos).element = plant;
         }
@@ -98,8 +99,11 @@ public class ElementHandler : MonoBehaviour
             }
 
             allSources.Add(source);
+
             //Link Element and Tile
+            source.gridPos = grisPos;
             source.tileOn = grid.GetTile(grisPos);
+
             grid.GetTile(grisPos).element = source;
         }
     }
@@ -124,6 +128,7 @@ public class ElementHandler : MonoBehaviour
 
             allClouds.Add(cloud);
             //Link Element and Tile
+            cloud.gridPos = grisPos;
             cloud.tileOn = grid.GetTile(grisPos);
             grid.GetTile(grisPos).element = cloud;
         }
@@ -149,6 +154,7 @@ public class ElementHandler : MonoBehaviour
 
             allMagicTrees.Add(magicTree);
             //Link Element and Tile
+            magicTree.gridPos = grisPos;
             magicTree.tileOn = grid.GetTile(grisPos);
             grid.GetTile(grisPos).element = magicTree;
         }
@@ -179,6 +185,7 @@ public class ElementHandler : MonoBehaviour
 
                 allLakes.Add(lake);
                 //Link Element and Tile
+                lake.gridPos = grisPos;
                 lake.tileOn = grid.GetTile(grisPos);
                 //lake get les tiles
                 grid.GetTile(grisPos).element = lake;

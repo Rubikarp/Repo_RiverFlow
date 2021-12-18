@@ -84,24 +84,25 @@ public class RiverSpline : MonoBehaviour
     public void ReCalculCurve()
     {
         GameTile startTile = grid.GetTile(grid.PosToTile(points[0].pos));
-        GameTile endTile = grid.GetTile(grid.PosToTile(points[points.Count - 1].pos));
-        Vector3 previousPos;
+        Vector3 previousPos = startTile.worldPos;
         if(startTile.flowIn.Count > 0)
         {
-            previousPos = startTile.worldPos + new Vector3(-startTile.flowIn[0].dirValue.x, -startTile.flowIn[0].dirValue.y,0) * grid.cellSize;
+            previousPos += new Vector3(startTile.flowIn[0].dirValue.x, startTile.flowIn[0].dirValue.y,0) * grid.cellSize;
         }
         else
         {
-            previousPos = startTile.worldPos + (endTile.worldPos - startTile.worldPos);
+            previousPos += startTile.worldPos - grid.GetTile(grid.PosToTile(points[1].pos)).worldPos;
         }
-        Vector3 afterPos;
-        if (startTile.flowOut.Count > 0)
+
+        GameTile endTile = grid.GetTile(grid.PosToTile(points[points.Count - 1].pos));
+        Vector3 afterPos = endTile.worldPos;
+        if (endTile.flowOut.Count > 0)
         {
-            afterPos = endTile.worldPos + new Vector3(-startTile.flowOut[0].dirValue.x, -startTile.flowOut[0].dirValue.y, 0) * grid.cellSize;
+            afterPos += new Vector3(endTile.flowOut[0].dirValue.x, endTile.flowOut[0].dirValue.y, 0) * grid.cellSize;
         }
         else
         {
-            afterPos = endTile.worldPos + ( startTile.worldPos - endTile.worldPos);
+            afterPos += endTile.worldPos - grid.GetTile(grid.PosToTile(points[points.Count - 2].pos)).worldPos;
         }
 
         line.points.Clear();
@@ -110,7 +111,7 @@ public class RiverSpline : MonoBehaviour
             line.AddPoint(points[0].ToPolyLine());
             line.AddPoints(CatmullInterpolation(
                 new CatmullRiverSegment(
-                    points[0].pos + (points[1].pos - points[0].pos),
+                    previousPos,
                     points[0].pos,
                     points[1].pos,
                     points[2].pos)
@@ -126,7 +127,7 @@ public class RiverSpline : MonoBehaviour
                      points[points.Count - 3].pos,
                      points[points.Count - 2].pos,
                      points[points.Count - 1].pos,
-                     points[points.Count - 1].pos + (points[points.Count - 1].pos - points[points.Count - 2].pos))
+                     afterPos)
                    , points[points.Count - 2], points[points.Count - 1]));
         }
         else if (points.Count == 2)
@@ -136,8 +137,8 @@ public class RiverSpline : MonoBehaviour
                 CatmullInterpolation(
                 new CatmullRiverSegment(
                     previousPos,
-                    startTile.worldPos,
-                    endTile.worldPos,
+                    points[0].pos,
+                    points[1].pos,
                     afterPos
                     ), points[0], points[1]));
         }
