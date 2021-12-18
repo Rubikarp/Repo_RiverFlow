@@ -14,7 +14,6 @@ public class GameTime : Singleton<GameTime>
     public int weekNumber = 1;
 
     [Header("FlowSimulation")]
-    [SerializeField] float simulTimer = 0;
     [Range(0.1f, 1.2f)] public float iterationStepDur = 0.2f;
 
     [Header("Plant Spawning")]

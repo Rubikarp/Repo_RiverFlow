@@ -29,6 +29,8 @@ public class GameGrid_Drawer : MonoBehaviour
 
     void Start()
     {
+        transform.localScale = new Vector3(grid.size.x, grid.size.y, 1);
+
         //permet d'overide les param sans modif le mat ou créer d'instance
         propBlock = new MaterialPropertyBlock();
         //Recup Data

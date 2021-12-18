@@ -19,7 +19,7 @@ public class River_Drawer : MonoBehaviour
     Vector3[] _tempRiver;
     private void Start()
     {
-        grid = GameGrid.instance;
+        grid = GameGrid.Instance;
     }
 
     void Update()

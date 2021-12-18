@@ -18,6 +18,14 @@ public class RiverSpline : MonoBehaviour
     public RiverPalette_SCO riverData;
     public List<RiverPoint> points = new List<RiverPoint>() {};
 
+    [Header("other")]
+    private GameGrid grid;
+
+    private void Start()
+    {
+        grid = GameGrid.Instance;
+    }
+
     void Update()
     {
         if(points.Count != line.points.Count)
@@ -75,6 +83,27 @@ public class RiverSpline : MonoBehaviour
     //
     public void ReCalculCurve()
     {
+        GameTile startTile = grid.GetTile(grid.PosToTile(points[0].pos));
+        GameTile endTile = grid.GetTile(grid.PosToTile(points[points.Count - 1].pos));
+        Vector3 previousPos;
+        if(startTile.flowIn.Count > 0)
+        {
+            previousPos = startTile.worldPos + new Vector3(-startTile.flowIn[0].dirValue.x, -startTile.flowIn[0].dirValue.y,0) * grid.cellSize;
+        }
+        else
+        {
+            previousPos = startTile.worldPos + (endTile.worldPos - startTile.worldPos);
+        }
+        Vector3 afterPos;
+        if (startTile.flowOut.Count > 0)
+        {
+            afterPos = endTile.worldPos + new Vector3(-startTile.flowOut[0].dirValue.x, -startTile.flowOut[0].dirValue.y, 0) * grid.cellSize;
+        }
+        else
+        {
+            afterPos = endTile.worldPos + ( startTile.worldPos - endTile.worldPos);
+        }
+
         line.points.Clear();
         if (points.Count > 2)
         {
@@ -103,13 +132,14 @@ public class RiverSpline : MonoBehaviour
         else if (points.Count == 2)
         {
             line.AddPoint(points[0].ToPolyLine());
-            line.AddPoints(CatmullInterpolation(
+            line.AddPoints(
+                CatmullInterpolation(
                 new CatmullRiverSegment(
-                    points[0].pos + (points[1].pos - points[0].pos),
-                    points[0].pos,
-                    points[1].pos,
-                    points[1].pos + (points[0].pos - points[1].pos))
-                , points[0], points[1]));
+                    previousPos,
+                    startTile.worldPos,
+                    endTile.worldPos,
+                    afterPos
+                    ), points[0], points[1]));
         }
         else
         {

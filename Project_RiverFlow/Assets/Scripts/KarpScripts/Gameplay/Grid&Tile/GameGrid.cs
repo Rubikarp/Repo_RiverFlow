@@ -6,18 +6,19 @@ using NaughtyAttributes;
 
 public class GameGrid : Singleton<GameGrid>
 {
-    public static GameGrid instance;
+    [Header("References")]
+    [Required] public Transform gridContainer;
+    [Required] public GameObject tileTemplate;
 
     [Header("Parameter")]
     public float cellSize = 1;
     public Vector2Int size = new Vector2Int(16, 16);
-    public Vector2 offSet = new Vector2Int(0,0);
+    public Vector2 offSet = new Vector2Int(0, 0);
 
-    [Space(10)]
     [Header("Data")]
     public Map_Data mapData;
-    #region Grid-GameTile
     public GameTile[] tiles;
+    #region Grid-Tile Methodes
     public GameTile GetTile(int x, int y)
     {
         return tiles[x + (y * (size.x))];
@@ -36,18 +37,10 @@ public class GameGrid : Singleton<GameGrid>
     }
     #endregion
 
-    [Header("Debug")]
-    public Transform gridContainer;
-    public GameObject tileTemplate;
-    
-    [Header("Debug")]
-    public bool showDebug;
-    public bool showCenter;
-
-    private void Awake()
-    {
-        instance = this;
-    }
+    [BoxGroup("Debug")] public bool showDebug;
+    [BoxGroup("Debug")] [ShowIf("showDebug")] public Color debugLineColor = Color.red;
+    [BoxGroup("Debug")] [ShowIf("showDebug")] public bool showCenter;
+    [BoxGroup("Debug")] [ShowIf("showCenter")] public Color debugCenterColor = Color.black;
 
     void Start()
     {
@@ -64,6 +57,7 @@ public class GameGrid : Singleton<GameGrid>
             return;
         }
         size = mapData.gridSize;
+        //offSet = -size/2;
 
         //Clear the map
         for (int i = 0; i < gridContainer.childCount; i++)
@@ -178,6 +172,7 @@ public class GameGrid : Singleton<GameGrid>
     }
     #endregion
 
+    #region Grid<->World Convertion
     /// <summary>
     /// Convert a GameGrid Pos to a worldPos
     /// WARNING ! The result can be extrapolate farther than the GridSize
@@ -196,7 +191,6 @@ public class GameGrid : Singleton<GameGrid>
 
         return result;
     }
-
     /// <summary>
     /// Convert a Point on the GamePlane to the GameGrid Pos related
     /// WARNING ! it can result a pos outside of the actual grid
@@ -217,6 +211,7 @@ public class GameGrid : Singleton<GameGrid>
 
         return result;
     }
+    #endregion
 
     private void OnDrawGizmos()
     {
@@ -230,8 +225,8 @@ public class GameGrid : Singleton<GameGrid>
             if (showCenter)
             {
                 #region center point
-
-                Gizmos.color = Color.green;
+                Color temp = Gizmos.color;
+                Gizmos.color = debugCenterColor;
                 for (int x = 0; x < size.x; x++)
                 {
                     for (int y = 0; y < size.y; y++)
@@ -239,18 +234,18 @@ public class GameGrid : Singleton<GameGrid>
                         Gizmos.DrawWireSphere(startPos + new Vector3(x * cellSize, y * cellSize, 0) + new Vector3(cellSize * 0.5f, cellSize * 0.5f, 0), cellSize * 0.5f * 0.8f);
                     }
                 }
+                Gizmos.color = temp;
                 #endregion
             }
 
             //GameGrid decals
-            Gizmos.color = Color.red;
             for (int x = 0; x <= size.x; x++)
             {
-                Debug.DrawRay(startPos + new Vector3(cellSize * x, 0, 0), Vector3.up * size.y * cellSize, Color.red);
+                Debug.DrawRay(startPos + new Vector3(cellSize * x, 0, 0), Vector3.up * size.y * cellSize, debugLineColor);
             }
             for (int y = 0; y <= size.y; y++)
             {
-                Debug.DrawRay(startPos + new Vector3(0, cellSize * y, 0), Vector3.right * size.x * cellSize, Color.red);
+                Debug.DrawRay(startPos + new Vector3(0, cellSize * y, 0), Vector3.right * size.x * cellSize, debugLineColor);
             }
         }
     }

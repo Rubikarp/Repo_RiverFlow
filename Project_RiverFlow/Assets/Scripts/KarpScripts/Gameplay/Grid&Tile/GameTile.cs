@@ -492,13 +492,13 @@ public class GameTile : MonoBehaviour
                 result[i] = null;
             }
             else
-            if (temp.x > GameGrid.instance.size.x - 1 || temp.y > GameGrid.instance.size.y - 1)
+            if (temp.x > GameGrid.Instance.size.x - 1 || temp.y > GameGrid.Instance.size.y - 1)
             {
                 result[i] = null;
             }
             else
             {
-                result[i] = GameGrid.instance.GetTile(temp);
+                result[i] = GameGrid.Instance.GetTile(temp);
             }
         }
 
