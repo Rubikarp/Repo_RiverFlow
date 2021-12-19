@@ -77,7 +77,7 @@ public class FruitTree : MonoBehaviour
         {
             for (int a = 0; a < closeTiles.Length; a++)
             {
-                if (closeTiles[a].linkedTile.Count == 0 && closeTiles[a].element == null)
+                if (closeTiles[a].linkAmount == 0 && closeTiles[a].element == null)
                 {
                     for (int b = 0; b < closeTiles[a].neighbors.Length; b++)
                     {

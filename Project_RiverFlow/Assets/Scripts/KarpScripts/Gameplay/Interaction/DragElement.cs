@@ -55,7 +55,7 @@ public class DragElement : MonoBehaviour,
     public void OnEndDrag(PointerEventData eventData)
     {
         GameTile dropTile = grid.GetTile(grid.PosToTile(input.GetHitPos()));
-        if (!dropTile.isElement)
+        if (!dropTile.haveElement)
         {
             //Init the linked object on grid
             switch (Item)
@@ -79,29 +79,27 @@ public class DragElement : MonoBehaviour,
                     if (Inventory.lakesAmmount > 0)
                     {
                         GameTile testedTile = grid.GetTile(grid.PosToTile(input.GetHitPos()));
-
                         if (testedTile.receivedFlow > FlowStrenght._00_)
                         {
-                            if (testedTile.linkedTile.Count == 2)
+                            if (testedTile.linkAmount == 2)
                             {
+                                List<GameTile> testedTileLinks = testedTile.GetLinkedTile();
                                 //check if vertical
-                                if ((testedTile.linkedTile[0] == testedTile.neighbors[1] && testedTile.linkedTile[1] == testedTile.neighbors[5])
-                                 || (testedTile.linkedTile[0] == testedTile.neighbors[5] && testedTile.linkedTile[1] == testedTile.neighbors[1]))
+                                if ((testedTileLinks[0] == testedTile.neighbors[1] && testedTileLinks[1] == testedTile.neighbors[5])
+                                 || (testedTileLinks[0] == testedTile.neighbors[5] && testedTileLinks[1] == testedTile.neighbors[1]))
                                 {
                                     elementManage.SpawnLakeAt(testedTile.gridPos, vertical: true);
                                     Inventory.lakesAmmount--;
                                 }
                                 //check if horizontal
                                 else 
-                                if ((testedTile.linkedTile[0] == testedTile.neighbors[3] && testedTile.linkedTile[1] == testedTile.neighbors[7])
-                                 || (testedTile.linkedTile[0] == testedTile.neighbors[7] && testedTile.linkedTile[1] == testedTile.neighbors[3]))
+                                if ((testedTileLinks[0] == testedTile.neighbors[3] && testedTileLinks[1] == testedTile.neighbors[7])
+                                 || (testedTileLinks[0] == testedTile.neighbors[7] && testedTileLinks[1] == testedTile.neighbors[3]))
                                 {
                                     elementManage.SpawnLakeAt(testedTile.gridPos, vertical: false);
                                     Inventory.lakesAmmount--;
                                 }
-
                             }
-
                         }
                     }
                 break;

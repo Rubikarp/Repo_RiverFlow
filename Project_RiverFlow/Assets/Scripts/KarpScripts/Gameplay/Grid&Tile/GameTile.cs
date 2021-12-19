@@ -37,10 +37,9 @@ public class GameTile : MonoBehaviour
     public List<Direction> flowIn = new List<Direction>();
     public List<Direction> flowOut = new List<Direction>();
     [Space(8)]
-    public List<GameTile> linkedTile = new List<GameTile>();
     public List<Canal> canalsIn = new List<Canal>();
     #region Getter / Setter
-    public bool isElement
+    public bool haveElement
     {
         get
         {
@@ -51,20 +50,16 @@ public class GameTile : MonoBehaviour
     {
         get
         {
-            if(element!= null)
+            if (linkAmount >= maxConnection || type == TileType.mountain) 
             {
-                if (!element.isLinkable) //S'il n'y a pas d'element
+                return false;
+            }
+            if(haveElement)
+            {
+                if (!element.isLinkable)
                 {
                     return false;
                 }
-            }
-            if (linkAmount >= maxConnection) //Si la tile n'est pas saturé
-            {
-                return false;
-            }
-            if(type == TileType.mountain) //Si la tile est une montagne
-            {
-                return false;
             }
             return true;
         }
@@ -127,13 +122,14 @@ public class GameTile : MonoBehaviour
                             }
                             break;
                         default:
+                            Debug.Log("oupsie");
                             break;
                     }
 
                 }
                 foreach (GameTile neighborOfNeighbor in neighbor.neighbors)
                 {
-                    if (neighborOfNeighbor.isElement)
+                    if (neighborOfNeighbor.haveElement)
                     {
                         if (neighborOfNeighbor.element is Lake)
                         {
@@ -338,9 +334,6 @@ public class GameTile : MonoBehaviour
 
         tileA.AddLinkedTile(dir, FlowType.flowOut);
         tileB.AddLinkedTile(Direction.Inverse(dir), FlowType.flowIn);
-
-        tileA.linkedTile.Add(tileB);
-        tileB.linkedTile.Add(tileA);
     }
     public static void UnLink(GameTile tileA, GameTile tileB)
     {
@@ -349,9 +342,6 @@ public class GameTile : MonoBehaviour
 
         tileA.RemoveLinkedTile(dir, FlowType.flowOut);
         tileB.RemoveLinkedTile(Direction.Inverse(dir), FlowType.flowIn);
-
-        tileA.linkedTile.Remove(tileB);
-        tileB.linkedTile.Remove(tileA);
     }
     public static void UnLinkAll(GameTile tileA)
     {
@@ -474,6 +464,29 @@ public class GameTile : MonoBehaviour
 
         //FillNeighborDist2();
     }
+    public void FillNeighborDist2()
+    {
+        List<GameTile> pack = new List<GameTile>();
+        pack.AddRange(neighbors[0].GetNeighbor());
+        pack.AddRange(neighbors[2].GetNeighbor());
+        pack.AddRange(neighbors[4].GetNeighbor());
+        pack.AddRange(neighbors[6].GetNeighbor());
+
+        List<GameTile> result = new List<GameTile>();
+
+        neighbors = new GameTile[8];
+        for (int i = 0; i < pack.Count; i++)
+        {
+            if(pack[i] != null && pack[i] != this)
+            {
+                if(NeighborIndex(pack[i]) == -1)
+                {
+
+                }
+            }
+        }
+
+    }
     public GameTile[] GetNeighbor()
     {
         GameTile[] result = new GameTile[8];
@@ -504,30 +517,6 @@ public class GameTile : MonoBehaviour
 
         return result;
     }
-
-    public void FillNeighborDist2()
-    {
-        List<GameTile> pack = new List<GameTile>();
-        pack.AddRange(neighbors[0].GetNeighbor());
-        pack.AddRange(neighbors[2].GetNeighbor());
-        pack.AddRange(neighbors[4].GetNeighbor());
-        pack.AddRange(neighbors[6].GetNeighbor());
-
-        List<GameTile> result = new List<GameTile>();
-
-        neighbors = new GameTile[8];
-        for (int i = 0; i < pack.Count; i++)
-        {
-            if(pack[i] != null && pack[i] != this)
-            {
-                if(NeighborIndex(pack[i]) == -1)
-                {
-
-                }
-            }
-        }
-
-    }
     public int NeighborIndex(GameTile tile)
     {
         for (int i = 0; i < 8; i++)
@@ -546,7 +535,7 @@ public class GameTile : MonoBehaviour
     }
     public bool IsLinkTo(GameTile tile)
     {
-        return linkedTile.Contains(tile);
+        return IsLinkInDir(new Direction(NeighborIndex(tile)));
     }
     public bool IsLinkInDir(Direction dir, FlowType flow)
     {
@@ -570,6 +559,19 @@ public class GameTile : MonoBehaviour
             return true;
         }
         return false;
+    }
+    public List<GameTile> GetLinkedTile()
+    {
+        List<GameTile> result = new List<GameTile>();
+        for (int i = 0; i < flowIn.Count; i++)
+        {
+            result.Add(GetNeighbor(flowIn[i]));
+        }
+        for (int i = 0; i < flowOut.Count; i++)
+        {
+            result.Add(GetNeighbor(flowOut[i]));
+        }
+        return result;
     }
 
     //GameTile to Data

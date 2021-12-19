@@ -26,7 +26,7 @@ public class Cloud : Element
     // Update is called once per frame
     void FlowStep()
     {
-        if (tileOn.linkedTile.Count >= 2)
+        if (tileOn.linkAmount >= 2)
         {
             tileOn.receivedFlow += 1;
         }

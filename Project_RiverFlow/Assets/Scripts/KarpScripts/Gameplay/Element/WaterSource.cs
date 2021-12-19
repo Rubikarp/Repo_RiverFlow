@@ -36,7 +36,7 @@ public class WaterSource : Element
         } 
         set { tileOn = value[0]; } 
     }
-    public override bool isLinkable { get { return tileOn.linkedTile.Count < 1; } }
+    public override bool isLinkable { get { return tileOn.linkAmount < 1; } }
     #endregion
 
     public override void AddLink(Direction dir) 
@@ -51,7 +51,7 @@ public class WaterSource : Element
 
     void Start()
     {
-        if (!tileOn.isElement)
+        if (!tileOn.haveElement)
         {
             tileOn.element = this;
         }
@@ -66,11 +66,11 @@ public class WaterSource : Element
 
     private void VerifySpriteDirection()
     {
-        if (tileOn.linkedTile.Count == 1)
+        if (tileOn.linkAmount == 1)
         {
             for (int i = 0; i < tileOn.neighbors.Length; i++)
             {
-                if (tileOn.linkedTile[0] == tileOn.neighbors[i])
+                if (tileOn.GetLinkedTile()[0] == tileOn.neighbors[i])
                 {
                     chosenSprite.sprite = spriteDirections[i];
                 }

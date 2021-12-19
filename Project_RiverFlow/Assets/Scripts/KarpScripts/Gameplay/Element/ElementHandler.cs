@@ -52,7 +52,7 @@ public class ElementHandler : MonoBehaviour
     #region Spawn
     public void SpawnPlantAt(Vector2Int grisPos)
     {
-        if (!grid.GetTile(grisPos).isElement)
+        if (!grid.GetTile(grisPos).haveElement)
         {
 #if UNITY_EDITOR
             GameObject go = PrefabUtility.InstantiatePrefab(plant_Template, elementContainer)as GameObject;
@@ -81,7 +81,7 @@ public class ElementHandler : MonoBehaviour
     }
     public void SpawnWaterSourceAt(Vector2Int grisPos)
     {
-        if (!grid.GetTile(grisPos).isElement)
+        if (!grid.GetTile(grisPos).haveElement)
         {
 #if UNITY_EDITOR
             GameObject go = PrefabUtility.InstantiatePrefab(waterSource_Template, elementContainer) as GameObject;
@@ -109,7 +109,7 @@ public class ElementHandler : MonoBehaviour
     }
     public void SpawnCloudAt(Vector2Int grisPos)
     {
-        if (!grid.GetTile(grisPos).isElement)
+        if (!grid.GetTile(grisPos).haveElement)
         {
 #if UNITY_EDITOR
             GameObject go = PrefabUtility.InstantiatePrefab(cloud_Template, elementContainer) as GameObject;
@@ -135,7 +135,7 @@ public class ElementHandler : MonoBehaviour
     }
     public void SpawnMagicTreeAt(Vector2Int grisPos)
     {
-        if (!grid.GetTile(grisPos).isElement)
+        if (!grid.GetTile(grisPos).haveElement)
         {
 #if UNITY_EDITOR
             GameObject go = PrefabUtility.InstantiatePrefab(magicTree_Template, elementContainer) as GameObject;
@@ -166,7 +166,7 @@ public class ElementHandler : MonoBehaviour
 
         if (CurrentTile.receivedFlow > FlowStrenght._00_)
         {
-            if (CurrentTile.linkedTile.Count == 2)
+            if (CurrentTile.linkAmount == 2)
             {
 
 #if UNITY_EDITOR

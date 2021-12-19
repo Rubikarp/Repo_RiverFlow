@@ -79,7 +79,7 @@ public class Plant : Element
 
         gameTime = GameTime.Instance;
 
-        if (tileOn.isElement)
+        if (tileOn.haveElement)
         {
             tileOn.element = this;
         }
@@ -277,7 +277,7 @@ public class Plant : Element
         {
             for (int a = 0; a < tileOn.neighbors.Length; a++)
             {
-                if (tileOn.neighbors[a].linkedTile.Count == 0 && tileOn.neighbors[a].element == null)
+                if (tileOn.neighbors[a].linkAmount == 0 && tileOn.neighbors[a].element == null)
                 {
                     for (int b = 0; b < tileOn.neighbors[a].neighbors.Length; b++)
                     {

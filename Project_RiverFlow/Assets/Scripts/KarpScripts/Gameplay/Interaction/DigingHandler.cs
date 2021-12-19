@@ -191,7 +191,7 @@ public class DigingHandler : MonoBehaviour
         {
             eraserSelectTile = grid.GetTile(grid.PosToTile(input.GetHitPos()));
 
-            if (eraserSelectTile.linkAmount > 0 || eraserSelectTile.isElement)
+            if (eraserSelectTile.linkAmount > 0 || eraserSelectTile.haveElement)
             {
                 if (lastEraserSelectTile != eraserSelectTile)
                 {

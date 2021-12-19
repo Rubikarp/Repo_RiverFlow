@@ -13,7 +13,7 @@ public class RiverManager : Singleton<RiverManager>
 
     void Start()
     {
-        digging.onLink.AddListener(OnLinkV2);
+        digging.onLink.AddListener(OnLinkV3);
         digging.onBreak.AddListener(OnBreak);
 
         gameTime = GameTime.Instance;
@@ -22,7 +22,7 @@ public class RiverManager : Singleton<RiverManager>
     }
     private void OnDestroy()
     {
-        digging.onLink.RemoveListener(OnLink);
+        digging.onLink.RemoveListener(OnLinkV3);
         digging.onBreak.RemoveListener(OnBreak);
 
         gameTime.onWaterSimulationStep.RemoveListener(FlowStep);
@@ -31,14 +31,14 @@ public class RiverManager : Singleton<RiverManager>
     private void OnLink(GameTile startTile, GameTile endTile)
     {
         //Check if isloate (no tile have link)
-        if (startTile.linkedTile.Count < 1 && endTile.linkedTile.Count < 1)
+        if (startTile.linkAmount < 1 && endTile.linkAmount < 1)
         {
             GenerateRiverCanal(startTile.gridPos, endTile.gridPos);
         }
         //Check Prolonging an existing linkCanal (start or End have 1 link)
-        else if (startTile.linkedTile.Count == 1)
+        else if (startTile.linkAmount == 1)
         {
-            if (endTile.linkedTile.Count < 1)
+            if (endTile.linkAmount < 1)
             {
                 for (int i = 0; i < canals.Count; i++)
                 {
@@ -49,7 +49,7 @@ public class RiverManager : Singleton<RiverManager>
                 }
             }
             else
-            if (endTile.linkedTile.Count == 1)
+            if (endTile.linkAmount == 1)
             {
                 if (startTile.riverStrenght == endTile.riverStrenght)
                 {
@@ -141,7 +141,7 @@ public class RiverManager : Singleton<RiverManager>
             }
         }
         //Check link between to extremum (merge canal)
-        else if (endTile.linkedTile.Count == 1)
+        else if (endTile.linkAmount == 1)
         {
             for (int i = 0; i < canals.Count; i++)
             {
@@ -154,7 +154,7 @@ public class RiverManager : Singleton<RiverManager>
         else
         {
             //Check Split on Tile (end/start have than more than 2 link)
-            if (startTile.linkedTile.Count >= 2)   //create divergence
+            if (startTile.linkAmount >= 2)   //create divergence
             {
                 if (!(startTile.canalsIn.Count >= 2))
                 {
@@ -165,7 +165,7 @@ public class RiverManager : Singleton<RiverManager>
                 GenerateRiverCanal(startTile.gridPos, endTile.gridPos);
             }
             else
-            if (endTile.linkedTile.Count >= 2)     //create confluence
+            if (endTile.linkAmount >= 2)     //create confluence
             {
                 if (!(endTile.canalsIn.Count >= 2))
                 {
@@ -175,7 +175,7 @@ public class RiverManager : Singleton<RiverManager>
 
                 //The new Part
                 //Extend Something ?
-                if (grid.GetTile(startTile.gridPos).linkedTile.Count < 1)
+                if (grid.GetTile(startTile.gridPos).linkAmount < 1)
                 {
                     GenerateRiverCanal(startTile.gridPos, endTile.gridPos);
                 }
@@ -197,10 +197,10 @@ public class RiverManager : Singleton<RiverManager>
     private void OnLinkV2(GameTile startTile, GameTile endTile)
     {
         #region works
-        switch (startTile.linkedTile.Count)
+        switch (startTile.linkAmount)
         {
             case 0:
-                switch (endTile.linkedTile.Count)
+                switch (endTile.linkAmount)
                 {
                     case 0: //in a void
                         if (endTile.element is WaterSource)
@@ -249,7 +249,7 @@ public class RiverManager : Singleton<RiverManager>
                 }
                 break;
             case 1:
-                switch (endTile.linkedTile.Count)
+                switch (endTile.linkAmount)
                 {
                     case 0: //extend in void
                         for (int i = 0; i < canals.Count; i++)
@@ -420,7 +420,7 @@ public class RiverManager : Singleton<RiverManager>
                 }
                 break;
             default: // 2 ou +
-                switch (endTile.linkedTile.Count)
+                switch (endTile.linkAmount)
                 {
                     case 0: //new divergence
                         if(startTile.canalsIn.Count == 1)
@@ -600,10 +600,386 @@ public class RiverManager : Singleton<RiverManager>
 
         FlowStep();
     }
+    private void OnLinkV3(GameTile startTile, GameTile endTile)
+    {
+        switch (startTile.linkAmount)
+        {
+            case 0:
+                switch (endTile.linkAmount)
+                {
+                    case 0: //in a void
+                        Link0To0(startTile, endTile);
+                        break;
+                    case 1: //extending the end canal
+                        Link1To0(endTile, startTile);
+                        break;
+                    default: //x >= 2
+                        Link2To0(endTile, startTile);
+                        break;
+                }
+                break;
+            case 1:
+                switch (endTile.linkAmount)
+                {
+                    case 0: //in a void
+                        Link1To0(startTile, endTile);
+                        break;
+                    case 1: //extending the end canal
+                        Link1To1(startTile, endTile);
+                        break;
+                    default: //x >= 2
+                        Link2To1(endTile, startTile);
+                        break;
+                }
+                break;
+            default: // 2 ou +
+                switch (endTile.linkAmount)
+                {
+                    case 0: //in a void
+                        Link2To0(startTile, endTile);
+                        break;
+                    case 1: //extending the end canal
+                        Link2To1(startTile, endTile);
+                        break;
+                    default: //x >= 2
+                        Link2To2(startTile, endTile);
+                        break;
+                }
+                break;
+        }
 
+        FlowStep();
+    }
+
+    private void Link0To0(GameTile tileA, GameTile tileB)
+    {
+        if (tileB.riverStrenght > tileA.riverStrenght)
+        {
+            GenerateRiverCanal(tileB.gridPos, tileA.gridPos);
+        }
+        else
+        {
+            GenerateRiverCanal(tileA.gridPos, tileB.gridPos);
+        }
+    }
+    private void Link1To0(GameTile tileA, GameTile tileB)
+    {
+        if (InCanalList(tileA.canalsIn[0]))
+        {
+            Canal list = CanalList(tileA.canalsIn[0]);
+
+            if (list.endNode == tileA.gridPos)
+            {
+                ExtendCanal(list, tileA, tileB);
+            }
+            else
+            {
+                ExtendCanal(list, tileB, tileA);
+                Inverse(list);
+            }
+        }
+        else
+        {
+            Debug.LogError(tileA.canalsIn[0] + "not in list");
+        }
+    }
+    private void Link1To1(GameTile tileA, GameTile tileB)
+    {
+        if (tileA.riverStrenght == tileB.riverStrenght)
+        {
+            for (int i = 0; i < canals.Count; i++)
+            {
+                if (tileA.canalsIn[0] == canals[i])
+                {
+                    ExtendCanal(canals[i], tileA, tileB);
+                }
+            }
+        }
+        else 
+        if (tileA.riverStrenght > tileB.riverStrenght)
+        {
+            if (tileA.gridPos == tileA.canalsIn[0].endNode)
+            {
+                if (tileB.gridPos == tileB.canalsIn[0].startNode)
+                {
+                    Merge(tileA.canalsIn[0], tileB.canalsIn[0]);
+
+                    ReplaceCanal(tileB.canalsIn[0], tileA.canalsIn[0]);
+                }
+                else
+                if (tileB.gridPos == tileB.canalsIn[0].endNode)
+                {
+                    Inverse(tileB.canalsIn[0]);
+                    Merge(tileA.canalsIn[0], tileB.canalsIn[0]);
+
+                    ReplaceCanal(tileB.canalsIn[0], tileA.canalsIn[0]);
+                }
+            }
+            else if (tileA.gridPos == tileA.canalsIn[0].startNode)
+            {
+                if (tileB.gridPos == tileB.canalsIn[0].startNode)
+                {
+                    Inverse(tileA.canalsIn[0]);
+                    Merge(tileA.canalsIn[0], tileB.canalsIn[0]);
+
+                    ReplaceCanal(tileB.canalsIn[0], tileA.canalsIn[0]);
+                }
+                else
+                if (tileB == grid.GetTile(tileB.canalsIn[0].endNode))
+                {
+                    Inverse(tileA.canalsIn[0]);
+                    Inverse(tileB.canalsIn[0]);
+
+                    Merge(tileA.canalsIn[0], tileB.canalsIn[0]);
+
+                    ReplaceCanal(tileB.canalsIn[0], tileA.canalsIn[0]);
+                }
+            }
+
+        }
+        else 
+        if (tileA.riverStrenght < tileB.riverStrenght)
+        {
+            if (tileA.gridPos == tileA.canalsIn[0].endNode)
+            {
+                if (tileB.gridPos == tileB.canalsIn[0].startNode)
+                {
+                    Inverse(tileB.canalsIn[0]);
+                    Inverse(tileA.canalsIn[0]);
+
+                    Merge(tileB.canalsIn[0], tileA.canalsIn[0]);
+
+                    ReplaceCanal(tileA.canalsIn[0], tileB.canalsIn[0]);
+                }
+                else
+                if (tileB.gridPos == tileB.canalsIn[0].endNode)
+                {
+                    Inverse(tileA.canalsIn[0]);
+                    Merge(tileB.canalsIn[0], tileA.canalsIn[0]);
+
+                    ReplaceCanal(tileA.canalsIn[0], tileB.canalsIn[0]);
+                }
+            }
+            else
+            if (tileA.gridPos == tileA.canalsIn[0].startNode)
+            {
+                if (tileB.gridPos == tileB.canalsIn[0].startNode)
+                {
+                    Inverse(tileB.canalsIn[0]);
+                    Merge(tileB.canalsIn[0], tileA.canalsIn[0]);
+
+                    ReplaceCanal(tileA.canalsIn[0], tileB.canalsIn[0]);
+                }
+                else
+                if (tileB == grid.GetTile(tileB.canalsIn[0].endNode))
+                {
+                    Merge(tileB.canalsIn[0], tileA.canalsIn[0]);
+
+                    ReplaceCanal(tileA.canalsIn[0], tileB.canalsIn[0]);
+                }
+            }
+        }
+    }
+    private void Link2To0(GameTile tileA, GameTile tileB)
+    {
+        if (tileA.canalsIn.Count == 1)
+        {
+            //Split
+            SplitCanal(tileA.canalsIn[0], tileA);
+        }
+        GenerateRiverCanal(tileA.gridPos, tileB.gridPos);
+    }
+    private void Link2To1(GameTile tileA, GameTile tileB)
+    {
+        if (tileA.canalsIn.Count == 1)
+        {
+            //Split
+            SplitCanal(tileA.canalsIn[0], tileA);
+        }
+        //Calcul Highest flow
+        int maxFlow = 0;
+        for (int i = 0; i < tileA.flowIn.Count; i++)
+        {
+            maxFlow = Mathf.Max(maxFlow, (int)tileA.GetNeighbor(tileA.flowIn[i]).riverStrenght);
+        }
+        ExtendCanal(tileB.canalsIn[0], tileB, tileA);
+        //Case
+        if (tileB.riverStrenght > (FlowStrenght)maxFlow) //je me fais override
+        {
+            for (int i = 0; i < tileA.canalsIn.Count; i++)
+            {
+                if (tileA.canalsIn[i].endNode == tileA.gridPos)//ceux à contre sens
+                {
+                    if (grid.GetTile(tileA.canalsIn[i].startNode).riverStrenght < (FlowStrenght)maxFlow)
+                    {
+                        if (tileA.canalsIn[i].canalTiles.Count < 1)//link simple
+                        {
+                            ErasedCanal(tileA.canalsIn[i]);
+                        }
+                        else
+                        {
+                            Inverse(tileA.canalsIn[i]);
+                        }
+                    }
+                    else
+                    if (grid.GetTile(tileA.canalsIn[i].startNode).riverStrenght > (FlowStrenght)(2 * maxFlow))
+                    {
+                        Inverse(tileB.canalsIn[0]);
+                    }
+                    else //==
+                    {
+                        //is okay
+                    }
+                }
+            }
+        }
+        else
+        if (tileB.riverStrenght < (FlowStrenght)(2 * maxFlow)) //je peut override 
+        {
+            Inverse(tileB.canalsIn[0]);
+        }
+        else
+        {
+            //il s'imisse sans soucis
+        }
+    }
+    private void Link2To2(GameTile tileA, GameTile tileB)
+    {
+        Debug.LogError("TODO");
+        /*
+if (startTile.canalsIn.Count == 1)
+{
+    //Split
+    SplitCanal(startTile.canalsIn[0], startTile);
+}
+if (endTile.canalsIn.Count == 1)
+{
+    //Split
+    SplitCanal(endTile.canalsIn[0], startTile);
+}
+
+//Calcul Highest flow
+int maxFlowStart = 0;
+for (int i = 0; i < startTile.flowIn.Count; i++)
+{
+    maxFlowStart = Mathf.Max(maxFlowStart, (int)startTile.GetNeighbor(startTile.flowIn[i]).riverStrenght);
+}
+int maxFlowEnd = 0;
+for (int i = 0; i < startTile.flowOut.Count; i++)
+{
+    maxFlowEnd = Mathf.Max(maxFlowEnd, (int)startTile.GetNeighbor(startTile.flowIn[i]).riverStrenght);
+}
+
+//Case
+if (endTile.riverStrenght > (FlowStrenght)maxFlowStart) //je me fais override
+{
+    for (int i = 0; i < startTile.canalsIn.Count; i++)
+    {
+        if (startTile.canalsIn[i].endNode == startTile.gridPos)//ceux à contre sens
+        {
+            if (grid.GetTile(startTile.canalsIn[i].startNode).riverStrenght < (FlowStrenght)maxFlowStart)
+            {
+                if (startTile.canalsIn[i].canalTiles.Count < 1)//link simple
+                {
+                    ErasedCanal(startTile.canalsIn[i]);
+                }
+                else
+                {
+                    Inverse(startTile.canalsIn[i]);
+                }
+            }
+            else
+            if (grid.GetTile(startTile.canalsIn[i].startNode).riverStrenght > (FlowStrenght)(2 * maxFlowStart))
+            {
+                Inverse(endTile.canalsIn[0]);
+            }
+            else //==
+            {
+                //is okay
+            }
+        }
+    }
+}
+else
+if (endTile.riverStrenght < (FlowStrenght)(2 * maxFlowStart)) //je peut override 
+{
+    Inverse(endTile.canalsIn[0]);
+}
+else
+{
+    //il s'imisse sans soucis
+}
+
+//Case
+if (startTile.riverStrenght > (FlowStrenght)maxFlowEnd) //j'override les deux autre flow
+{
+    for (int i = 0; i < endTile.canalsIn.Count; i++)
+    {
+        if (endTile.canalsIn[i].endNode == endTile.gridPos)//ceux à contre sens
+        {
+            if (endTile.canalsIn[i].canalTiles.Count < 1)//link simple
+            {
+                if (grid.GetTile(endTile.canalsIn[i].startNode).riverStrenght < (FlowStrenght)maxFlowEnd)
+                {
+                    if (endTile.canalsIn[i].canalTiles.Count < 1)//link simple
+                    {
+                        ErasedCanal(endTile.canalsIn[i]);
+                    }
+                    else
+                    {
+                        Inverse(endTile.canalsIn[i]);
+                    }
+                }
+                else
+                if (grid.GetTile(endTile.canalsIn[i].startNode).riverStrenght > (FlowStrenght)(2 * maxFlowEnd))
+                {
+                    Inverse(startTile.canalsIn[0]);
+                }
+                else //==
+                {
+                    //is okay
+                }
+
+            }
+        }
+    }
+}
+else
+if (startTile.riverStrenght < (FlowStrenght)(2 * maxFlowEnd)) //je me fais peut etre override
+{
+    Inverse(startTile.canalsIn[0]);
+}
+else
+{
+    //je m'imisse sans soucis
+}*/
+    }
+
+    private bool InCanalList(Canal canal)
+    {
+        for (int i = 0; i < canals.Count; i++)
+        {
+            if (canal == canals[i])
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+    private Canal CanalList(Canal canal)
+    {
+        for (int i = 0; i < canals.Count; i++)
+        {
+            if (canal == canals[i])
+            {
+                return canals[i];
+            }
+        }
+        return null;
+    }
     private void OnBreak(GameTile erasedTile)
     {
-        if (erasedTile.isElement && !(erasedTile.element is WaterSource) && !( erasedTile.element is Plant))
+        if (erasedTile.haveElement && !(erasedTile.element is WaterSource) && !( erasedTile.element is Plant))
         {
             digging.RemoveElement(erasedTile.element);
         }
