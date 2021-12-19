@@ -18,6 +18,13 @@ public class GameGrid : Singleton<GameGrid>
     [Header("Data")]
     public Map_Data mapData;
     public GameTile[] tiles;
+    #region Debug
+    [BoxGroup("Debug")] public bool showDebug;
+    [BoxGroup("Debug")] [ShowIf("showDebug")] public Color debugLineColor = Color.red;
+    [BoxGroup("Debug")] [ShowIf("showDebug")] public bool showCenter;
+    [BoxGroup("Debug")] [ShowIf("showCenter")] public Color debugCenterColor = Color.black;
+    #endregion
+
     #region Grid-Tile Methodes
     public GameTile GetTile(int x, int y)
     {
@@ -36,18 +43,7 @@ public class GameGrid : Singleton<GameGrid>
         tiles[pos.x + (pos.y * (size.x))] = value;
     }
     #endregion
-
-    [BoxGroup("Debug")] public bool showDebug;
-    [BoxGroup("Debug")] [ShowIf("showDebug")] public Color debugLineColor = Color.red;
-    [BoxGroup("Debug")] [ShowIf("showDebug")] public bool showCenter;
-    [BoxGroup("Debug")] [ShowIf("showCenter")] public Color debugCenterColor = Color.black;
-
-    void Start()
-    {
-        //LoadMap();
-    }
-
-    #region Map Manage
+    #region Map Management
     [Button]
     private void LoadMap()
     {
@@ -173,7 +169,21 @@ public class GameGrid : Singleton<GameGrid>
 
     }
     #endregion
+    #region AreManagement
+    public bool PosInGrid(Vector2Int testedPos)
+    {
+        if(testedPos.x < 0 || testedPos.y < 0)
+        {
+            return false;
+        }
+        if (testedPos.x >= size.x || testedPos.y >= size.y)
+        {
+            return false;
+        }
+        return true;
+    }
 
+    #endregion
     #region Grid<->World Convertion
     /// <summary>
     /// Convert a GameGrid Pos to a worldPos

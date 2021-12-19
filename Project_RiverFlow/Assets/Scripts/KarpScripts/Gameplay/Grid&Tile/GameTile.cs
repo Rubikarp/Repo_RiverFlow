@@ -437,55 +437,76 @@ public class GameTile : MonoBehaviour
 
     //Helper
     public void FillNeighbor(GameGrid grid)
-    {
-        Vector2Int temp = gridPos;
-        Direction dir = new Direction(0);
-
+    {        
+        //Clear
         neighbors = new GameTile[8];
+
+        Vector2Int tempPos; 
+        Direction dir;
         for (int i = 0; i < 8; i++)
         {
             dir = new Direction((DirectionEnum)i);
-            temp = gridPos + dir.dirValue;
-
-            if (temp.x < 0 || temp.y < 0)
-            {
-                neighbors[i] = null;
-            }
-            else
-            if (temp.x > grid.size.x - 1 || temp.y > grid.size.y - 1)
-            {
-                neighbors[i] = null;
-            }
-            else
-            {
-                neighbors[i] = grid.GetTile(temp);
-            }
+            tempPos = gridPos + dir.dirValue;
+            neighborsDist2[i] = grid.PosInGrid(tempPos) ? grid.GetTile(tempPos) : null;
         }
 
-        //FillNeighborDist2();
+        FillNeighborDist2(grid);
     }
-    public void FillNeighborDist2()
+    public void FillNeighborDist2(GameGrid grid)
     {
-        List<GameTile> pack = new List<GameTile>();
-        pack.AddRange(neighbors[0].GetNeighbor());
-        pack.AddRange(neighbors[2].GetNeighbor());
-        pack.AddRange(neighbors[4].GetNeighbor());
-        pack.AddRange(neighbors[6].GetNeighbor());
+        //Clear
+        neighborsDist2 = new GameTile[16];
 
-        List<GameTile> result = new List<GameTile>();
-
-        neighbors = new GameTile[8];
-        for (int i = 0; i < pack.Count; i++)
+        /* 
+        Tracing Order
+        00/01/02/03/04
+        15          05
+        14          06
+        13          07
+        12/11/10/09/08
+        */
+        Vector2Int testPos = gridPos + new Vector2Int(-2,2);
+        int dist2Index = 0;
+        //Upleft->UpRight Line
+        for (int i = 0; i < 4; i++)
         {
-            if(pack[i] != null && pack[i] != this)
+            neighborsDist2[dist2Index] = grid.PosInGrid(testPos)?grid.GetTile(testPos) : null;
+            testPos += Vector2Int.right;
+            dist2Index++;
+        }
+        //UpRight->DownRight Line
+        for (int i = 0; i < 4; i++)
+        {
+            neighborsDist2[dist2Index] = grid.PosInGrid(testPos) ? grid.GetTile(testPos) : null;
+            testPos += Vector2Int.down;
+            dist2Index++;
+        }
+        //DownRight->DownLeft Line
+        for (int i = 0; i < 4; i++)
+        {
+            neighborsDist2[dist2Index] = grid.PosInGrid(testPos) ? grid.GetTile(testPos) : null;
+            testPos += Vector2Int.left;
+            dist2Index++;
+        }
+        //DownLeft->Upleft Line
+        for (int i = 0; i < 4; i++)
+        {
+            neighborsDist2[dist2Index] = grid.PosInGrid(testPos) ? grid.GetTile(testPos) : null;
+            testPos += Vector2Int.up;
+            dist2Index++;
+        }
+    }
+    public int NeighborIndex(GameTile tile)
+    {
+        for (int i = 0; i < 8; i++)
+        {
+            if (neighbors[i] == tile)
             {
-                if(NeighborIndex(pack[i]) == -1)
-                {
-
-                }
+                return i;
             }
         }
-
+        Debug.LogError("Linked tile " + tile.gridPos + " n'est pas un voisin de " + this.gridPos + ".", this);
+        return -1;
     }
     public GameTile[] GetNeighbor()
     {
@@ -516,18 +537,6 @@ public class GameTile : MonoBehaviour
         }
 
         return result;
-    }
-    public int NeighborIndex(GameTile tile)
-    {
-        for (int i = 0; i < 8; i++)
-        {
-            if (neighbors[i] == tile)
-            {
-                return i;
-            }
-        }
-        Debug.LogError("Linked tile " + tile.gridPos + " n'est pas un voisin de " + this.gridPos + ".", this);
-        return -1;
     }
     public GameTile GetNeighbor(Direction dir)
     {
