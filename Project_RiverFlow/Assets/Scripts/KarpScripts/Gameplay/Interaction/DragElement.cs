@@ -59,27 +59,30 @@ public class DragElement : MonoBehaviour,
         {
             //Init the linked object on grid
             switch (Item)
-        {
-            case Items.Cloud:
-                if (Inventory.cloudsAmmount >0)
-                {
-
-                    elementManage.SpawnCloudAt(grid.PosToTile(input.GetHitPos()));
-                    Inventory.cloudsAmmount--;
-                }
-                break;
-            case Items.Source:
-                if (Inventory.sourcesAmmount > 0)
-                {
-                    elementManage.SpawnWaterSourceAt(grid.PosToTile(input.GetHitPos()));
-                    Inventory.sourcesAmmount--;
-                }
-                break;
-            case Items.Lake:
+            {
+                case Items.Cloud:
+                    if (Inventory.cloudsAmmount > 0)
+                    {
+                        GameTile testedTile = grid.GetTile(grid.PosToTile(input.GetHitPos()));
+                        if (testedTile.ReceivedFlow() > FlowStrenght._00_)
+                        {
+                            elementManage.SpawnCloudAt(grid.PosToTile(input.GetHitPos()));
+                            Inventory.cloudsAmmount--;
+                        }
+                    }
+                    break;
+                case Items.Source:
+                    if (Inventory.sourcesAmmount > 0)
+                    {
+                        elementManage.SpawnWaterSourceAt(grid.PosToTile(input.GetHitPos()));
+                        Inventory.sourcesAmmount--;
+                    }
+                    break;
+                case Items.Lake:
                     if (Inventory.lakesAmmount > 0)
                     {
                         GameTile testedTile = grid.GetTile(grid.PosToTile(input.GetHitPos()));
-                        if (testedTile.receivedFlow > FlowStrenght._00_)
+                        if (testedTile.ReceivedFlow() > FlowStrenght._00_)
                         {
                             if (testedTile.linkAmount == 2)
                             {
@@ -92,7 +95,7 @@ public class DragElement : MonoBehaviour,
                                     Inventory.lakesAmmount--;
                                 }
                                 //check if horizontal
-                                else 
+                                else
                                 if ((testedTileLinks[0] == testedTile.neighbors[3] && testedTileLinks[1] == testedTile.neighbors[7])
                                  || (testedTileLinks[0] == testedTile.neighbors[7] && testedTileLinks[1] == testedTile.neighbors[3]))
                                 {
@@ -102,10 +105,10 @@ public class DragElement : MonoBehaviour,
                             }
                         }
                     }
-                break;
-            default:
-                break;
-        }
+                    break;
+                default:
+                    break;
+            }
 
             RiverManager.Instance.FlowStep();
         }

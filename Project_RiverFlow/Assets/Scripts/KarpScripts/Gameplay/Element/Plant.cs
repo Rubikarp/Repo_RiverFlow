@@ -281,7 +281,7 @@ public class Plant : Element
                 {
                     for (int b = 0; b < tileOn.neighbors[a].neighbors.Length; b++)
                     {
-                        if (tileOn.neighbors[a].neighbors[b].receivedFlow >= FlowStrenght._25_)
+                        if (tileOn.neighbors[a].neighbors[b].ReceivedFlow() >= FlowStrenght._25_)
                         {
                             irrigatedNeighbors[a] = true;
 

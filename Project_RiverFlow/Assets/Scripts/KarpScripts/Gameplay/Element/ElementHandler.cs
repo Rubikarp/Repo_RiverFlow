@@ -54,12 +54,7 @@ public class ElementHandler : MonoBehaviour
     {
         if (!grid.GetTile(grisPos).haveElement)
         {
-#if UNITY_EDITOR
-            GameObject go = PrefabUtility.InstantiatePrefab(plant_Template, elementContainer)as GameObject;
-#else
-            GameObject go = Instantiate(plant_Template, elementContainer);
-#endif 
-
+            GameObject go = InstanciateElement(plant_Template);
             go.transform.position = grid.TileToPos(new Vector2Int(grisPos.x, grisPos.y));
             go.name = "Plant_" + grisPos;
 
@@ -75,19 +70,14 @@ public class ElementHandler : MonoBehaviour
 
             //Link Element and Tile
             plant.gridPos = grisPos;
-            plant.tileOn = grid.GetTile(grisPos);
-            grid.GetTile(grisPos).element = plant;
+            LinkElementToGrid(plant);
         }
     }
     public void SpawnWaterSourceAt(Vector2Int grisPos)
     {
         if (!grid.GetTile(grisPos).haveElement)
         {
-#if UNITY_EDITOR
-            GameObject go = PrefabUtility.InstantiatePrefab(waterSource_Template, elementContainer) as GameObject;
-#else
-            GameObject go = Instantiate(waterSource_Template, elementContainer);
-#endif 
+            GameObject go = InstanciateElement(waterSource_Template);
             go.transform.position = grid.TileToPos(new Vector2Int(grisPos.x, grisPos.y));
             go.name = "Source_" + grisPos;
 
@@ -111,11 +101,7 @@ public class ElementHandler : MonoBehaviour
     {
         if (!grid.GetTile(grisPos).haveElement)
         {
-#if UNITY_EDITOR
-            GameObject go = PrefabUtility.InstantiatePrefab(cloud_Template, elementContainer) as GameObject;
-#else
-            GameObject go = Instantiate(cloud_Template, elementContainer);
-#endif 
+            GameObject go = InstanciateElement(cloud_Template);
             go.transform.position = grid.TileToPos(new Vector2Int(grisPos.x, grisPos.y));
             go.name = "Cloud_" + grisPos;
 
@@ -137,11 +123,7 @@ public class ElementHandler : MonoBehaviour
     {
         if (!grid.GetTile(grisPos).haveElement)
         {
-#if UNITY_EDITOR
-            GameObject go = PrefabUtility.InstantiatePrefab(magicTree_Template, elementContainer) as GameObject;
-#else
-            GameObject go = Instantiate(magicTree_Template, elementContainer);
-#endif 
+            GameObject go = InstanciateElement(magicTree_Template);
             go.transform.position = grid.TileToPos(new Vector2Int(grisPos.x, grisPos.y));
             go.name = "MagicTree_" + grisPos;
 
@@ -164,18 +146,14 @@ public class ElementHandler : MonoBehaviour
         GameTile CurrentTile = grid.GetTile(grisPos);
         Debug.Log(grid.GetTile(grisPos));
 
-        if (CurrentTile.receivedFlow > FlowStrenght._00_)
+        if (CurrentTile.ReceivedFlow() > FlowStrenght._00_)
         {
             if (CurrentTile.linkAmount == 2)
             {
-
-#if UNITY_EDITOR
-                GameObject go = PrefabUtility.InstantiatePrefab(lake_Template, elementContainer) as GameObject;
-#else
-            GameObject go = Instantiate(lake_Template, elementContainer);
-#endif 
+                GameObject go = InstanciateElement(lake_Template);
                 go.transform.position = grid.TileToPos(new Vector2Int(grisPos.x, grisPos.y));
                 go.name = "Lake_" + grisPos;
+
                 //Check if Plant
                 Lake lake = go.GetComponent<Lake>();
                 if (lake == null)
@@ -215,6 +193,27 @@ public class ElementHandler : MonoBehaviour
         }
 
 
+    }
+    /// 
+    public GameObject InstanciateElement(GameObject template)
+    {
+#if UNITY_EDITOR
+        return PrefabUtility.InstantiatePrefab(plant_Template, elementContainer) as GameObject;
+#else
+        return Instantiate(plant_Template, elementContainer);
+#endif 
+    }
+    public void LinkElementToGrid(Element element)
+    {
+        //Link Element and Tile
+        element.TileOn = grid.GetTile(element.gridPos);
+        grid.GetTile(element.gridPos).element = element;
+    }
+    public void UnLinkElementToGrid(Element element)
+    {
+        //Link Element and Tile
+        grid.GetTile(element.gridPos).element = null;
+        element.TileOn = null;
     }
     #endregion
 

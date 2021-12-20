@@ -39,5 +39,17 @@ public class Element : MonoBehaviour
     }
 
     public virtual void AddLink(Direction dir) { }
+    public virtual void LinkElementToGrid(GameGrid grid)
+    {
+        //Link Element and Tile
+        TileOn = grid.GetTile(gridPos);
+        grid.GetTile(gridPos).element = this;
+    }
+    public virtual void UnLinkElementToGrid(GameGrid grid)
+    {
+        //UnLink Element and Tile
+        grid.GetTile(gridPos).element = null;
+        TileOn = null;
+    }
 
 }

@@ -650,32 +650,71 @@ public class RiverManager : Singleton<RiverManager>
 
         FlowStep();
     }
-
-    private void Link0To0(GameTile tileA, GameTile tileB)
+    private void OnBreak(GameTile erasedTile)
     {
-        if (tileB.riverStrenght > tileA.riverStrenght)
+        if (erasedTile.haveElement && !(erasedTile.element is WaterSource) && !( erasedTile.element is Plant))
         {
-            GenerateRiverCanal(tileB.gridPos, tileA.gridPos);
+            digging.RemoveElement(erasedTile.element);
         }
         else
         {
+            List<Canal> canals = new List<Canal>();
+            canals = erasedTile.canalsIn;
+            int temp = canals.Count;
+
+            for (int i = 0; i < temp; i++)
+            {
+                if (canals[canals.Count-1].Contains(erasedTile.gridPos))
+                {
+                    int indexInCanal = canals[canals.Count - 1].IndexOf(erasedTile.gridPos);
+                    if (indexInCanal == 0 || indexInCanal == canals[canals.Count - 1].canalTiles.Count + 1)
+                    {
+                        ShortenCanal(canals[canals.Count - 1], erasedTile);
+                    }
+                    else
+                    {
+                        BreakCanalIn2(canals[canals.Count - 1], erasedTile);
+                    }
+                }
+                else
+                {
+                    canals.Remove(canals[canals.Count - 1]);
+                }
+            }
+            erasedTile.riverStrenght = 0;
+        }
+        FlowStep();
+    }
+
+    private void Link0To0(GameTile tileA, GameTile tileB)
+    {
+        if (tileA.ReceivedFlow() >= tileB.ReceivedFlow())
+        {
             GenerateRiverCanal(tileA.gridPos, tileB.gridPos);
+        }
+        else //if (tileA.ReceivedFlow() < tileB.ReceivedFlow())
+        {
+            GenerateRiverCanal(tileB.gridPos, tileA.gridPos);
         }
     }
     private void Link1To0(GameTile tileA, GameTile tileB)
     {
         if (InCanalList(tileA.canalsIn[0]))
         {
-            Canal list = CanalList(tileA.canalsIn[0]);
+            Canal listCanal = CanalList(tileA.canalsIn[0]);
 
-            if (list.endNode == tileA.gridPos)
+            if (listCanal.endNode == tileA.gridPos)
             {
-                ExtendCanal(list, tileA, tileB);
+                ExtendCanal(listCanal, tileA, tileB);
             }
             else
             {
-                ExtendCanal(list, tileB, tileA);
-                Inverse(list);
+                ExtendCanal(listCanal, tileB, tileA);
+            }
+            
+            if (tileA.ReceivedFlow() < tileB.ReceivedFlow()) 
+            { 
+                Inverse(listCanal);
             }
         }
         else
@@ -685,100 +724,190 @@ public class RiverManager : Singleton<RiverManager>
     }
     private void Link1To1(GameTile tileA, GameTile tileB)
     {
-        if (tileA.riverStrenght == tileB.riverStrenght)
+        if (InCanalList(tileA.canalsIn[0]))
         {
-            for (int i = 0; i < canals.Count; i++)
-            {
-                if (tileA.canalsIn[0] == canals[i])
+            Canal listCanalA = CanalList(tileA.canalsIn[0]);
+            Canal listCanalB = CanalList(tileB.canalsIn[0]);
+
+            //Done
+            if (tileA.gridPos == tileA.canalsIn[0].endNode && tileB.gridPos == tileB.canalsIn[0].endNode)
+            {//==>to<==
+                if (tileA.ReceivedFlow() == tileB.ReceivedFlow())
                 {
-                    ExtendCanal(canals[i], tileA, tileB);
+                    if (tileA.ReceivedFlow() == FlowStrenght._00_)
+                    {//==>==>
+                        Inverse(listCanalB);
+                        Merge(listCanalA, listCanalB);
+
+                        ReplaceCanal(listCanalB, listCanalA);
+                    }
+                    else
+                    {//==>o<==
+                        ExtendCanal(listCanalA, tileA, tileB);
+                    }
+                }
+                else if (tileA.ReceivedFlow() > tileB.ReceivedFlow())
+                {//==>==>
+                    Inverse(listCanalB);
+                    Merge(listCanalA, listCanalB);
+                    ReplaceCanal(listCanalB, listCanalA);
+                }
+                else if (tileA.ReceivedFlow() < tileB.ReceivedFlow())
+                {//<==<==
+                    Inverse(listCanalA);
+                    Merge(listCanalB, listCanalA);
+                    ReplaceCanal(listCanalA, listCanalB);
                 }
             }
+            else if (tileA.gridPos == tileA.canalsIn[0].endNode && tileB.gridPos == tileB.canalsIn[0].startNode)
+            {//==>to==>
+                if (tileA.ReceivedFlow() >= tileB.ReceivedFlow())
+                {//==>==>
+                    Merge(listCanalA, listCanalB);
+                    ReplaceCanal(listCanalB, listCanalA);
+                }
+                else if (tileA.ReceivedFlow() < tileB.ReceivedFlow())
+                {//<==o==> //La tileB est forcément un point d'émission (nuage ?)
+                    ExtendCanal(listCanalA, tileA, tileB);
+                    Inverse(listCanalA);
+                }
+            }
+            else if (tileA.gridPos == tileA.canalsIn[0].startNode && tileB.gridPos == tileB.canalsIn[0].endNode)
+            {//<==to<==
+                if (tileA.ReceivedFlow() > tileB.ReceivedFlow())
+                {//<==o==> //La tileA est forcément un point d'émission (nuage ?)
+                    ExtendCanal(listCanalB, tileB, tileA);
+                    Inverse(listCanalB);
+                }
+                else if (tileA.ReceivedFlow() <= tileB.ReceivedFlow())
+                {//<==<==
+                    Merge(listCanalB, listCanalA);
+                    ReplaceCanal(listCanalA, listCanalB);
+                }
+            }
+            else if (tileA.gridPos == tileA.canalsIn[0].startNode && tileB.gridPos == tileB.canalsIn[0].startNode)
+            {//<==to==>
+                if (tileA.ReceivedFlow() == tileB.ReceivedFlow())
+                {
+                    if (tileA.ReceivedFlow() == FlowStrenght._00_)
+                    {//==>==>
+                        Inverse(listCanalA);
+                        Merge(listCanalA, listCanalB);
+                        ReplaceCanal(listCanalB, listCanalA);
+                    }
+                    else
+                    {//<==oo==> ??? temp behavior //==>==>
+                        Inverse(listCanalA);
+                        Merge(listCanalA, listCanalB);
+                        ReplaceCanal(listCanalB, listCanalA);
+                        //Debug.LogError("Demande aux GD");
+                    }
+                }
+                else if (tileA.ReceivedFlow() > tileB.ReceivedFlow())
+                {//<==o==> //La tileA est forcément un point d'émission (nuage ?)
+                    ExtendCanal(listCanalB, tileB, tileA);
+                    Inverse(listCanalB);
+                }
+                else if (tileA.ReceivedFlow() < tileB.ReceivedFlow())
+                {//<==o==> //La tileB est forcément un point d'émission (nuage ?)
+                    ExtendCanal(listCanalA, tileA, tileB);
+                    Inverse(listCanalA);
+                }
+            }
+            /* oldd stuff
+            if (tileA.ReceivedFlow() == tileB.ReceivedFlow())
+            {
+                ExtendCanal(listCanalA, tileA, tileB);
+            }
+            else if (tileA.ReceivedFlow() > tileB.ReceivedFlow())
+            {
+                if (tileA.gridPos == tileA.canalsIn[0].endNode)
+                {
+                    if (tileB.gridPos == tileB.canalsIn[0].startNode)
+                    {
+                        Merge(tileA.canalsIn[0], tileB.canalsIn[0]);
+
+                        ReplaceCanal(tileB.canalsIn[0], tileA.canalsIn[0]);
+                    }
+                    else
+                    if (tileB.gridPos == tileB.canalsIn[0].endNode)
+                    {
+                        Inverse(tileB.canalsIn[0]);
+                        Merge(tileA.canalsIn[0], tileB.canalsIn[0]);
+
+                        ReplaceCanal(tileB.canalsIn[0], tileA.canalsIn[0]);
+                    }
+                }
+                else if (tileA.gridPos == tileA.canalsIn[0].startNode)
+                {
+                    if (tileB.gridPos == tileB.canalsIn[0].startNode)
+                    {
+                        Inverse(tileA.canalsIn[0]);
+                        Merge(tileA.canalsIn[0], tileB.canalsIn[0]);
+
+                        ReplaceCanal(tileB.canalsIn[0], tileA.canalsIn[0]);
+                    }
+                    else
+                    if (tileB == grid.GetTile(tileB.canalsIn[0].endNode))
+                    {
+                        Inverse(tileA.canalsIn[0]);
+                        Inverse(tileB.canalsIn[0]);
+
+                        Merge(tileA.canalsIn[0], tileB.canalsIn[0]);
+
+                        ReplaceCanal(tileB.canalsIn[0], tileA.canalsIn[0]);
+                    }
+                }
+
+            }
+            else if (tileA.ReceivedFlow() < tileB.ReceivedFlow())
+            {
+                if (tileA.gridPos == tileA.canalsIn[0].endNode)
+                {
+                    if (tileB.gridPos == tileB.canalsIn[0].startNode)
+                    {
+                        Inverse(tileB.canalsIn[0]);
+                        Inverse(tileA.canalsIn[0]);
+
+                        Merge(tileB.canalsIn[0], tileA.canalsIn[0]);
+
+                        ReplaceCanal(tileA.canalsIn[0], tileB.canalsIn[0]);
+                    }
+                    else
+                    if (tileB.gridPos == tileB.canalsIn[0].endNode)
+                    {
+                        Inverse(tileA.canalsIn[0]);
+                        Merge(tileB.canalsIn[0], tileA.canalsIn[0]);
+
+                        ReplaceCanal(tileA.canalsIn[0], tileB.canalsIn[0]);
+                    }
+                }
+                else if (tileA.gridPos == tileA.canalsIn[0].startNode)
+                {
+                    if (tileB.gridPos == tileB.canalsIn[0].startNode)
+                    {
+                        Inverse(tileB.canalsIn[0]);
+                        Merge(tileB.canalsIn[0], tileA.canalsIn[0]);
+
+                        ReplaceCanal(tileA.canalsIn[0], tileB.canalsIn[0]);
+                    }
+                    else
+                    if (tileB == grid.GetTile(tileB.canalsIn[0].endNode))
+                    {
+                        Merge(tileB.canalsIn[0], tileA.canalsIn[0]);
+
+                        ReplaceCanal(tileA.canalsIn[0], tileB.canalsIn[0]);
+                    }
+                }
+
+            }
+            */
         }
-        else 
-        if (tileA.riverStrenght > tileB.riverStrenght)
+        else
         {
-            if (tileA.gridPos == tileA.canalsIn[0].endNode)
-            {
-                if (tileB.gridPos == tileB.canalsIn[0].startNode)
-                {
-                    Merge(tileA.canalsIn[0], tileB.canalsIn[0]);
-
-                    ReplaceCanal(tileB.canalsIn[0], tileA.canalsIn[0]);
-                }
-                else
-                if (tileB.gridPos == tileB.canalsIn[0].endNode)
-                {
-                    Inverse(tileB.canalsIn[0]);
-                    Merge(tileA.canalsIn[0], tileB.canalsIn[0]);
-
-                    ReplaceCanal(tileB.canalsIn[0], tileA.canalsIn[0]);
-                }
-            }
-            else if (tileA.gridPos == tileA.canalsIn[0].startNode)
-            {
-                if (tileB.gridPos == tileB.canalsIn[0].startNode)
-                {
-                    Inverse(tileA.canalsIn[0]);
-                    Merge(tileA.canalsIn[0], tileB.canalsIn[0]);
-
-                    ReplaceCanal(tileB.canalsIn[0], tileA.canalsIn[0]);
-                }
-                else
-                if (tileB == grid.GetTile(tileB.canalsIn[0].endNode))
-                {
-                    Inverse(tileA.canalsIn[0]);
-                    Inverse(tileB.canalsIn[0]);
-
-                    Merge(tileA.canalsIn[0], tileB.canalsIn[0]);
-
-                    ReplaceCanal(tileB.canalsIn[0], tileA.canalsIn[0]);
-                }
-            }
-
+            Debug.LogError(tileA.canalsIn[0] + "not in list");
         }
-        else 
-        if (tileA.riverStrenght < tileB.riverStrenght)
-        {
-            if (tileA.gridPos == tileA.canalsIn[0].endNode)
-            {
-                if (tileB.gridPos == tileB.canalsIn[0].startNode)
-                {
-                    Inverse(tileB.canalsIn[0]);
-                    Inverse(tileA.canalsIn[0]);
 
-                    Merge(tileB.canalsIn[0], tileA.canalsIn[0]);
-
-                    ReplaceCanal(tileA.canalsIn[0], tileB.canalsIn[0]);
-                }
-                else
-                if (tileB.gridPos == tileB.canalsIn[0].endNode)
-                {
-                    Inverse(tileA.canalsIn[0]);
-                    Merge(tileB.canalsIn[0], tileA.canalsIn[0]);
-
-                    ReplaceCanal(tileA.canalsIn[0], tileB.canalsIn[0]);
-                }
-            }
-            else
-            if (tileA.gridPos == tileA.canalsIn[0].startNode)
-            {
-                if (tileB.gridPos == tileB.canalsIn[0].startNode)
-                {
-                    Inverse(tileB.canalsIn[0]);
-                    Merge(tileB.canalsIn[0], tileA.canalsIn[0]);
-
-                    ReplaceCanal(tileA.canalsIn[0], tileB.canalsIn[0]);
-                }
-                else
-                if (tileB == grid.GetTile(tileB.canalsIn[0].endNode))
-                {
-                    Merge(tileB.canalsIn[0], tileA.canalsIn[0]);
-
-                    ReplaceCanal(tileA.canalsIn[0], tileB.canalsIn[0]);
-                }
-            }
-        }
     }
     private void Link2To0(GameTile tileA, GameTile tileB)
     {
@@ -976,37 +1105,6 @@ else
             }
         }
         return null;
-    }
-    private void OnBreak(GameTile erasedTile)
-    {
-        if (erasedTile.haveElement && !(erasedTile.element is WaterSource) && !( erasedTile.element is Plant))
-        {
-            digging.RemoveElement(erasedTile.element);
-        }
-        else
-        {
-            List<Canal> canals = new List<Canal>();
-            canals = erasedTile.canalsIn;
-            int temp = canals.Count;
-
-            for (int i = 0; i < temp; i++)
-            {
-                if (canals[canals.Count-1].Contains(erasedTile.gridPos))
-                {
-                    int indexInCanal = canals[canals.Count - 1].IndexOf(erasedTile.gridPos);
-                    if (indexInCanal == 0 || indexInCanal == canals[canals.Count - 1].canalTiles.Count + 1)
-                    {
-                        ShortenCanal(canals[canals.Count - 1], erasedTile);
-                    }
-                    else
-                    {
-                        BreakCanalIn2(canals[canals.Count - 1], erasedTile);
-                    }
-                }
-            }
-            erasedTile.StopFlow();
-        }
-        FlowStep();
     }
 
     public void ReplaceCanal(Canal oldCanal, Canal newCanal)

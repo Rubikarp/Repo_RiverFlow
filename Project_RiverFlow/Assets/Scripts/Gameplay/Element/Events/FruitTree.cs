@@ -81,7 +81,7 @@ public class FruitTree : MonoBehaviour
                 {
                     for (int b = 0; b < closeTiles[a].neighbors.Length; b++)
                     {
-                        if (closeTiles[a].neighbors[b].receivedFlow >= FlowStrenght._25_)
+                        if (closeTiles[a].neighbors[b].ReceivedFlow() >= FlowStrenght._25_)
                         {
                             irrigatedNeighbors[a] = true;
 

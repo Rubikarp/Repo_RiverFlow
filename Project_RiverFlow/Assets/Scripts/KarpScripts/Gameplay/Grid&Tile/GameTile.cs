@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using NaughtyAttributes;
 
 public class GameTile : MonoBehaviour
 {
@@ -29,14 +30,13 @@ public class GameTile : MonoBehaviour
 
     [Header("GameObject Data")]
     public Element element;
+    [HorizontalLine(height:5,color:EColor.Red)]
     public GameTile[] neighbors = new GameTile[8];
     public GameTile[] neighborsDist2 = new GameTile[16];
-    [Space(8)]
-    public FlowStrenght receivedFlow = FlowStrenght._00_;
-    [Space(8)]
+    [HorizontalLine(height:5, color: EColor.Green)]
     public List<Direction> flowIn = new List<Direction>();
     public List<Direction> flowOut = new List<Direction>();
-    [Space(8)]
+    [HorizontalLine(height:5, color: EColor.Yellow)]
     public List<Canal> canalsIn = new List<Canal>();
     #region Getter / Setter
     public bool haveElement
@@ -178,40 +178,36 @@ public class GameTile : MonoBehaviour
         spawnScore = GetComponent<TileSpawnScore>();
     }
 
+    public FlowStrenght ReceivedFlow()
+    {
+        if (element is WaterSource)
+        {
+            return FlowStrenght._100_;
+        }
+        int received = (int)FlowStrenght._00_;
+        if (element is Cloud)
+        {
+            received += (int)FlowStrenght._25_;
+        }
+        if (flowIn.Count > 0)
+        {
+            for (int i = 0; i < flowIn.Count; i++)
+            {
+                received += (int)GetNeighbor(flowIn[i]).AskForWater(this);
+            }
+            if (element is Cloud)
+            {
+                received += (int)FlowStrenght._25_;
+            }
+            return (FlowStrenght)Mathf.Clamp(received, 0, (int)FlowStrenght._100_);
+        }
+        return (FlowStrenght)received;
+    }
     //Flow
     public void FlowStep()
     {
-        //Reset receivedFlow
-        receivedFlow = FlowStrenght._00_;
-
-        //Check received Water
-        if (flowIn.Count > 0 || element is WaterSource)
-        {
-            if (element is WaterSource)
-            {
-                receivedFlow = FlowStrenght._100_;
-            }
-            else
-            {
-                for (int i = 0; i < flowIn.Count; i++)
-                {
-                    receivedFlow += (int)GetNeighbor(flowIn[i]).AskForWater(this);
-                }
-                if (element is Cloud)
-                {
-                    receivedFlow += (int)FlowStrenght._25_;
-                }
-                receivedFlow = (FlowStrenght)Mathf.Clamp((int)receivedFlow, 0, (int)FlowStrenght._100_);
-            }
-
-            //SetFlow
-            riverStrenght = receivedFlow;
-        }
-        else
-        {
-            StopFlow();
-            return;
-        }
+        //Update RiverStrenght
+        riverStrenght = ReceivedFlow();
 
         //Check for contradictory flow
         if (linkAmount == 2)
@@ -321,11 +317,6 @@ public class GameTile : MonoBehaviour
             return FlowStrenght._00_;
         }
     }
-    public void StopFlow()
-    {
-        riverStrenght = FlowStrenght._00_;
-        receivedFlow = FlowStrenght._00_;
-    }
     //LINK
     public static void Link(GameTile tileA, GameTile tileB)
     {
@@ -379,20 +370,12 @@ public class GameTile : MonoBehaviour
             {
                 flowIn.Add(addedDir);
             }
-            else
-            {
-                Debug.LogError("oupsie", this);
-            }
         }
         else
         {
             if (!flowOut.Contains(addedDir))
             {
                 flowOut.Add(addedDir);
-            }
-            else
-            {
-                Debug.LogError("oupsie", this);
             }
         }
     }
@@ -404,20 +387,12 @@ public class GameTile : MonoBehaviour
             {
                 flowIn.Remove(removeDir);
             }
-            else 
-            {
-                Debug.LogError("oupsie", this);
-            }
         }
         else
         {
             if (flowOut.Contains(removeDir))
             {
                 flowOut.Remove(removeDir);
-            }
-            else
-            {
-                Debug.LogError("oupsie", this);
             }
         }
     }
