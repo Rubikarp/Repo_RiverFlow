@@ -178,31 +178,6 @@ public class GameTile : MonoBehaviour
         spawnScore = GetComponent<TileSpawnScore>();
     }
 
-    public FlowStrenght ReceivedFlow()
-    {
-        if (element is WaterSource)
-        {
-            return FlowStrenght._100_;
-        }
-        int received = (int)FlowStrenght._00_;
-        if (element is Cloud)
-        {
-            received += (int)FlowStrenght._25_;
-        }
-        if (flowIn.Count > 0)
-        {
-            for (int i = 0; i < flowIn.Count; i++)
-            {
-                received += (int)GetNeighbor(flowIn[i]).AskForWater(this);
-            }
-            if (element is Cloud)
-            {
-                received += (int)FlowStrenght._25_;
-            }
-            return (FlowStrenght)Mathf.Clamp(received, 0, (int)FlowStrenght._100_);
-        }
-        return (FlowStrenght)received;
-    }
     //Flow
     public void FlowStep()
     {
@@ -210,11 +185,12 @@ public class GameTile : MonoBehaviour
         riverStrenght = ReceivedFlow();
 
         //Check for contradictory flow
+        /*
         if (linkAmount == 2)
         {
             //Link
             if (flowOut.Count > flowIn.Count)
-            {
+            {//<==0==>
                 //flowOut.Count = 2
                 GameTile neighborA = GetNeighbor(flowOut[0]);
                 GameTile neighborB = GetNeighbor(flowOut[1]);
@@ -228,14 +204,10 @@ public class GameTile : MonoBehaviour
                 {
                     InverseLink(this,neighborB);
                 }
-                else
-                {
-
-                }
             }
             else
             if (flowOut.Count < flowIn.Count)
-            {
+            {//==>0<==
                 //flowIn.Count = 2
                 GameTile neighborA = GetNeighbor(flowIn[0]);
                 GameTile neighborB = GetNeighbor(flowIn[1]);
@@ -248,10 +220,6 @@ public class GameTile : MonoBehaviour
                 if (neighborA.riverStrenght < neighborB.riverStrenght)
                 {
                     InverseLink(this,neighborA);
-                }
-                else
-                {
-
                 }
             }
             else
@@ -275,6 +243,28 @@ public class GameTile : MonoBehaviour
                 //TODO
             }
         }
+        */
+    }
+    public FlowStrenght ReceivedFlow()
+    {
+        if (element is WaterSource)
+        {
+            return FlowStrenght._100_;
+        }
+        int received = (int)FlowStrenght._00_;
+        if (element is Cloud)
+        {
+            received += (int)FlowStrenght._25_;
+        }
+        if (flowIn.Count > 0)
+        {
+            for (int i = 0; i < flowIn.Count; i++)
+            {
+                received += (int)GetNeighbor(flowIn[i]).AskForWater(this);
+            }
+            return (FlowStrenght)Mathf.Clamp(received, 0, (int)FlowStrenght._100_);
+        }
+        return (FlowStrenght)received;
     }
     public FlowStrenght AskForWater(GameTile asker)
     {

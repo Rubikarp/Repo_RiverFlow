@@ -52,7 +52,7 @@ public class ElementHandler : MonoBehaviour
     #region Spawn
     public void SpawnPlantAt(Vector2Int grisPos)
     {
-        if (!grid.GetTile(grisPos).haveElement)
+        if (!grid.GetTile(grisPos).haveElement && grid.GetTile(grisPos).canalsIn.Count == 0)
         {
             GameObject go = InstanciateElement(plant_Template);
             go.transform.position = grid.TileToPos(new Vector2Int(grisPos.x, grisPos.y));
@@ -198,9 +198,9 @@ public class ElementHandler : MonoBehaviour
     public GameObject InstanciateElement(GameObject template)
     {
 #if UNITY_EDITOR
-        return PrefabUtility.InstantiatePrefab(plant_Template, elementContainer) as GameObject;
+        return PrefabUtility.InstantiatePrefab(template, elementContainer) as GameObject;
 #else
-        return Instantiate(plant_Template, elementContainer);
+        return Instantiate(template, elementContainer);
 #endif 
     }
     public void LinkElementToGrid(Element element)
