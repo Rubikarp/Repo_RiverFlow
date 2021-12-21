@@ -831,13 +831,9 @@ public class RiverManager : Singleton<RiverManager>
                 ExtendCanal(listCanalB, tileB, tileA);
                 Inverse(listCanalB);
             }
-            else if (FlowOf2 < (2 * FlowOf1))
+            else if (FlowOf2 <= (2 * FlowOf1))
             {
                 ExtendCanal(listCanalB, tileB, tileA);
-            }
-            else if (FlowOf2 == (2 * FlowOf1))
-            {
-                GenerateRiverCanal(tileA.gridPos, tileB.gridPos);
             }
         }
         else
@@ -1059,18 +1055,49 @@ public class RiverManager : Singleton<RiverManager>
         RemoveCanalRef(canal,canal);
     }
 
+    /// <summary>
+    /// =CanalA={=CanalB=}=> Or =CanalB={=CanalA=}=>
+    /// </summary>
     public void Merge(Canal canalA, Canal canalB)
     {
-        //add endNode to the end linkCanal
-        canalA.canalTiles.Add(canalA.endNode);
-        GameTile.Link(grid.GetTile(canalA.endNode), grid.GetTile(canalB.startNode));
-        //add start linkCanal to the end linkCanal
-        canalA.canalTiles.Add(canalB.startNode);
-        canalA.canalTiles.AddRange(canalB.canalTiles);
+        if(canalA.endNode == canalB.startNode)
+        {// =CanalA={=CanalB=}=>
 
-        //add endNode to the end  
-        canalA.endNode = canalB.endNode;
+            //add endNode to the end linkCanal
+            canalA.canalTiles.Add(canalA.endNode);
+            //if not already link
+            GameTile.Link(grid.GetTile(canalA.endNode), grid.GetTile(canalB.startNode));
+            //add start linkCanal to the end linkCanal
+            canalA.canalTiles.Add(canalB.startNode);
+            canalA.canalTiles.AddRange(canalB.canalTiles);
+            //add endNode to the end  
+            canalA.endNode = canalB.endNode;
+
+            ErasedCanal(canalB);
+        }
+        else 
+        if (canalB.endNode == canalA.startNode)
+        {// =CanalB={=CanalA=}=>
+
+            //add endNode to the end linkCanal
+            canalB.canalTiles.Add(canalB.endNode);
+            //if not already link
+            GameTile.Link(grid.GetTile(canalB.endNode), grid.GetTile(canalA.startNode));
+            //add start linkCanal to the end linkCanal
+            canalA.canalTiles.Add(canalA.startNode);
+            canalA.canalTiles.AddRange(canalA.canalTiles);
+            //add endNode to the end  
+            canalA.endNode = canalA.endNode;
+
+            ErasedCanal(canalA);
+        }
+        else
+        {
+
+        }
+
     }
+    //to delete
     public void Inverse(Canal canal)
     {
         if(canal.canalTiles.Count > 0)
@@ -1233,7 +1260,7 @@ public class RiverManager : Singleton<RiverManager>
     {
         for (int i = 0; i < breakTile.canalsIn.Count; i++)
         {
-            if (grid.GetTile(canal.startNode) == breakTile || grid.GetTile(canal.endNode) == breakTile)
+            if (canal.startNode == breakTile.gridPos || canal.endNode == breakTile.gridPos)
             {
                 ShortenCanal(canal, breakTile);
             }
@@ -1280,7 +1307,7 @@ public class RiverManager : Singleton<RiverManager>
                         {
                             grid.GetTile(canal.canalTiles[j]).RemoveAllLinkedTile();
                         }
-                        grid.GetTile(canal.endNode).RemoveAllLinkedTile();
+                        GameTile.UnLink(grid.GetTile(canal.canalTiles[canal.canalTiles.Count - 1]), grid.GetTile(canal.endNode));
                     }
                     #endregion
                     //

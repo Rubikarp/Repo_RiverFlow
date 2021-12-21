@@ -72,12 +72,4 @@ public class Canal
         return false;
     }
 
-    public void ChangeFlowStrenght(FlowStrenght newRiverStrenght, GameGrid grid)
-    {
-        for (int i = 0; i < canalTiles.Count; i++)
-        {
-            grid.GetTile(canalTiles[i]).riverStrenght = newRiverStrenght;
-        }
-    }
-
 }
