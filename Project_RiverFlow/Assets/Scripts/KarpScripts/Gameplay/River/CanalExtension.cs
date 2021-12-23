@@ -27,18 +27,9 @@ public static class CanalExtension
     }
     public static bool Contains(this Canal canal, Vector2Int checkPos)
     {
-        if (canal.startNode == checkPos)
-        {
-            return true;
-        }
-        if (canal.canalTiles.Contains(checkPos))
-        {
-            return true;
-        }
-        if (canal.endNode == (checkPos))
-        {
-            return true;
-        }
+        if (canal.startNode == checkPos) { return true; }
+        if (canal.endNode == (checkPos)) { return true; }
+        if (canal.canalTiles.Contains(checkPos)) { return true; }
         return false;
     }
 
@@ -71,6 +62,41 @@ public static class CanalExtension
 
             //inverse sens
             GameTile.InverseLink(grid.GetTile(canal.startNode), grid.GetTile(canal.endNode));
+        }
+    }
+    public static void Extend(this Canal canal, GameTile extremumTile, GameTile addedTile)
+    {
+        if (extremumTile.neighbors.Contain<GameTile>(addedTile))
+        {
+            if (canal.startNode == extremumTile.gridPos)
+            {
+                GameTile.Link(addedTile, extremumTile);
+
+                List<Vector2Int> list = new List<Vector2Int>();
+                list.Add(canal.startNode);
+                list.AddRange(canal.canalTiles);
+                canal.canalTiles = list;
+
+                canal.startNode = addedTile.gridPos;
+                addedTile.canalsIn.Add(canal);
+            }
+            else
+            if (canal.endNode == extremumTile.gridPos)
+            {
+                GameTile.Link(extremumTile, addedTile);
+
+                canal.canalTiles.Add(canal.endNode);
+                canal.endNode = addedTile.gridPos;
+                addedTile.canalsIn.Add(canal);
+            }
+            else
+            {
+                Debug.LogWarning("added tile is not at  any extremum");
+            }
+        }
+        else
+        {
+            Debug.LogWarningFormat("{0} is not a neighbor of {1}",addedTile, extremumTile);
         }
     }
 

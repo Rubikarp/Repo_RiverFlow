@@ -37,4 +37,21 @@ public static class KarpHelper
     {
         foreach (Transform child in t) Object.Destroy(child.gameObject);
     }
+
+    public static bool Contain<T>(this T[] array, T toFind)
+    {
+        for (int i = 0; i < array.Length; i++)
+        {
+            if(array[i].Equals(toFind)) { return true; }
+        }
+        return false;
+    }
+    public static T Last<T>(this T[] array)
+    {
+        return array[array.Length-1];
+    }
+    public static T Last<T>(this List<T> array)
+    {
+        return array[array.Count - 1];
+    }
 }

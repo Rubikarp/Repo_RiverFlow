@@ -473,40 +473,11 @@ public class GameTile : MonoBehaviour
         Debug.LogError("Linked tile " + tile.gridPos + " n'est pas un voisin de " + this.gridPos + ".", this);
         return -1;
     }
-    public GameTile[] GetNeighbor()
-    {
-        GameTile[] result = new GameTile[8];
-
-        Vector2Int temp = gridPos;
-        Direction dir = new Direction(0);
-
-        neighbors = new GameTile[8];
-        for (int i = 0; i < 8; i++)
-        {
-            dir = new Direction((DirectionEnum)i);
-            temp = gridPos + dir.dirValue;
-
-            if (temp.x < 0 || temp.y < 0)
-            {
-                result[i] = null;
-            }
-            else
-            if (temp.x > GameGrid.Instance.size.x - 1 || temp.y > GameGrid.Instance.size.y - 1)
-            {
-                result[i] = null;
-            }
-            else
-            {
-                result[i] = GameGrid.Instance.GetTile(temp);
-            }
-        }
-
-        return result;
-    }
     public GameTile GetNeighbor(Direction dir)
     {
         return neighbors[(int)dir.dirEnum];
     }
+    //
     public bool IsLinkTo(GameTile tile)
     {
         return IsLinkInDir(new Direction(NeighborIndex(tile)));
@@ -534,6 +505,7 @@ public class GameTile : MonoBehaviour
         }
         return false;
     }
+    //
     public List<GameTile> GetLinkedTile()
     {
         List<GameTile> result = new List<GameTile>();
