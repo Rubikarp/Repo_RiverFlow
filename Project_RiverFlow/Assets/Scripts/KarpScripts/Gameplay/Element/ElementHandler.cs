@@ -50,13 +50,13 @@ public class ElementHandler : MonoBehaviour
     }
 
     #region Spawn
-    public void SpawnPlantAt(Vector2Int grisPos)
+    public void SpawnPlantAt(Vector2Int gridPos)
     {
-        if (!grid.GetTile(grisPos).haveElement && grid.GetTile(grisPos).canalsIn.Count == 0)
+        if (!grid.GetTile(gridPos).haveElement && grid.GetTile(gridPos).canalsIn.Count == 0)
         {
             GameObject go = InstanciateElement(plant_Template);
-            go.transform.position = grid.TileToPos(new Vector2Int(grisPos.x, grisPos.y));
-            go.name = "Plant_" + grisPos;
+            go.transform.position = grid.TileToPos(new Vector2Int(gridPos.x, gridPos.y));
+            go.name = "Plant_" + gridPos;
 
             //Check if Plant
             Plant plant = go.GetComponent<Plant>();
@@ -69,7 +69,7 @@ public class ElementHandler : MonoBehaviour
             allPlants.Add(plant);
 
             //Link Element and Tile
-            plant.gridPos = grisPos;
+            plant.gridPos = gridPos;
             LinkElementToGrid(plant);
         }
     }
@@ -205,9 +205,10 @@ public class ElementHandler : MonoBehaviour
     }
     public void LinkElementToGrid(Element element)
     {
+        GameTile elementTile = grid.GetTile(pos: element.gridPos);
         //Link Element and Tile
-        element.TileOn = grid.GetTile(element.gridPos);
-        grid.GetTile(element.gridPos).element = element;
+        elementTile.element = element;
+        element.TileOn = elementTile;
     }
     public void UnLinkElementToGrid(Element element)
     {

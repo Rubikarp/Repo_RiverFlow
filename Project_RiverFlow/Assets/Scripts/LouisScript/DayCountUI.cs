@@ -12,7 +12,7 @@ public class DayCountUI : MonoBehaviour
     private void Start()
     {
         textGUI = this.gameObject.GetComponent<TextMeshProUGUI>();
-        
+        Timer = GameTime.Instance;
     }
     private void Update()
     {

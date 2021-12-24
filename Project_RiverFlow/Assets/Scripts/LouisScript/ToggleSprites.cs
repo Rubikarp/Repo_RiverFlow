@@ -2,15 +2,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using NaughtyAttributes;
 
 public class ToggleSprites : MonoBehaviour
 {
-    public Sprite sprOn;
-    public Sprite sprOff;
-    public bool UI;
-    public Image image;
-    public SpriteRenderer spRenderer;
-    public bool on;
+    [BoxGroup("Statut")] public bool on;
+    [Space(5)]
+    [BoxGroup("Visual")] public Sprite sprOn;
+    [BoxGroup("Visual")] public Sprite sprOff;
+    private bool Sprite => !UI;
+    [BoxGroup("Target")] public bool UI;
+    [BoxGroup("Target")] [ShowIf("UI")] public Image image;
+    [BoxGroup("Target")] [ShowIf("Sprite")] public SpriteRenderer spRenderer;
 
     public void ToggleGraph()
     {

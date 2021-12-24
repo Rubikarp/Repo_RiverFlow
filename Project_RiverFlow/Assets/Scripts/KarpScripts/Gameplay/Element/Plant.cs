@@ -25,8 +25,8 @@ public class Plant : Element
         }
         set
         {
-            gridPos = tileOn.gridPos;
             tileOn = value; 
+            gridPos = tileOn.gridPos;
         }
     }
     //Don't overide other methode because is not linkable

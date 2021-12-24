@@ -6,8 +6,6 @@ using UnityEngine;
 
 public class Save : MonoBehaviour
 {
-
-    
     public static void SaveLevel(List<LevelSave> LevelSaves)
     {
 
