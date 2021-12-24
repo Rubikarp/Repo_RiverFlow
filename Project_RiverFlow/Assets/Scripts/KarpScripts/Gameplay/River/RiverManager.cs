@@ -120,6 +120,11 @@ public class RiverManager : Singleton<RiverManager>
             Canal listCanalA = CanalList(tileA.canalsIn[0]);
             Canal listCanalB = CanalList(tileB.canalsIn[0]);
 
+            if(listCanalA == listCanalB)
+            {
+                Debug.LogError("Move Interdit");
+                return;
+            }
             //Done
             if (tileA.gridPos == tileA.canalsIn[0].endNode && tileB.gridPos == tileB.canalsIn[0].endNode)
             {//==>to<==
@@ -248,8 +253,16 @@ public class RiverManager : Singleton<RiverManager>
         if (InCanalList(tileA.canalsIn[0]))
         {
             Canal listCanalA = CanalList(tileA.canalsIn[0]);
+            Canal listCanalB = CanalList(tileB.canalsIn[0]);
+
             if (tileA.canalsIn.Count == 1)
-            {   //Split
+            {
+                if (listCanalA == listCanalB)
+                {
+                    Debug.LogError("Move Interdit");
+                    return;
+                }
+                //Split
                 SplitCanal(listCanalA, tileA);
             }
             if (listCanalA.endNode != tileA.gridPos)
@@ -257,7 +270,6 @@ public class RiverManager : Singleton<RiverManager>
                 listCanalA = CanalList(tileA.canalsIn[1]);
             }
 
-            Canal listCanalB = CanalList(tileB.canalsIn[0]);
             int FlowOf2 = (int)tileA.ReceivedFlow();
             int FlowOf1 = (int)tileB.ReceivedFlow();
 
