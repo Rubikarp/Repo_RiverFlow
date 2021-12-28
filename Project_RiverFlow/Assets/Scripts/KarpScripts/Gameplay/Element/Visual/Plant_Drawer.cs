@@ -26,7 +26,10 @@ public class Plant_Drawer : MonoBehaviour
     private bool increase =true;
 
     [Header("Particles")]
-    public ParticleSystem Leafs;
+    public ParticleSystem LeafsDefault;
+    public ParticleSystem LeafsDesert;
+    public ParticleSystem LeafsSavana;
+    public ParticleSystem MiniWave;
 
     void Start()
     {
@@ -66,7 +69,7 @@ public class Plant_Drawer : MonoBehaviour
         transform.DOScaleY(1f, 1.3f).SetEase(Ease.OutElastic);
         yield return new WaitForSecondsRealtime(0.1f);
         transform.DOScaleX(1f, 1.3f).SetEase(Ease.OutElastic);
-        Leafs.Play(true);
+        UpgradeFeedback();
     }
     IEnumerator TreeSkouiz(PlantState state)
     {
@@ -102,7 +105,7 @@ public class Plant_Drawer : MonoBehaviour
 
                 break;
             case PlantState.Young:
-                Leafs.Play(true);
+                UpgradeFeedback();
 
                 transform.localScale = new Vector3(0.3f, 0, 0);
                 yield return new WaitForSecondsRealtime(0.1f);
@@ -112,21 +115,21 @@ public class Plant_Drawer : MonoBehaviour
 
                 break;
             case PlantState.Adult:
-                Leafs.Play(true);
+                UpgradeFeedback();
 
                 yield return new WaitForSecondsRealtime(0.1f);
                 transform.DOScaleX(1f, 1.3f).SetEase(Ease.OutElastic);
 
                 break;
             case PlantState.Senior:
-                Leafs.Play(true);
+                UpgradeFeedback();
 
                 yield return new WaitForSecondsRealtime(0.1f);
                 transform.DOScaleX(1f, 1.3f).SetEase(Ease.OutElastic);
 
                 break;
             case PlantState.FruitTree:
-                Leafs.Play(true);
+                UpgradeFeedback();
 
                 yield return new WaitForSecondsRealtime(0.1f);
                 transform.DOScaleX(1f, 1.3f).SetEase(Ease.OutElastic);
@@ -262,12 +265,13 @@ public class Plant_Drawer : MonoBehaviour
     }
     IEnumerator Twitch()
     {
-        Debug.Log("Boing");
+        //Debug.Log("Boing");
         transform.DOScaleY(1.1f, 0.5f).SetEase(Ease.OutElastic);
         transform.DOScaleX(1.1f, 0.5f).SetEase(Ease.OutElastic);
         yield return new WaitForSecondsRealtime(0.05f);
         transform.DOScaleY(1f, 0.5f).SetEase(Ease.OutElastic);
         transform.DOScaleX(1f, 0.5f).SetEase(Ease.OutElastic);
+        MiniWave.Play(true);
     }
     public void TwitchTiming()
     {
@@ -278,8 +282,28 @@ public class Plant_Drawer : MonoBehaviour
                 StartCoroutine(Twitch());
 
                 currentTwitch++;
-                currentTwitch = currentTwitch % (twitchFrequency.Count-1);
+                currentTwitch = currentTwitch % (twitchFrequency.Count);
             }
         }
+    }
+
+    public void UpgradeFeedback()
+    {
+        switch (plant.tileOn.type)
+        {
+            case TileType.grass :
+                LeafsDefault.Play(true);
+                break;
+            case TileType.clay:
+                LeafsSavana.Play(true);
+                break;
+            case TileType.sand:
+                LeafsDesert.Play(true);
+                break;
+            default:
+
+                break;
+        }
+
     }
 }
