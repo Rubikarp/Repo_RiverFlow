@@ -31,6 +31,10 @@ public class Plant_Drawer : MonoBehaviour
     public ParticleSystem LeafsSavana;
     public ParticleSystem MiniWave;
 
+    //[Header("Fade")]
+    //public float lerpToGrey;
+    //public float lerpToWhite;
+
     void Start()
     {
         cam = Camera.main;
@@ -47,6 +51,8 @@ public class Plant_Drawer : MonoBehaviour
     void Update()
     {
         TwitchTiming();
+        imgTiller.fillAmount = plant.timer;
+        //FadeColors();
         ////imgTiller.fillAmount = plant.timer;
         //if (Input.GetKeyDown(KeyCode.Space))
         //{
@@ -286,6 +292,28 @@ public class Plant_Drawer : MonoBehaviour
             }
         }
     }
+    //public void FadeColors() 
+    //{
+    //    bool isWhite = true;
+    //    if (plant.isIrrigated == false)
+    //    {
+    //        this.sprRender.color = Color.Lerp(Color.white, Color.grey, ((1-plant.timer) * plant.gameTime.gameTimeSpeed * lerpToGrey));
+    //        if (isWhite == true)
+    //        {
+    //            isWhite = false;
+    //        }
+
+    //    }
+    //    else if (plant.isIrrigated == true && isWhite ==false)
+    //    {
+    //        this.sprRender.color = Color.Lerp(Color.gray, Color.white, (plant.gameTime.gameTimer * lerpToWhite));
+    //        if (this.sprRender.color == Color.white)
+    //        {
+    //            isWhite = true;
+    //        }
+    //    }
+
+    //}
 
     public void UpgradeFeedback()
     {
