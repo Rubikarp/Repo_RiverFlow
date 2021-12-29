@@ -11,11 +11,6 @@ public class InventoryManager : MonoBehaviour
     public int lakesAmmount;
     public int tunnelsAmmount;
 
-    void Start()
-    {
-        digAmmount = 30;
-    }
-
     private void AddDigAmmo(int bonusDig)
     {
         digAmmount += bonusDig;

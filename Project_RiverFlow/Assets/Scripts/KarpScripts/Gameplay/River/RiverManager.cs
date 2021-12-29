@@ -1,7 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
+public class MessageEvent : UnityEvent<MessageCase, string> { }
+public enum MessageCase
+{
+    TryLoopingCanal = 0,
+    ElementAtImpossiblePlace = 1,
+
+}
 public class RiverManager : Singleton<RiverManager>
 {
     public InputHandler input;
@@ -10,6 +18,7 @@ public class RiverManager : Singleton<RiverManager>
     public GameTime gameTime;
 
     public List<Canal> canals = new List<Canal>();
+    public MessageEvent loopEvent = new MessageEvent();
 
     void Start()
     {
@@ -73,7 +82,6 @@ public class RiverManager : Singleton<RiverManager>
                 }
                 break;
         }
-
         FlowStep();
     }
     //
@@ -120,12 +128,13 @@ public class RiverManager : Singleton<RiverManager>
             Canal listCanalA = CanalList(tileA.canalsIn[0]);
             Canal listCanalB = CanalList(tileB.canalsIn[0]);
 
-            if(listCanalA == listCanalB)
+            if (listCanalA == listCanalB || ComputeCanalParent(listCanalA).Contains(listCanalB) || ComputeCanalParent(listCanalB).Contains(listCanalA))
             {
                 Debug.LogError("Move Interdit");
+                loopEvent?.Invoke(MessageCase.TryLoopingCanal, "You can't create a loop");
+
                 return;
             }
-            //Done
             if (tileA.gridPos == tileA.canalsIn[0].endNode && tileB.gridPos == tileB.canalsIn[0].endNode)
             {//==>to<==
                 if (tileA.ReceivedFlow() == tileB.ReceivedFlow())
@@ -256,20 +265,19 @@ public class RiverManager : Singleton<RiverManager>
             Canal listCanalB = CanalList(tileB.canalsIn[0]);
 
             if (tileA.canalsIn.Count == 1)
-            {
-                if (listCanalA == listCanalB)
-                {
-                    Debug.LogError("Move Interdit");
-                    return;
-                }
-                //Split
+            {//Split
                 SplitCanal(listCanalA, tileA);
             }
             if (listCanalA.endNode != tileA.gridPos)
             {
                 listCanalA = CanalList(tileA.canalsIn[1]);
             }
-
+            if (listCanalA == listCanalB || ComputeCanalParent(listCanalA).Contains(listCanalB) || ComputeCanalParent(listCanalB).Contains(listCanalA))
+            {
+                Debug.LogError("Move Interdit");
+                loopEvent?.Invoke(MessageCase.TryLoopingCanal, "You can't create a loop");
+                return;
+            }
             int FlowOf2 = (int)tileA.ReceivedFlow();
             int FlowOf1 = (int)tileB.ReceivedFlow();
 
@@ -312,6 +320,13 @@ public class RiverManager : Singleton<RiverManager>
                 if (listCanalB.endNode != tileB.gridPos)
                 {
                     listCanalB = CanalList(tileB.canalsIn[1]);
+                }
+
+                if (listCanalA == listCanalB || ComputeCanalParent(listCanalA).Contains(listCanalB) || ComputeCanalParent(listCanalB).Contains(listCanalA))
+                {
+                    Debug.LogError("Move Interdit");
+                    loopEvent?.Invoke(MessageCase.TryLoopingCanal, "You can't create a loop");
+                    return;
                 }
 
                 int FlowOfA = (int)tileA.ReceivedFlow();
@@ -452,27 +467,68 @@ public class RiverManager : Singleton<RiverManager>
     {
         for (int i = 0; i < canals.Count; i++)
         {
-            watergoing(canals[i]);
+            WaterStep(canals[i]);
         }
     }
-    private void watergoing(Canal canal)
+    private void WaterStep(Canal canal)
     {
         if (canal.canalTiles.Count > 0)
         {
-            grid.GetTile(canal.startNode).FlowStep();
+            grid.GetTile(canal.startNode).UpdateReceivedFlow();
             for (int i = 0; i < canal.canalTiles.Count; i++)
             {
-                grid.GetTile(canal.canalTiles[i]).FlowStep();
+                grid.GetTile(canal.canalTiles[i]).UpdateReceivedFlow();
             }
-            grid.GetTile(canal.endNode).FlowStep();
+            grid.GetTile(canal.endNode).UpdateReceivedFlow();
         }
         else
         {
-            grid.GetTile(canal.startNode).FlowStep();
-            grid.GetTile(canal.endNode).FlowStep();
+            grid.GetTile(canal.startNode).UpdateReceivedFlow();
+            grid.GetTile(canal.endNode).UpdateReceivedFlow();
         }
     }
-
+    private List<Canal> ComputeCanalParent(Canal canal, List<Canal> alreadyCalc = null)
+    {
+        List<Canal> result = new List<Canal>();
+        if (alreadyCalc == null)
+        {
+            alreadyCalc = new List<Canal>();
+        }
+        GameTile startTile = grid.GetTile(canal.startNode);
+        if (startTile.flowIn.Count >= 1)    //y a t-il un canal avant
+        {
+            for (int i = 0; i < startTile.flowIn.Count; i++)
+            {
+                GameTile previousTile = grid.GetTile(startTile.gridPos + startTile.flowIn[i].dirValue);
+                if(previousTile.canalsIn.Count >= 2)//canal qui précède n'a pas de mid tiles
+                {
+                    for (int j = 0; j < previousTile.canalsIn.Count; j++)
+                    {
+                        if (!alreadyCalc.Contains(previousTile.canalsIn[j]))
+                        {
+                            result.Add(previousTile.canalsIn[j]);
+                            alreadyCalc.AddRange(result);
+                            result.AddRange(ComputeCanalParent(previousTile.canalsIn[j], alreadyCalc));
+                        }
+                    }
+                }
+                else if (previousTile.canalsIn.Count == 1)
+                {
+                    if (!alreadyCalc.Contains(previousTile.canalsIn[0]))
+                    {
+                        result.Add(previousTile.canalsIn[0]);
+                        alreadyCalc.AddRange(result);
+                        result.AddRange(ComputeCanalParent(previousTile.canalsIn[0], alreadyCalc));
+                    }
+                }
+                else
+                {
+                    Debug.LogError("Eh ça va pas !", this);
+                }
+            }
+        }
+        return result;
+    }
 
     private void GenerateRiverCanal(GameTile _startNode, GameTile _endNode)
     {
@@ -570,20 +626,6 @@ public class RiverManager : Singleton<RiverManager>
             Debug.LogErrorFormat("can't merge {0} and {1}, they don't have any extremum in common", canalA, canalB);
         }
 
-    }
-    [System.Obsolete] public void OldMerge(Canal canalA, Canal canalB) 
-    {
-        //add endNode to the end linkCanal
-        canalA.canalTiles.Add(canalA.endNode);
-        //if not already link
-        GameTile.Link(grid.GetTile(canalA.endNode), grid.GetTile(canalB.startNode));
-        //add start linkCanal to the end linkCanal
-        canalA.canalTiles.Add(canalB.startNode);
-        canalA.canalTiles.AddRange(canalB.canalTiles);
-        //add endNode to the end  
-        canalA.endNode = canalB.endNode;
-
-        ErasedCanal(canalB);
     }
     //
     private void ShortenCanal(Canal canal, GameTile erasedTile)
@@ -704,7 +746,6 @@ public class RiverManager : Singleton<RiverManager>
             Debug.LogError(canal + "not in list");
         }
     }
-    //Check if it work
     private void BreakCanalIn2(Canal canal, GameTile breakTile)
     {
         if (InCanalList(canal))
