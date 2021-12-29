@@ -25,6 +25,9 @@ public class GameGrid : Singleton<GameGrid>
     [BoxGroup("Debug")] [ShowIf("showCenter")] public Color debugCenterColor = Color.black;
     #endregion
 
+    [Header("Data")]
+    public ElementHandler element;
+
     #region Grid-Tile Methodes
     public GameTile GetTile(int x, int y)
     {
@@ -69,6 +72,15 @@ public class GameGrid : Singleton<GameGrid>
         PopulateGrid(size);
         ReferenceTheGrid();
         SetNeighbor();
+
+        for (int i = 0; i < element.allPlants.Count; i++)
+        {
+            element.LinkElementToGrid(element.allPlants[i]);
+        }
+        for (int i = 0; i < element.allSources.Count; i++)
+        {
+            element.LinkElementToGrid(element.allSources[i]);
+        }
         UpdateGraph(size);
     }
     private void ClearGrid()

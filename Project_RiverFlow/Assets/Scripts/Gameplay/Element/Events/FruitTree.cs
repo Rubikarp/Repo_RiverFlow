@@ -27,7 +27,7 @@ public class FruitTree : MonoBehaviour
     {
         gameTime = GameTime.Instance;
 
-        closeTiles = plantScript.tileOn.neighbors;
+        closeTiles = plantScript.TileOn.neighbors;
         irrigatedNeighbors = new bool[closeTiles.Length];
 
         for (int x = 0; x < irrigatedNeighbors.Length; x++)

@@ -5,8 +5,8 @@ using UnityEngine;
 public class WaterSource : Element
 {
     #region Element
-    [Header("Element Data")]
-    public GameTile tileOn;
+    [Header("Element Data"), SerializeField]
+    private GameTile tileOn;
     public override GameTile TileOn
     {
         get
@@ -21,6 +21,7 @@ public class WaterSource : Element
         set
         { 
             tileOn = value;
+            gridPos = tileOn.gridPos;
         }
     }
     public override GameTile[] TilesOn 

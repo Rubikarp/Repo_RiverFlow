@@ -88,7 +88,6 @@ public class DigingHandler : MonoBehaviour
                 {
                     if (!CheckCrossADiagonal(startSelectTile, endSelectTile))
                     {
-
                         if (inventory.digAmmount > 0)
                         {
                             Vector2Int tileToMe = endSelectTile.gridPos - startSelectTile.gridPos;
@@ -109,7 +108,6 @@ public class DigingHandler : MonoBehaviour
                             {
                                 //Event
                                 onLink?.Invoke(startSelectTile, endSelectTile);
-                                inventory.digAmmount--;
                             }
                         }
                     }

@@ -31,24 +31,17 @@ public class ElementHandler : MonoBehaviour
     [SerializeField] int posX;
     [SerializeField] int posY;
 
-    void Start()
+    private void Start()
     {
-        
-    }
-
-    public void CheckLink(Element  element)
-    {
-        if(element.TileOn == null)
+        for (int i = 0; i < allPlants.Count; i++)
         {
-
+            LinkElementToGrid(allPlants[i]);
         }
-
-        //Link Element and Tile
-        //element.tileOn = grid.GetTile(grisPos);
-        //grid.GetTile(grisPos).element = plant;
-
+        for (int i = 0; i < allSources.Count; i++)
+        {
+            LinkElementToGrid(allSources[i]);
+        }
     }
-
     #region Spawn
     public void SpawnPlantAt(Vector2Int gridPos)
     {
@@ -92,7 +85,7 @@ public class ElementHandler : MonoBehaviour
 
             //Link Element and Tile
             source.gridPos = grisPos;
-            source.tileOn = grid.GetTile(grisPos);
+            source.TileOn = grid.GetTile(grisPos);
 
             grid.GetTile(grisPos).element = source;
         }

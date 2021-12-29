@@ -38,7 +38,7 @@ public class Plant_Drawer : MonoBehaviour
 
         sprRender = gameObject.GetComponent<SpriteRenderer>();
 
-        sprRender.sprite = visual.GetSprite(plant.currentState, plant.tileOn.type);
+        sprRender.sprite = visual.GetSprite(plant.currentState, plant.TileOn.type);
         plant.onStateChange.AddListener(UpdateSkin);
         //apparition
         StartCoroutine(Apparition());
@@ -152,14 +152,14 @@ public class Plant_Drawer : MonoBehaviour
                     transform.DOScaleY(0.2f, 0.4f).SetEase(Ease.InElastic);
                     transform.DOScaleX(0.2f, 0.4f).SetEase(Ease.InElastic);
                     yield return new WaitForSecondsRealtime(0.3f);
-                    sprRender.sprite = visual.GetSprite(plant.currentState, plant.tileOn.type);
+                    sprRender.sprite = visual.GetSprite(plant.currentState, plant.TileOn.type);
                     break;
 
                 case PlantState.Agony:
                     transform.DOScaleY(0.1f, 0.4f).SetEase(Ease.InElastic);
                     transform.DOScaleX(0.2f, 0.4f).SetEase(Ease.InElastic);
                     yield return new WaitForSecondsRealtime(0.3f);
-                    sprRender.sprite = visual.GetSprite(plant.currentState, plant.tileOn.type);
+                    sprRender.sprite = visual.GetSprite(plant.currentState, plant.TileOn.type);
                     break;
 
                 case PlantState.Baby:
@@ -167,35 +167,35 @@ public class Plant_Drawer : MonoBehaviour
                     transform.DOScaleY(0.2f, 0.4f).SetEase(Ease.InElastic);
                     transform.DOScaleX(0.2f, 0.4f).SetEase(Ease.InElastic);
                     yield return new WaitForSecondsRealtime(0.4f);
-                    sprRender.sprite = visual.GetSprite(plant.currentState, plant.tileOn.type);
+                    sprRender.sprite = visual.GetSprite(plant.currentState, plant.TileOn.type);
                     break;
 
                 case PlantState.Young:
 
                     transform.DOScaleX(0.4f, 0.4f).SetEase(Ease.InElastic);
                     yield return new WaitForSecondsRealtime(0.3f);
-                    sprRender.sprite = visual.GetSprite(plant.currentState, plant.tileOn.type);
+                    sprRender.sprite = visual.GetSprite(plant.currentState, plant.TileOn.type);
                     break;
 
                 case PlantState.Adult:
 
                     transform.DOScaleX(0.4f, 0.4f).SetEase(Ease.InElastic);
                     yield return new WaitForSecondsRealtime(0.3f);
-                    sprRender.sprite = visual.GetSprite(plant.currentState, plant.tileOn.type);
+                    sprRender.sprite = visual.GetSprite(plant.currentState, plant.TileOn.type);
                     break;
 
                 case PlantState.Senior:
 
                     transform.DOScaleX(0.4f, 0.4f).SetEase(Ease.InElastic);
                     yield return new WaitForSecondsRealtime(0.3f);
-                    sprRender.sprite = visual.GetSprite(plant.currentState, plant.tileOn.type);
+                    sprRender.sprite = visual.GetSprite(plant.currentState, plant.TileOn.type);
                     break;
 
                 case PlantState.FruitTree:
 
                     transform.DOScaleX(0.4f, 0.4f).SetEase(Ease.InElastic);
                     yield return new WaitForSecondsRealtime(0.3f);
-                    sprRender.sprite = visual.GetSprite(plant.currentState, plant.tileOn.type);
+                    sprRender.sprite = visual.GetSprite(plant.currentState, plant.TileOn.type);
                     break;
 
                 default:
@@ -211,21 +211,21 @@ public class Plant_Drawer : MonoBehaviour
                     transform.DOScaleY(0.1f, 0.3f).SetEase(Ease.InElastic);
                     transform.DOScaleX(0.1f, 0.3f).SetEase(Ease.InElastic);
                     yield return new WaitForSecondsRealtime(0.3f);
-                    sprRender.sprite = visual.GetSprite(plant.currentState, plant.tileOn.type);
+                    sprRender.sprite = visual.GetSprite(plant.currentState, plant.TileOn.type);
                     break;
 
                 case PlantState.Agony:
                     transform.DOScaleY(0.2f, 0.3f).SetEase(Ease.InElastic);
                     transform.DOScaleX(0.2f, 0.3f).SetEase(Ease.InElastic);
                     yield return new WaitForSecondsRealtime(0.3f);
-                    sprRender.sprite = visual.GetSprite(plant.currentState, plant.tileOn.type);
+                    sprRender.sprite = visual.GetSprite(plant.currentState, plant.TileOn.type);
                     break;
 
                 case PlantState.Baby:
                     transform.DOScaleY(0.2f, 0.3f).SetEase(Ease.InElastic);
                     transform.DOScaleX(0.2f, 0.3f).SetEase(Ease.InElastic);
                     yield return new WaitForSecondsRealtime(0.3f);
-                    sprRender.sprite = visual.GetSprite(plant.currentState, plant.tileOn.type);
+                    sprRender.sprite = visual.GetSprite(plant.currentState, plant.TileOn.type);
                     break;
 
                 case PlantState.Young:
@@ -233,26 +233,26 @@ public class Plant_Drawer : MonoBehaviour
                     transform.DOScaleY(0.2f, 0.3f).SetEase(Ease.InElastic);
                     transform.DOScaleX(0.2f, 0.3f).SetEase(Ease.InElastic);
                     yield return new WaitForSecondsRealtime(0.3f);
-                    sprRender.sprite = visual.GetSprite(plant.currentState, plant.tileOn.type);
+                    sprRender.sprite = visual.GetSprite(plant.currentState, plant.TileOn.type);
                     break;
 
                 case PlantState.Adult:
                     transform.DOScaleX(0.4f, 0.4f).SetEase(Ease.InElastic);
                     yield return new WaitForSecondsRealtime(0.3f);
-                    sprRender.sprite = visual.GetSprite(plant.currentState, plant.tileOn.type);
+                    sprRender.sprite = visual.GetSprite(plant.currentState, plant.TileOn.type);
                     break;
 
                 case PlantState.Senior:
                     transform.DOScaleX(0.4f, 0.4f).SetEase(Ease.InElastic);
                     yield return new WaitForSecondsRealtime(0.3f);
-                    sprRender.sprite = visual.GetSprite(plant.currentState, plant.tileOn.type);
+                    sprRender.sprite = visual.GetSprite(plant.currentState, plant.TileOn.type);
                     
                     break;
 
                 case PlantState.FruitTree:
                     transform.DOScaleX(0.4f, 0.4f).SetEase(Ease.InElastic);
                     yield return new WaitForSecondsRealtime(0.3f);
-                    sprRender.sprite = visual.GetSprite(plant.currentState, plant.tileOn.type);
+                    sprRender.sprite = visual.GetSprite(plant.currentState, plant.TileOn.type);
 
                     break;
 
@@ -289,7 +289,7 @@ public class Plant_Drawer : MonoBehaviour
 
     public void UpgradeFeedback()
     {
-        switch (plant.tileOn.type)
+        switch (plant.TileOn.type)
         {
             case TileType.grass :
                 LeafsDefault.Play(true);

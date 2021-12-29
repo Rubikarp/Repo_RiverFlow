@@ -10,8 +10,8 @@ public class BoolEvent : UnityEvent<bool>
 public class Plant : Element
 {
     #region Element
-    [Header("Element Data")]
-    public GameTile tileOn;
+    [Header("Element Data"), SerializeField]
+    private GameTile tileOn;
     public override GameTile TileOn
     {
         get
@@ -79,12 +79,12 @@ public class Plant : Element
 
         gameTime = GameTime.Instance;
 
-        if (tileOn.haveElement)
+        if (!TileOn.haveElement)
         {
-            tileOn.element = this;
+            TileOn.element = this;
         }
 
-        irrigatedNeighbors = new bool[tileOn.neighbors.Length];
+        irrigatedNeighbors = new bool[TileOn.neighbors.Length];
 
         for (int x = 0; x < irrigatedNeighbors.Length; x++)
         {
@@ -117,9 +117,9 @@ public class Plant : Element
     private void CheckNeighboringRivers()
     {
         //Cherche all irrigated Neighbor
-        for (int i = 0; i < tileOn.neighbors.Length; i++)
+        for (int i = 0; i < TileOn.neighbors.Length; i++)
         {
-            if (tileOn.neighbors[i].isRiver)
+            if (TileOn.neighbors[i].isRiver)
             {
                 if (!closeRivers.Contains(i))
                 {
@@ -140,14 +140,14 @@ public class Plant : Element
         bestRiverStrenght = 0;
         for (int j = 0; j < closeRivers.Count; j++)
         {
-            if (tileOn.neighbors[closeRivers[j]].riverStrenght > bestRiverStrenght)
+            if (TileOn.neighbors[closeRivers[j]].riverStrenght > bestRiverStrenght)
             {
-                bestRiverStrenght = tileOn.neighbors[closeRivers[j]].riverStrenght;
+                bestRiverStrenght = TileOn.neighbors[closeRivers[j]].riverStrenght;
             }
         }
 
         //Determine if irrigated
-        isIrrigated = tileOn.IsIrrigate;
+        isIrrigated = TileOn.IsIrrigate;
 
         //Determine si on vient de changer d'etat
         if(previousIrrigation != isIrrigated)

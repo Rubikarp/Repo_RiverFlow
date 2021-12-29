@@ -50,7 +50,7 @@ public class GameTile : MonoBehaviour
     {
         get
         {
-            if (linkAmount >= maxConnection || type == TileType.mountain) 
+            if (linkAmount >= maxConnection) 
             {
                 return false;
             }
@@ -417,7 +417,7 @@ public class GameTile : MonoBehaviour
         {
             dir = new Direction((DirectionEnum)i);
             tempPos = gridPos + dir.dirValue;
-            neighborsDist2[i] = grid.PosInGrid(tempPos) ? grid.GetTile(tempPos) : null;
+            neighbors[i] = grid.PosInGrid(tempPos) ? grid.GetTile(tempPos) : null;
         }
 
         FillNeighborDist2(grid);

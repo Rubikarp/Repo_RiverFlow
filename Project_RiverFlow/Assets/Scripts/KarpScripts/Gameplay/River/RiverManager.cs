@@ -8,7 +8,9 @@ public enum MessageCase
 {
     TryLoopingCanal = 0,
     ElementAtImpossiblePlace = 1,
-
+    CannotInMountain = 2,
+    NoMoreElement = 3,
+    NoMoreDig = 4,
 }
 public class RiverManager : Singleton<RiverManager>
 {
@@ -19,6 +21,8 @@ public class RiverManager : Singleton<RiverManager>
 
     public List<Canal> canals = new List<Canal>();
     public MessageEvent loopEvent = new MessageEvent();
+
+    public InventoryManager inventory;
 
     void Start()
     {
@@ -36,6 +40,44 @@ public class RiverManager : Singleton<RiverManager>
 
     #region Make Link
     private void OnLink(GameTile startTile, GameTile endTile)
+    {
+        if (startTile.type == TileType.mountain || endTile.type == TileType.mountain)
+        {
+            //InMoutain
+            if (startTile.type == TileType.mountain && endTile.type == TileType.mountain)
+            {
+                LinkInsideMoutainConfirmed(startTile, endTile);
+            }
+            //MountainEdge
+            else
+            {
+                if (inventory.tunnelsAmmount > 0)
+                {
+                    if(startTile.type == TileType.mountain)
+                    {
+                        LinkEdgeMoutainConfirmed(startTile, endTile);
+                    }
+                    else
+                    {
+                        LinkEdgeMoutainConfirmed(endTile, startTile);
+                    }
+                    inventory.tunnelsAmmount--;
+                }
+                else
+                {
+                    CannotLink(MessageCase.CannotInMountain);
+                }
+            }
+        }
+        else
+        {
+            LinkConfirmed(startTile, endTile);
+        }
+        inventory.digAmmount--;
+        FlowStep();
+    }
+    //
+    private void LinkConfirmed(GameTile startTile, GameTile endTile)
     {
         switch (startTile.linkAmount)
         {
@@ -82,9 +124,81 @@ public class RiverManager : Singleton<RiverManager>
                 }
                 break;
         }
-        FlowStep();
     }
-    //
+    private void LinkEdgeMoutainConfirmed( GameTile inMountain, GameTile outMountain)
+    {
+        switch (inMountain.linkAmount)
+        {
+            case 0:
+                switch (outMountain.linkAmount)
+                {
+                    case 0: //in a void
+                        Link0To0(inMountain, outMountain);
+                        break;
+                    case 1: //extending the end canal
+                        Link1To0(outMountain, inMountain);
+                        break;
+                    default: //x >= 2
+                        Link2To0(outMountain, inMountain);
+                        break;
+                }
+                break;
+            case 1:
+                switch (outMountain.linkAmount)
+                {
+                    case 0: //in a void
+                        Link1To0(inMountain, outMountain);
+                        break;
+                    case 1: //extending the end canal
+                        Link1To1(inMountain, outMountain);
+                        break;
+                    default: //x >= 2
+                        Link2To1(outMountain, inMountain);
+                        break;
+                }
+                break;
+            default: // 2 ou +
+                CannotLink(MessageCase.CannotInMountain);
+                break;
+        }
+    }
+    private void LinkInsideMoutainConfirmed(GameTile startTile, GameTile endTile)
+    {
+        switch (startTile.linkAmount)
+        {
+            case 0:
+                switch (endTile.linkAmount)
+                {
+                    case 0: //in a void
+                        CannotLink(MessageCase.CannotInMountain);
+                        break;
+                    case 1: //extending the end canal
+                        Link1To0(endTile, startTile);
+                        break;
+                    default: //x >= 2
+                        CannotLink(MessageCase.CannotInMountain);
+                        break;
+                }
+                break;
+            case 1:
+                switch (endTile.linkAmount)
+                {
+                    case 0: //in a void
+                        Link1To0(startTile, endTile);
+                        break;
+                    case 1: //extending the end canal
+                        Link1To1(startTile, endTile);
+                        break;
+                    default: //x >= 2
+                        CannotLink(MessageCase.CannotInMountain);
+                        break;
+                }
+                break;
+            default: // 2 ou +
+                CannotLink(MessageCase.CannotInMountain);
+                break;
+        }
+    }
     private void Link0To0(GameTile tileA, GameTile tileB)
     {
         if (tileA.ReceivedFlow() >= tileB.ReceivedFlow())
@@ -130,9 +244,7 @@ public class RiverManager : Singleton<RiverManager>
 
             if (listCanalA == listCanalB || ComputeCanalParent(listCanalA).Contains(listCanalB) || ComputeCanalParent(listCanalB).Contains(listCanalA))
             {
-                Debug.LogError("Move Interdit");
-                loopEvent?.Invoke(MessageCase.TryLoopingCanal, "You can't create a loop");
-
+                CannotLink(MessageCase.TryLoopingCanal);
                 return;
             }
             if (tileA.gridPos == tileA.canalsIn[0].endNode && tileB.gridPos == tileB.canalsIn[0].endNode)
@@ -274,8 +386,7 @@ public class RiverManager : Singleton<RiverManager>
             }
             if (listCanalA == listCanalB || ComputeCanalParent(listCanalA).Contains(listCanalB) || ComputeCanalParent(listCanalB).Contains(listCanalA))
             {
-                Debug.LogError("Move Interdit");
-                loopEvent?.Invoke(MessageCase.TryLoopingCanal, "You can't create a loop");
+                CannotLink(MessageCase.TryLoopingCanal);
                 return;
             }
             int FlowOf2 = (int)tileA.ReceivedFlow();
@@ -324,8 +435,7 @@ public class RiverManager : Singleton<RiverManager>
 
                 if (listCanalA == listCanalB || ComputeCanalParent(listCanalA).Contains(listCanalB) || ComputeCanalParent(listCanalB).Contains(listCanalA))
                 {
-                    Debug.LogError("Move Interdit");
-                    loopEvent?.Invoke(MessageCase.TryLoopingCanal, "You can't create a loop");
+                    CannotLink(MessageCase.TryLoopingCanal);
                     return;
                 }
 
@@ -350,6 +460,12 @@ public class RiverManager : Singleton<RiverManager>
         {
             Debug.LogError(tileA.canalsIn[0] + "not in list");
         }
+    }
+    private void CannotLink(MessageCase messageCase)
+    {
+        Debug.LogError("Move Interdit");
+        loopEvent?.Invoke(MessageCase.TryLoopingCanal, "You can't create a loop");
+        inventory.digAmmount++;
     }
     #endregion
     #region Break Link
