@@ -245,6 +245,11 @@ public class GameTile : MonoBehaviour
         }
         */
     }
+    public void UpdateReceivedFlow()
+    {
+        //Update RiverStrenght
+        riverStrenght = ReceivedFlow();
+    }
     public FlowStrenght ReceivedFlow()
     {
         if (element is WaterSource)

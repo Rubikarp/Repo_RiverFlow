@@ -19,12 +19,10 @@ public class RewardManager : MonoBehaviour
     public InventoryManager Inventory;
     public GameTime Timer;
 
-
     void Start()
     {
         rewardDisplays = new List<GameObject>();
     }
-
 
     void Update()
     {
@@ -51,10 +49,9 @@ public class RewardManager : MonoBehaviour
         List<GameObject> Temporary = new List<GameObject>();
            if (usedButtons.Count > 0)
            {
-
                 for (int i = 0; i < usedButtons.Count; i++)
                 {
-                Temporary.Add(usedButtons[i]);
+                    Temporary.Add(usedButtons[i]);
                 }
            }
 
@@ -73,9 +70,6 @@ public class RewardManager : MonoBehaviour
                 Temporary.RemoveAt(pull);
                 GameObject SourceRewardDisplay = Instantiate(SourceButton, rewardSelectionPanelTransform);
                 rewardDisplays.Add(SourceRewardDisplay);
-           
-
-
         }
         else
         {
@@ -87,10 +81,7 @@ public class RewardManager : MonoBehaviour
                 Temporary.RemoveAt(pull);
             }
         }
-        
         rewardSelectionPanelTransform.sizeDelta = new Vector2((rewardDisplays.Count - 1) * (rewardButton.GetComponent<RectTransform>().sizeDelta.x + rewardSelectionPanelTransform.GetComponent<HorizontalLayoutGroup>().spacing), rewardSelectionPanelTransform.sizeDelta.y);
-
-
     }
 
 }
