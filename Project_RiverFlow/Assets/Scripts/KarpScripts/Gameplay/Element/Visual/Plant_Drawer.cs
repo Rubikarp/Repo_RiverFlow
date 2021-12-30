@@ -51,7 +51,7 @@ public class Plant_Drawer : MonoBehaviour
     void Update()
     {
         TwitchTiming();
-        imgTiller.fillAmount = plant.timer;
+        //imgTiller.fillAmount = plant.timer;
         //FadeColors();
         ////imgTiller.fillAmount = plant.timer;
         //if (Input.GetKeyDown(KeyCode.Space))
