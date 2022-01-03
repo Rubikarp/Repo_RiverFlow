@@ -73,10 +73,19 @@ public class Plant : Element
     public bool previousIrrigation;
     public ParticleSystem WaveIrrigate;
 
+    [Header("Scoring")]
+    public int youngTreeScoring;
+    public int adultTreeScoring;
+    public int seniorTreeScoring;
+    private ScoreManager scoreManager;
+    public float scoringTick;
+    private float scoringTimer = 0.0f;
+
+
     private void Start()
     {
         previousIrrigation = isIrrigated;
-
+        scoreManager = ScoreManager.Instance;
         gameTime = GameTime.Instance;
 
         if (!TileOn.haveElement)
@@ -101,7 +110,7 @@ public class Plant : Element
         {
             CheckNeighboringRivers();
             StateUpdate();
-
+            Scoring();
             if (isFruitTree == true)
             {
                 FruitSpawn();
@@ -346,5 +355,45 @@ public class Plant : Element
             }
         }
             
+    }
+
+
+    private void Scoring()
+    {
+        if (isIrrigated == true)
+        {
+            scoringTimer += Time.deltaTime * gameTime.gameTimeSpeed;
+
+            if (scoringTimer >= scoringTick)
+            {
+
+
+                CalculateScore();
+
+                scoringTimer = 0;
+            }
+        }
+    }
+
+    private void CalculateScore()
+    {
+        switch (currentState)
+        {
+            case PlantState.Young:
+                scoreManager.gameScore += youngTreeScoring;
+                break;
+            case PlantState.Adult:
+                scoreManager.gameScore += adultTreeScoring;
+                break;
+            case PlantState.Senior:
+                scoreManager.gameScore += seniorTreeScoring;
+                break;
+            case PlantState.FruitTree:
+                scoreManager.gameScore += seniorTreeScoring;
+                break;
+            default:
+                break;
+
+        }
     }
 }

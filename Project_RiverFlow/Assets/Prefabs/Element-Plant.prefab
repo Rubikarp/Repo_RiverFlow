@@ -297,6 +297,10 @@ MonoBehaviour:
   gameTime: {fileID: 0}
   previousIrrigation: 0
   WaveIrrigate: {fileID: 4760614957984372912}
+  scoringTick: 10
+  youngTreeScoring: 1
+  adultTreeScoring: 2
+  seniorTreeScoring: 4
 --- !u!114 &6917927953608742452
 MonoBehaviour:
   m_ObjectHideFlags: 0
