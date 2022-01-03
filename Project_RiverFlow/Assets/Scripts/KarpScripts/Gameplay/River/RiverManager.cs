@@ -499,7 +499,28 @@ public class RiverManager : Singleton<RiverManager>
         canals = erasedTile.canalsIn;
         int temp = canals.Count;
 
-        //if(erasedTile.type)
+        List<GameTile> linkedTiles = erasedTile.GetLinkedTile();
+        if (erasedTile.type == TileType.mountain)
+        {
+            foreach (var tile in linkedTiles)
+            {
+                if (tile.type != TileType.mountain)
+                {
+                    inventory.tunnelsAmmount++;
+                }
+            }
+        }
+        else
+        {
+            foreach (var tile in linkedTiles)
+            {
+                if (tile.type == TileType.mountain)
+                {
+                    inventory.tunnelsAmmount ++;
+                }
+            }
+        }
+
         for (int i = 0; i < temp; i++)
         {
             if (canals[canals.Count - 1].Contains(erasedTile.gridPos))
