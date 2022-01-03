@@ -212,6 +212,7 @@ Transform:
   - {fileID: 4324557442799640851}
   - {fileID: 2937353478159346887}
   - {fileID: 46383975406292834}
+  - {fileID: 840555654104729246}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -296,11 +297,12 @@ MonoBehaviour:
       m_Calls: []
   gameTime: {fileID: 0}
   previousIrrigation: 0
-  WaveIrrigate: {fileID: 4760614957984372912}
-  scoringTick: 10
+  waveIrrigate: {fileID: 4760614957984372912}
+  butterflyScore: {fileID: 840555654104729245}
   youngTreeScoring: 1
   adultTreeScoring: 2
   seniorTreeScoring: 4
+  scoringTick: 10
 --- !u!114 &6917927953608742452
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -329,6 +331,73 @@ MonoBehaviour:
   LeafsDesert: {fileID: 3372413344352302530}
   LeafsSavana: {fileID: 4324557442799640850}
   MiniWave: {fileID: 7044593471437667412}
+--- !u!1001 &165796064658364559
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 8408782267423306832}
+    m_Modifications:
+    - target: {fileID: 713616364832906769, guid: f67b1ff80006b8742bac808b748a649c, type: 3}
+      propertyPath: m_RootOrder
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 713616364832906769, guid: f67b1ff80006b8742bac808b748a649c, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 713616364832906769, guid: f67b1ff80006b8742bac808b748a649c, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.002
+      objectReference: {fileID: 0}
+    - target: {fileID: 713616364832906769, guid: f67b1ff80006b8742bac808b748a649c, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 713616364832906769, guid: f67b1ff80006b8742bac808b748a649c, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 713616364832906769, guid: f67b1ff80006b8742bac808b748a649c, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 713616364832906769, guid: f67b1ff80006b8742bac808b748a649c, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 713616364832906769, guid: f67b1ff80006b8742bac808b748a649c, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 713616364832906769, guid: f67b1ff80006b8742bac808b748a649c, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: -90
+      objectReference: {fileID: 0}
+    - target: {fileID: 713616364832906769, guid: f67b1ff80006b8742bac808b748a649c, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 713616364832906769, guid: f67b1ff80006b8742bac808b748a649c, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 713616364832906772, guid: f67b1ff80006b8742bac808b748a649c, type: 3}
+      propertyPath: m_Name
+      value: Butterflies
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: f67b1ff80006b8742bac808b748a649c, type: 3}
+--- !u!4 &840555654104729246 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 713616364832906769, guid: f67b1ff80006b8742bac808b748a649c, type: 3}
+  m_PrefabInstance: {fileID: 165796064658364559}
+  m_PrefabAsset: {fileID: 0}
+--- !u!198 &840555654104729245 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 713616364832906770, guid: f67b1ff80006b8742bac808b748a649c, type: 3}
+  m_PrefabInstance: {fileID: 165796064658364559}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &943581888506805443
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -454,6 +523,34 @@ PrefabInstance:
     - target: {fileID: 3202272597955794289, guid: 632a5de7012c0a84ca6eb5cbdd77802a, type: 3}
       propertyPath: m_Name
       value: Particle System Lucioles
+      objectReference: {fileID: 0}
+    - target: {fileID: 3202272597955794290, guid: 632a5de7012c0a84ca6eb5cbdd77802a, type: 3}
+      propertyPath: InitialModule.maxNumParticles
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 3202272597955794290, guid: 632a5de7012c0a84ca6eb5cbdd77802a, type: 3}
+      propertyPath: InitialModule.startSize.scalar
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3202272597955794290, guid: 632a5de7012c0a84ca6eb5cbdd77802a, type: 3}
+      propertyPath: InitialModule.startLifetime.scalar
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3202272597955794290, guid: 632a5de7012c0a84ca6eb5cbdd77802a, type: 3}
+      propertyPath: InitialModule.startColor.maxColor.b
+      value: 0.5707547
+      objectReference: {fileID: 0}
+    - target: {fileID: 3202272597955794290, guid: 632a5de7012c0a84ca6eb5cbdd77802a, type: 3}
+      propertyPath: InitialModule.startColor.maxColor.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3202272597955794290, guid: 632a5de7012c0a84ca6eb5cbdd77802a, type: 3}
+      propertyPath: InitialModule.startColor.maxColor.r
+      value: 0.9959119
+      objectReference: {fileID: 0}
+    - target: {fileID: 3202272597955794290, guid: 632a5de7012c0a84ca6eb5cbdd77802a, type: 3}
+      propertyPath: EmissionModule.m_Bursts.Array.data[1].time
+      value: 5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 632a5de7012c0a84ca6eb5cbdd77802a, type: 3}

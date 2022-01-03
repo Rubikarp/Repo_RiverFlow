@@ -71,7 +71,8 @@ public class Plant : Element
 
     [Header("FX")]
     public bool previousIrrigation;
-    public ParticleSystem WaveIrrigate;
+    public ParticleSystem waveIrrigate;
+    public ParticleSystem butterflyScore;
 
     [Header("Scoring")]
     public int youngTreeScoring;
@@ -164,7 +165,7 @@ public class Plant : Element
             //determine si on vient d'etre irrigué
             if (isIrrigated == true)
             {
-                WaveIrrigate.Play();
+                waveIrrigate.Play();
             }
 
             previousIrrigation = isIrrigated;
@@ -381,15 +382,19 @@ public class Plant : Element
         {
             case PlantState.Young:
                 scoreManager.gameScore += youngTreeScoring;
+                butterflyScore.Play(true);
                 break;
             case PlantState.Adult:
                 scoreManager.gameScore += adultTreeScoring;
+                butterflyScore.Play(true);
                 break;
             case PlantState.Senior:
                 scoreManager.gameScore += seniorTreeScoring;
+                butterflyScore.Play(true);
                 break;
             case PlantState.FruitTree:
                 scoreManager.gameScore += seniorTreeScoring;
+                butterflyScore.Play(true);
                 break;
             default:
                 break;
