@@ -247,9 +247,16 @@ public class GameTile : MonoBehaviour
     }
     public void UpdateReceivedFlow()
     {
+        bool irrigate = riverStrenght > 0;
         //Update RiverStrenght
         riverStrenght = ReceivedFlow();
+
+        if(irrigate != riverStrenght > 0)
+        {
+            //Changement d'état
+        }
     }
+
     public FlowStrenght ReceivedFlow()
     {
         if (element is WaterSource)
@@ -257,12 +264,12 @@ public class GameTile : MonoBehaviour
             return FlowStrenght._100_;
         }
         int received = (int)FlowStrenght._00_;
-        if (element is Cloud)
-        {
-            received += (int)FlowStrenght._25_;
-        }
         if (flowIn.Count > 0)
         {
+            if (element is Cloud)
+            {
+                received += (int)FlowStrenght._25_;
+            }
             for (int i = 0; i < flowIn.Count; i++)
             {
                 received += (int)GetNeighbor(flowIn[i]).AskForWater(this);

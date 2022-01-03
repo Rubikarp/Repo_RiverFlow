@@ -12,6 +12,7 @@ public enum MessageCase
     NoMoreElement = 3,
     NoMoreDig = 4,
 }
+
 public class RiverManager : Singleton<RiverManager>
 {
     public InputHandler input;
