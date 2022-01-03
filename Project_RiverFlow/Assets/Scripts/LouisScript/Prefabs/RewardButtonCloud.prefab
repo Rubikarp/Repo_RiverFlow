@@ -151,10 +151,10 @@ MonoBehaviour:
   digNumber: {fileID: 2572214140826430823}
   Inventory: {fileID: 0}
   digBonus: 20
-  cloudBonus: 1
+  cloudBonus: 0
   sourceBonus: 0
   lakeBonus: 0
-  tunnelBonus: 0
+  tunnelBonus: 1
 --- !u!1 &4987207982411307184
 GameObject:
   m_ObjectHideFlags: 0
@@ -220,7 +220,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 84f87f0f7616e5c4bb1f902a4ad14973, type: 3}
+  m_Sprite: {fileID: 21300000, guid: c2e32659e241f5b41b5bda202fb54bee, type: 3}
   m_Type: 0
   m_PreserveAspect: 1
   m_FillCenter: 1
