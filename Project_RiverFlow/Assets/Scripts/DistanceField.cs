@@ -1,12 +1,16 @@
 using System.Collections.Generic;
+using System;
 
 public class DistanceField
 {
     private int[,] array;
+    private bool[,] isCalculated;
     private int sizeX;
     private int sizeY;
     private int defaultValue;
     private List<int[]> updateList;
+
+
 
     public DistanceField(int sizeX, int sizeY, int defaultValue) 
     { 
@@ -21,11 +25,14 @@ public class DistanceField
                 this.array[i, j] = defaultValue;
             }
         }
+        this.isCalculated = new bool[sizeX, sizeY];
+        this.ClearCalulatedArray();
     }
 
     public void SetZero(int x, int y) 
     {
         this.array[x, y] = 0;
+        this.isCalculated[x, y] = true;
         for(int i = -1; i <= 1; i++) 
         {
             for(int j = -1; j <= 1; j++) 
@@ -63,6 +70,7 @@ public class DistanceField
             }
         }
         this.array[x,y] = minimalValue + 1;
+        this.isCalculated[x, y] = true;
     }
 
     private void AppendToUpdateList(int x, int y) {
@@ -76,11 +84,26 @@ public class DistanceField
         }
     }
 
+    private void ClearCalulatedArray()
+    {
+        for (int i = 0; i < this.sizeX; i++)
+        {
+            for (int j = 0; j < this.sizeY; j++)
+            {
+                this.isCalculated[i, j] = false;
+            }
+        }
+    }
+
     public void UpdateList() 
     { 
-        for(int i = 0 ; i < updateList.Count ; i++) 
+        for(int i = 0 ; i < this.updateList.Count ; i++) 
         {
-            SetValue(updateList[i][0], updateList[i][1]);
+            if(!this.isCalculated[this.updateList[i][0], this.updateList[i][1]])
+            {
+                SetValue(this.updateList[i][0], this.updateList[i][1]);
+            }
         }
+        this.ClearCalulatedArray();
     }
 }
