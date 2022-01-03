@@ -272,11 +272,11 @@ public class Plant_Drawer : MonoBehaviour
     IEnumerator Twitch()
     {
         //Debug.Log("Boing");
-        transform.DOScaleY(1.1f, 0.5f).SetEase(Ease.OutElastic);
-        transform.DOScaleX(1.1f, 0.5f).SetEase(Ease.OutElastic);
+        //transform.DOScaleY(1.1f, 0.5f).SetEase(Ease.OutElastic);
+        //transform.DOScaleX(1.1f, 0.5f).SetEase(Ease.OutElastic);
         yield return new WaitForSecondsRealtime(0.05f);
-        transform.DOScaleY(1f, 0.5f).SetEase(Ease.OutElastic);
-        transform.DOScaleX(1f, 0.5f).SetEase(Ease.OutElastic);
+        //transform.DOScaleY(1f, 0.5f).SetEase(Ease.OutElastic);
+        //transform.DOScaleX(1f, 0.5f).SetEase(Ease.OutElastic);
         MiniWave.Play(true);
     }
     public void TwitchTiming()
