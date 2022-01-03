@@ -57,7 +57,7 @@ public class PlantSpawner : MonoBehaviour
     public GameTime gametime;
 
     [Header("Difficulty Score")]
-    public int digNumberMultiplier;
+    public float digNumberMultiplier;
     public int nonIrrigatedPlantScore;
     public int deadPlantScore;
     public int lastThreatStateCalmScore;
@@ -65,6 +65,11 @@ public class PlantSpawner : MonoBehaviour
     public int lastThreatStateChaoticScore;
     public int difficultyScoreToPassInNeutral;
     public int difficultyScoreToPassInChaotic;
+
+    [Header("First Plant")]
+    bool isFirstPlant = true;
+    public List<GameObject> firstPlants;
+    int randomFirstPlant;
 
     private void Start()
     {
@@ -84,19 +89,29 @@ public class PlantSpawner : MonoBehaviour
 
     public void SpawnPlant()
     {
-        DifficultyScoreCalcul();
-        EvaluateTiles();
-        for (int i = this.tileScores.Count - 1; i>0;i--)
+        if(isFirstPlant == true)
         {
-            //Debug.Log(tileScores[i].spawn);
-            //Debug.Log(tileScores[i].score);
-            if (this.tileScores[i].spawn)
+            randomFirstPlant = Random.Range(0, firstPlants.Count);
+            firstPlants[randomFirstPlant].SetActive(true);
+            isFirstPlant = false;
+        }
+        else
+        {
+            DifficultyScoreCalcul();
+            EvaluateTiles();
+            for (int i = this.tileScores.Count - 1; i > 0; i--)
             {
-                //Debug.Log(this.tileScores[i].tile.gridPos);
-                elementHandler.SpawnPlantAt(this.tileScores[i].tile.gridPos);
-                break;
+                //Debug.Log(tileScores[i].spawn);
+                //Debug.Log(tileScores[i].score);
+                if (this.tileScores[i].spawn)
+                {
+                    //Debug.Log(this.tileScores[i].tile.gridPos);
+                    elementHandler.SpawnPlantAt(this.tileScores[i].tile.gridPos);
+                    break;
+                }
             }
         }
+
     }
 
     public void EvaluateTiles()
@@ -162,38 +177,44 @@ public class PlantSpawner : MonoBehaviour
 
         difficultyScore = 0;
 
-        difficultyScore = inventory.digAmmount * digNumberMultiplier;
+        difficultyScore = (int) (inventory.digAmmount * digNumberMultiplier);
+        //Debug.Log("dig score " + difficultyScore);
 
-        foreach(Plant plant in elementHandler.allPlants)
+        foreach (Plant plant in elementHandler.allPlants)
         {
             if(plant.currentState == PlantState.Baby || plant.currentState == PlantState.Agony)
             {
                 difficultyScore -= nonIrrigatedPlantScore;
+                //Debug.Log("non irrigated " + difficultyScore);
             }
             if (plant.hasDiedRecently == true)
             {
                 difficultyScore -= deadPlantScore;
                 plant.hasDiedRecently = false;
+                //Debug.Log("dead " + difficultyScore);
             }
         }
 
         if(lastThreastState == ThreatState.CALM)
         {
             difficultyScore += lastThreatStateCalmScore;
+            //Debug.Log("calm last " + difficultyScore);
         }
         else if (lastThreastState == ThreatState.NEUTRAL)
         {
-            difficultyScore -= lastThreatStateCalmScore;
+            difficultyScore -= lastThreatStateNeutralScore;
+            //Debug.Log("neutral last " + difficultyScore);
         }
         else if (lastThreastState == ThreatState.CHAOTIC)
         {
             difficultyScore -= lastThreatStateChaoticScore;
         }
+        
+        //Debug.Log((int)Mathf.Sin(gametime.gameTimer * 0.03f) * 5 + 5 + (int)gametime.gameTimer);
+        //difficultyScore += (int) Mathf.Sin(gametime.gameTimer*0.03f) * 5 + 5 + (int) gametime.gameTimer;
+        //Debug.Log("Score de difficulté actuel " + difficultyScore);
 
-        difficultyScore += (int) Mathf.Sin(gametime.gameTimer*0.03f) * 5 + 5 + (int) gametime.gameTimer;
-        Debug.Log("Score de difficulté actuel " + difficultyScore);
-
-        //ChooseThreadState();
+        ChooseThreadState();
     }
 
     private void ChooseThreadState()
@@ -210,5 +231,6 @@ public class PlantSpawner : MonoBehaviour
         {
             threatState = ThreatState.CHAOTIC;
         }
+        Debug.Log(threatState);
     }
 }
