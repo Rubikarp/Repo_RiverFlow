@@ -170,12 +170,14 @@ public class GameTile : MonoBehaviour
     #endregion
 
     [Space(8)]
+    private DistanceField distanceField;
     public TileSpawnScore spawnScore;
     public int spawnArea = 0;
 
     void Start()
     {
         spawnScore = GetComponent<TileSpawnScore>();
+        distanceField = GameObject.Find("PlantSpawner").GetComponent<DistanceField>();
     }
 
     //Flow
@@ -253,7 +255,7 @@ public class GameTile : MonoBehaviour
 
         if(irrigate != riverStrenght > 0)
         {
-            //Changement d'état
+            distanceField.SetZero(gridPos.x, gridPos.y);
         }
     }
 

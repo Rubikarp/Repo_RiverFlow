@@ -1,22 +1,18 @@
 using System.Collections.Generic;
-using System;
+using UnityEngine;
 
-public class DistanceField
+public class DistanceField : MonoBehaviour
 {
     private int[,] array;
     private bool[,] isCalculated;
-    private int sizeX;
-    private int sizeY;
-    private int defaultValue;
+    public int sizeX;
+    public int sizeY;
+    public int defaultValue;
     private List<int[]> updateList;
 
 
-
-    public DistanceField(int sizeX, int sizeY, int defaultValue) 
+    public void Start()
     { 
-        this.sizeX = sizeX;
-        this.sizeY = sizeY;
-        this.defaultValue = defaultValue;
         this.array = new int[sizeX,sizeY];
         for (int i = 0; i < sizeX; i++) 
         {
@@ -26,6 +22,7 @@ public class DistanceField
             }
         }
         this.isCalculated = new bool[sizeX, sizeY];
+        updateList = new List<int[]>();
         this.ClearCalulatedArray();
     }
 
@@ -80,7 +77,7 @@ public class DistanceField
         bool isYTooHigh = (y >= this.sizeY);
         if(!isXTooLow && !isXTooHigh && !isYTooLow && !isYTooHigh) 
         {
-            this.updateList.Add(new int[]{x, y});
+            this.updateList.Add(new int[2]{x, y});
         }
     }
 
@@ -105,5 +102,20 @@ public class DistanceField
             }
         }
         this.ClearCalulatedArray();
+        Debug.Log("\n" + Print());
+    }
+
+    public string Print()
+    {
+        string output = "";
+        for(int i = 0; i<sizeY ; i++)
+        {
+            for (int j = 0; j < sizeX; j++)
+            {
+                output += "" + array[i, j];
+            }
+            output += "\n";
+        }
+        return output;
     }
 }
