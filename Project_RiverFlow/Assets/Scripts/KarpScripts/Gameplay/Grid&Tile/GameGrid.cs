@@ -72,7 +72,6 @@ public class GameGrid : Singleton<GameGrid>
         PopulateGrid(size);
         ReferenceTheGrid();
         SetNeighbor();
-
         for (int i = 0; i < element.allPlants.Count; i++)
         {
             element.LinkElementToGrid(element.allPlants[i]);
