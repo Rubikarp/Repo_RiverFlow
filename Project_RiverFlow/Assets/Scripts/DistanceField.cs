@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using Karprod;
 
 public class DistanceField : MonoBehaviour
 {
@@ -9,8 +10,10 @@ public class DistanceField : MonoBehaviour
     public int sizeY;
     public int defaultValue;
     private List<int[]> updateList;
+    private List<int[]> zerosList;
 
-
+    public Texture2D debugTexture;
+    int debugScale = 10;
     public void Start()
     { 
         this.array = new int[sizeX,sizeY];
@@ -23,7 +26,10 @@ public class DistanceField : MonoBehaviour
         }
         this.isCalculated = new bool[sizeX, sizeY];
         updateList = new List<int[]>();
+        zerosList = new List<int[]>();
         this.ClearCalulatedArray();
+
+        debugTexture = Karprod.TextureGenerator.Generate(sizeX * debugScale, sizeY * debugScale, false);
     }
 
     public void SetZero(int x, int y) 
@@ -37,10 +43,25 @@ public class DistanceField : MonoBehaviour
                 if(i != 0 && j != 0) 
                 {
                     AppendToUpdateList(x+i,y+j);
+                    debugTexture.SetPixels((x + 1)* debugScale, (y + 1) * debugScale, debugScale, debugScale, GetBlockColor(Color.blue, debugScale));
+                    debugTexture.Apply();
                 }
             }
         }
         this.UpdateList();
+    }
+
+    private Color[] GetBlockColor(Color col, int size)
+    {
+        Color[] result = new Color[size * size];
+        for (int x = 0; x < size; x++)
+        {
+            for (int y = 0; y < size; y++)
+            {
+                result[x + y * size] = col;
+            }
+        }
+        return result;
     }
 
     public void SetValue(int x, int y) {
@@ -67,6 +88,9 @@ public class DistanceField : MonoBehaviour
             }
         }
         this.array[x,y] = minimalValue + 1;
+        debugTexture.SetPixels((x + 1) * debugScale, (y + 1) * debugScale, debugScale, debugScale, GetBlockColor(new Color(0,0, (float)(minimalValue + 1) / (float)defaultValue,0), debugScale));
+        debugTexture.Apply();
+
         this.isCalculated[x, y] = true;
     }
 
