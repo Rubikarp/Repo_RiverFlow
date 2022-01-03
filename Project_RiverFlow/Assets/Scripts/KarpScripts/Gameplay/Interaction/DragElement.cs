@@ -6,9 +6,11 @@ using UnityEngine.UI;
 using TMPro;
 public enum Items
 {
+    Dig,
     Cloud,
     Source,
-    Lake
+    Lake,
+    Tunnel,
 }
 public class DragElement : MonoBehaviour,
     IDragHandler,

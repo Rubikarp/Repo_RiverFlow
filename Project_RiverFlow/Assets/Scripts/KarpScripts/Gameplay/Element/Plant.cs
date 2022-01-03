@@ -73,6 +73,7 @@ public class Plant : Element
     public bool previousIrrigation;
     public ParticleSystem waveIrrigate;
     public ParticleSystem butterflyScore;
+    public float timeWithoutIrrigation =0;
 
     [Header("Scoring")]
     public int youngTreeScoring;
@@ -121,6 +122,10 @@ public class Plant : Element
             {
                 MagicTreeVerif();
             }
+            if (isIrrigated == false)
+            {
+                timeWithoutIrrigation += Time.deltaTime * gameTime.gameTimeSpeed;
+            }
         }
     }
 
@@ -165,6 +170,7 @@ public class Plant : Element
             //determine si on vient d'etre irrigué
             if (isIrrigated == true)
             {
+                timeWithoutIrrigation = 0;
                 waveIrrigate.Play();
             }
 

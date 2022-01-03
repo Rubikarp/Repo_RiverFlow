@@ -11,21 +11,43 @@ public class Digging_UI : MonoBehaviour
     public Sprite on;
     public Sprite off;
     public Image selfImage;
+    [SerializeField]
+    private Items Item;
     //public DigingHandler dig;
 
     void Update()
     {
         
-        if (Inventory.digAmmount <= 0)
-        {
-            textGUI.text = string.Empty;
-            selfImage.sprite = off;
-        }
-        else
-        {
-            textGUI.text = Inventory.digAmmount.ToString();
-            selfImage.sprite = on;
-        }
+            switch (Item)
+            {
+                case Items.Dig:
+                if (Inventory.digAmmount <= 0)
+                {
+                    textGUI.text = string.Empty;
+                    selfImage.sprite = off;
+                }
+                else
+                {
+                    textGUI.text = Inventory.digAmmount.ToString();
+                    selfImage.sprite = on;
+                }
+                    break;
+            case Items.Tunnel:
+                if (Inventory.tunnelsAmmount <= 0)
+                {
+                    textGUI.text = string.Empty;
+                    selfImage.sprite = off;
+                }
+                else
+                {
+                    textGUI.text = Inventory.tunnelsAmmount.ToString();
+                    selfImage.sprite = on;
+                }
+                break;
+            default:
+                break;
+            }
+
     }
 
 }

@@ -299,6 +299,7 @@ MonoBehaviour:
   previousIrrigation: 0
   waveIrrigate: {fileID: 4760614957984372912}
   butterflyScore: {fileID: 840555654104729245}
+  timeWithoutIrrigation: 0
   youngTreeScoring: 1
   adultTreeScoring: 2
   seniorTreeScoring: 4
@@ -327,10 +328,12 @@ MonoBehaviour:
   - 0.9
   - 1.2
   currentTwitch: 0
+  nowaterTime: 10
   LeafsDefault: {fileID: 4497268701671101756}
   LeafsDesert: {fileID: 3372413344352302530}
   LeafsSavana: {fileID: 4324557442799640850}
   MiniWave: {fileID: 7044593471437667412}
+  NoWater: {fileID: 3323013486589095526}
 --- !u!1 &7765756693867423144
 GameObject:
   m_ObjectHideFlags: 0
