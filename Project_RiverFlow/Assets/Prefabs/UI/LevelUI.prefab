@@ -252,7 +252,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7564991288794492297}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 174.61287, y: 297.53287, z: -976.8056}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -357,7 +357,7 @@ MonoBehaviour:
   grid: {fileID: 0}
   preview: {fileID: 7564991290151202825}
   textGUI: {fileID: 7564991289677188741}
-  Item: 1
+  Item: 2
   SelfImage: {fileID: 7564991288843447505}
   on: {fileID: 21300000, guid: c97e0911ef22cf1478fb8382d9ea36d5, type: 3}
   off: {fileID: 21300000, guid: 1491223f9110f8f4cba9d997258aed8f, type: 3}
@@ -458,7 +458,7 @@ MonoBehaviour:
   grid: {fileID: 0}
   preview: {fileID: 7564991290151202825}
   textGUI: {fileID: 7564991290804351309}
-  Item: 2
+  Item: 3
   SelfImage: {fileID: 7564991288911682888}
   on: {fileID: 21300000, guid: 6d4347d074ab3ac4bba45d4b0f797610, type: 3}
   off: {fileID: 21300000, guid: 1d38d4f353c311a46b1b593321f127c5, type: 3}
@@ -574,7 +574,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -26.146702, y: 17.862999}
+  m_AnchoredPosition: {x: -26.146698, y: 17.862976}
   m_SizeDelta: {x: -52.2934, y: -35.727}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7564991289567366102
@@ -774,7 +774,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -25.04, y: 18.195103}
+  m_AnchoredPosition: {x: -25.04, y: 18.19513}
   m_SizeDelta: {x: -50.08, y: -36.3912}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7564991289677188742
@@ -1030,7 +1030,7 @@ MonoBehaviour:
   - {fileID: 301909890580975399, guid: 397504d53a2cfce4094f7ba1012c10fc, type: 3}
   - {fileID: 301909890580975399, guid: 3677919d59ec0d64da3d9c4c08421928, type: 3}
   SourceButton: {fileID: 301909890580975399, guid: 1a2b6b9d15e51e448b4cb0be1e5a5626, type: 3}
-  sourceTurn: 2
+  sourceTurn: 3
   rewardButton: {fileID: 2848760089627443386, guid: 405997e30e97be841bcc395dfe657300, type: 3}
   Newday: {fileID: 7564991290344970225}
   rewardSelectionPanelTransform: {fileID: 7564991290505418659}
@@ -1622,7 +1622,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -100.618, y: -0.000061035156}
+  m_AnchoredPosition: {x: -100.61792, y: 0}
   m_SizeDelta: {x: 201.236, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7564991290515428030
@@ -1862,7 +1862,7 @@ MonoBehaviour:
   grid: {fileID: 0}
   preview: {fileID: 7564991290151202825}
   textGUI: {fileID: 7564991290160162973}
-  Item: 0
+  Item: 1
   SelfImage: {fileID: 7564991290855244986}
   on: {fileID: 21300000, guid: 2d216c2df221e3e4a948be7408598e64, type: 3}
   off: {fileID: 21300000, guid: dadaa62378f984246bf3a5d92f7887bf, type: 3}
