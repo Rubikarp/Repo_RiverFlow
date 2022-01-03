@@ -498,6 +498,7 @@ public class RiverManager : Singleton<RiverManager>
         canals = erasedTile.canalsIn;
         int temp = canals.Count;
 
+        //if(erasedTile.type)
         for (int i = 0; i < temp; i++)
         {
             if (canals[canals.Count - 1].Contains(erasedTile.gridPos))
