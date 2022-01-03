@@ -70,5 +70,4 @@ public struct RiverPoint
 								Mathf.Lerp(a.thickness, b.thickness, t)
 								);
 	}
-
 }

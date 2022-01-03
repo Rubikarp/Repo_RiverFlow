@@ -29,13 +29,13 @@ public class RiverManager : Singleton<RiverManager>
         gameTime = GameTime.Instance;
         gameTime.onWaterSimulationStep.AddListener(FlowStep);
         digging.onLink.AddListener(OnLink);
-        digging.onBreak.AddListener(OnBreakV2);
+        digging.onBreak.AddListener(OnBreak);
     }
     private void OnDestroy()
     {
         gameTime.onWaterSimulationStep.RemoveListener(FlowStep);
         digging.onLink.RemoveListener(OnLink);
-        digging.onBreak.RemoveListener(OnBreakV2);
+        digging.onBreak.RemoveListener(OnBreak);
     }
 
     #region Make Link
@@ -471,42 +471,6 @@ public class RiverManager : Singleton<RiverManager>
     #region Break Link
     private void OnBreak(GameTile erasedTile)
     {
-        if (erasedTile.haveElement && !(erasedTile.element is WaterSource) && !( erasedTile.element is Plant))
-        {
-            digging.RemoveElement(erasedTile.element);
-        }
-        else
-        {
-            List<Canal> canals = new List<Canal>();
-            canals = erasedTile.canalsIn;
-            int temp = canals.Count;
-
-            for (int i = 0; i < temp; i++)
-            {
-                if (canals[canals.Count-1].Contains(erasedTile.gridPos))
-                {
-                    int indexInCanal = canals[canals.Count - 1].IndexOf(erasedTile.gridPos);
-                    if (indexInCanal == 0 || indexInCanal == canals[canals.Count - 1].canalTiles.Count + 1)
-                    {
-                        ShortenCanal(canals[canals.Count - 1], erasedTile);
-                    }
-                    else
-                    {
-                        BreakCanalIn2(canals[canals.Count - 1], erasedTile);
-                    }
-                }
-                else
-                {
-                    canals.Remove(canals[canals.Count - 1]);
-                }
-            }
-            erasedTile.riverStrenght = 0;
-        }
-
-        FlowStep();
-    }
-    private void OnBreakV2(GameTile erasedTile)
-    {
         if (erasedTile.haveElement && !(erasedTile.element is WaterSource) && !(erasedTile.element is Plant))
         {
             ErasedElement(erasedTile);
@@ -515,6 +479,7 @@ public class RiverManager : Singleton<RiverManager>
         {
             ErasedRiverInTile(erasedTile);
         }
+        FlowStep();
         FlowStep();
     }
     //

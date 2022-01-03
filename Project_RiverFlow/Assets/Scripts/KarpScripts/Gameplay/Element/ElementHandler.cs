@@ -31,7 +31,7 @@ public class ElementHandler : MonoBehaviour
     [SerializeField] int posX;
     [SerializeField] int posY;
 
-    private void Start()
+    private void Awake()
     {
         for (int i = 0; i < allPlants.Count; i++)
         {
