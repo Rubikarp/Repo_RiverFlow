@@ -71,12 +71,22 @@ public class Plant : Element
 
     [Header("FX")]
     public bool previousIrrigation;
-    public ParticleSystem WaveIrrigate;
+    public ParticleSystem waveIrrigate;
+    public ParticleSystem butterflyScore;
+
+    [Header("Scoring")]
+    public int youngTreeScoring;
+    public int adultTreeScoring;
+    public int seniorTreeScoring;
+    private ScoreManager scoreManager;
+    public float scoringTick;
+    private float scoringTimer = 0.0f;
+
 
     private void Start()
     {
         previousIrrigation = isIrrigated;
-
+        scoreManager = ScoreManager.Instance;
         gameTime = GameTime.Instance;
 
         if (!TileOn.haveElement)
@@ -101,7 +111,7 @@ public class Plant : Element
         {
             CheckNeighboringRivers();
             StateUpdate();
-
+            Scoring();
             if (isFruitTree == true)
             {
                 FruitSpawn();
@@ -155,7 +165,7 @@ public class Plant : Element
             //determine si on vient d'etre irrigué
             if (isIrrigated == true)
             {
-                WaveIrrigate.Play();
+                waveIrrigate.Play();
             }
 
             previousIrrigation = isIrrigated;
@@ -346,5 +356,49 @@ public class Plant : Element
             }
         }
             
+    }
+
+
+    private void Scoring()
+    {
+        if (isIrrigated == true)
+        {
+            scoringTimer += Time.deltaTime * gameTime.gameTimeSpeed;
+
+            if (scoringTimer >= scoringTick)
+            {
+
+
+                CalculateScore();
+
+                scoringTimer = 0;
+            }
+        }
+    }
+
+    private void CalculateScore()
+    {
+        switch (currentState)
+        {
+            case PlantState.Young:
+                scoreManager.gameScore += youngTreeScoring;
+                butterflyScore.Play(true);
+                break;
+            case PlantState.Adult:
+                scoreManager.gameScore += adultTreeScoring;
+                butterflyScore.Play(true);
+                break;
+            case PlantState.Senior:
+                scoreManager.gameScore += seniorTreeScoring;
+                butterflyScore.Play(true);
+                break;
+            case PlantState.FruitTree:
+                scoreManager.gameScore += seniorTreeScoring;
+                butterflyScore.Play(true);
+                break;
+            default:
+                break;
+
+        }
     }
 }
