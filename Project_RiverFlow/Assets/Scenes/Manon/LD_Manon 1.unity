@@ -13826,7 +13826,7 @@ PrefabInstance:
     - target: {fileID: 5204486106669806365, guid: 70baebe00357fc94991eb1ce0d0a1738, type: 3}
       propertyPath: tileOn
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1455999560}
     - target: {fileID: 5375811947892556009, guid: 70baebe00357fc94991eb1ce0d0a1738, type: 3}
       propertyPath: m_Name
       value: Source_(18/7)
@@ -36965,6 +36965,7 @@ MonoBehaviour:
   debugLineColor: {r: 1, g: 0, b: 0, a: 1}
   showCenter: 0
   debugCenterColor: {r: 0, g: 0, b: 0, a: 1}
+  element: {fileID: 0}
 --- !u!4 &925749904
 Transform:
   m_ObjectHideFlags: 0
@@ -44959,11 +44960,19 @@ PrefabInstance:
     - target: {fileID: 4751209323767118212, guid: 5a8552f0c1487f74bb441c5c837d2071, type: 3}
       propertyPath: tileOn
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 516832388}
+    - target: {fileID: 4751209323767118212, guid: 5a8552f0c1487f74bb441c5c837d2071, type: 3}
+      propertyPath: gameTime
+      value: 
+      objectReference: {fileID: 357762604}
     - target: {fileID: 4751209323767118212, guid: 5a8552f0c1487f74bb441c5c837d2071, type: 3}
       propertyPath: elementHandler
       value: 
       objectReference: {fileID: 1297783542}
+    - target: {fileID: 6917927953608742452, guid: 5a8552f0c1487f74bb441c5c837d2071, type: 3}
+      propertyPath: cam
+      value: 
+      objectReference: {fileID: 2083589401}
     - target: {fileID: 7129485572310087032, guid: 5a8552f0c1487f74bb441c5c837d2071, type: 3}
       propertyPath: m_Name
       value: Plant_(11, 7)
@@ -52572,6 +52581,7 @@ MonoBehaviour:
   grid: {fileID: 925749903}
   gameTime: {fileID: 0}
   canals: []
+  inventory: {fileID: 0}
 --- !u!114 &1288366433
 MonoBehaviour:
   m_ObjectHideFlags: 0
