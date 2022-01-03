@@ -119,7 +119,18 @@ public class DigingHandler : MonoBehaviour
             startSelectTilePos = grid.TileToPos(startSelectTile.gridPos);
         }
     }
-
+    private void OnLeftClickRelease()
+    {
+        //Reset
+        startSelectTile = null;
+        startSelectTilePos = Vector3.zero;
+        //
+        endSelectTile = null;
+        endSelectPos = Vector3.zero;
+        //
+        dragPos = Vector3.zero;
+        dragVect = Vector3.zero;
+    }
     private bool CheckCrossADiagonal(GameTile tileA, GameTile tileB)
     {
         Vector2Int A2B = tileB.gridPos - tileA.gridPos;
@@ -169,19 +180,6 @@ public class DigingHandler : MonoBehaviour
         }
     }
 
-    private void OnLeftClickRelease()
-    {
-        //Reset
-        startSelectTile = null;
-        startSelectTilePos = Vector3.zero;
-        //
-        endSelectTile = null;
-        endSelectPos = Vector3.zero;
-        //
-        dragPos = Vector3.zero;
-        dragVect = Vector3.zero;
-    }
-
     //Undigging
     private void OnRighClicking()
     {
@@ -194,8 +192,6 @@ public class DigingHandler : MonoBehaviour
                 if (lastEraserSelectTile != eraserSelectTile)
                 {
                     lastEraserSelectTile = eraserSelectTile;
-                    inventory.digAmmount += eraserSelectTile.linkAmount;
-
                     onBreak?.Invoke(eraserSelectTile);
                 }
             }

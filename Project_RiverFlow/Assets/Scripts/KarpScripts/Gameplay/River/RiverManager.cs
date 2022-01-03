@@ -495,31 +495,12 @@ public class RiverManager : Singleton<RiverManager>
     }
     private void ErasedRiverInTile(GameTile erasedTile)
     {
+        inventory.digAmmount += erasedTile.linkAmount;
+
+        List<GameTile> linkedTiles = erasedTile.GetLinkedTile();
         List<Canal> canals = new List<Canal>();
         canals = erasedTile.canalsIn;
         int temp = canals.Count;
-
-        List<GameTile> linkedTiles = erasedTile.GetLinkedTile();
-        if (erasedTile.type == TileType.mountain)
-        {
-            foreach (var tile in linkedTiles)
-            {
-                if (tile.type != TileType.mountain)
-                {
-                    inventory.tunnelsAmmount++;
-                }
-            }
-        }
-        else
-        {
-            foreach (var tile in linkedTiles)
-            {
-                if (tile.type == TileType.mountain)
-                {
-                    inventory.tunnelsAmmount ++;
-                }
-            }
-        }
 
         for (int i = 0; i < temp; i++)
         {
@@ -541,6 +522,32 @@ public class RiverManager : Singleton<RiverManager>
             }
         }
         erasedTile.riverStrenght = 0;
+
+        //Mountain check
+        if (erasedTile.type == TileType.mountain)
+        {
+            foreach (var tile in linkedTiles)
+            {
+                if (tile.type != TileType.mountain)
+                {
+                    inventory.tunnelsAmmount++;
+                }
+                else
+                {
+                    OnBreak(tile);
+                }
+            }
+        }
+        else
+        {
+            foreach (var tile in linkedTiles)
+            {
+                if (tile.type == TileType.mountain)
+                {
+                    inventory.tunnelsAmmount ++;
+                }
+            }
+        }
     }
     #endregion
 
