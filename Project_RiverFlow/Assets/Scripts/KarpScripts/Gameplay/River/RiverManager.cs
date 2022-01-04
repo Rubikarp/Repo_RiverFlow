@@ -62,7 +62,6 @@ public class RiverManager : Singleton<RiverManager>
                     {
                         LinkEdgeMoutainConfirmed(endTile, startTile);
                     }
-                    inventory.tunnelsAmmount--;
                 }
                 else
                 {
@@ -143,6 +142,7 @@ public class RiverManager : Singleton<RiverManager>
                         Link2To0(outMountain, inMountain);
                         break;
                 }
+                inventory.tunnelsAmmount--;
                 break;
             case 1:
                 switch (outMountain.linkAmount)
@@ -160,7 +160,7 @@ public class RiverManager : Singleton<RiverManager>
                 break;
             default: // 2 ou +
                 CannotLink(MessageCase.CannotInMountain);
-                break;
+                return;
         }
     }
     private void LinkInsideMoutainConfirmed(GameTile startTile, GameTile endTile)
@@ -530,6 +530,8 @@ public class RiverManager : Singleton<RiverManager>
             {
                 if (tile.type != TileType.mountain)
                 {
+                    //TODO
+                    //if(tile.IsLinkInDir()
                     inventory.tunnelsAmmount++;
                 }
                 else

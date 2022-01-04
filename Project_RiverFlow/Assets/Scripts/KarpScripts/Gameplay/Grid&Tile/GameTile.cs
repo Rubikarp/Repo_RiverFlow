@@ -255,7 +255,10 @@ public class GameTile : MonoBehaviour
 
         if(irrigate != riverStrenght > 0)
         {
-            distanceField.SetZero(gridPos.x, gridPos.y);
+            if(distanceField != null)
+            {
+                distanceField.SetZero(gridPos.x, gridPos.y);
+            }
         }
     }
 
