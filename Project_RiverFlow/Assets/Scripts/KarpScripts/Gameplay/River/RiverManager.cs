@@ -609,17 +609,93 @@ public class RiverManager : Singleton<RiverManager>
     {
         if (canal.canalTiles.Count > 0)
         {
-            grid.GetTile(canal.startNode).UpdateReceivedFlow();
+            TileWaterStep(grid.GetTile(canal.startNode));
             for (int i = 0; i < canal.canalTiles.Count; i++)
             {
-                grid.GetTile(canal.canalTiles[i]).UpdateReceivedFlow();
+                TileWaterStep(grid.GetTile(canal.canalTiles[i]));
             }
-            grid.GetTile(canal.endNode).UpdateReceivedFlow();
+            TileWaterStep(grid.GetTile(canal.endNode));
         }
         else
         {
-            grid.GetTile(canal.startNode).UpdateReceivedFlow();
-            grid.GetTile(canal.endNode).UpdateReceivedFlow();
+            TileWaterStep(grid.GetTile(canal.startNode));
+            TileWaterStep(grid.GetTile(canal.endNode));
+        }
+    }
+    private void TileWaterStep(GameTile tile)
+    {
+        tile.UpdateReceivedFlow();
+
+        //Check for contradictory flow
+        /*if (linkAmount == 2)
+        {
+            //Link
+            if (flowOut.Count > flowIn.Count)
+            {//<==0==>
+                //flowOut.Count = 2
+                GameTile neighborA = GetNeighbor(flowOut[0]);
+                GameTile neighborB = GetNeighbor(flowOut[1]);
+
+                if (neighborA.riverStrenght > neighborB.riverStrenght)
+                {
+                    InverseLink(this,neighborA);
+                }
+                else
+                if (neighborA.riverStrenght < neighborB.riverStrenght)
+                {
+                    InverseLink(this,neighborB);
+                }
+            }
+            else
+            if (flowOut.Count < flowIn.Count)
+            {//==>0<==
+                //flowIn.Count = 2
+                GameTile neighborA = GetNeighbor(flowIn[0]);
+                GameTile neighborB = GetNeighbor(flowIn[1]);
+
+                if (neighborA.riverStrenght > neighborB.riverStrenght)
+                {
+                    InverseLink(this,neighborB);
+                }
+                else
+                if (neighborA.riverStrenght < neighborB.riverStrenght)
+                {
+                    InverseLink(this,neighborA);
+                }
+            }
+            else
+            {
+                //flowOut.Count == flowIn.Count
+                //Du coup it's okay
+            }
+        }
+        else */
+        if (tile.linkAmount > 2)
+        {
+            if(tile.flowIn.Count >= 2)
+            {
+                int maxFlow = 0;
+
+                for (int i = 0; i < tile.flowIn.Count; i++)
+                {
+                    maxFlow = Mathf.Max(maxFlow, (int)tile.GetNeighbor(tile.flowIn[i]).ReceivedFlow());
+                }
+
+                //TODO
+                for (int i = 0; i < tile.flowIn.Count; i++)
+                {
+                    if ((int)tile.GetNeighbor(tile.flowIn[i]).ReceivedFlow() < maxFlow)
+                    {
+                        for (int j = 0; j < tile.canalsIn.Count; j++)
+                        {
+                            if (tile.canalsIn[j].Contains(tile.GetNeighbor(tile.flowIn[i]).gridPos))
+                            {
+                                tile.canalsIn[j].Inverse(grid);
+                            }
+                        }
+                    }
+                }
+            }
         }
     }
     private List<Canal> ComputeCanalParent(Canal canal, List<Canal> alreadyCalc = null)

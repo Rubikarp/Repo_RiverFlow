@@ -181,72 +181,6 @@ public class GameTile : MonoBehaviour
     }
 
     //Flow
-    public void FlowStep()
-    {
-        //Update RiverStrenght
-        riverStrenght = ReceivedFlow();
-
-        //Check for contradictory flow
-        /*
-        if (linkAmount == 2)
-        {
-            //Link
-            if (flowOut.Count > flowIn.Count)
-            {//<==0==>
-                //flowOut.Count = 2
-                GameTile neighborA = GetNeighbor(flowOut[0]);
-                GameTile neighborB = GetNeighbor(flowOut[1]);
-
-                if (neighborA.riverStrenght > neighborB.riverStrenght)
-                {
-                    InverseLink(this,neighborA);
-                }
-                else
-                if (neighborA.riverStrenght < neighborB.riverStrenght)
-                {
-                    InverseLink(this,neighborB);
-                }
-            }
-            else
-            if (flowOut.Count < flowIn.Count)
-            {//==>0<==
-                //flowIn.Count = 2
-                GameTile neighborA = GetNeighbor(flowIn[0]);
-                GameTile neighborB = GetNeighbor(flowIn[1]);
-
-                if (neighborA.riverStrenght > neighborB.riverStrenght)
-                {
-                    InverseLink(this,neighborB);
-                }
-                else
-                if (neighborA.riverStrenght < neighborB.riverStrenght)
-                {
-                    InverseLink(this,neighborA);
-                }
-            }
-            else
-            {
-                //flowOut.Count == flowIn.Count
-                //Du coup it's okay
-            }
-        }
-        else 
-        if (linkAmount > 2)
-        {
-            if(flowIn.Count >= 2)
-            {
-                int maxFlow = 0;
-
-                for (int i = 0; i < flowIn.Count; i++)
-                {
-                    maxFlow = Mathf.Max(maxFlow, (int)GetNeighbor(flowIn[i]).riverStrenght);
-                }
-
-                //TODO
-            }
-        }
-        */
-    }
     public void UpdateReceivedFlow()
     {
         bool irrigate = riverStrenght > 0;
@@ -261,7 +195,6 @@ public class GameTile : MonoBehaviour
             }
         }*/
     }
-
     public FlowStrenght ReceivedFlow()
     {
         if (element is WaterSource)
@@ -324,6 +257,7 @@ public class GameTile : MonoBehaviour
             return FlowStrenght._00_;
         }
     }
+
     //LINK
     public static void Link(GameTile tileA, GameTile tileB)
     {
