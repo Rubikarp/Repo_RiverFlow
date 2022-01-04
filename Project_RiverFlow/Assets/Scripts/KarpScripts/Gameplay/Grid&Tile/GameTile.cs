@@ -259,7 +259,7 @@ public class GameTile : MonoBehaviour
             {
                 distanceField.SetZero(gridPos.x, gridPos.y);
             }
-        }
+        }*/
     }
 
     public FlowStrenght ReceivedFlow()

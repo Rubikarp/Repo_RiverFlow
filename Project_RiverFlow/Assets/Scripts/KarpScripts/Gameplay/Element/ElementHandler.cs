@@ -92,7 +92,9 @@ public class ElementHandler : MonoBehaviour
     }
     public void SpawnCloudAt(Vector2Int grisPos)
     {
-        if (!grid.GetTile(grisPos).haveElement)
+        GameTile aimedTile = grid.GetTile(grisPos);
+
+        if (!aimedTile.haveElement && aimedTile.type != TileType.mountain)
         {
             GameObject go = InstanciateElement(cloud_Template);
             go.transform.position = grid.TileToPos(new Vector2Int(grisPos.x, grisPos.y));
@@ -108,8 +110,8 @@ public class ElementHandler : MonoBehaviour
             allClouds.Add(cloud);
             //Link Element and Tile
             cloud.gridPos = grisPos;
-            cloud.tileOn = grid.GetTile(grisPos);
-            grid.GetTile(grisPos).element = cloud;
+            cloud.tileOn = aimedTile;
+            aimedTile.element = cloud;
         }
     }
     public void SpawnMagicTreeAt(Vector2Int grisPos)

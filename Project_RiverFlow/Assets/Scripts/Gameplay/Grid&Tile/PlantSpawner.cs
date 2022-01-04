@@ -97,11 +97,17 @@ public class PlantSpawner : MonoBehaviour
             randomFirstPlant = Random.Range(0, firstPlants.Count);
             firstPlants[randomFirstPlant].SetActive(true);
             isFirstPlant = false;
-            distanceField.GenerateArray();
+            if (distanceField != null)
+            {
+                distanceField.GenerateArray();
+            }
         }
         else
         {
-            distanceField.GenerateArray();
+            if(distanceField != null)
+            {
+                distanceField.GenerateArray();
+            }
             DifficultyScoreCalcul();
             EvaluateTiles();
             for (int i = this.tileScores.Count - 1; i > 0; i--)

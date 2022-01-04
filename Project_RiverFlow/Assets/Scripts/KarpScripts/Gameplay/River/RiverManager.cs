@@ -502,6 +502,34 @@ public class RiverManager : Singleton<RiverManager>
         canals = erasedTile.canalsIn;
         int temp = canals.Count;
 
+        //Mountain check
+        if (erasedTile.type == TileType.mountain)
+        {
+            foreach (var tile in linkedTiles)
+            {
+                if (tile.type != TileType.mountain)
+                {
+                    if (erasedTile.flowIn.Contains(new Direction(erasedTile.NeighborIndex(tile))))
+                    {
+                        inventory.tunnelsAmmount++;
+                    }
+                }
+            }
+        }
+        else
+        {
+            foreach (var tile in linkedTiles)
+            {
+                if (tile.type == TileType.mountain)
+                {
+                    if (erasedTile.flowOut.Contains(new Direction(erasedTile.NeighborIndex(tile))))
+                    {
+                        inventory.tunnelsAmmount++;
+                    }
+                }
+            }
+        }
+
         for (int i = 0; i < temp; i++)
         {
             if (canals[canals.Count - 1].Contains(erasedTile.gridPos))
@@ -528,15 +556,9 @@ public class RiverManager : Singleton<RiverManager>
         {
             foreach (var tile in linkedTiles)
             {
-                if (tile.type != TileType.mountain)
+                if (tile.type == TileType.mountain)
                 {
-                    //TODO
-                    //if(tile.IsLinkInDir()
-                    inventory.tunnelsAmmount++;
-                }
-                else
-                {
-                    OnBreak(tile);
+                    ErasedRiverInTile(tile);
                 }
             }
         }
@@ -546,7 +568,7 @@ public class RiverManager : Singleton<RiverManager>
             {
                 if (tile.type == TileType.mountain)
                 {
-                    inventory.tunnelsAmmount ++;
+                    ErasedRiverInTile(tile);
                 }
             }
         }

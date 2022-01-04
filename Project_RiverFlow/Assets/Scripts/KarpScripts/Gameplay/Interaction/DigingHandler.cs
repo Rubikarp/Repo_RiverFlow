@@ -121,6 +121,14 @@ public class DigingHandler : MonoBehaviour
     }
     private void OnLeftClickRelease()
     {
+        if (endSelectTile != null)
+        {
+            if (endSelectTile.type == TileType.mountain && endSelectTile.linkAmount < 2)
+            {
+                onBreak?.Invoke(endSelectTile);
+            }
+        }
+
         //Reset
         startSelectTile = null;
         startSelectTilePos = Vector3.zero;
