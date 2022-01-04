@@ -253,10 +253,10 @@ public class GameTile : MonoBehaviour
         //Update RiverStrenght
         riverStrenght = ReceivedFlow();
 
-        if(irrigate != riverStrenght > 0)
+        /*if(irrigate != riverStrenght > 0)
         {
             distanceField.SetZero(gridPos.x, gridPos.y);
-        }
+        }*/
     }
 
     public FlowStrenght ReceivedFlow()
