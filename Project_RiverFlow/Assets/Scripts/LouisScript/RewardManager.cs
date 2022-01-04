@@ -44,10 +44,12 @@ public class RewardManager : MonoBehaviour
             Newday.SetActive(false);
             DestroyImmediate(rewardSelectionPanelTransform.GetChild(0).gameObject);
             rewardSelectionPanelTransform.sizeDelta = new Vector2(0, 0);
+            rewardDisplays.Clear();
         }
     }
     public void InitializeSelectionPanel()
     {
+
         Newday.SetActive(true);
         EmptySelectionPanel();
 
@@ -90,7 +92,7 @@ public class RewardManager : MonoBehaviour
         int indexToDrop = ComputeIndexOfButtonToDrop(weightIndexes, randomNumber);
         GameObject selectedButton = weightedButtons[indexToDrop].UsedButton;
         weightedButtons.Remove(weightedButtons[indexToDrop]);
-        Debug.Log(selectedButton);
+        //Debug.Log(selectedButton);
         return selectedButton;
     }
 

@@ -1026,9 +1026,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   usedButtons:
-  - {fileID: 301909890580975399, guid: 90c0d22ba5a1a03489c3ff9da43fc8b0, type: 3}
-  - {fileID: 301909890580975399, guid: 397504d53a2cfce4094f7ba1012c10fc, type: 3}
-  - {fileID: 301909890580975399, guid: 3677919d59ec0d64da3d9c4c08421928, type: 3}
+  - UsedButton: {fileID: 301909890580975399, guid: 90c0d22ba5a1a03489c3ff9da43fc8b0, type: 3}
+    weight: 10
+  - UsedButton: {fileID: 301909890580975399, guid: 3677919d59ec0d64da3d9c4c08421928, type: 3}
+    weight: 10
+  - UsedButton: {fileID: 301909890580975399, guid: 397504d53a2cfce4094f7ba1012c10fc, type: 3}
+    weight: 10
   SourceButton: {fileID: 301909890580975399, guid: 1a2b6b9d15e51e448b4cb0be1e5a5626, type: 3}
   sourceTurn: 3
   rewardButton: {fileID: 2848760089627443386, guid: 405997e30e97be841bcc395dfe657300, type: 3}
