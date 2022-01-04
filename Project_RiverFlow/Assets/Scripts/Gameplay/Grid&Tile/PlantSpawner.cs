@@ -71,6 +71,9 @@ public class PlantSpawner : MonoBehaviour
     public List<GameObject> firstPlants;
     int randomFirstPlant;
 
+    [Header("DistanceGrid")]
+    public DistanceField distanceField;
+
     private void Start()
     {
         gameGrid = GameObject.Find("Grid").GetComponent<GameGrid>();
@@ -94,9 +97,11 @@ public class PlantSpawner : MonoBehaviour
             randomFirstPlant = Random.Range(0, firstPlants.Count);
             firstPlants[randomFirstPlant].SetActive(true);
             isFirstPlant = false;
+            distanceField.GenerateArray();
         }
         else
         {
+            distanceField.GenerateArray();
             DifficultyScoreCalcul();
             EvaluateTiles();
             for (int i = this.tileScores.Count - 1; i > 0; i--)
@@ -231,6 +236,6 @@ public class PlantSpawner : MonoBehaviour
         {
             threatState = ThreatState.CHAOTIC;
         }
-        Debug.Log(threatState);
+        //Debug.Log(threatState);
     }
 }

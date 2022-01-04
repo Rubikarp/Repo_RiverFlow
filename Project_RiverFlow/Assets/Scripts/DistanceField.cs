@@ -1,33 +1,31 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Karprod;
+using System.Text;
 
 public class DistanceField : MonoBehaviour
 {
+
     private int[,] array;
-    private bool[,] isCalculated;
-    public int sizeX;
-    public int sizeY;
+    private int sizeX;
+    private int sizeY;
     public int defaultValue;
     private List<int[]> updateList;
     private List<int[]> zerosList;
 
+    public RiverManager riverManager;
+    public GameGrid gameGrid;
+
     public Texture2D debugTexture;
     int debugScale = 10;
     public void Start()
-    { 
+    {
+        sizeX = gameGrid.size.x;
+        sizeY = gameGrid.size.y;
         this.array = new int[sizeX,sizeY];
-        for (int i = 0; i < sizeX; i++) 
-        {
-            for (int j = 0; j < sizeY; j++) 
-            {
-                this.array[i, j] = defaultValue;
-            }
-        }
-        this.isCalculated = new bool[sizeX, sizeY];
+        ResetArray();
         updateList = new List<int[]>();
         zerosList = new List<int[]>();
-        this.ClearCalulatedArray();
 
         debugTexture = Karprod.TextureGenerator.Generate(sizeX * debugScale, sizeY * debugScale, false);
     }
@@ -35,7 +33,6 @@ public class DistanceField : MonoBehaviour
     public void SetZero(int x, int y) 
     {
         this.array[x, y] = 0;
-        this.isCalculated[x, y] = true;
         for(int i = -1; i <= 1; i++) 
         {
             for(int j = -1; j <= 1; j++) 
@@ -90,8 +87,6 @@ public class DistanceField : MonoBehaviour
         this.array[x,y] = minimalValue + 1;
         debugTexture.SetPixels((x + 1) * debugScale, (y + 1) * debugScale, debugScale, debugScale, GetBlockColor(new Color(0,0, (float)(minimalValue + 1) / (float)defaultValue,0), debugScale));
         debugTexture.Apply();
-
-        this.isCalculated[x, y] = true;
     }
 
     private void AppendToUpdateList(int x, int y) {
@@ -105,41 +100,64 @@ public class DistanceField : MonoBehaviour
         }
     }
 
-    private void ClearCalulatedArray()
-    {
-        for (int i = 0; i < this.sizeX; i++)
-        {
-            for (int j = 0; j < this.sizeY; j++)
-            {
-                this.isCalculated[i, j] = false;
-            }
-        }
-    }
-
     public void UpdateList() 
     { 
         for(int i = 0 ; i < this.updateList.Count ; i++) 
         {
-            if(!this.isCalculated[this.updateList[i][0], this.updateList[i][1]])
-            {
+
                 SetValue(this.updateList[i][0], this.updateList[i][1]);
+            
+        }
+
+        Debug.Log("\n" + Print());
+    }
+
+
+    private void CompleteArrayWithCanals() // C'est le nouveau set zero
+    {
+        
+        foreach (Canal canal in riverManager.canals)
+        {
+            array[canal.endNode.x, canal.endNode.y] = 0;
+            array[canal.startNode.x, canal.startNode.y] = 0;
+            foreach (Vector2Int tile in canal.canalTiles)
+            {
+                array[tile.x, tile.y] = 0;
             }
         }
-        this.ClearCalulatedArray();
-        Debug.Log("\n" + Print());
+    }
+
+    private void ResetArray()
+    {
+        for (int i = 0; i < sizeX; i++)
+        {
+            for (int j = 0; j < sizeY; j++)
+            {
+                this.array[i, j] = defaultValue;
+            }
+        }
+    }
+    public void GenerateArray()
+    {
+        ResetArray();
+
+        CompleteArrayWithCanals();
+        
+        //Debug.Log($"\n{Print()}");
     }
 
     public string Print()
     {
-        string output = "";
-        for(int i = 0; i<sizeY ; i++)
+
+        StringBuilder strBuilder = new StringBuilder();
+        for (int i = sizeY - 1; i >= 0; i--)
         {
             for (int j = 0; j < sizeX; j++)
             {
-                output += "" + array[i, j];
+                strBuilder.Append($"[{array[j, i].ToString()}]");
             }
-            output += "\n";
+            strBuilder.Append("\n");
         }
-        return output;
+        return strBuilder.ToString();
     }
 }
