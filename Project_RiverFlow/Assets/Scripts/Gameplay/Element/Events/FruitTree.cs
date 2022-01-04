@@ -65,7 +65,7 @@ public class FruitTree : MonoBehaviour
 
             //Mettre ici les changements de graph.
 
-            Debug.Log("Evolution !");
+            //Debug.Log("Evolution !");
         }
     }
 
@@ -102,9 +102,27 @@ public class FruitTree : MonoBehaviour
                         spawnTileFound = true;
                     }
                 }
-
+                Debug.Log("spawn : " + plantScript.TileOn.type.ToString());
+                switch (plantScript.TileOn.type)
+                {
+                    case TileType.grass:
+                        
+                        plantScript.fruitDropForest.Play(true);
+                        break;
+                    case TileType.clay:
+                        
+                        plantScript.fruitDropSavanna.Play(true);
+                        break;
+                    case TileType.sand:
+                        
+                        plantScript.fruitDropDesert.Play(true);
+                        break;
+                    default:
+                        Debug.Log("default");
+                        break;
+                }
                 elementHandler.SpawnPlantAt(closeTiles[chosenTileForFruit].gridPos);
-
+                
                 spawnTileFound = false;
                 fruitTimer = 0;
                 goodTilesForFruit = 0;

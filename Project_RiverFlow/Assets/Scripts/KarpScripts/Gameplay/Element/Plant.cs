@@ -66,13 +66,16 @@ public class Plant : Element
 
     [Header("Event")]
     public BoolEvent onStateChange;
-
     public GameTime gameTime;
 
     [Header("FX")]
     public bool previousIrrigation;
     public ParticleSystem waveIrrigate;
     public ParticleSystem butterflyScore;
+    public float timeWithoutIrrigation =0;
+    public ParticleSystem fruitDropForest;
+    public ParticleSystem fruitDropSavanna;
+    public ParticleSystem fruitDropDesert;
 
     [Header("Scoring")]
     public int youngTreeScoring;
@@ -121,6 +124,10 @@ public class Plant : Element
             {
                 MagicTreeVerif();
             }
+            if (isIrrigated == false)
+            {
+                timeWithoutIrrigation += Time.deltaTime * gameTime.gameTimeSpeed;
+            }
         }
     }
 
@@ -165,6 +172,7 @@ public class Plant : Element
             //determine si on vient d'etre irrigué
             if (isIrrigated == true)
             {
+                timeWithoutIrrigation = 0;
                 waveIrrigate.Play();
             }
 
@@ -223,7 +231,7 @@ public class Plant : Element
                         {
                             if (tileOn.neighbors[i].element.GetComponent<Plant>().isFruitTree == true)
                             {
-                                Debug.Log("FRUITS!");
+                                //Debug.Log("FRUITS!");
                                 neighborHasFruit = true;
                             }
                         }
@@ -235,7 +243,7 @@ public class Plant : Element
                         currentState = (PlantState)Mathf.Clamp((int)(currentState + 1), 0, (int)PlantState.FruitTree);
                         onStateChange?.Invoke(true);
 
-                        Debug.Log("Evolution !");
+                        //Debug.Log("Evolution !");
                     }
                 }
             }
@@ -252,7 +260,7 @@ public class Plant : Element
                         {
                             if (tileOn.neighbors[i].element.GetComponent<Plant>().isFruitTree == true)
                             {
-                                Debug.Log("FRUITS!");
+                                //Debug.Log("FRUITS!");
                                 neighborHasFruit = true;
                             }
                         }
@@ -264,7 +272,7 @@ public class Plant : Element
                         currentState = (PlantState)Mathf.Clamp((int)(currentState + 1), 0, (int)PlantState.FruitTree);
                         onStateChange?.Invoke(true);
 
-                        Debug.Log("Evolution !");
+                        //Debug.Log("Evolution !");
                     }
 
                 }
@@ -312,9 +320,27 @@ public class Plant : Element
                         spawnTileFound = true;
                     }
                 }
+                //Debug.Log("spawn : " +TileOn.type.ToString());
+                switch (TileOn.type)
+                {
+                    case TileType.grass:
 
-                elementHandler.SpawnPlantAt(tileOn.neighbors[chosenTileForFruit].gridPos);
+                        fruitDropForest.Play(true);
+                        break;
+                    case TileType.clay:
 
+                        fruitDropSavanna.Play(true);
+                        break;
+                    case TileType.sand:
+
+                        fruitDropDesert.Play(true);
+                        break;
+                    default:
+                        //Debug.Log("default");
+                        break;
+                }
+                StartCoroutine(SpawnFruitTree());
+                //Debug.Log("spawn");
                 spawnTileFound = false;
                 fruitTimer = 0;
                 goodTilesForFruit = 0;
@@ -325,6 +351,12 @@ public class Plant : Element
                 irrigatedNeighbors[y] = false;
             }
         }
+    }
+
+    IEnumerator SpawnFruitTree()
+    {
+        yield return new WaitForSeconds(1);
+        elementHandler.SpawnPlantAt(tileOn.neighbors[chosenTileForFruit].gridPos);
     }
 
     private void MagicTreeVerif()

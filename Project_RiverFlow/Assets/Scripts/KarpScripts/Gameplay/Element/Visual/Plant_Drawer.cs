@@ -26,10 +26,12 @@ public class Plant_Drawer : MonoBehaviour
     private bool increase =true;
 
     [Header("Particles")]
+    public float nowaterTime;
     public ParticleSystem LeafsDefault;
     public ParticleSystem LeafsDesert;
     public ParticleSystem LeafsSavana;
     public ParticleSystem MiniWave;
+    public ParticleSystem NoWater;
 
     //[Header("Fade")]
     //public float lerpToGrey;
@@ -58,6 +60,7 @@ public class Plant_Drawer : MonoBehaviour
         //{
         //    StartCoroutine(Twitch());
         //}
+        NoWaterFeedback();
     }
 
     private void UpdateSkin(bool isUp)
@@ -331,6 +334,21 @@ public class Plant_Drawer : MonoBehaviour
             default:
 
                 break;
+        }
+
+    }
+    public void NoWaterFeedback()
+    {
+        bool playing = false;
+        if (plant.timeWithoutIrrigation >=nowaterTime && playing ==false)
+        {
+            NoWater.Play(true);
+            playing = true;
+        }
+        else if (plant.timeWithoutIrrigation < nowaterTime)
+        {
+            NoWater.Stop(true);
+            playing = false;
         }
 
     }
