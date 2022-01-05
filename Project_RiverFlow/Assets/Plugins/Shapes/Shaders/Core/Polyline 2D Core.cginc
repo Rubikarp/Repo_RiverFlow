@@ -209,8 +209,9 @@ FRAG_OUTPUT_V4 frag( VertexOutput i ) : SV_Target {
     UNITY_SETUP_INSTANCE_ID(i);
     
     // debug padding 
-    // float2 paddingDebug = abs(float2( i.uv0.x, i.uv0.z )) >= 1 ? 1 : 0;
-    //return ShapesOutput( float4(uv,0,1), shape_mask );
+    //float2 paddingDebug = abs(float2( i.uv0.x, i.uv0.z )) >= 1 ? 1 : 0;
+    //return ShapesOutput( float4(i.color,0,1), shape_mask );
+
     half shape_mask = 1;
     
     // Round joins

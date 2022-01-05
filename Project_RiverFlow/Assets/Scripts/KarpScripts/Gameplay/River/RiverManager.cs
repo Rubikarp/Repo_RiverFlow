@@ -133,16 +133,17 @@ public class RiverManager : Singleton<RiverManager>
                 switch (outMountain.linkAmount)
                 {
                     case 0: //in a void
-                        Link0To0(inMountain, outMountain);
+                        CannotLink(MessageCase.CannotInMountain);
                         break;
                     case 1: //extending the end canal
                         Link1To0(outMountain, inMountain);
+                        inventory.tunnelsAmmount--;
                         break;
                     default: //x >= 2
                         Link2To0(outMountain, inMountain);
+                        inventory.tunnelsAmmount--;
                         break;
                 }
-                inventory.tunnelsAmmount--;
                 break;
             case 1:
                 switch (outMountain.linkAmount)
@@ -216,16 +217,8 @@ public class RiverManager : Singleton<RiverManager>
         if (InCanalList(tileA.canalsIn[0]))
         {
             Canal listCanal = CanalList(tileA.canalsIn[0]);
+            listCanal.Extend(tileA, tileB);
 
-            if (listCanal.endNode == tileA.gridPos)
-            {
-                listCanal.Extend(tileA, tileB);
-            }
-            else
-            {
-                listCanal.Extend(tileB, tileA);
-            }
-            
             if (tileA.ReceivedFlow() < tileB.ReceivedFlow()) 
             {
                 listCanal.Inverse(grid);
@@ -393,7 +386,12 @@ public class RiverManager : Singleton<RiverManager>
             int FlowOf2 = (int)tileA.ReceivedFlow();
             int FlowOf1 = (int)tileB.ReceivedFlow();
 
-            if (FlowOf2 > (2 * FlowOf1))
+            if(FlowOf2 == 0)
+            {
+                listCanalA.Inverse(grid);
+                listCanalB.Extend(tileB, tileA);
+            }
+            else if(FlowOf2 > (2 * FlowOf1))
             {
                 listCanalB.Extend(tileB, tileA);
                 listCanalB.Inverse(grid);
@@ -626,72 +624,18 @@ public class RiverManager : Singleton<RiverManager>
     {
         tile.UpdateReceivedFlow();
 
-        //Check for contradictory flow
-        /*if (linkAmount == 2)
+        //Check for empty flow
+        if (tile.ReceivedFlow() > 0)
         {
-            //Link
-            if (flowOut.Count > flowIn.Count)
-            {//<==0==>
-                //flowOut.Count = 2
-                GameTile neighborA = GetNeighbor(flowOut[0]);
-                GameTile neighborB = GetNeighbor(flowOut[1]);
-
-                if (neighborA.riverStrenght > neighborB.riverStrenght)
-                {
-                    InverseLink(this,neighborA);
-                }
-                else
-                if (neighborA.riverStrenght < neighborB.riverStrenght)
-                {
-                    InverseLink(this,neighborB);
-                }
-            }
-            else
-            if (flowOut.Count < flowIn.Count)
-            {//==>0<==
-                //flowIn.Count = 2
-                GameTile neighborA = GetNeighbor(flowIn[0]);
-                GameTile neighborB = GetNeighbor(flowIn[1]);
-
-                if (neighborA.riverStrenght > neighborB.riverStrenght)
-                {
-                    InverseLink(this,neighborB);
-                }
-                else
-                if (neighborA.riverStrenght < neighborB.riverStrenght)
-                {
-                    InverseLink(this,neighborA);
-                }
-            }
-            else
+            for (int i = 0; i < tile.flowIn.Count; i++)
             {
-                //flowOut.Count == flowIn.Count
-                //Du coup it's okay
-            }
-        }
-        else */
-        if (tile.linkAmount > 2)
-        {
-            if(tile.flowIn.Count >= 2)
-            {
-                int maxFlow = 0;
-
-                for (int i = 0; i < tile.flowIn.Count; i++)
+                if ((int)tile.GetNeighbor(tile.flowIn[i]).ReceivedFlow() <= 0)
                 {
-                    maxFlow = Mathf.Max(maxFlow, (int)tile.GetNeighbor(tile.flowIn[i]).ReceivedFlow());
-                }
-
-                //TODO
-                for (int i = 0; i < tile.flowIn.Count; i++)
-                {
-                    if ((int)tile.GetNeighbor(tile.flowIn[i]).ReceivedFlow() < maxFlow)
+                    for (int j = 0; j < tile.canalsIn.Count; j++)
                     {
-                        for (int j = 0; j < tile.canalsIn.Count; j++)
+                        if (tile.canalsIn[j].Contains(tile.GetNeighbor(tile.flowIn[i]).gridPos))
                         {
-                            if (tile.canalsIn[j].Contains(tile.GetNeighbor(tile.flowIn[i]).gridPos))
-                            {
-                                tile.canalsIn[j].Inverse(grid);
-                            }
+                            tile.canalsIn[j].Inverse(grid);
                         }
                     }
                 }

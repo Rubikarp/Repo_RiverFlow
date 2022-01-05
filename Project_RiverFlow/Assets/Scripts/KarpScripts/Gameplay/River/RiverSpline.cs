@@ -6,7 +6,9 @@ using Shapes;
 public class RiverSpline : MonoBehaviour
 {
     [Header("Shapes")]
+    public bool custom;
     public Polyline line;
+    public RiverMesh customLine;
     [Space(5)]
     public Cone cone;
     [Space(5)]
@@ -147,6 +149,8 @@ public class RiverSpline : MonoBehaviour
             Debug.LogWarning("Need more point", this);
         }
 
+        customLine.linePoints = line.points;
+
         UpdateEndPoint();
         ArrowFlowDir();
     }
@@ -156,7 +160,7 @@ public class RiverSpline : MonoBehaviour
         startDisk.Color = points[0].color;
         startDisk.transform.position = points[0].pos;
 
-        endDisk.Radius = points[points.Count - 1].thickness * 0.5f * line.Thickness;
+        endDisk.Radius = points[points.Count - 1].thickness * 0.75f * line.Thickness;
         endDisk.Color = points[points.Count - 1].color;
         endDisk.transform.position = points[points.Count - 1].pos;
     }

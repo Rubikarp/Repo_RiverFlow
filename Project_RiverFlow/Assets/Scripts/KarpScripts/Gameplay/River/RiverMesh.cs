@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using NaughtyAttributes;
+using Shapes;
 
 [RequireComponent(typeof(MeshFilter)), RequireComponent(typeof(MeshRenderer))]
 public class RiverMesh : MonoBehaviour
@@ -13,21 +14,19 @@ public class RiverMesh : MonoBehaviour
     public Color[] verticesColors = new Color[6];
     public Vector3[] vertices = new Vector3[6];
     public Vector3[] normals = new Vector3[6];
-    public Vector2[] uvs = new Vector2[6];
+    public Vector3[] uvs = new Vector3[6];
     public int[] triangles = new int[12];
 
     [Header("River Data")]
-    [Range(2, 16)] public int pointPerSegment = 8;
+    [Range(1, 16)] public int subdividePerSegment = 1;
     public RiverPalette_SCO riverData;
-    public List<RiverPoint> points = new List<RiverPoint>() { };
+    public List<PolylinePoint> linePoints = new List<PolylinePoint>() { new PolylinePoint(Vector3.zero, Color.red, 1), new PolylinePoint(Vector3.zero, Color.red, 1) };
+    [Range(0.01f, 4)] public float scale = 1;
+    [Range(0.01f, 4)] public float uvScale = 1;
 
     [Header("other")]
     private GameGrid grid;
 
-    void Awake()
-    {
-        UpdateMesh();
-    }
     void Update()
     {
         UpdateMesh();
@@ -45,52 +44,57 @@ public class RiverMesh : MonoBehaviour
             mesh = new Mesh();
         }
 
-        if (points.Count < 2)
+        if (linePoints.Count < 2)
         {
             //Error Catching
             Debug.LogError("pas assez de point");
             return;
         }
 
-        int pointCount = points.Count;
+        #region Compute array size
+        int pointCount = linePoints.Count;
         verticesColors = new Color[pointCount * 3];
         vertices = new Vector3[pointCount * 3];
         normals = new Vector3[pointCount * 3];
-        uvs = new Vector2[pointCount * 3];
-
-        int segmentCount = points.Count - 1;
+        uvs = new Vector3[pointCount * 3];
+        //
+        int segmentCount = linePoints.Count - 1;
         triangles = new int[segmentCount * 12];
+        #endregion
 
         #region Vertices
-        Vector3 previousDir = (points[1].pos - points[0].pos).normalized;
-        Vector3 nextDir = (points[1].pos - points[0].pos).normalized;
+        Vector3 previousDir = (linePoints[1].point - linePoints[0].point).normalized;
+        Vector3 nextDir = (linePoints[1].point - linePoints[0].point).normalized;
         Vector3 dir = (previousDir + nextDir) * 0.5f;
         Vector3 right = Vector3.Cross(Vector3.back, dir).normalized;
+        float thickness = linePoints[0].thickness * scale;
         //
-        vertices[0] = points[0].pos;
-        vertices[1] = points[0].pos - (right * points[0].thickness);
-        vertices[2] = points[0].pos + (right * points[0].thickness);
+        vertices[0] = linePoints[0].point;
+        vertices[1] = linePoints[0].point - (right * thickness);
+        vertices[2] = linePoints[0].point + (right * thickness);
 
         for (int i = 1; i < pointCount - 1; i++)
         {
-            previousDir = (points[i].pos - points[i - 1].pos).normalized;
-            nextDir = (points[i + 1].pos - points[i].pos).normalized;
+            previousDir = (linePoints[i].point - linePoints[i - 1].point).normalized;
+            nextDir = (linePoints[i + 1].point - linePoints[i].point).normalized;
             dir = (previousDir + nextDir) * 0.5f;
             right = Vector3.Cross(Vector3.back, dir).normalized;
+            thickness = linePoints[i].thickness * scale;
             //
-            vertices[(i * 3) + 0] = points[i].pos;
-            vertices[(i * 3) + 1] = points[i].pos - (right * points[i].thickness);
-            vertices[(i * 3) + 2] = points[i].pos + (right * points[i].thickness);
+            vertices[(i * 3) + 0] = linePoints[i].point;
+            vertices[(i * 3) + 1] = linePoints[i].point - (right * thickness);
+            vertices[(i * 3) + 2] = linePoints[i].point + (right * thickness);
         }
 
-        previousDir = (points[(pointCount - 1)].pos - points[(pointCount - 2)].pos).normalized;
-        nextDir = (points[(pointCount - 1)].pos - points[(pointCount - 2)].pos).normalized;
+        previousDir = (linePoints[(pointCount - 1)].point - linePoints[(pointCount - 2)].point).normalized;
+        nextDir = (linePoints[(pointCount - 1)].point - linePoints[(pointCount - 2)].point).normalized;
         dir = (previousDir + nextDir) * 0.5f;
         right = Vector3.Cross(Vector3.back, dir).normalized;
+        thickness = linePoints[pointCount - 1].thickness * scale;
         //
-        vertices[((pointCount - 1) * 3) + 0] = points[(pointCount - 1)].pos;
-        vertices[((pointCount - 1) * 3) + 1] = points[(pointCount - 1)].pos - (right * points[(pointCount - 1)].thickness);
-        vertices[((pointCount - 1) * 3) + 2] = points[(pointCount - 1)].pos + (right * points[(pointCount - 1)].thickness);
+        vertices[((pointCount - 1) * 3) + 0] = linePoints[pointCount - 1].point;
+        vertices[((pointCount - 1) * 3) + 1] = linePoints[pointCount - 1].point - (right * thickness);
+        vertices[((pointCount - 1) * 3) + 2] = linePoints[pointCount - 1].point + (right * thickness);
         #endregion
         #region Normal
         for (int i = 0; i < pointCount; i++)
@@ -104,7 +108,7 @@ public class RiverMesh : MonoBehaviour
         Color temp;
         for (int i = 0; i < pointCount; i++)
         {
-            temp = points[i].color;
+            temp = linePoints[i].color;
             verticesColors[(i * 3) + 0] = temp;
             verticesColors[(i * 3) + 1] = temp;
             verticesColors[(i * 3) + 2] = temp;
@@ -112,13 +116,17 @@ public class RiverMesh : MonoBehaviour
         #endregion
         #region UV
         float distTravell = 0;
-        for (int i = 0; i < pointCount; i++)
-        {
-            uvs[(i * 3) + 0] = new Vector2(distTravell, 0);
-            uvs[(i * 3) + 1] = new Vector2(distTravell, 1);
-            uvs[(i * 3) + 2] = new Vector2(distTravell, 1);
+        uvs[0] = new Vector3(distTravell, 0.5f, linePoints[0].color.b);
+        uvs[1] = new Vector3(distTravell, 1, linePoints[0].color.b);
+        uvs[2] = new Vector3(distTravell, 0, linePoints[0].color.b);
 
-            distTravell += dir.magnitude;
+        for (int i = 1; i < pointCount; i++)
+        {
+            distTravell += (linePoints[i].point - linePoints[i-1].point).magnitude;
+
+            uvs[(i * 3) + 0] = new Vector3(distTravell, 0.5f, linePoints[i].color.b);
+            uvs[(i * 3) + 1] = new Vector3(distTravell, 1, linePoints[i].color.b);
+            uvs[(i * 3) + 2] = new Vector3(distTravell, 0, linePoints[i].color.b);
         }
         #endregion
         #region Triangle
@@ -163,52 +171,52 @@ public class RiverMesh : MonoBehaviour
             mesh = new Mesh();
         }
 
-        if (points.Count < 2)
+        if (linePoints.Count < 2)
         {
             //Error Catching
             Debug.LogError("pas assez de point");
             return;
         }
 
-        int pointCount = points.Count;
+        int pointCount = linePoints.Count;
         verticesColors = new Color[pointCount * 3];
         vertices = new Vector3[pointCount * 3];
         normals = new Vector3[pointCount * 3];
-        uvs = new Vector2[pointCount * 3];
+        uvs = new Vector3[pointCount * 3];
 
-        int segmentCount = points.Count -1;
+        int segmentCount = linePoints.Count -1;
         triangles = new int[segmentCount * 12];
 
         #region Vertices
-        Vector3 previousDir = (points[1].pos - points[0].pos).normalized;
-        Vector3 nextDir = (points[1].pos - points[0].pos).normalized;
+        Vector3 previousDir = (linePoints[1].point - linePoints[0].point).normalized;
+        Vector3 nextDir = (linePoints[1].point - linePoints[0].point).normalized;
         Vector3 dir = (previousDir + nextDir) * 0.5f;
         Vector3 right = Vector3.Cross(Vector3.back, dir).normalized;
         //
-        vertices[0] = points[0].pos;
-        vertices[1] = points[0].pos - (right * points[0].thickness);
-        vertices[2] = points[0].pos + (right * points[0].thickness);
+        vertices[0] = linePoints[0].point;
+        vertices[1] = linePoints[0].point - (right * linePoints[0].thickness);
+        vertices[2] = linePoints[0].point + (right * linePoints[0].thickness);
 
         for (int i = 1; i < pointCount-1; i++)
         {
-            previousDir = (points[i].pos - points[i - 1].pos).normalized;
-            nextDir = (points[i+1].pos - points[i].pos).normalized;
+            previousDir = (linePoints[i].point - linePoints[i - 1].point).normalized;
+            nextDir = (linePoints[i+1].point - linePoints[i].point).normalized;
             dir = (previousDir + nextDir) * 0.5f;
             right = Vector3.Cross(Vector3.back, dir).normalized;
             //
-            vertices[(i * 3) + 0] = points[i].pos;
-            vertices[(i * 3) + 1] = points[i].pos - (right * points[i].thickness);
-            vertices[(i * 3) + 2] = points[i].pos + (right * points[i].thickness);
+            vertices[(i * 3) + 0] = linePoints[i].point;
+            vertices[(i * 3) + 1] = linePoints[i].point - (right * linePoints[i].thickness);
+            vertices[(i * 3) + 2] = linePoints[i].point + (right * linePoints[i].thickness);
         }
 
-        previousDir = (points[(pointCount - 1)].pos - points[(pointCount - 2)].pos).normalized;
-        nextDir = (points[(pointCount - 1)].pos - points[(pointCount - 2)].pos).normalized;
+        previousDir = (linePoints[(pointCount - 1)].point - linePoints[(pointCount - 2)].point).normalized;
+        nextDir = (linePoints[(pointCount - 1)].point - linePoints[(pointCount - 2)].point).normalized;
         dir = (previousDir + nextDir) * 0.5f;
         right = Vector3.Cross(Vector3.back, dir).normalized;
         //
-        vertices[((pointCount - 1 ) * 3) + 0] = points[(pointCount - 1)].pos;
-        vertices[((pointCount - 1 ) * 3) + 1] = points[(pointCount - 1)].pos - (right * points[(pointCount - 1)].thickness);
-        vertices[((pointCount - 1 )* 3) + 2] = points[(pointCount - 1)].pos + (right * points[(pointCount - 1)].thickness);
+        vertices[((pointCount - 1 ) * 3) + 0] = linePoints[(pointCount - 1)].point;
+        vertices[((pointCount - 1 ) * 3) + 1] = linePoints[(pointCount - 1)].point - (right * linePoints[(pointCount - 1)].thickness);
+        vertices[((pointCount - 1 ) * 3) + 2] = linePoints[(pointCount - 1)].point + (right * linePoints[(pointCount - 1)].thickness);
         #endregion
         #region Normal
         for (int i = 0; i < pointCount; i++)
@@ -222,7 +230,7 @@ public class RiverMesh : MonoBehaviour
         Color temp;
         for (int i = 0; i < pointCount; i++)
         {
-            temp = points[i].color;
+            temp = linePoints[i].color;
             verticesColors[(i * 3) + 0] = temp;
             verticesColors[(i * 3) + 1] = temp;
             verticesColors[(i * 3) + 2] = temp;
@@ -281,7 +289,7 @@ public class RiverMesh : MonoBehaviour
             mesh = new Mesh();
         }
 
-        if (points.Count < 2)
+        if (linePoints.Count < 2)
         {
             //Error Catching
             Debug.LogError("pas assez de point");
@@ -289,15 +297,15 @@ public class RiverMesh : MonoBehaviour
         }
 
         #region Vertices
-        vertices[0] = points[0].pos;
-        vertices[1] = points[1].pos;
+        vertices[0] = linePoints[0].point;
+        vertices[1] = linePoints[1].point;
         //
         Vector3 right = Vector3.Cross(Vector3.back, (vertices[1] - vertices[0])).normalized;
-        vertices[2] = points[0].pos - (right * points[0].thickness);
-        vertices[3] = points[0].pos + (right * points[0].thickness);
+        vertices[2] = linePoints[0].point - (right * linePoints[0].thickness);
+        vertices[3] = linePoints[0].point + (right * linePoints[0].thickness);
         //
-        vertices[4] = points[1].pos - (right * points[1].thickness);
-        vertices[5] = points[1].pos + (right * points[1].thickness);
+        vertices[4] = linePoints[1].point - (right * linePoints[1].thickness);
+        vertices[5] = linePoints[1].point + (right * linePoints[1].thickness);
         #endregion
         #region Normal
         normals[0] = Vector3.back;
@@ -310,8 +318,8 @@ public class RiverMesh : MonoBehaviour
         normals[5] = Vector3.back;
         #endregion
         #region Vertex Colors
-        Color a = points[0].color;
-        Color b = points[1].color;
+        Color a = linePoints[0].color;
+        Color b = linePoints[1].color;
         //
         verticesColors[0] = a;
         verticesColors[2] = a;

@@ -201,7 +201,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 540668936}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -4, y: 2, z: -10}
+  m_LocalPosition: {x: 0, y: 0, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -273,25 +273,19 @@ MonoBehaviour:
   mf: {fileID: 721812943}
   mesh: {fileID: 1695605596}
   verticesColors:
-  - {r: 0.30588236, g: 0.67058825, b: 0.7490196, a: 1}
-  - {r: 0.30588236, g: 0.67058825, b: 0.7490196, a: 1}
-  - {r: 0.30588236, g: 0.67058825, b: 0.7490196, a: 1}
-  - {r: 0.6745098, g: 0.8980392, b: 0.9490196, a: 1}
-  - {r: 0.6745098, g: 0.8980392, b: 0.9490196, a: 1}
-  - {r: 0.6745098, g: 0.8980392, b: 0.9490196, a: 1}
-  - {r: 0.9725491, g: 0.8470589, b: 0.6039216, a: 1}
-  - {r: 0.9725491, g: 0.8470589, b: 0.6039216, a: 1}
-  - {r: 0.9725491, g: 0.8470589, b: 0.6039216, a: 1}
+  - {r: 1, g: 1, b: 0.5, a: 1}
+  - {r: 1, g: 1, b: 0.5, a: 1}
+  - {r: 1, g: 1, b: 0.5, a: 1}
+  - {r: 1, g: 1, b: 0.5019608, a: 1}
+  - {r: 1, g: 1, b: 0.5019608, a: 1}
+  - {r: 1, g: 1, b: 0.5019608, a: 1}
   vertices:
   - {x: 0, y: 0, z: 0}
-  - {x: 0, y: -1, z: 0}
-  - {x: 0, y: 1, z: 0}
-  - {x: -2, y: 0, z: 0}
-  - {x: -2.525731, y: -0.8506508, z: 0}
-  - {x: -1.4742689, y: 0.8506508, z: 0}
-  - {x: -3, y: 2, z: 0}
-  - {x: -3.8944273, y: 1.5527864, z: 0}
-  - {x: -2.1055727, y: 2.4472136, z: 0}
+  - {x: -1, y: 0, z: 0}
+  - {x: 1, y: 0, z: 0}
+  - {x: 0, y: 8, z: 0}
+  - {x: -1, y: 8, z: 0}
+  - {x: 1, y: 8, z: 0}
   normals:
   - {x: 0, y: 0, z: -1}
   - {x: 0, y: 0, z: -1}
@@ -299,32 +293,25 @@ MonoBehaviour:
   - {x: 0, y: 0, z: -1}
   - {x: 0, y: 0, z: -1}
   - {x: 0, y: 0, z: -1}
-  - {x: 0, y: 0, z: -1}
-  - {x: 0, y: 0, z: -1}
-  - {x: 0, y: 0, z: -1}
   uvs:
-  - {x: 0, y: 0}
-  - {x: 0, y: 1}
-  - {x: 0, y: 1}
-  - {x: 1, y: 0}
-  - {x: 1, y: 1}
-  - {x: 1, y: 1}
-  - {x: 2, y: 0}
-  - {x: 2, y: 1}
-  - {x: 2, y: 1}
-  triangles: 000000000100000003000000000000000300000002000000030000000100000004000000020000000300000005000000030000000400000006000000030000000600000005000000060000000400000007000000050000000600000008000000
-  pointPerSegment: 8
+  - {x: 0, y: 0.5, z: 0.5}
+  - {x: 0, y: 1, z: 0.5}
+  - {x: 0, y: 0, z: 0.5}
+  - {x: 8, y: 0.5, z: 0.5019608}
+  - {x: 8, y: 1, z: 0.5019608}
+  - {x: 8, y: 0, z: 0.5019608}
+  triangles: 000000000100000003000000000000000300000002000000030000000100000004000000020000000300000005000000
+  subdividePerSegment: 1
   riverData: {fileID: 11400000, guid: 41848361330582a4c99fa9e0185c69e5, type: 2}
-  points:
-  - pos: {x: 0, y: 0, z: 0}
-    color: {r: 0.30588236, g: 0.67058825, b: 0.7490196, a: 1}
+  linePoints:
+  - point: {x: 0, y: 0, z: 0}
+    color: {r: 1, g: 1, b: 1, a: 1}
     thickness: 1
-  - pos: {x: -2, y: 0, z: 0}
-    color: {r: 0.6745098, g: 0.8980392, b: 0.9490196, a: 1}
+  - point: {x: 0, y: 8, z: 0}
+    color: {r: 1, g: 1, b: 0.631, a: 1}
     thickness: 1
-  - pos: {x: -3, y: 2, z: 0}
-    color: {r: 0.9725491, g: 0.8470589, b: 0.6039216, a: 1}
-    thickness: 1
+  scale: 1
+  uvScale: 1
 --- !u!23 &721812942
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -382,7 +369,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 721812940}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: -4, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -426,7 +413,8 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 34fc5346917eea54aba37bcbe8ff730a, type: 2}
+  - {fileID: 2100000, guid: 7ed6c8840b3aa56409d5cddba935234b, type: 2}
+  - {fileID: 2100000, guid: b1a4091a668c75a498eedfe1de21e60f, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -482,17 +470,26 @@ MonoBehaviour:
   stencilReadMask: 255
   stencilWriteMask: 255
   points:
-  - point: {x: 0, y: 0, z: 0}
+  - point: {x: 4.7897506, y: 3.4400427, z: 0}
+    color: {r: 0.8679245, g: 0.09416164, b: 0.25866234, a: 1}
+    thickness: 10.423601
+  - point: {x: 1.9247227, y: 1.2965102, z: 0}
     color: {r: 0.30588236, g: 0.67058825, b: 0.7490196, a: 1}
     thickness: 16
-  - point: {x: -2, y: 0, z: 0}
+  - point: {x: -1.9097137, y: -0.4740026, z: 0}
     color: {r: 0.6745098, g: 0.8980392, b: 0.9490196, a: 1}
     thickness: 16
-  - point: {x: -3, y: 2, z: 0}
-    color: {r: 0.9725491, g: 0.8470589, b: 0.6039216, a: 1}
-    thickness: 16
+  - point: {x: -3.3008122, y: 2.1963596, z: 0}
+    color: {r: 0.8235295, g: 0.87254906, b: 0.7764706, a: 1}
+    thickness: 24.579542
+  - point: {x: -3.8341916, y: 4.415291, z: 0}
+    color: {r: 0.97254914, g: 0.8470589, b: 0.6039216, a: 1}
+    thickness: 8.4853
+  - point: {x: -5.9024367, y: 6.589079, z: 0}
+    color: {r: 0.30611658, g: 0.9811321, b: 0.14346743, a: 1}
+    thickness: 8.995011
   geometry: 0
-  joins: 1
+  joins: 2
   closed: 0
   thickness: 0.125
   thicknessSpace: 0
@@ -521,14 +518,14 @@ Mesh:
   m_SubMeshes:
   - serializedVersion: 2
     firstByte: 0
-    indexCount: 24
+    indexCount: 12
     topology: 0
     baseVertex: 0
     firstVertex: 0
-    vertexCount: 9
+    vertexCount: 6
     localAABB:
-      m_Center: {x: -1.9472136, y: 0.7236068, z: 0}
-      m_Extent: {x: 1.9472136, y: 1.7236068, z: 0}
+      m_Center: {x: 0, y: 4, z: 0}
+      m_Extent: {x: 1, y: 4, z: 0}
   m_Shapes:
     vertices: []
     shapes: []
@@ -545,10 +542,10 @@ Mesh:
   m_KeepVertices: 1
   m_KeepIndices: 1
   m_IndexFormat: 0
-  m_IndexBuffer: 000001000300000003000200030001000400020003000500030004000600030006000500060004000700050006000800
+  m_IndexBuffer: 000001000300000003000200030001000400020003000500
   m_VertexData:
     serializedVersion: 3
-    m_VertexCount: 9
+    m_VertexCount: 6
     m_Channels:
     - stream: 0
       offset: 0
@@ -569,7 +566,7 @@ Mesh:
     - stream: 0
       offset: 40
       format: 0
-      dimension: 2
+      dimension: 3
     - stream: 0
       offset: 0
       format: 0
@@ -606,8 +603,8 @@ Mesh:
       offset: 0
       format: 0
       dimension: 0
-    m_DataSize: 432
-    _typelessdata: 0000000000000000000000000000000000000000000080bf9d9c9c3eacab2b3fc0bf3f3f0000803f000000000000000000000000000080bf000000000000000000000000000080bf9d9c9c3eacab2b3fc0bf3f3f0000803f000000000000803f000000000000803f000000000000000000000000000080bf9d9c9c3eacab2b3fc0bf3f3f0000803f000000000000803f000000c000000000000000000000000000000000000080bfadac2c3fe6e5653ff3f2723f0000803f0000803f0000000094a521c040c459bf000000000000000000000000000080bfadac2c3fe6e5653ff3f2723f0000803f0000803f0000803fd8b4bcbf40c4593f000000000000000000000000000080bfadac2c3fe6e5653ff3f2723f0000803f0000803f0000803f000040c000000040000000000000000000000000000080bffaf8783fdad8583f9b9a1a3f0000803f00000040000000004c3e79c0b4c1c63f000000000000000000000000000080bffaf8783fdad8583f9b9a1a3f0000803f000000400000803fb4c106c0269f1c40000000000000000000000000000080bffaf8783fdad8583f9b9a1a3f0000803f000000400000803f
+    m_DataSize: 312
+    _typelessdata: 0000000000000000000000000000000000000000000080bf0000803f0000803f0000003f0000803f000000000000003f0000003f000080bf00000000000000000000000000000000000080bf0000803f0000803f0000003f0000803f000000000000803f0000003f0000803f00000000000000000000000000000000000080bf0000803f0000803f0000003f0000803f00000000000000000000003f0000000000000041000000000000000000000000000080bf0000803f0000803f8180003f0000803f000000410000003f8180003f000080bf00000041000000000000000000000000000080bf0000803f0000803f8180003f0000803f000000410000803f8180003f0000803f00000041000000000000000000000000000080bf0000803f0000803f8180003f0000803f00000041000000008180003f
   m_CompressedMesh:
     m_Vertices:
       m_NumItems: 0
@@ -661,8 +658,8 @@ Mesh:
       m_BitSize: 0
     m_UVInfo: 0
   m_LocalAABB:
-    m_Center: {x: -1.9472136, y: 0.7236068, z: 0}
-    m_Extent: {x: 1.9472136, y: 1.7236068, z: 0}
+    m_Center: {x: 0, y: 4, z: 0}
+    m_Extent: {x: 1, y: 4, z: 0}
   m_MeshUsageFlags: 0
   m_BakedConvexCollisionMesh: 
   m_BakedTriangleCollisionMesh: 
