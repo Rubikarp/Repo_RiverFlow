@@ -22,12 +22,16 @@ public class TileSpawnScore : MonoBehaviour
     public bool spawnable = false;
     
     private GameTile tile;
+    private Camera mainCamera;
     private PlantSpawner plantSpawner;
+    private DistanceField distanceField;
 
     private void Start()
     {
         tile = GetComponent<GameTile>();
+        mainCamera = GameObject.Find("Main Camera").GetComponent<Camera>();
         plantSpawner = GameObject.Find("PlantSpawner").GetComponent<PlantSpawner>();
+        distanceField = GameObject.Find("PlantSpawner").GetComponent<DistanceField>();
     }
 
     public TileInfoScore Evaluate()
@@ -36,6 +40,7 @@ public class TileSpawnScore : MonoBehaviour
         spawnable = false;
         scoreValue = 0;
 
+        /*
         if (tile.spawnArea <= plantSpawner.currentSpawnArea && tile.spawnArea != 0)
         {
 
@@ -47,12 +52,22 @@ public class TileSpawnScore : MonoBehaviour
 
             scoreValue += EvalTerrainType() * CastThreatToInt(1, 0);
             scoreValue += EvalPlantsNearby() * CastThreatToInt(1, 0);
+            scoreValue += EvalRiverNearby() * CastThreatToInt(1, 0);
             scoreValue += EvalMountainsNearby() * CastThreatToInt(1, 0);
             scoreValue += EvalIrrigatedTile() * CastThreatToInt(1, 0);
             scoreValue += EvalNoise();
             spawnable = EvalForbiddenCase();
 
         }
+        */
+
+        scoreValue += EvalTerrainType() * CastThreatToInt(1, 0);
+        scoreValue += EvalPlantsNearby() * CastThreatToInt(1, 0);
+        scoreValue += EvalRiverNearby() * CastThreatToInt(1, 0);
+        scoreValue += EvalMountainsNearby() * CastThreatToInt(1, 0);
+        //scoreValue += EvalIrrigatedTile() * CastThreatToInt(1, 0);
+        scoreValue += EvalNoise();
+        spawnable = EvalForbiddenCase();
 
         return new TileInfoScore(tile, scoreValue, spawnable);
     }
@@ -85,29 +100,68 @@ public class TileSpawnScore : MonoBehaviour
 
     private int EvalTerrainType()
     {
-        int ruleScore;
-        switch(tile.type)
+        int ruleScore = 0;
+        switch (plantSpawner.threatState)
         {
-            case TileType.grass:
-                ruleScore = plantSpawner.scoreTerrainIsGrass;
+            case ThreatState.CALM:
+                switch (tile.type)
+                {
+                    case TileType.grass:
+                        ruleScore = plantSpawner.scoreCalmTerrainIsGrass;
+                        break;
+                    case TileType.clay:
+                        ruleScore = plantSpawner.scoreCalmTerrainIsClay;
+                        break;
+                    case TileType.sand:
+                        ruleScore = plantSpawner.scoreCalmTerrainIsSand;
+                        break;
+                    default:
+                        break;
+                }
                 break;
-            case TileType.clay:
-                ruleScore = plantSpawner.scoreTerrainIsClay;
+
+            case ThreatState.NEUTRAL:
+                switch (tile.type)
+                {
+                    case TileType.grass:
+                        ruleScore = plantSpawner.scoreNeutralTerrainIsGrass;
+                        break;
+                    case TileType.clay:
+                        ruleScore = plantSpawner.scoreNeutralTerrainIsClay;
+                        break;
+                    case TileType.sand:
+                        ruleScore = plantSpawner.scoreNeutralTerrainIsSand;
+                        break;
+                    default:
+                        break;
+                }
                 break;
-            case TileType.sand:
-                ruleScore = plantSpawner.scoreTerrainIsSand;
+
+            case ThreatState.CHAOTIC:
+                switch (tile.type)
+                {
+                    case TileType.grass:
+                        ruleScore = plantSpawner.scoreChaoticTerrainIsGrass;
+                        break;
+                    case TileType.clay:
+                        ruleScore = plantSpawner.scoreChaoticTerrainIsClay;
+                        break;
+                    case TileType.sand:
+                        ruleScore = plantSpawner.scoreChaoticTerrainIsSand;
+                        break;
+                    default:
+                        break;
+                }
                 break;
-            case TileType.other:
-                ruleScore = plantSpawner.scoreTerrainIsOther;
-                break;
+
             default:
-                ruleScore = plantSpawner.scoreTerrainIsOther;
                 break;
         }
         ruleScore *= plantSpawner.weightTerrainType;
         return ruleScore;
     }
 
+    /*
     private int EvalSpawnArea()
     {
         int ruleScore = 0;
@@ -124,7 +178,101 @@ public class TileSpawnScore : MonoBehaviour
 
         return ruleScore;
     }
+    */
 
+    private int EvalPlantsNearby()
+    {
+        int ruleScore = 0;
+        int distanceValue = distanceField.treeArray[tile.gridPos.x, tile.gridPos.y];
+        switch (plantSpawner.threatState)
+        {
+            case ThreatState.CALM:
+                if(distanceValue <= 2)
+                {
+                    ruleScore = plantSpawner.scoreCalmPlantsClose;
+                }
+                else
+                {
+                    ruleScore = plantSpawner.scoreCalmPlantsFar;
+                }
+                break;
+
+            case ThreatState.NEUTRAL:
+                if (distanceValue >= 4)
+                {
+                    ruleScore = plantSpawner.scoreNeutralPlantsFar;
+                }
+                else
+                {
+                    ruleScore = plantSpawner.scoreNeutralPlantsClose;
+                }
+                break;
+
+            case ThreatState.CHAOTIC:
+                if (distanceValue >= 5)
+                {
+                    ruleScore = plantSpawner.scoreChaoticPlantsFar;
+                }
+                else
+                {
+                    ruleScore = plantSpawner.scoreChaoticPlantsClose;
+                }
+                break;
+
+            default:
+                break;
+        }
+        ruleScore *= plantSpawner.weightPlantNearby;
+        return ruleScore;
+    }
+
+    private int EvalRiverNearby()
+    {
+        int ruleScore = 0;
+        int distanceValue = distanceField.riverArray[tile.gridPos.x, tile.gridPos.y];
+        switch (plantSpawner.threatState)
+        {
+            case ThreatState.CALM:
+                if (2 <= distanceValue && distanceValue <= 3)
+                {
+                    ruleScore = plantSpawner.scoreCalmRiverClose;
+                }
+                else
+                {
+                    ruleScore = plantSpawner.scoreCalmRiverFar;
+                }
+                break;
+
+            case ThreatState.NEUTRAL:
+                if (distanceValue >= 4)
+                {
+                    ruleScore = plantSpawner.scoreNeutralRiverFar;
+                }
+                else
+                {
+                    ruleScore = plantSpawner.scoreNeutralRiverClose;
+                }
+                break;
+
+            case ThreatState.CHAOTIC:
+                if (distanceValue >= 5)
+                {
+                    ruleScore = plantSpawner.scoreChaoticRiverFar;
+                }
+                else
+                {
+                    ruleScore = plantSpawner.scoreChaoticRiverClose;
+                }
+                break;
+
+            default:
+                break;
+        }
+        ruleScore *= plantSpawner.weightRiverNearby;
+        return ruleScore;
+    }
+
+    /*
     private int EvalPlantsNearby()
     {
         int ruleScore = 0;
@@ -141,6 +289,7 @@ public class TileSpawnScore : MonoBehaviour
         ruleScore *= plantSpawner.weightPlantNearby;
         return ruleScore;
     }
+    */
 
     private int EvalMountainsNearby()
     {
@@ -202,6 +351,7 @@ public class TileSpawnScore : MonoBehaviour
     private bool EvalForbiddenCase()
     {
         bool boolOutput = false;
+        boolOutput |= IsOutsideOfCamera();
         boolOutput |= AreAllTilesAroundOccupied();
         boolOutput |= IsMountain();
         boolOutput |= IsDugged();
@@ -212,6 +362,21 @@ public class TileSpawnScore : MonoBehaviour
         //boolOutput |= IsNextToThreeSproutNearby();
 
         return !boolOutput;
+    }
+
+    private bool IsOutsideOfCamera()
+    {
+        bool output = false;
+
+        int maxX = (int)Mathf.Floor(((float)Screen.width / (float)Screen.height) * mainCamera.orthographicSize);
+        int maxY = (int)Mathf.Floor(mainCamera.orthographicSize);
+
+        if(!(-maxX <= tile.worldPos2D.x && tile.worldPos2D.x <= maxX) || !(-maxY <= tile.worldPos2D.y && tile.worldPos2D.y <= maxY))
+        {
+            output = true;
+        }
+
+        return output;
     }
 
     private bool AreAllTilesAroundOccupied()

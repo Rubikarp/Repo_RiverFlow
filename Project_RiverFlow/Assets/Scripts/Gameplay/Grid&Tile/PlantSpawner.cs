@@ -14,27 +14,49 @@ public class PlantSpawner : MonoBehaviour
 {
     [Header("Scores & Weights")]
     [Header("Terrain Type")]
-    public int scoreTerrainIsGrass = 5;
-    public int scoreTerrainIsClay = 3;
-    public int scoreTerrainIsSand = 1;
-    public int scoreTerrainIsOther = 0;
+    public int scoreCalmTerrainIsGrass = 5;
+    public int scoreCalmTerrainIsClay = 3;
+    public int scoreCalmTerrainIsSand = 1;
+    public int scoreNeutralTerrainIsGrass = 5;
+    public int scoreNeutralTerrainIsClay = 3;
+    public int scoreNeutralTerrainIsSand = 1;
+    public int scoreChaoticTerrainIsGrass = 5;
+    public int scoreChaoticTerrainIsClay = 3;
+    public int scoreChaoticTerrainIsSand = 1;
     public int weightTerrainType = 1;
-    [Space(8)]
+    /*
+     * [Space(8)]
     [Header("Spawn Area")]
     public int scoreGoodSpawnArea = 3;
     public int scoreBadSpawnArea = 1;
     public int weightSpawnArea = 1;
+    */
     [Space(8)]
     [Header("Plant Nearby")]
-    public int scorePlantsNearby = 1;
+    public int scoreCalmPlantsFar = 2;
+    public int scoreCalmPlantsClose = -1;
+    public int scoreNeutralPlantsFar = 2;
+    public int scoreNeutralPlantsClose = -1;
+    public int scoreChaoticPlantsFar = 2;
+    public int scoreChaoticPlantsClose = -1;
     public int weightPlantNearby = 1;
+    [Space(8)]
+    [Header("River Nearby")]
+    public int scoreCalmRiverFar = 2;
+    public int scoreCalmRiverClose = -1;
+    public int scoreNeutralRiverFar = 2;
+    public int scoreNeutralRiverClose = -1;
+    public int scoreChaoticRiverFar = 2;
+    public int scoreChaoticRiverClose = -1;
+    public int weightRiverNearby = 1;
     [Space(8)]
     [Header("Mountains Nearby")]
     public int scoreMountainsNearby = 1;
     public int weightMountainsNearby = 1;
-    public int scoreIrrigatedTile100 = 4;
+    
     [Space(8)]
     [Header("Irrigated Tiles")]
+    public int scoreIrrigatedTile100 = 4;
     public int scoreIrrigatedTile75 = 4;
     public int scoreIrrigatedTile50 = 3;
     public int scoreIrrigatedTile25 = 2;
@@ -84,9 +106,9 @@ public class PlantSpawner : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.S))
         {
-            EvaluateTiles();
+            SpawnPlant();
         }
     }
 
@@ -242,6 +264,6 @@ public class PlantSpawner : MonoBehaviour
         {
             threatState = ThreatState.CHAOTIC;
         }
-        //Debug.Log(threatState);
+        Debug.Log(threatState);
     }
 }

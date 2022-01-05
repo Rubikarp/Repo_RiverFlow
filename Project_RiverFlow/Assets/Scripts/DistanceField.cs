@@ -6,8 +6,8 @@ using System.Text;
 public class DistanceField : MonoBehaviour
 {
 
-    private int[,] riverArray;
-    private int[,] treeArray;
+    public int[,] riverArray;
+    public int[,] treeArray;
     private int sizeX;
     private int sizeY;
     public int defaultRiverValue;
