@@ -1026,10 +1026,10 @@ public class RiverManager : Singleton<RiverManager>
                     #region FirstPart
                     //si plus de 2 tile avant rupture alors je raccorcie le canal
                     // (tileIndex-1 (tile avant rupture) + 1(start))
-                    int beginPartTile = index-2;
+                    int beginPartTile = index;
                     if (beginPartTile >= 2)
                     {
-                        CutCanalTo(listCanal, grid.GetTile(listCanal.canalTiles[beginPartTile]));
+                        CutCanalTo(listCanal, grid.GetTile(listCanal.canalTiles[beginPartTile-2]));
                     }
                     else
                     {
