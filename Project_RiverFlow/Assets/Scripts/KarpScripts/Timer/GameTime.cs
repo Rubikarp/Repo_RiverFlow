@@ -23,7 +23,6 @@ public class GameTime : Singleton<GameTime>
     [Range(0.0f,1.0f)] public float spawnRateVariation = 0.2f;
     private float nextPlantSpawn;
     private PlantSpawner plantSpawner;
-    public List<int> timingsZones;
 
 
     [Header("Event")]
@@ -44,20 +43,6 @@ public class GameTime : Singleton<GameTime>
         {
             gameTimer += Time.deltaTime;
 
-            if (timingsZones.Count > 0)
-            {
-                if ((gameTimer) >= timingsZones[plantSpawner.currentSpawnArea - 1] && plantSpawner.newZone == false)
-                {
-                    plantSpawner.currentSpawnArea++;
-                    plantSpawner.newZone = true;
-                    //Debug.Log(plantSpawner.newZone);
-
-                }
-            }
-            else
-            {
-                Debug.LogWarning("timingsZones not set",this);
-            }
             if (gameTimer > (weekDuration * weekNumber))
             {
                 
@@ -67,6 +52,12 @@ public class GameTime : Singleton<GameTime>
 
 
                 Pause();
+            }
+
+            //Cheat pour faire spawn instant une pousse
+            if (Input.GetKeyDown(KeyCode.S))
+            {
+                nextPlantSpawn = 0;
             }
 
             nextPlantSpawn -= Time.deltaTime;
@@ -91,11 +82,6 @@ public class GameTime : Singleton<GameTime>
                 }
 
                 plantSpawner.SpawnPlant();
-                if (plantSpawner.newZone == true)
-                {
-                    plantSpawner.newZone = false;
-                }
-
             }
             
         }
