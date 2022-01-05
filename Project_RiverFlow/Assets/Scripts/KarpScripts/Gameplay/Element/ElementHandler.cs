@@ -118,6 +118,7 @@ public class ElementHandler : MonoBehaviour
     {
         if (!grid.GetTile(grisPos).haveElement)
         {
+            Debug.Log("MAGIC SPAWN");
             GameObject go = InstanciateElement(magicTree_Template);
             go.transform.position = grid.TileToPos(new Vector2Int(grisPos.x, grisPos.y));
             go.name = "MagicTree_" + grisPos;
