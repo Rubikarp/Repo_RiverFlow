@@ -68,8 +68,15 @@ public class DragElement : MonoBehaviour,
                         GameTile testedTile = grid.GetTile(grid.PosToTile(input.GetHitPos()));
                         if (testedTile.ReceivedFlow() > FlowStrenght._00_)
                         {
-                            elementManage.SpawnCloudAt(grid.PosToTile(input.GetHitPos()));
-                            Inventory.cloudsAmmount--;
+                            if (!testedTile.haveElement && testedTile.type != TileType.mountain)
+                            {
+                                if (testedTile.flowOut.Count < 2 && testedTile.flowIn.Count < 2)
+                                {
+                                    elementManage.SpawnCloudAt(grid.PosToTile(input.GetHitPos()));
+                                    Inventory.cloudsAmmount--;
+
+                                }
+                            }
                         }
                     }
                     break;

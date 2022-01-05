@@ -94,25 +94,23 @@ public class ElementHandler : MonoBehaviour
     {
         GameTile aimedTile = grid.GetTile(grisPos);
 
-        if (!aimedTile.haveElement && aimedTile.type != TileType.mountain)
-        {
-            GameObject go = InstanciateElement(cloud_Template);
-            go.transform.position = grid.TileToPos(new Vector2Int(grisPos.x, grisPos.y));
-            go.name = "Cloud_" + grisPos;
+                GameObject go = InstanciateElement(cloud_Template);
+                go.transform.position = grid.TileToPos(new Vector2Int(grisPos.x, grisPos.y));
+                go.name = "Cloud_" + grisPos;
 
-            //Check if Plant
-            Cloud cloud = go.GetComponent<Cloud>();
-            if (cloud == null)
-            {
-                Debug.LogError("can't Find WaterSource on the object", go);
-            }
+                //Check if Plant
+                Cloud cloud = go.GetComponent<Cloud>();
+                if (cloud == null)
+                {
+                    Debug.LogError("can't Find WaterSource on the object", go);
+                }
 
-            allClouds.Add(cloud);
-            //Link Element and Tile
-            cloud.gridPos = grisPos;
-            cloud.tileOn = aimedTile;
-            aimedTile.element = cloud;
-        }
+                allClouds.Add(cloud);
+                //Link Element and Tile
+                cloud.gridPos = grisPos;
+                cloud.tileOn = aimedTile;
+                aimedTile.element = cloud;
+
     }
     public void SpawnMagicTreeAt(Vector2Int grisPos)
     {
