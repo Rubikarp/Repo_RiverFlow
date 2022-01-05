@@ -361,26 +361,36 @@ public class Plant : Element
 
     private void MagicTreeVerif()
     {
-        if (tileOn.neighbors[3].element is Plant && tileOn.neighbors[7].element is Plant && tileOn.neighbors[1].element == null)
+        if (tileOn.neighbors[1].element is null || tileOn.neighbors[1].element is Plant)
         {
-            if (tileOn.neighbors[3].element.GetComponent<Plant>().currentState >= PlantState.Young && tileOn.neighbors[3].element.GetComponent<Plant>().currentState >= PlantState.Young)
+            for (int g = 1; g < tileOn.neighbors[1].neighbors.Length; g = g + 2)
             {
-                for (int g = 0; g < tileOn.neighbors[1].neighbors.Length; g++)
+                if (tileOn.neighbors[1].neighbors[g].element is Plant)
                 {
-                    if (tileOn.neighbors[1].neighbors[g].element is Plant)
+                    if(tileOn.neighbors[1].neighbors[g].element.GetComponent<Plant>().currentState >= PlantState.Young)
                     {
-                        if(tileOn.neighbors[1].neighbors[g].element.GetComponent<Plant>().currentState >= PlantState.Young)
-                        {
-                            plantsForMagicTree++;
-                        }
+                        plantsForMagicTree++;
                     }
                 }
             }
 
-            if (plantsForMagicTree == 8)
+
+            if (plantsForMagicTree == 4)
             {
-                elementHandler.SpawnMagicTreeAt(tileOn.neighbors[1].gridPos);
-                hasMagicTree = true;
+                if (tileOn.neighbors[1].element is Plant)
+                {
+                    Destroy(tileOn.neighbors[1].element.gameObject);
+                    tileOn.neighbors[1].element = null;
+                    Debug.Log("MAGIC");
+                    elementHandler.SpawnMagicTreeAt(tileOn.neighbors[1].gridPos);
+                    hasMagicTree = true;
+                }
+                else
+                {
+                    Debug.Log("MAGIC2");
+                    elementHandler.SpawnMagicTreeAt(tileOn.neighbors[1].gridPos);
+                    hasMagicTree = true;
+                }
             }
             else
             {

@@ -41,7 +41,7 @@ public class MagicTree : Element
     public GameObject savanaSprite;
     public GameObject desertSprite;
 
-    private void Awake()
+    private void Start()
     {
         switch (tileOn.type)
         {
