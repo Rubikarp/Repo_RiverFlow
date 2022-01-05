@@ -43,7 +43,6 @@ public class TileSpawnScore : MonoBehaviour
             if (plantSpawner.newZone == true)
             {
                 scoreValue += EvalSpawnArea() * CastThreatToInt(1, 0) + 10000;
-                Debug.Log("Le calcul se fait bien");
             }
 
             scoreValue += EvalTerrainType() * CastThreatToInt(1, 0);
