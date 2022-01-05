@@ -6,147 +6,139 @@ using System.Text;
 public class DistanceField : MonoBehaviour
 {
 
-    private int[,] array;
+    public int[,] riverArray;
+    public int[,] treeArray;
     private int sizeX;
     private int sizeY;
-    public int defaultValue;
-    private List<int[]> updateList;
-    private List<int[]> zerosList;
+    public int defaultRiverValue;
+    public int defaultTreeValue;
 
     public RiverManager riverManager;
+    public ElementHandler elementHandler;
     public GameGrid gameGrid;
 
-    public Texture2D debugTexture;
-    int debugScale = 10;
     public void Start()
     {
         sizeX = gameGrid.size.x;
         sizeY = gameGrid.size.y;
-        this.array = new int[sizeX,sizeY];
-        ResetArray();
-        updateList = new List<int[]>();
-        zerosList = new List<int[]>();
-
-        debugTexture = Karprod.TextureGenerator.Generate(sizeX * debugScale, sizeY * debugScale, false);
+        riverArray = new int[sizeX,sizeY];
+        treeArray = new int[sizeX, sizeY];
+        ResetRiverArray();
+        ResetTreeArray();
     }
-
-    public void SetZero(int x, int y) 
-    {
-        this.array[x, y] = 0;
-        for(int i = -1; i <= 1; i++) 
-        {
-            for(int j = -1; j <= 1; j++) 
-            {
-                if(i != 0 && j != 0) 
-                {
-                    AppendToUpdateList(x+i,y+j);
-                    debugTexture.SetPixels((x + 1)* debugScale, (y + 1) * debugScale, debugScale, debugScale, GetBlockColor(Color.blue, debugScale));
-                    debugTexture.Apply();
-                }
-            }
-        }
-        this.UpdateList();
-    }
-
-    private Color[] GetBlockColor(Color col, int size)
-    {
-        Color[] result = new Color[size * size];
-        for (int x = 0; x < size; x++)
-        {
-            for (int y = 0; y < size; y++)
-            {
-                result[x + y * size] = col;
-            }
-        }
-        return result;
-    }
-
-    public void SetValue(int x, int y) {
-        int minimalValue = this.defaultValue;
-        for(int i = -1; i <= 1; i++) 
-        {
-            for(int j = -1; j <= 1; j++) 
-            {
-                try 
-                {
-                    if(this.array[x+i,y+j] < minimalValue) 
-                    {
-                        minimalValue = this.array[x+i,y+j];
-                    }
-                }
-                catch 
-                {
-                    continue;
-                }
-                  
-                if(i != 0 && j != 0) {
-                    AppendToUpdateList(x+i,y+j);
-                }
-            }
-        }
-        this.array[x,y] = minimalValue + 1;
-        debugTexture.SetPixels((x + 1) * debugScale, (y + 1) * debugScale, debugScale, debugScale, GetBlockColor(new Color(0,0, (float)(minimalValue + 1) / (float)defaultValue,0), debugScale));
-        debugTexture.Apply();
-    }
-
-    private void AppendToUpdateList(int x, int y) {
-        bool isXTooLow = (x < 0);
-        bool isXTooHigh = (x >= this.sizeX);
-        bool isYTooLow = (y < 0);
-        bool isYTooHigh = (y >= this.sizeY);
-        if(!isXTooLow && !isXTooHigh && !isYTooLow && !isYTooHigh) 
-        {
-            this.updateList.Add(new int[2]{x, y});
-        }
-    }
-
-    public void UpdateList() 
-    { 
-        for(int i = 0 ; i < this.updateList.Count ; i++) 
-        {
-
-                SetValue(this.updateList[i][0], this.updateList[i][1]);
-            
-        }
-
-        Debug.Log("\n" + Print());
-    }
-
 
     private void CompleteArrayWithCanals() // C'est le nouveau set zero
     {
         
         foreach (Canal canal in riverManager.canals)
         {
-            array[canal.endNode.x, canal.endNode.y] = 0;
-            array[canal.startNode.x, canal.startNode.y] = 0;
+            riverArray[canal.endNode.x, canal.endNode.y] = 0;
+            riverArray[canal.startNode.x, canal.startNode.y] = 0;
             foreach (Vector2Int tile in canal.canalTiles)
             {
-                array[tile.x, tile.y] = 0;
+                riverArray[tile.x, tile.y] = 0;
             }
         }
     }
 
-    private void ResetArray()
+    private void CompleteArrayWithTrees()
+    {
+        foreach(Plant plant in elementHandler.allPlants)
+        {
+            treeArray[plant.gridPos.x, plant.gridPos.y] = 0;
+        }
+    }
+
+    private void ResetRiverArray()
     {
         for (int i = 0; i < sizeX; i++)
         {
             for (int j = 0; j < sizeY; j++)
             {
-                this.array[i, j] = defaultValue;
+                riverArray[i, j] = defaultRiverValue;
             }
         }
     }
-    public void GenerateArray()
-    {
-        ResetArray();
 
-        CompleteArrayWithCanals();
-        
-        //Debug.Log($"\n{Print()}");
+    private void ResetTreeArray()
+    {
+        for (int i = 0; i < sizeX; i++)
+        {
+            for (int j = 0; j < sizeY; j++)
+            {
+                treeArray[i, j] = defaultTreeValue;
+            }
+        }
     }
 
-    public string Print()
+    private void UpdateDistance(int currentValue)
+    {
+        for(int x = 0; x < sizeX; x++)
+        {
+            for(int y = 0; y < sizeY; y++)
+            {
+                if(riverArray[x,y] == currentValue)
+                {
+                    for(int i = -1; i<=1; i++)
+                    {
+                        for(int j = -1; j<=1; j++)
+                        {
+                            try
+                            {
+                                if (riverArray[x + i, y + j] > currentValue + 1)
+                                {
+                                    riverArray[x + i, y + j] = currentValue + 1;
+                                }
+                            }
+                            catch
+                            {
+                                // C'est pour les OutOfBound Exception
+                            }
+                        }
+                    }
+                }
+
+                if (treeArray[x, y] == currentValue)
+                {
+                    for (int i = -1; i <= 1; i++)
+                    {
+                        for (int j = -1; j <= 1; j++)
+                        {
+                            try
+                            {
+                                if (treeArray[x + i, y + j] > currentValue + 1)
+                                {
+                                    treeArray[x + i, y + j] = currentValue + 1;
+                                }
+                            }
+                            catch
+                            {
+                                // C'est pour les OutOfBound Exception
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    public void GenerateArray()
+    {
+        ResetRiverArray();
+        ResetTreeArray();
+
+        CompleteArrayWithCanals();
+        CompleteArrayWithTrees();
+
+        for(int i = 0; i<defaultRiverValue; i++)
+        {
+            UpdateDistance(i);
+        }
+
+        //Debug.Log($"\n{Print(treeArray)}");
+    }
+
+    public string Print(int[,] array)
     {
 
         StringBuilder strBuilder = new StringBuilder();
