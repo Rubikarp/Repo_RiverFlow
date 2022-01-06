@@ -183,6 +183,6 @@ public class PlantSpawner : MonoBehaviour
         {
             threatState = ThreatState.CHAOTIC;
         }
-        //Debug.Log(threatState);
+        Debug.Log(threatState);
     }
 }

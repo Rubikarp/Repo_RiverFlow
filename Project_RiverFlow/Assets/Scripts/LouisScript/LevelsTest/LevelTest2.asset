@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b29908123b7277242a9c96854f780ebc, type: 3}
   m_Name: LevelTest2
   m_EditorClassIdentifier: 
-  levelSceneName: Assets/Scenes/Manon/LD_Manon 1.unity
+  levelSceneName: Assets/Scenes/Luc/Level_02.unity
   levelNumber: 2
   name: Niveau 2
   recordScore: 0
-  scoreUnlock: 50
+  scoreUnlock: 0
   LockLvl: {fileID: 11400000, guid: dfb255225e6354f41a4f27526680a3e0, type: 2}
