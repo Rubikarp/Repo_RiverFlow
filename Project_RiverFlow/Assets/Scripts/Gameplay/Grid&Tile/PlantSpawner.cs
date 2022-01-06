@@ -84,6 +84,8 @@ public class PlantSpawner : MonoBehaviour
     [Header("DistanceGrid")]
     public DistanceField distanceField;
 
+    public PositionRendererSorter positionRendererSorter;
+
     private void Start()
     {
         gameGrid = GameObject.Find("Grid").GetComponent<GameGrid>();
@@ -97,6 +99,7 @@ public class PlantSpawner : MonoBehaviour
         {
             randomFirstPlant = Random.Range(0, firstPlants.Count);
             firstPlants[randomFirstPlant].SetActive(true);
+            positionRendererSorter.SortTreePositionOderInLayer(firstPlants[randomFirstPlant].GetComponent<SpriteRenderer>(), firstPlants[randomFirstPlant].transform);
             isFirstPlant = false;
         }
         else
