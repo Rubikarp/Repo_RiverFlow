@@ -72,7 +72,7 @@ public class InputHandler : Singleton<InputHandler>
         return hitPoint;
     }
     //
-    public void CheckMode()
+    private void CheckMode()
     {
         lastMode = mode;
         if (Input.GetKeyDown(digMode))
@@ -106,7 +106,7 @@ public class InputHandler : Singleton<InputHandler>
             onInputPress?.Invoke(mode);
         }
     }
-    public void CheckInput()
+    private void CheckInput()
     {
         //OnPress
         if (Input.GetMouseButtonDown(0))
@@ -122,20 +122,34 @@ public class InputHandler : Singleton<InputHandler>
         {
             if (KarpHelper.IsOverUI())
             {
-                isMaintaining = true;
                 onInputRelease?.Invoke(mode);
             }
-            else
+            else 
+            if(isMaintaining)
             {
-                isMaintaining = true;
                 onInputMaintain?.Invoke(mode);
             }
         }
         //OnRelease
         if (Input.GetMouseButtonUp(0))
         {
-            isMaintaining = false;
-            onInputRelease?.Invoke(mode);
+            if (isMaintaining)
+            {
+                isMaintaining = false;
+                onInputRelease?.Invoke(mode);
+            }
         }
     }
+    //
+    public void ChangeMode(InputMode newMode)
+    {
+        lastMode = mode;
+        mode = newMode;
+        if (isMaintaining && lastMode != newMode)
+        {
+            onInputRelease?.Invoke(lastMode);
+            onInputPress?.Invoke(mode);
+        }
+    }
+
 }

@@ -2,14 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PositionRendererSorter : MonoBehaviour
+public static class PositionRendererSorter
 {
-    public void SortTreePositionOderInLayer(Renderer rendererToSort, Transform objectWorldPosition)
+    public static void SortTreePositionOderInLayer(Renderer rendererToSort, Transform objectWorldPosition)
     {
-            rendererToSort.sortingOrder = (int)(Mathf.Floor(objectWorldPosition.position.y)) * 4 * -1;        
+        rendererToSort.sortingOrder = (int)(Mathf.Floor(objectWorldPosition.position.y)) * 4 * -1;
     }
 
-    public void SortPositionOrderInLayer(Renderer rendererToSort, Renderer attachedTreeRenderer, Transform objectWorldPosition, bool isTreeShadow)
+    public static void SortPositionOrderInLayer(Renderer rendererToSort, Renderer attachedTreeRenderer, Transform objectWorldPosition, bool isTreeShadow)
     {
         if (isTreeShadow)
         {

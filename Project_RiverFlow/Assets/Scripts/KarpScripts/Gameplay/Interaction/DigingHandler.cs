@@ -73,6 +73,7 @@ public class DigingHandler : MonoBehaviour
                 {
                     element.SpawnWaterSourceAt(grid.PosToTile(input.GetHitPos()));
                     inventory.sourcesAmmount--;
+                    input.ChangeMode(InputMode.diging);
                 }
                 break;
             case InputMode.cloud:
@@ -84,6 +85,7 @@ public class DigingHandler : MonoBehaviour
                         {
                             element.SpawnCloudAt(grid.PosToTile(input.GetHitPos()));
                             inventory.cloudsAmmount--;
+                            input.ChangeMode(InputMode.diging);
                         }
                     }
                 }
@@ -102,6 +104,7 @@ public class DigingHandler : MonoBehaviour
                             {
                                 element.SpawnLakeAt(startSelectTile.gridPos, vertical: true);
                                 inventory.lakesAmmount--;
+                                input.ChangeMode(InputMode.diging);
                             }
                             //check if horizontal
                             else
@@ -110,6 +113,7 @@ public class DigingHandler : MonoBehaviour
                             {
                                 element.SpawnLakeAt(startSelectTile.gridPos, vertical: false);
                                 inventory.lakesAmmount--;
+                                input.ChangeMode(InputMode.diging);
                             }
                         }
                     }
