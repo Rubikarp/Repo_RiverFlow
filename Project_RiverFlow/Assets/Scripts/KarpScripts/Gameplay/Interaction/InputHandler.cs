@@ -12,7 +12,7 @@ public enum InputMode
     lake = 4,
     source = 5,
 }
-public class InputHandler : MonoBehaviour
+public class InputHandler : Singleton<InputHandler>
 {
     [Header("reférence")]
     public Camera cam;
