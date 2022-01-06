@@ -391,7 +391,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &3656627349718562325
 Transform:
   m_ObjectHideFlags: 0
@@ -491,17 +491,24 @@ MonoBehaviour:
   - {x: 0, y: 0, z: 0}
   - {x: 0, y: 0, z: 0}
   uvs:
-  - {x: 0, y: 0}
-  - {x: 0, y: 0}
-  - {x: 0, y: 0}
-  - {x: 0, y: 0}
-  - {x: 0, y: 0}
-  - {x: 0, y: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
   triangles: 000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
   subdividePerSegment: 1
   riverData: {fileID: 11400000, guid: 41848361330582a4c99fa9e0185c69e5, type: 2}
-  points: []
+  linePoints:
+  - point: {x: 0, y: 0, z: 0}
+    color: {r: 1, g: 0, b: 0, a: 1}
+    thickness: 1
+  - point: {x: 0, y: 0, z: 0}
+    color: {r: 1, g: 0, b: 0, a: 1}
+    thickness: 1
   scale: 0.3
+  uvScale: 1
 --- !u!1 &8909883473942522786
 GameObject:
   m_ObjectHideFlags: 0
@@ -568,7 +575,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8909883473942522786}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1cb1cf2193571cf41b51b8f61d4c9c14, type: 3}
   m_Name: 
@@ -607,7 +614,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8909883473942522786}
-  m_Enabled: 0
+  m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1

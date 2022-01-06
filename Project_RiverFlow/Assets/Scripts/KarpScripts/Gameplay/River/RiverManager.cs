@@ -52,20 +52,13 @@ public class RiverManager : Singleton<RiverManager>
             //MountainEdge
             else
             {
-                if (inventory.tunnelsAmmount > 0)
+                if (startTile.type == TileType.mountain)
                 {
-                    if(startTile.type == TileType.mountain)
-                    {
-                        LinkEdgeMoutainConfirmed(startTile, endTile);
-                    }
-                    else
-                    {
-                        LinkEdgeMoutainConfirmed(endTile, startTile);
-                    }
+                    LinkEdgeMoutainConfirmed(startTile, endTile);
                 }
                 else
                 {
-                    CannotLink(MessageCase.CannotInMountain);
+                    LinkEdgeMoutainConfirmed(endTile, startTile);
                 }
             }
         }
@@ -136,12 +129,26 @@ public class RiverManager : Singleton<RiverManager>
                         CannotLink(MessageCase.CannotInMountain);
                         break;
                     case 1: //extending the end canal
-                        Link1To0(outMountain, inMountain);
-                        inventory.tunnelsAmmount--;
+                        if(inventory.tunnelsAmmount > 0)
+                        {
+                            Link1To0(outMountain, inMountain);
+                            inventory.tunnelsAmmount--;
+                        }
+                        else
+                        {
+                            CannotLink(MessageCase.CannotInMountain);
+                        }
                         break;
                     default: //x >= 2
-                        Link2To0(outMountain, inMountain);
-                        inventory.tunnelsAmmount--;
+                        if (inventory.tunnelsAmmount > 0)
+                        {
+                            Link2To0(outMountain, inMountain);
+                            inventory.tunnelsAmmount--;
+                        }
+                        else
+                        {
+                            CannotLink(MessageCase.CannotInMountain);
+                        }
                         break;
                 }
                 break;
