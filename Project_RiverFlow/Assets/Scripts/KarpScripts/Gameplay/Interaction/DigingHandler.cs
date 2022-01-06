@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -10,15 +11,15 @@ public class DigingHandler : MonoBehaviour
 {
     [Header("Reférence")]
     public InputHandler input;
+    public ElementHandler element;
     public GameGrid grid;
-    public GameTime timer;
+    public InventoryManager inventory;
 
     [Header("Event")]
     public LinkEvent onLink;
     public TileEvent onBreak;
     
     [Header("Digging")]
-    [SerializeField] public bool canDig = true;
     [SerializeField] public GameTile startSelectTile;
     [SerializeField] public Vector3 startSelectTilePos;
     [Space(10)]
@@ -27,44 +28,98 @@ public class DigingHandler : MonoBehaviour
     [Space(10)]
     [SerializeField] public Vector3 dragPos;
     [SerializeField] public Vector3 dragVect;
+    [Space(10)]
+    private GameTile lastSelectedTile;
 
-    [Header("Eraser")]
-    [SerializeField] public GameTile eraserSelectTile;
-    private GameTile lastEraserSelectTile;
-
-    [Header("Digging")]
-    public InventoryManager inventory;
-
-    void Start()
+    void OnEnable()
     {
-        input.onLeftClickDown.AddListener(OnLeftClick);
-        input.onLeftClicking.AddListener(OnLeftClicking);
-        input.onLeftClickUp.AddListener(OnLeftClickRelease);
-
-        input.onRightClicking.AddListener(OnRighClicking);
-        input.onRightClickUp.AddListener(OnRightClickRelease);
-
+        input.onInputPress.AddListener(InputPress);
+        input.onInputMaintain.AddListener(InputMaintain);
+        input.onInputRelease.AddListener(InputRelease);
     }
 
     private void OnDestroy()
     {
-        input.onLeftClickDown.RemoveListener(OnLeftClick);
-        input.onLeftClicking.RemoveListener(OnLeftClicking);
-        input.onLeftClickUp.RemoveListener(OnLeftClickRelease);
-
-        input.onRightClicking.RemoveListener(OnRighClicking);
-        input.onRightClickUp.RemoveListener(OnRightClickRelease);
-
+        input.onInputPress.RemoveListener(InputPress);
+        input.onInputMaintain.RemoveListener(InputMaintain);
+        input.onInputRelease.RemoveListener(InputRelease);
     }
 
-    //Digging
-    private void OnLeftClick()
+    //InputMode
+    private void InputPress(InputMode mode)
     {
         //Initialise start select
         startSelectTile = grid.GetTile(grid.PosToTile(input.GetHitPos()));
         startSelectTilePos = grid.TileToPos(startSelectTile.gridPos);
+
+        switch (mode)
+        {
+            case InputMode.diging:
+                //Nothing
+                break;
+            case InputMode.eraser:
+                if (startSelectTile.linkAmount > 0 || startSelectTile.haveElement)
+                {
+                    if (lastSelectedTile != startSelectTile)
+                    {
+                        lastSelectedTile = startSelectTile;
+                        onBreak?.Invoke(startSelectTile);
+                    }
+                }
+                break;
+                ///////
+            case InputMode.source:
+                if (inventory.sourcesAmmount > 0 && !startSelectTile.haveElement && startSelectTile.type != TileType.mountain)// 
+                {
+                    element.SpawnWaterSourceAt(grid.PosToTile(input.GetHitPos()));
+                    inventory.sourcesAmmount--;
+                }
+                break;
+            case InputMode.cloud:
+                if (inventory.cloudsAmmount > 0 && !startSelectTile.haveElement && startSelectTile.type != TileType.mountain)// 
+                {
+                    if (startSelectTile.flowOut.Count < 2 && startSelectTile.flowIn.Count < 2)
+                    {
+                        if (startSelectTile.ReceivedFlow() > FlowStrenght._00_) //
+                        {
+                            element.SpawnCloudAt(grid.PosToTile(input.GetHitPos()));
+                            inventory.cloudsAmmount--;
+                        }
+                    }
+                }
+                break;
+            case InputMode.lake:
+                if (inventory.lakesAmmount > 0 && !startSelectTile.haveElement && startSelectTile.type != TileType.mountain)// 
+                {
+                    if (startSelectTile.linkAmount == 2)
+                    {
+                        if (startSelectTile.ReceivedFlow() > FlowStrenght._00_) //
+                        {
+                            List<GameTile> testedTileLinks = startSelectTile.GetLinkedTile();
+                            //check if vertical
+                            if ((testedTileLinks[0] == startSelectTile.neighbors[1] && testedTileLinks[1] == startSelectTile.neighbors[5])
+                             || (testedTileLinks[0] == startSelectTile.neighbors[5] && testedTileLinks[1] == startSelectTile.neighbors[1]))
+                            {
+                                element.SpawnLakeAt(startSelectTile.gridPos, vertical: true);
+                                inventory.lakesAmmount--;
+                            }
+                            //check if horizontal
+                            else
+                            if ((testedTileLinks[0] == startSelectTile.neighbors[3] && testedTileLinks[1] == startSelectTile.neighbors[7])
+                             || (testedTileLinks[0] == startSelectTile.neighbors[7] && testedTileLinks[1] == startSelectTile.neighbors[3]))
+                            {
+                                element.SpawnLakeAt(startSelectTile.gridPos, vertical: false);
+                                inventory.lakesAmmount--;
+                            }
+                        }
+                    }
+                }
+                break;
+            default:
+                break;
+        }
     }
-    private void OnLeftClicking()
+    private void InputMaintain(InputMode mode)
     {
         dragPos = input.GetHitPos();
         dragVect = (dragPos - startSelectTilePos);
@@ -82,45 +137,70 @@ public class DigingHandler : MonoBehaviour
             endSelectTile = grid.GetTile(grid.PosToTile(startSelectTilePos + drag));
             endSelectPos = dragPos;
 
-            if (canDig)
+            switch (mode)
             {
-                if (startSelectTile.isLinkable && endSelectTile.isLinkable)
-                {
-                    if (!CheckCrossADiagonal(startSelectTile, endSelectTile))
+                case InputMode.diging:
+                    if (inventory.digAmmount > 0)
                     {
-                        if (inventory.digAmmount > 0)
+                        if (startSelectTile.isLinkable && endSelectTile.isLinkable)
                         {
-                            Vector2Int tileToMe = endSelectTile.gridPos - startSelectTile.gridPos;
-                            Direction linkDir = new Direction(tileToMe);
+                            if (!CheckCrossADiagonal(startSelectTile, endSelectTile))
+                            {
+                                Vector2Int tileToMe = endSelectTile.gridPos - startSelectTile.gridPos;
+                                Direction linkDir = new Direction(tileToMe);
 
-                            if (startSelectTile.IsLinkInDir(linkDir, FlowType.flowOut))
-                            {
-                                ///link in the same sens
-                                //Do nothing
-                            }
-                            else
-                            if (startSelectTile.IsLinkInDir(linkDir, FlowType.flowIn))
-                            {
-                                ///TODO : link in the opposite sens
-                                //Do nothing
-                            }
-                            else
-                            {
-                                //Event
-                                onLink?.Invoke(startSelectTile, endSelectTile);
+                                if (startSelectTile.IsLinkInDir(linkDir, FlowType.flowOut))
+                                {
+                                    ///link in the same sens
+                                    //Do nothing
+                                }
+                                else
+                                if (startSelectTile.IsLinkInDir(linkDir, FlowType.flowIn))
+                                {
+                                    ///TODO : link in the opposite sens
+                                    //Do nothing
+                                }
+                                else
+                                {
+                                    //Event
+                                    onLink?.Invoke(startSelectTile, endSelectTile);
+                                }
                             }
                         }
                     }
-                }
-
+                    break;
+                case InputMode.eraser:
+                    if (endSelectTile.linkAmount > 0 || endSelectTile.haveElement)
+                    {
+                        if (lastSelectedTile != endSelectTile)
+                        {
+                            lastSelectedTile = endSelectTile;
+                            onBreak?.Invoke(endSelectTile);
+                        }
+                    }
+                    break;
+                ///////
+                case InputMode.source:
+                    //Nothing
+                    break;
+                case InputMode.cloud:
+                    //Nothing
+                    break;
+                case InputMode.lake:
+                    //Nothing
+                    break;
+                default:
+                    break;
             }
+
             //End became the new start
             startSelectTile = endSelectTile;
             startSelectTilePos = grid.TileToPos(startSelectTile.gridPos);
         }
     }
-    private void OnLeftClickRelease()
+    private void InputRelease(InputMode mode)
     {
+        //Moutain end
         if (endSelectTile != null)
         {
             if (endSelectTile.type == TileType.mountain && endSelectTile.linkAmount < 2)
@@ -138,7 +218,11 @@ public class DigingHandler : MonoBehaviour
         //
         dragPos = Vector3.zero;
         dragVect = Vector3.zero;
+        //
+        lastSelectedTile = null;
     }
+    
+    //
     private bool CheckCrossADiagonal(GameTile tileA, GameTile tileB)
     {
         Vector2Int A2B = tileB.gridPos - tileA.gridPos;
@@ -187,31 +271,6 @@ public class DigingHandler : MonoBehaviour
             return cross;
         }
     }
-
-    //Undigging
-    private void OnRighClicking()
-    {
-        if (canDig)
-        {
-            eraserSelectTile = grid.GetTile(grid.PosToTile(input.GetHitPos()));
-
-            if (eraserSelectTile.linkAmount > 0 || eraserSelectTile.haveElement)
-            {
-                if (lastEraserSelectTile != eraserSelectTile)
-                {
-                    lastEraserSelectTile = eraserSelectTile;
-                    onBreak?.Invoke(eraserSelectTile);
-                }
-            }
-        }
-    }
-    private void OnRightClickRelease()
-    {
-        eraserSelectTile = null;
-        lastEraserSelectTile = null;
-
-    }
-
     public void RemoveElement(Element element)
     {
         if (element is WaterSource || element is Plant)

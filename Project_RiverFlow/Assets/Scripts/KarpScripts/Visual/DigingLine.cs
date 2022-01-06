@@ -13,7 +13,7 @@ public class DigingLine : MonoBehaviour
 
     void Update()
     {
-        if (dig.canDig)
+        if (input.mode == InputMode.diging)
         {
             if (dig.startSelectTilePos != null)
             {

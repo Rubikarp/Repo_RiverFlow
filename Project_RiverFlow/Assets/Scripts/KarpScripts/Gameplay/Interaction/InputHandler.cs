@@ -1,6 +1,17 @@
+using System;
 using UnityEngine;
 using UnityEngine.Events;
 
+[Serializable] public class InputEvent : UnityEvent<InputMode> { }
+public enum InputMode
+{
+    nothing = 0,
+    diging = 1,
+    eraser = 2,
+    cloud = 3,
+    lake = 4,
+    source = 5,
+}
 public class InputHandler : MonoBehaviour
 {
     [Header("reférence")]
@@ -11,14 +22,9 @@ public class InputHandler : MonoBehaviour
 
     #region Event
     [Header("Event")]
-    public UnityEvent onLeftClickDown;
-    public UnityEvent onRightClickDown;
-    [Space(5)]
-    public UnityEvent onLeftClicking;
-    public UnityEvent onRightClicking;
-    [Space(5)]
-    public UnityEvent onLeftClickUp;
-    public UnityEvent onRightClickUp;
+    public InputEvent onInputPress;
+    public InputEvent onInputMaintain;
+    public InputEvent onInputRelease;
     #endregion
 
     [Header("Internal Value")]
@@ -28,8 +34,22 @@ public class InputHandler : MonoBehaviour
     [SerializeField] public float hitDist = 0f;
     [SerializeField] public Vector3 hitPoint = Vector3.zero;
 
+    [Header("Mode")]
+    public KeyCode digMode = KeyCode.Alpha1;
+    public KeyCode eraserMode = KeyCode.Alpha2;
+    public KeyCode cloudMode = KeyCode.Alpha3;
+    public KeyCode lakeMode = KeyCode.Alpha4;
+    public KeyCode sourceMode = KeyCode.Alpha5;
+    [Space(10)]
+    public InputMode mode = InputMode.diging;
+    //public InputMode secondaryMode = InputMode.eraser;
+
+    private bool isMaintaining = false;
+    private InputMode lastMode = InputMode.diging;
+
     void Update()
     {
+        CheckMode();
         CheckInput();
     }
 
@@ -51,42 +71,71 @@ public class InputHandler : MonoBehaviour
         }
         return hitPoint;
     }
+    //
+    public void CheckMode()
+    {
+        lastMode = mode;
+        if (Input.GetKeyDown(digMode))
+        {
+            mode = InputMode.diging;
+        }
+        else 
+        if (Input.GetKeyDown(eraserMode))
+        {
+            mode = InputMode.eraser;
+        }
+        else
+        if (Input.GetKeyDown(cloudMode))
+        {
+            mode = InputMode.cloud;
+        }
+        else
+        if (Input.GetKeyDown(lakeMode))
+        {
+            mode = InputMode.lake;
+        }
+        else
+        if (Input.GetKeyDown(sourceMode))
+        {
+            mode = InputMode.source;
+        }
+
+        if(isMaintaining && lastMode != mode )
+        {
+            onInputRelease?.Invoke(lastMode);
+            onInputPress?.Invoke(mode);
+        }
+    }
     public void CheckInput()
     {
-        #region leftClick
         //OnPress
         if (Input.GetMouseButtonDown(0))
         {
-            onLeftClickDown?.Invoke();
+            if (!KarpHelper.IsOverUI())
+            {
+                isMaintaining = true;
+                onInputPress?.Invoke(mode);
+            }
         }
         //OnDrag
         if (Input.GetMouseButton(0))
         {
-            onLeftClicking?.Invoke();
+            if (KarpHelper.IsOverUI())
+            {
+                isMaintaining = true;
+                onInputRelease?.Invoke(mode);
+            }
+            else
+            {
+                isMaintaining = true;
+                onInputMaintain?.Invoke(mode);
+            }
         }
         //OnRelease
         if (Input.GetMouseButtonUp(0))
         {
-            onLeftClickUp?.Invoke();
+            isMaintaining = false;
+            onInputRelease?.Invoke(mode);
         }
-        #endregion
-        #region rightClick
-        //OnPress
-        if (Input.GetMouseButtonDown(1))
-        {
-            onRightClickDown?.Invoke();
-        }
-        //OnDrag
-        if (Input.GetMouseButton(1))
-        {
-            onRightClicking?.Invoke();
-        }
-        //OnRelease
-        if (Input.GetMouseButtonUp(1))
-        {
-            onRightClickUp?.Invoke();
-        }
-        #endregion
     }
-    
 }

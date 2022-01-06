@@ -44,7 +44,6 @@ public class DragElement : MonoBehaviour,
     {
         //initialize pointer visual
         preview.gameObject.SetActive(true);
-        dig.canDig = false;
     }
 
     //Call on Event update
@@ -123,7 +122,6 @@ public class DragElement : MonoBehaviour,
         }
         preview.position = Vector3.zero;
         preview.gameObject.SetActive(false);
-        dig.canDig = true;
     }
 
     private void Start()

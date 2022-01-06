@@ -137,56 +137,47 @@ public class ElementHandler : MonoBehaviour
     }
     public void SpawnLakeAt(Vector2Int grisPos, bool vertical)
     {
-        GameTile CurrentTile = grid.GetTile(grisPos);
-        Debug.Log(grid.GetTile(grisPos));
 
-        if (CurrentTile.ReceivedFlow() > FlowStrenght._00_)
+        GameObject go = InstanciateElement(lake_Template);
+        go.transform.position = grid.TileToPos(new Vector2Int(grisPos.x, grisPos.y));
+        go.name = "Lake_" + grisPos;
+
+        //Check if Lake
+        Lake lake = go.GetComponent<Lake>();
+        if (lake == null)
         {
-            if (CurrentTile.linkAmount == 2)
-            {
-                GameObject go = InstanciateElement(lake_Template);
-                go.transform.position = grid.TileToPos(new Vector2Int(grisPos.x, grisPos.y));
-                go.name = "Lake_" + grisPos;
-
-                //Check if Plant
-                Lake lake = go.GetComponent<Lake>();
-                if (lake == null)
-                {
-                    Debug.LogError("can't Find WaterSource on the object", go);
-                }
-
-                allLakes.Add(lake);
-                //Link Element and Tile
-                lake.gridPos = grisPos;
-                lake.tileOn = grid.GetTile(grisPos);
-                //lake get les tiles
-                grid.GetTile(grisPos).element = lake;
-                if (vertical == true)
-                {
-                    lake.isVertical = true;
-                    lake.allTilesOn = new GameTile[3];
-                    lake.allTilesOn[0] = CurrentTile.neighbors[1];
-                    lake.allTilesOn[1] = CurrentTile;
-                    lake.allTilesOn[2] = CurrentTile.neighbors[5];
-                }
-                else
-                {
-                    lake.isVertical = false;
-                    lake.allTilesOn = new GameTile[3];
-                    lake.allTilesOn[0] = CurrentTile.neighbors[3];
-                    lake.allTilesOn[1] = CurrentTile;
-                    lake.allTilesOn[2] = CurrentTile.neighbors[7];
-                }
-                //assigner le lac au tiles
-                for (int i = 0; i < lake.allTilesOn.Length; i++)
-                {
-                    lake.allTilesOn[i].element = lake;
-                }
-            }
-
+            Debug.LogError("can't Find WaterSource on the object", go);
         }
+        allLakes.Add(lake);
 
+        //Link Element and Tile
+        lake.gridPos = grisPos;
+        lake.tileOn = grid.GetTile(grisPos);
 
+        //lake get les tiles
+        GameTile CurrentTile = grid.GetTile(grisPos);
+        grid.GetTile(grisPos).element = lake;
+        if (vertical == true)
+        {
+            lake.isVertical = true;
+            lake.allTilesOn = new GameTile[3];
+            lake.allTilesOn[0] = CurrentTile.neighbors[1];
+            lake.allTilesOn[1] = CurrentTile;
+            lake.allTilesOn[2] = CurrentTile.neighbors[5];
+        }
+        else
+        {
+            lake.isVertical = false;
+            lake.allTilesOn = new GameTile[3];
+            lake.allTilesOn[0] = CurrentTile.neighbors[3];
+            lake.allTilesOn[1] = CurrentTile;
+            lake.allTilesOn[2] = CurrentTile.neighbors[7];
+        }
+        //assigner le lac au tiles
+        for (int i = 0; i < lake.allTilesOn.Length; i++)
+        {
+            lake.allTilesOn[i].element = lake;
+        }
     }
     /// 
     public GameObject InstanciateElement(GameObject template)
