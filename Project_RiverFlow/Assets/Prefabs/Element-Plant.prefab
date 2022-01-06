@@ -291,7 +291,7 @@ MonoBehaviour:
   timer: 0.5
   stateUpgradeTime: 20
   stateDowngradeTime: 20
-  fruitSpawnTime: 1
+  fruitSpawnTime: 40
   elementHandler: {fileID: 0}
   closeRiverTilesNeeded: 3
   magicTree: {fileID: 9077409752301440309, guid: b9b7ff63b0430e7478b2cfd76f01484d, type: 3}
