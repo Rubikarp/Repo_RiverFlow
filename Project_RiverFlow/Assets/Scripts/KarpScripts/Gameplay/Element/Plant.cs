@@ -85,6 +85,9 @@ public class Plant : Element
     public float scoringTick;
     private float scoringTimer = 0.0f;
 
+    [Header("Flower")]
+    public GameObject flowerTemplate;
+    public List<GameObject> myFlower = new List<GameObject>();
 
     private void Start()
     {
@@ -214,6 +217,7 @@ public class Plant : Element
         //Lvl Up
         if (timer > 1)
         {
+            
             //Si pas au niveau max
             if (currentState < PlantState.Senior)
             {
@@ -246,6 +250,7 @@ public class Plant : Element
                         //Debug.Log("Evolution !");
                     }
                 }
+               
             }
             else
             {
@@ -284,6 +289,7 @@ public class Plant : Element
                     onStateChange?.Invoke(true);
                 }
             }
+            SpawnFlowers();
         }
     }
 
@@ -442,5 +448,50 @@ public class Plant : Element
                 break;
 
         }
+    }
+
+    public void SpawnFlowers()
+    {
+        
+        int numberOfFlowers = 0;
+        float flowerXCoordinate;
+        float flowerYCoordinate;
+        if (currentState == PlantState.Adult)
+        {
+            numberOfFlowers = 3;
+        }
+        if(currentState == PlantState.Senior)
+        {
+            numberOfFlowers = 6;
+        }
+        for(int i = myFlower.Count; i < numberOfFlowers; i++)
+        {
+            flowerXCoordinate = Random.Range(-0.5f, 0.5f);
+            flowerYCoordinate = Random.Range(-0.5f, 0.5f);
+
+            Vector3 flowerCoordinate = new Vector3(flowerXCoordinate, flowerYCoordinate, 0);
+            Sprite[] flowers = plantDrawer.visual.grass_plantGrowth.flowers;
+
+            GameObject go = Instantiate(flowerTemplate, transform);
+            go.transform.position = tileOn.worldPos + flowerCoordinate;
+            go.name = "Flower_" + myFlower.Count;
+            myFlower.Add(go);
+
+            //Check if Plant
+            FlowerVisual flower = go.GetComponent<FlowerVisual>();
+            if (flower == null)
+            {
+                Debug.LogError("can't Find flower on the object", go);
+                return;
+            }
+            else
+            {
+                flower.type = tileOn.type;
+                flower.GenerateVisual();
+            }
+
+            Debug.Log("pweaseflowerz");
+        }
+
     }
 }

@@ -11,7 +11,8 @@ public struct PlantGrowth
     public Sprite adultSprite;
     public Sprite seniorSprite;
     public Sprite fruitSprite;
-
+    [Space(10)]
+    public Sprite[] flowers;
     public Sprite StateSprite(PlantState state)
     {
         switch (state)

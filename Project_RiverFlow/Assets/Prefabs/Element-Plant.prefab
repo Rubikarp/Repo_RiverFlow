@@ -310,6 +310,7 @@ MonoBehaviour:
   adultTreeScoring: 2
   seniorTreeScoring: 4
   scoringTick: 10
+  flowerTemplate: {fileID: 5034603643439891213, guid: cd767a0e4cea6e14488837dba6560876, type: 3}
 --- !u!114 &6917927953608742452
 MonoBehaviour:
   m_ObjectHideFlags: 0

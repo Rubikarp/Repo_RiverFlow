@@ -127,7 +127,7 @@ public class GameTile : MonoBehaviour
                     }
 
                 }
-                foreach (GameTile neighborOfNeighbor in neighbor.neighbors)
+                foreach (GameTile neighborOfNeighbor in neighborsDist2)
                 {
                     if (neighborOfNeighbor.haveElement)
                     {

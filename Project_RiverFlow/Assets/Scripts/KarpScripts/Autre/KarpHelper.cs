@@ -50,6 +50,10 @@ public static class KarpHelper
     {
         return array[array.Length-1];
     }
+    public static T Random<T>(this T[] array)
+    {
+        return array[UnityEngine.Random.Range(0,array.Length-1)];
+    }
     public static T Last<T>(this List<T> array)
     {
         return array[array.Count - 1];

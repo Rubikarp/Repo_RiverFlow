@@ -15,6 +15,7 @@ public class ElementHandler : MonoBehaviour
     public GameObject magicTree_Template;
     [Space(10)]
     public Transform elementContainer;
+    public PositionRendererSorter positionRendererSorter;
 
     [Header("Tool"), HorizontalLine]
     public List<Plant> allPlants = new List<Plant>();
@@ -30,6 +31,8 @@ public class ElementHandler : MonoBehaviour
     [Header("Tool"), HorizontalLine]
     [SerializeField] int posX;
     [SerializeField] int posY;
+
+   
 
     private void Awake()
     {
@@ -64,6 +67,8 @@ public class ElementHandler : MonoBehaviour
             //Link Element and Tile
             plant.gridPos = gridPos;
             LinkElementToGrid(plant);
+
+            positionRendererSorter.SortTreePositionOderInLayer(plant.GetComponent<SpriteRenderer>(), plant.GetComponent<Transform>());
         }
     }
     public void SpawnWaterSourceAt(Vector2Int grisPos)
