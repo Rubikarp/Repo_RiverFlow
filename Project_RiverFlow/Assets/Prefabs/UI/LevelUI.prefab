@@ -555,7 +555,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dig: {fileID: 7564991290427099071}
-  eraser: {fileID: 1700899797014623343}
+  eraser: {fileID: 7161581256186202061}
   cloud: {fileID: 7564991290855244984}
   lake: {fileID: 7564991288911682894}
   source: {fileID: 7564991288843447504}
