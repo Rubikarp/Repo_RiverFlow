@@ -22,7 +22,6 @@ public class RiverMesh : MonoBehaviour
     public RiverPalette_SCO riverData;
     public List<PolylinePoint> linePoints = new List<PolylinePoint>() { new PolylinePoint(Vector3.zero, Color.red, 1), new PolylinePoint(Vector3.zero, Color.red, 1) };
     [Range(0.01f, 4)] public float scale = 1;
-    [Range(0.01f, 4)] public float uvScale = 1;
 
     [Header("other")]
     private GameGrid grid;
@@ -59,7 +58,7 @@ public class RiverMesh : MonoBehaviour
         uvs = new Vector3[pointCount * 3];
         //
         int segmentCount = linePoints.Count - 1;
-        triangles = new int[segmentCount * 12];
+        triangles = new int[segmentCount * 3 * 4];
         #endregion
 
         #region Vertices
@@ -67,7 +66,7 @@ public class RiverMesh : MonoBehaviour
         Vector3 nextDir = (linePoints[1].point - linePoints[0].point).normalized;
         Vector3 dir = (previousDir + nextDir) * 0.5f;
         Vector3 right = Vector3.Cross(Vector3.back, dir).normalized;
-        float thickness = linePoints[0].thickness * scale;
+        float thickness = 0.5f * scale;
         //
         vertices[0] = linePoints[0].point;
         vertices[1] = linePoints[0].point - (right * thickness);
@@ -79,7 +78,7 @@ public class RiverMesh : MonoBehaviour
             nextDir = (linePoints[i + 1].point - linePoints[i].point).normalized;
             dir = (previousDir + nextDir) * 0.5f;
             right = Vector3.Cross(Vector3.back, dir).normalized;
-            thickness = linePoints[i].thickness * scale;
+            thickness = 0.5f * scale;
             //
             vertices[(i * 3) + 0] = linePoints[i].point;
             vertices[(i * 3) + 1] = linePoints[i].point - (right * thickness);
@@ -90,7 +89,7 @@ public class RiverMesh : MonoBehaviour
         nextDir = (linePoints[(pointCount - 1)].point - linePoints[(pointCount - 2)].point).normalized;
         dir = (previousDir + nextDir) * 0.5f;
         right = Vector3.Cross(Vector3.back, dir).normalized;
-        thickness = linePoints[pointCount - 1].thickness * scale;
+        thickness = 0.5f * scale;
         //
         vertices[((pointCount - 1) * 3) + 0] = linePoints[pointCount - 1].point;
         vertices[((pointCount - 1) * 3) + 1] = linePoints[pointCount - 1].point - (right * thickness);
@@ -116,17 +115,17 @@ public class RiverMesh : MonoBehaviour
         #endregion
         #region UV
         float distTravell = 0;
-        uvs[0] = new Vector3(distTravell, 0.5f, linePoints[0].color.b);
-        uvs[1] = new Vector3(distTravell, 1, linePoints[0].color.b);
-        uvs[2] = new Vector3(distTravell, 0, linePoints[0].color.b);
+        uvs[0] = new Vector3(distTravell, 0.5f, linePoints[0].thickness);
+        uvs[1] = new Vector3(distTravell, 1.0f, linePoints[0].thickness);
+        uvs[2] = new Vector3(distTravell, 0.0f, linePoints[0].thickness);
 
         for (int i = 1; i < pointCount; i++)
         {
             distTravell += (linePoints[i].point - linePoints[i-1].point).magnitude;
 
-            uvs[(i * 3) + 0] = new Vector3(distTravell, 0.5f, linePoints[i].color.b);
-            uvs[(i * 3) + 1] = new Vector3(distTravell, 1, linePoints[i].color.b);
-            uvs[(i * 3) + 2] = new Vector3(distTravell, 0, linePoints[i].color.b);
+            uvs[(i * 3) + 0] = new Vector3(distTravell, 0.5f, linePoints[i].thickness);
+            uvs[(i * 3) + 1] = new Vector3(distTravell, 1.0f, linePoints[i].thickness);
+            uvs[(i * 3) + 2] = new Vector3(distTravell, 0.0f, linePoints[i].thickness);
         }
         #endregion
         #region Triangle
