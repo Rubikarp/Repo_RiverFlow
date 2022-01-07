@@ -12,11 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 703320c6bb07f284292278a729f4e631, type: 3}
   m_Name: RiverPalette_new
   m_EditorClassIdentifier: 
-  debit_00: 0.5
-  debit_25: 0.6
-  debit_50: 0.75
-  debit_75: 0.9
-  debit_100: 1
+  debit_00: 0
+  debit_25: 0.35
+  debit_50: 0.6
+  debit_75: 0.75
+  debit_100: 0.92
   color_00: {r: 0.6745098, g: 0.91764706, b: 0.6156863, a: 1}
   color_25: {r: 0.6745098, g: 0.8980393, b: 0.9490197, a: 1}
   color_50: {r: 0.54509807, g: 0.9098039, b: 0.8980392, a: 1}
