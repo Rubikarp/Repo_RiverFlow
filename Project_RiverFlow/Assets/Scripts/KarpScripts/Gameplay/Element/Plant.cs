@@ -88,6 +88,7 @@ public class Plant : Element
     [Header("Flower")]
     public GameObject flowerTemplate;
     public List<GameObject> myFlower = new List<GameObject>();
+    bool flowerSpawnLeft;
 
     private void Start()
     {
@@ -456,6 +457,7 @@ public class Plant : Element
         int numberOfFlowers = 0;
         float flowerXCoordinate;
         float flowerYCoordinate;
+
         if (currentState == PlantState.Adult)
         {
             numberOfFlowers = 3;
@@ -466,8 +468,18 @@ public class Plant : Element
         }
         for(int i = myFlower.Count; i < numberOfFlowers; i++)
         {
-            flowerXCoordinate = Random.Range(-0.5f, 0.5f);
             flowerYCoordinate = Random.Range(-0.5f, 0.5f);
+            if(flowerSpawnLeft == false)
+            {
+                flowerXCoordinate = Random.Range(0.2f, 0.5f);
+                flowerSpawnLeft = true;
+            }
+            else 
+            {
+                flowerXCoordinate = Random.Range(-0.5f, -0.2f);
+                flowerSpawnLeft = false;
+            }
+
 
             Vector3 flowerCoordinate = new Vector3(flowerXCoordinate, flowerYCoordinate, 0);
             Sprite[] flowers = plantDrawer.visual.grass_plantGrowth.flowers;
@@ -489,7 +501,14 @@ public class Plant : Element
                 flower.type = tileOn.type;
                 flower.GenerateVisual();
             }
-
+            if(flowerYCoordinate <= 0.17)
+            {
+                flower.renderer.sortingOrder = transform.GetComponent<SpriteRenderer>().sortingOrder + 1;
+            }
+            else
+            {
+                flower.renderer.sortingOrder = transform.GetComponent<SpriteRenderer>().sortingOrder - 1;
+            }
             Debug.Log("pweaseflowerz");
         }
 

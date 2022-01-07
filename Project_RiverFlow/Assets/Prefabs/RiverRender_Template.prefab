@@ -391,7 +391,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &3656627349718562325
 Transform:
   m_ObjectHideFlags: 0
@@ -401,7 +401,7 @@ Transform:
   m_GameObject: {fileID: 7971005421300836365}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1, y: 1.3213, z: 1}
   m_Children: []
   m_Father: {fileID: 2181973212053450265}
   m_RootOrder: 3
@@ -470,43 +470,43 @@ MonoBehaviour:
   mf: {fileID: 1038589728351790013}
   mesh: {fileID: 0}
   verticesColors:
-  - {r: 0, g: 0, b: 0, a: 0}
-  - {r: 0, g: 0, b: 0, a: 0}
-  - {r: 0, g: 0, b: 0, a: 0}
-  - {r: 0, g: 0, b: 0, a: 0}
-  - {r: 0, g: 0, b: 0, a: 0}
-  - {r: 0, g: 0, b: 0, a: 0}
+  - {r: 1, g: 0, b: 0, a: 1}
+  - {r: 1, g: 0, b: 0, a: 1}
+  - {r: 1, g: 0, b: 0, a: 1}
+  - {r: 1, g: 0, b: 0, a: 1}
+  - {r: 1, g: 0, b: 0, a: 1}
+  - {r: 1, g: 0, b: 0, a: 1}
   vertices:
   - {x: 0, y: 0, z: 0}
-  - {x: 0, y: 0, z: 0}
-  - {x: 0, y: 0, z: 0}
-  - {x: 0, y: 0, z: 0}
-  - {x: 0, y: 0, z: 0}
-  - {x: 0, y: 0, z: 0}
+  - {x: -0.15, y: 0, z: 0}
+  - {x: 0.15, y: 0, z: 0}
+  - {x: 0, y: 2, z: 0}
+  - {x: -0.15, y: 2, z: 0}
+  - {x: 0.15, y: 2, z: 0}
   normals:
-  - {x: 0, y: 0, z: 0}
-  - {x: 0, y: 0, z: 0}
-  - {x: 0, y: 0, z: 0}
-  - {x: 0, y: 0, z: 0}
-  - {x: 0, y: 0, z: 0}
-  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: -1}
+  - {x: 0, y: 0, z: -1}
+  - {x: 0, y: 0, z: -1}
+  - {x: 0, y: 0, z: -1}
+  - {x: 0, y: 0, z: -1}
+  - {x: 0, y: 0, z: -1}
   uvs:
-  - {x: 0, y: 0, z: 0}
-  - {x: 0, y: 0, z: 0}
-  - {x: 0, y: 0, z: 0}
-  - {x: 0, y: 0, z: 0}
-  - {x: 0, y: 0, z: 0}
-  - {x: 0, y: 0, z: 0}
-  triangles: 000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+  - {x: 0, y: 0.5, z: 2}
+  - {x: 0, y: 1, z: 2}
+  - {x: 0, y: 0, z: 2}
+  - {x: 2, y: 0.5, z: 2}
+  - {x: 2, y: 1, z: 2}
+  - {x: 2, y: 0, z: 2}
+  triangles: 000000000100000003000000000000000300000002000000030000000100000004000000020000000300000005000000
   subdividePerSegment: 1
   riverData: {fileID: 11400000, guid: 41848361330582a4c99fa9e0185c69e5, type: 2}
   linePoints:
   - point: {x: 0, y: 0, z: 0}
     color: {r: 1, g: 0, b: 0, a: 1}
-    thickness: 1
-  - point: {x: 0, y: 0, z: 0}
+    thickness: 2
+  - point: {x: 0, y: 2, z: 0}
     color: {r: 1, g: 0, b: 0, a: 1}
-    thickness: 1
+    thickness: 2
   scale: 0.3
   uvScale: 1
 --- !u!1 &8909883473942522786
