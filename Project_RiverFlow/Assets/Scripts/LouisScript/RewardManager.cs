@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 [System.Serializable]
@@ -74,11 +75,23 @@ public class RewardManager : MonoBehaviour
         }
         else
         {
-            for (int i = 0; i < 2; i++)
+            if (Temporary.Any())
             {
-                GameObject usedButton = RandomWeightedChoiceWithoutReplacement(Temporary);
-                GameObject newRewardDisplay = Instantiate(usedButton, rewardSelectionPanelTransform);
-                rewardDisplays.Add(newRewardDisplay);
+                //Debug.Log("Temp not empty" + Temporary.Any());
+                for (int i = 0; i < 2; i++)
+                {
+                    //Debug.Log("Search for reward n°" + i);
+                    //foreach (var item in Temporary)
+                    //{
+                    //    Debug.Log(item.UsedButton.name);
+                    //    Debug.Log(item.weight);
+
+                    //}
+                    GameObject usedButton = RandomWeightedChoiceWithoutReplacement(Temporary);
+                    //Debug.Log("Button to Display : " + usedButton.name);
+                    GameObject newRewardDisplay = Instantiate(usedButton, rewardSelectionPanelTransform);
+                    rewardDisplays.Add(newRewardDisplay);
+                }
             }
         }
         rewardSelectionPanelTransform.sizeDelta = new Vector2((rewardDisplays.Count - 1) * (rewardButton.GetComponent<RectTransform>().sizeDelta.x + rewardSelectionPanelTransform.GetComponent<HorizontalLayoutGroup>().spacing), rewardSelectionPanelTransform.sizeDelta.y);
@@ -88,7 +101,13 @@ public class RewardManager : MonoBehaviour
     private GameObject RandomWeightedChoiceWithoutReplacement(List<WeightedButton> weightedButtons)
     {
         List<int> weightIndexes = ComputeWeightIndexes(weightedButtons);
-        int randomNumber = Random.Range(0, weightIndexes[weightIndexes.Count-1]);
+        //foreach (var item in weightIndexes)
+        //{
+        //    Debug.Log("Weight indexes : " + item);
+        //}
+        //Debug.Log("weightIndexes count - 1: " + (weightIndexes.Count - 1));
+        int randomNumber = Random.Range(0, weightIndexes[weightIndexes.Count - 1]);
+        //Debug.Log("randomNumber : " + randomNumber);
         int indexToDrop = ComputeIndexOfButtonToDrop(weightIndexes, randomNumber);
         GameObject selectedButton = weightedButtons[indexToDrop].UsedButton;
         weightedButtons.Remove(weightedButtons[indexToDrop]);
@@ -117,10 +136,9 @@ public class RewardManager : MonoBehaviour
         int i = 0;
         foreach (WeightedButton weithedButton in weithedButtons)
         {
-            weightIndexes.Add(i);
             i += weithedButton.weight;
+            weightIndexes.Add(i);
         }
-        weightIndexes.Add(i);
         return weightIndexes;
     }
 }

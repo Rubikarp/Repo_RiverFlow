@@ -152,4 +152,17 @@ public class InputHandler : Singleton<InputHandler>
         }
     }
 
+    public void ButtonChangeMode(int newMode)
+    {
+        newMode = Mathf.Clamp(newMode,0,InputMode.GetNames(typeof(InputMode)).Length);
+        lastMode = mode;
+        mode = (InputMode)newMode;
+        if (isMaintaining && lastMode != (InputMode)newMode)
+        {
+            onInputRelease?.Invoke(lastMode);
+            onInputPress?.Invoke(mode);
+        }
+    }
+
+
 }
