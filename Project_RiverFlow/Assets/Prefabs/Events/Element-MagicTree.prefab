@@ -292,7 +292,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 54aa9957ad033f0419fdfae4865ae8d2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gridPos: {x: 0, y: 0}
   tileOn: {fileID: 0}
+  gameTime: {fileID: 0}
+  scoreManager: {fileID: 0}
+  magicTreeScoring: 10
+  scoringTick: 10
   forestSprite: {fileID: 7902284155574265534}
   savanaSprite: {fileID: 4933319876423251737}
   desertSprite: {fileID: 7041710654413921008}

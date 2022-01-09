@@ -37,12 +37,24 @@ public class MagicTree : Element
     //Don't overide other methode because is not linkable
     #endregion
 
+    public GameTime gameTime;
+
+    [Header("Scoring")]
+    public ScoreManager scoreManager;
+    public int magicTreeScoring;
+    private float scoringTimer;
+    public int scoringTick;
+
+    [Header("Sprites")]
     public GameObject forestSprite;
     public GameObject savanaSprite;
     public GameObject desertSprite;
 
     private void Start()
     {
+        gameTime = GameTime.Instance;
+        scoreManager = ScoreManager.Instance;
+
         switch (tileOn.type)
         {
             case TileType.grass:
@@ -67,5 +79,23 @@ public class MagicTree : Element
                 break;
 
         }
+    }
+
+    private void Update()
+    {
+        Scoring();
+    }
+
+    private void Scoring()
+    {
+        scoringTimer += Time.deltaTime * gameTime.gameTimeSpeed;
+
+        if (scoringTimer >= scoringTick)
+        {
+            scoreManager.gameScore += magicTreeScoring;
+
+            scoringTimer = 0;
+        }
+
     }
 }
