@@ -643,6 +643,7 @@ public class RiverManager : Singleton<RiverManager>
                         if (tile.canalsIn[j].Contains(tile.GetNeighbor(tile.flowIn[i]).gridPos))
                         {
                             tile.canalsIn[j].Inverse(grid);
+                            j--;
                         }
                     }
                 }

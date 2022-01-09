@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: RiverPalette_new
   m_EditorClassIdentifier: 
   debit_00: 0
-  debit_25: 0.35
-  debit_50: 0.6
+  debit_25: 0.4
+  debit_50: 0.75
   debit_75: 0.75
   debit_100: 0.92
   color_00: {r: 0.6745098, g: 0.91764706, b: 0.6156863, a: 1}
