@@ -36,12 +36,12 @@ MonoBehaviour:
     seniorSprite: {fileID: 21300000, guid: 64b3b261f82c8ff478ad9df56f24e62f, type: 3}
     fruitSprite: {fileID: 21300000, guid: 28d54a21882cc734ba8c4c3eaa0bb576, type: 3}
     flowers:
-    - {fileID: 21300000, guid: e2f81e49b303a3c4682fdc104969a097, type: 3}
-    - {fileID: 21300000, guid: 83645e4d79d147d45977a1d9b766a90b, type: 3}
-    - {fileID: 21300000, guid: 79e2a57b2c9bba844b8ca26766967b96, type: 3}
-    - {fileID: 21300000, guid: ba5472467f2038b46b5b802d989bf0c8, type: 3}
-    - {fileID: 21300000, guid: 56820f661bdb11f4d955ba8a6f106dd0, type: 3}
-    - {fileID: 21300000, guid: 9d62bddfeeef2f64da111e4aa0456777, type: 3}
+    - {fileID: 21300000, guid: c0005bf19aef49e4aac4afd11e9e5738, type: 3}
+    - {fileID: 21300000, guid: 8230bff30e610334784e8b9b3f247dca, type: 3}
+    - {fileID: 21300000, guid: e2c119e9f71e7984788c482c6debe1e1, type: 3}
+    - {fileID: 21300000, guid: 8b2ecab57d3388b4188f44f27f5145a8, type: 3}
+    - {fileID: 21300000, guid: bbe3b6c6dac2d814198d2650849bbba5, type: 3}
+    - {fileID: 21300000, guid: 0a1de038ca027864a9169a552fead208, type: 3}
   sand_plantGrowth:
     deadSprite: {fileID: 21300000, guid: f6a8bcde42d95df40a2284c67e7e58f4, type: 3}
     agonySprite: {fileID: 21300000, guid: 5043aa4992e8c6844addef1ede78dfa4, type: 3}
@@ -51,10 +51,9 @@ MonoBehaviour:
     seniorSprite: {fileID: 21300000, guid: 78ae08fb7b6344c448ac2f30897d7ce2, type: 3}
     fruitSprite: {fileID: 21300000, guid: 114481e9cbbb34a478a739d174593742, type: 3}
     flowers:
-    - {fileID: 21300000, guid: 83645e4d79d147d45977a1d9b766a90b, type: 3}
-    - {fileID: 21300000, guid: e2f81e49b303a3c4682fdc104969a097, type: 3}
-    - {fileID: 21300000, guid: 83645e4d79d147d45977a1d9b766a90b, type: 3}
-    - {fileID: 21300000, guid: 79e2a57b2c9bba844b8ca26766967b96, type: 3}
-    - {fileID: 21300000, guid: ba5472467f2038b46b5b802d989bf0c8, type: 3}
-    - {fileID: 21300000, guid: 56820f661bdb11f4d955ba8a6f106dd0, type: 3}
-    - {fileID: 21300000, guid: 9d62bddfeeef2f64da111e4aa0456777, type: 3}
+    - {fileID: 21300000, guid: 2114542e32457544ab34b22ee4d10a0f, type: 3}
+    - {fileID: 21300000, guid: a52df9ac16aea2849b83eca850adb96b, type: 3}
+    - {fileID: 21300000, guid: cf3e129208dea0549aef337deab736b2, type: 3}
+    - {fileID: 21300000, guid: 7e3b27a056041bc48948c0eb67c7eb22, type: 3}
+    - {fileID: 21300000, guid: 16d6de34228123847bb7560b82d767d8, type: 3}
+    - {fileID: 21300000, guid: 934aa639771370e43a0b5abda20dc78a, type: 3}

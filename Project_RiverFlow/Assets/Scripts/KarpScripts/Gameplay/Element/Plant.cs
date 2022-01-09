@@ -88,13 +88,18 @@ public class Plant : Element
     [Header("Flower")]
     public GameObject flowerTemplate;
     public List<GameObject> myFlower = new List<GameObject>();
-    bool flowerSpawnLeft;
+    List<Collider2D> flowerSpawnAeras = new List<Collider2D>();
+    public List<Collider2D> savanaFlowerSpawnAeras = new List<Collider2D>();
+    public List<Collider2D> forestFlowerSpawnAeras = new List<Collider2D>();
+    public List<Collider2D> desertFlowerSpawnAeras = new List<Collider2D>();
+    int frontAeraLeft = 1;
 
     private void Start()
     {
         previousIrrigation = isIrrigated;
         scoreManager = ScoreManager.Instance;
         gameTime = GameTime.Instance;
+        
 
         if (!TileOn.haveElement)
         {
@@ -103,6 +108,8 @@ public class Plant : Element
 
         irrigatedNeighbors = new bool[TileOn.neighbors.Length];
 
+
+
         for (int x = 0; x < irrigatedNeighbors.Length; x++)
         {
             irrigatedNeighbors[x] = false;
@@ -110,6 +117,18 @@ public class Plant : Element
 
         elementHandler = GetComponentInParent<ElementHandler>();
         plantDrawer = GetComponent<Plant_Drawer>();
+
+        if (TileOn.type == TileType.grass)
+        {
+            flowerSpawnAeras = forestFlowerSpawnAeras;
+        }else if(TileOn.type == TileType.sand)
+        {
+            flowerSpawnAeras = desertFlowerSpawnAeras;
+        }
+        else if(TileOn.type == TileType.clay)
+        {
+            flowerSpawnAeras = savanaFlowerSpawnAeras;
+        }
     }
 
     void Update()
@@ -290,7 +309,7 @@ public class Plant : Element
                     onStateChange?.Invoke(true);
                 }
             }
-            SpawnFlowers();
+            SpawnFlower();
         }
     }
 
@@ -451,7 +470,7 @@ public class Plant : Element
         }
     }
 
-    public void SpawnFlowers()
+    /*public void SpawnFlowers()
     {
         
         int numberOfFlowers = 0;
@@ -512,5 +531,79 @@ public class Plant : Element
             Debug.Log("pweaseflowerz");
         }
 
+    }*/
+
+
+    public void SpawnFlower()
+    {
+        int numberOfFlowers = 0;
+        if (currentState == PlantState.Adult)
+        {
+            numberOfFlowers = 3;
+        }
+        if (currentState == PlantState.Senior)
+        {
+            numberOfFlowers = 6;
+        }
+        for (int i = myFlower.Count; i < numberOfFlowers; i++)
+        {
+            
+            int chooseCollider = (int)Random.Range(0, flowerSpawnAeras.Count);
+            
+
+            float flowerXCoordinate;
+            float flowerYCoordinate;
+
+            flowerXCoordinate = Random.Range(flowerSpawnAeras[chooseCollider].bounds.max.x, flowerSpawnAeras[chooseCollider].bounds.min.x);
+            flowerYCoordinate = Random.Range(flowerSpawnAeras[chooseCollider].bounds.max.y, flowerSpawnAeras[chooseCollider].bounds.min.y);
+            if (Mathf.Sign(flowerXCoordinate) == 1)
+            {
+                flowerXCoordinate = flowerXCoordinate - Mathf.Abs(transform.position.x);
+            }
+            else if (Mathf.Sign(flowerXCoordinate) == -1)
+            {
+                flowerXCoordinate = flowerXCoordinate + Mathf.Abs(transform.position.x);
+            }
+
+            if (Mathf.Sign(flowerYCoordinate) == 1)
+            {
+                flowerYCoordinate = flowerYCoordinate - Mathf.Abs(transform.position.y);
+            }
+            else if (Mathf.Sign(flowerYCoordinate) == -1)
+            {
+                flowerYCoordinate = flowerYCoordinate + Mathf.Abs(transform.position.y);
+            }
+            Vector3 flowerCoordinate = new Vector3(flowerXCoordinate, flowerYCoordinate, 0);
+            Sprite[] flowers = plantDrawer.visual.grass_plantGrowth.flowers;
+
+            GameObject go = Instantiate(flowerTemplate, transform);
+            go.transform.position = tileOn.worldPos + flowerCoordinate;
+            go.name = "Flower_" + myFlower.Count;
+            myFlower.Add(go);
+
+            //Check if Plant
+            FlowerVisual flower = go.GetComponent<FlowerVisual>();
+            if (flower == null)
+            {
+                Debug.LogError("can't Find flower on the object", go);
+                return;
+            }
+            else
+            {
+                flower.type = tileOn.type;
+                flower.GenerateVisual();
+            }
+            if (chooseCollider <= frontAeraLeft )
+            {
+
+                flower.renderer.sortingOrder = transform.GetComponent<SpriteRenderer>().sortingOrder + 1;
+                frontAeraLeft--;
+            }
+            else
+            {
+                flower.renderer.sortingOrder = transform.GetComponent<SpriteRenderer>().sortingOrder - 1;
+            }
+            flowerSpawnAeras.RemoveAt(chooseCollider);
+        }
     }
 }
