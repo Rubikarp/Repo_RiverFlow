@@ -145,7 +145,11 @@ public class Plant : Element
 
             if (currentState >= PlantState.Young && hasMagicTree == false)
             {
-                MagicTreeVerif();
+                MagicTreeSpawnVerif();
+            }
+            else if (hasMagicTree == true)
+            {
+                MagicTreeDestroyVerif();
             }
             if (isIrrigated == false)
             {
@@ -215,6 +219,14 @@ public class Plant : Element
             timer -= Time.deltaTime * (1 / stateDowngradeTime) * gameTime.gameTimeSpeed;
         }
 
+        if (currentState == PlantState.FruitTree && closeRivers.Count < closeRiverTilesNeeded)
+        {
+            isFruitTree = false;
+
+            currentState = (PlantState)Mathf.Clamp((int)(currentState - 1), 0, (int)PlantState.FruitTree);
+            onStateChange?.Invoke(true);
+        }
+
         //Lvl Drop
         if (timer < 0)
         {
@@ -228,10 +240,6 @@ public class Plant : Element
             onStateChange?.Invoke(false);
             //Debug.Log("testcridown");
 
-            if (isFruitTree == true)
-            {
-                isFruitTree = false;
-            }
         }
         else
         //Lvl Up
@@ -385,7 +393,7 @@ public class Plant : Element
         elementHandler.SpawnPlantAt(tileOn.neighbors[chosenTileForFruit].gridPos);
     }
 
-    private void MagicTreeVerif()
+    private void MagicTreeSpawnVerif()
     {
         if (tileOn.neighbors[1].element is null || tileOn.neighbors[1].element is Plant)
         {
@@ -393,7 +401,7 @@ public class Plant : Element
             {
                 if (tileOn.neighbors[1].neighbors[g].element is Plant)
                 {
-                    if(tileOn.neighbors[1].neighbors[g].element.GetComponent<Plant>().currentState >= PlantState.Young)
+                    if (tileOn.neighbors[1].neighbors[g].element.GetComponent<Plant>().currentState >= PlantState.Young)
                     {
                         plantsForMagicTree++;
                     }
@@ -401,21 +409,23 @@ public class Plant : Element
             }
 
 
-            if (plantsForMagicTree == 4)
+            if (plantsForMagicTree == 4 && tileOn.neighbors[1].canalsIn.Count <= 0)
             {
                 if (tileOn.neighbors[1].element is Plant)
                 {
                     Destroy(tileOn.neighbors[1].element.gameObject);
                     tileOn.neighbors[1].element = null;
-                    Debug.Log("MAGIC");
+                    //Debug.Log("MAGIC");
                     elementHandler.SpawnMagicTreeAt(tileOn.neighbors[1].gridPos);
                     hasMagicTree = true;
+                    plantsForMagicTree = 0;
                 }
                 else
                 {
-                    Debug.Log("MAGIC2");
+                    //Debug.Log("MAGIC2");
                     elementHandler.SpawnMagicTreeAt(tileOn.neighbors[1].gridPos);
                     hasMagicTree = true;
+                    plantsForMagicTree = 0;
                 }
             }
             else
@@ -423,7 +433,42 @@ public class Plant : Element
                 plantsForMagicTree = 0;
             }
         }
-            
+
+    }
+
+    private void MagicTreeDestroyVerif()
+    {
+        if (currentState < PlantState.Young)
+        {
+            Destroy(tileOn.neighbors[1].element.gameObject);
+            tileOn.neighbors[1].element = null;
+            hasMagicTree = false;
+            //Debug.Log("NO MAGIC");
+        }
+
+        else
+        {
+            for (int f = 1; f < tileOn.neighbors[1].neighbors.Length; f = f + 2)
+            {
+                if (tileOn.neighbors[1].neighbors[f].element is Plant)
+                {
+                    if (tileOn.neighbors[1].neighbors[f].element.GetComponent<Plant>().currentState >= PlantState.Young)
+                    {
+                        plantsForMagicTree++;
+                    }
+                }
+            }
+
+            if (plantsForMagicTree != 4)
+            {
+                Destroy(tileOn.neighbors[1].element.gameObject);
+                tileOn.neighbors[1].element = null;
+                hasMagicTree = false;
+                Debug.Log(plantsForMagicTree);
+            }
+
+            plantsForMagicTree = 0;
+        }
     }
 
 
