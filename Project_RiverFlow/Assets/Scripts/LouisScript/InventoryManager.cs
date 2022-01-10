@@ -3,7 +3,7 @@ using UnityEngine;
 public class InventoryManager : Singleton<InventoryManager>
 {
     [Header("Pelle")]
-    public int digAmmount;
+    public int digAmmount = 30;
 
     [Header("Item")]
     public int cloudsAmmount;
