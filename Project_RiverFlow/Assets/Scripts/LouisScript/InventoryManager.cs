@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class InventoryManager : MonoBehaviour
+public class InventoryManager : Singleton<InventoryManager>
 {
     [Header("Pelle")]
     public int digAmmount;

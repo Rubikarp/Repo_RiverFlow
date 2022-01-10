@@ -8,12 +8,13 @@ public class GameManager : Singleton<GameManager>
     public List<LevelSO> levelList;
     [HideInInspector]
     public List<LevelSave> levelSaves;
+
     void Start()
     {
         MakeSingleton(true);
         levelSaves = Save.LoadSave();
         //si on a pas de saves
-        if (levelSaves == null)
+        if (levelSaves.Count < levelList.Count)
         {
             //creer des fichiers ou tt les scores max sont à 0
             levelSaves = new List<LevelSave>();
@@ -24,12 +25,6 @@ public class GameManager : Singleton<GameManager>
             //on les save
             Save.SaveLevel(levelSaves);
         }
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 
     public void ChangeScene(string sceneName)

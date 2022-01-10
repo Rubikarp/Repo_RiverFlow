@@ -1009,6 +1009,8 @@ MonoBehaviour:
   levelList:
   - {fileID: 11400000, guid: dfb255225e6354f41a4f27526680a3e0, type: 2}
   - {fileID: 11400000, guid: 7c2049fdedf69144cad32cfa3e02e7ff, type: 2}
+  - {fileID: 11400000, guid: e71192118d8f6e749aa1707cd4955940, type: 2}
+  levelSaves: []
 --- !u!1 &1777580604
 GameObject:
   m_ObjectHideFlags: 0
@@ -1177,6 +1179,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2783b67c35db2c042aff2e2cef5b8977, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currentLevels: []
   levelButton: {fileID: 301909890580975401, guid: a9129c386f1a7b545a117ae246785cbe, type: 3}
   levelSelectionPanelTransform: {fileID: 2046088873}
 --- !u!4 &1876687482
