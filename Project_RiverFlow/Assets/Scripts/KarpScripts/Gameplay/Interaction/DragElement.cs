@@ -5,10 +5,10 @@ using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using TMPro;
 
-public class DragElement : MonoBehaviour,
-    IDragHandler,
-    IBeginDragHandler,
-    IEndDragHandler
+public class DragElement : MonoBehaviour
+    //IDragHandler,
+    //IBeginDragHandler,
+    //IEndDragHandler
 {
     //public ElementHandler elementManage;
     //public InputHandler input;
