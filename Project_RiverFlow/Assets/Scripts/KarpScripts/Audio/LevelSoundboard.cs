@@ -14,9 +14,6 @@ public class LevelSoundboard : MonoBehaviour
     public Slider soundSliderMusic;
     public Slider soundSliderEffect;
 
-    [Header("Effect")]
-    public AudioClip error;
-
     [Header("Music")]
     public AudioMixerGroup musicGroup;
     [Space(5)]
@@ -25,6 +22,9 @@ public class LevelSoundboard : MonoBehaviour
     [Space(15)]
     public AudioClip levelTheme;
     public AudioClip backgroundTheme;
+
+    [Header("Effect")]
+    public AudioClip error;
 
     [Header("UI sound")]
     public AudioMixerGroup uiGroup;
@@ -57,6 +57,7 @@ public class LevelSoundboard : MonoBehaviour
     public void PlayErrorSound(AudioSource audioSource) { soundHandler.PlaySound(error, audioSource, uiGroup); }
     public void PlaySelection(AudioSource audioSource) { soundHandler.PlaySound(selection, audioSource, uiGroup); }
 
+    
     //Music
     public void PlayLevelTheme() { soundHandler.PlaySound(levelTheme, musicPlayer, musicGroup); }
     public void PlayBackground() { soundHandler.PlaySound(backgroundTheme, backgroundPlayer, musicGroup); }
