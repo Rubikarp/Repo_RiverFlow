@@ -27,6 +27,7 @@ public class RewardManager : MonoBehaviour
 
     void Start()
     {
+        Inventory = InventoryManager.Instance;
         rewardDisplays = new List<GameObject>();
     }
 

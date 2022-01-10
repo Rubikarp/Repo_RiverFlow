@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b29908123b7277242a9c96854f780ebc, type: 3}
+  m_Name: LevelTest3
+  m_EditorClassIdentifier: 
+  levelSceneName: Assets/Scenes/Luc/Level_03.unity
+  levelNumber: 3
+  name: Level 3
+  recordScore: 0
+  scoreUnlock: 0
+  LockLvl: {fileID: 11400000, guid: 7c2049fdedf69144cad32cfa3e02e7ff, type: 2}

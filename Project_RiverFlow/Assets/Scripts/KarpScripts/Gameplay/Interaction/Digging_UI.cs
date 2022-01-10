@@ -15,6 +15,10 @@ public class Digging_UI : MonoBehaviour
     private Items Item;
     //public DigingHandler dig;
 
+    private void Awake()
+    {
+        Inventory = InventoryManager.Instance;
+    }
     void Update()
     {
         
