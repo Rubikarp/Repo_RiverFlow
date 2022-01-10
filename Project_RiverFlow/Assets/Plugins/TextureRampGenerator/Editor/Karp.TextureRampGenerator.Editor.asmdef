@@ -1,0 +1,15 @@
+{
+    "name": "Karprod.editor",
+    "references": [
+        "GUID:d887b75700f909449a6f288e35470911"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
