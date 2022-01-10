@@ -3,7 +3,7 @@ using UnityEngine;
 public class InventoryManager : MonoBehaviour
 {
     [Header("Pelle")]
-    public int digAmmount;
+    public int digAmmount = 30;
 
     [Header("Item")]
     public int cloudsAmmount;

@@ -1,11 +1,13 @@
-using System.Collections;
-using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using System.Collections;
+using System.Collections.Generic;
 
 public class ScoreManager : Singleton<ScoreManager>
 {
-    public Text scoreUI;
+    public TextMeshProUGUI scoreUI; 
+
     public GameObject gameOverText;
     private bool gameOn = true;
     private int deadPlants = 0;

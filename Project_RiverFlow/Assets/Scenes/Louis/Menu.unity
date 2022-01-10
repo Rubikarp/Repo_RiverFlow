@@ -837,7 +837,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 104048623523940774, guid: b8ef74dafed9a094c97b782a855fda8c, type: 3}
       propertyPath: buttonClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_StringArgument
-      value: Assets/Scenes/Karp/Test_Karp.unity
+      value: Assets/Scenes/Luc/Level_03.unity
       objectReference: {fileID: 0}
     - target: {fileID: 104048623523940774, guid: b8ef74dafed9a094c97b782a855fda8c, type: 3}
       propertyPath: buttonClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
@@ -1009,6 +1009,7 @@ MonoBehaviour:
   levelList:
   - {fileID: 11400000, guid: dfb255225e6354f41a4f27526680a3e0, type: 2}
   - {fileID: 11400000, guid: 7c2049fdedf69144cad32cfa3e02e7ff, type: 2}
+  levelSaves: []
 --- !u!1 &1777580604
 GameObject:
   m_ObjectHideFlags: 0

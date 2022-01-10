@@ -4,14 +4,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using TMPro;
-public enum Items
-{
-    Dig,
-    Cloud,
-    Source,
-    Lake,
-    Tunnel,
-}
+
 public class DragElement : MonoBehaviour,
     IDragHandler,
     IBeginDragHandler,
