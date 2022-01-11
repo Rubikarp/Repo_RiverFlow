@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
 using NaughtyAttributes;
+using UnityEngine.Events;
 
 public class ElementHandler : MonoBehaviour
 {
@@ -31,7 +32,9 @@ public class ElementHandler : MonoBehaviour
     [SerializeField] int posX;
     [SerializeField] int posY;
 
-   
+    [Header("Event")]
+    public UnityEvent onSproutSpawn;
+
 
     private void Awake()
     {
@@ -68,6 +71,7 @@ public class ElementHandler : MonoBehaviour
             LinkElementToGrid(plant);
 
             PositionRendererSorter.SortTreePositionOderInLayer(plant.GetComponent<SpriteRenderer>(), plant.GetComponent<Transform>());
+            onSproutSpawn?.Invoke();
         }
     }
     public void SpawnWaterSourceAt(Vector2Int grisPos)
@@ -212,6 +216,7 @@ public class ElementHandler : MonoBehaviour
     private void UXspawnPlant()
     {
         SpawnPlantAt(new Vector2Int(posX, posY));
+
     }
     [Button("Spawn WaterSource At")]
     private void UXspawnWaterSource()

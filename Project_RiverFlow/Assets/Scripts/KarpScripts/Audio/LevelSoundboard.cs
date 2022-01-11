@@ -24,7 +24,16 @@ public class LevelSoundboard : MonoBehaviour
     public AudioClip backgroundTheme;
 
     [Header("Effect")]
+    public AudioMixerGroup FXGroup;
+    [Space(5)]
+    public AudioSource spawnSource;
+    public AudioSource errorSource;
+    [Space(15)]
     public AudioClip error;
+    public AudioClip sproutspawn;
+
+
+
 
     [Header("UI sound")]
     public AudioMixerGroup uiGroup;
@@ -40,14 +49,16 @@ public class LevelSoundboard : MonoBehaviour
     {
         soundHandler = SoundHandler.Instance;
 
-        PlayLevelTheme();
-        PlayBackground();
+        //PlayLevelTheme();
+        //PlayBackground();
 
         //Place rightly the slider
-        soundSliderMaster.value = PlayerPrefs.GetFloat("masterVolume", 0.5f);
-        soundSliderUI.value = PlayerPrefs.GetFloat("uiVolume", 0.5f);
-        soundSliderMusic.value = PlayerPrefs.GetFloat("musicVolume", 0.5f);
-        soundSliderEffect.value = PlayerPrefs.GetFloat("effectsVolume", 0.5f);
+        //soundSliderMaster.value = PlayerPrefs.GetFloat("masterVolume", 0.5f);
+        //soundSliderUI.value = PlayerPrefs.GetFloat("uiVolume", 0.5f);
+        //soundSliderMusic.value = PlayerPrefs.GetFloat("musicVolume", 0.5f);
+        //soundSliderEffect.value = PlayerPrefs.GetFloat("effectsVolume", 0.5f);
+
+        
     }
 
     //UI sound
@@ -62,6 +73,9 @@ public class LevelSoundboard : MonoBehaviour
     public void PlayLevelTheme() { soundHandler.PlaySound(levelTheme, musicPlayer, musicGroup); }
     public void PlayBackground() { soundHandler.PlaySound(backgroundTheme, backgroundPlayer, musicGroup); }
 
+
+    //SFX
+    public void PlaySproutSpawn() { soundHandler.PlaySound(sproutspawn,spawnSource, FXGroup); }
     //Change a specific volume with slider
     public void ChangeMasterVolume(float value)
     {
