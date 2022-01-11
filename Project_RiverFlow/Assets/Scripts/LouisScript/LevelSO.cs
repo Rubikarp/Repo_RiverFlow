@@ -8,6 +8,7 @@ using System;
 public class LevelSO : ScriptableObject
 {
     public string levelSceneName;
+    public Sprite levelCapture;
     public int levelNumber;
     public new string name;
     //public string description;
