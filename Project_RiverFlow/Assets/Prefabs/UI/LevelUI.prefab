@@ -249,15 +249,27 @@ MonoBehaviour:
   weekNumber: 1
   iterationStepDur: 0.25
   plantSpawnRateCalm: 10
-  plantSpawnRateNeutral: 15
-  plantSpawnRateChaotic: 8
+  plantSpawnRateNeutral: 12
+  plantSpawnRateChaotic: 6
   spawnRateVariation: 0.35
   onWaterSimulationStep:
     m_PersistentCalls:
       m_Calls: []
   getMoreDig:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 7564991290013214242}
+        m_TargetAssemblyTypeName: RewardManager, Assembly-CSharp
+        m_MethodName: InitializeSelectionPanel
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &2142884564
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1570,18 +1582,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   usedButtons:
   - UsedButton: {fileID: 301909890580975399, guid: 90c0d22ba5a1a03489c3ff9da43fc8b0, type: 3}
-    weight: 30
+    weight: 10
   - UsedButton: {fileID: 301909890580975399, guid: 3677919d59ec0d64da3d9c4c08421928, type: 3}
-    weight: 20
+    weight: 10
   - UsedButton: {fileID: 301909890580975399, guid: 397504d53a2cfce4094f7ba1012c10fc, type: 3}
     weight: 10
+  - UsedButton: {fileID: 301909890580975399, guid: 9ee1198064e57f846b4debfaec648794, type: 3}
+    weight: 10
   SourceButton: {fileID: 301909890580975399, guid: 1a2b6b9d15e51e448b4cb0be1e5a5626, type: 3}
-  sourceTurn: 3
+  sourceTurn: 7
   rewardButton: {fileID: 2848760089627443386, guid: 405997e30e97be841bcc395dfe657300, type: 3}
   Newday: {fileID: 7564991290344970225}
   rewardSelectionPanelTransform: {fileID: 7564991290505418659}
   Inventory: {fileID: 0}
-  Timer: {fileID: 0}
+  Timer: {fileID: 1336425976}
 --- !u!1 &7564991290151202831
 GameObject:
   m_ObjectHideFlags: 0
@@ -2898,12 +2912,40 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5834999995747536882, guid: a44e5395d06c8bc41af76d1791451c88, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 5834999995747536882, guid: a44e5395d06c8bc41af76d1791451c88, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 5834999995747536882, guid: a44e5395d06c8bc41af76d1791451c88, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1336425976}
     - target: {fileID: 5834999995747536882, guid: a44e5395d06c8bc41af76d1791451c88, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
+      objectReference: {fileID: 1336425976}
+    - target: {fileID: 5834999995747536882, guid: a44e5395d06c8bc41af76d1791451c88, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: SetPause
+      objectReference: {fileID: 0}
+    - target: {fileID: 5834999995747536882, guid: a44e5395d06c8bc41af76d1791451c88, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: SetSpeed
+      objectReference: {fileID: 0}
+    - target: {fileID: 5834999995747536882, guid: a44e5395d06c8bc41af76d1791451c88, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: TimeManager, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 5834999995747536882, guid: a44e5395d06c8bc41af76d1791451c88, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
+      value: TimeManager, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 5834999995747536882, guid: a44e5395d06c8bc41af76d1791451c88, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_FloatArgument
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 5834999995968923729, guid: a44e5395d06c8bc41af76d1791451c88, type: 3}
       propertyPath: m_Name
@@ -2978,12 +3020,40 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 0}
     - target: {fileID: 5834999996871044368, guid: a44e5395d06c8bc41af76d1791451c88, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 5834999996871044368, guid: a44e5395d06c8bc41af76d1791451c88, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 5834999996871044368, guid: a44e5395d06c8bc41af76d1791451c88, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1336425976}
     - target: {fileID: 5834999996871044368, guid: a44e5395d06c8bc41af76d1791451c88, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
+      objectReference: {fileID: 1336425976}
+    - target: {fileID: 5834999996871044368, guid: a44e5395d06c8bc41af76d1791451c88, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: SetPause
+      objectReference: {fileID: 0}
+    - target: {fileID: 5834999996871044368, guid: a44e5395d06c8bc41af76d1791451c88, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: SetSpeed
+      objectReference: {fileID: 0}
+    - target: {fileID: 5834999996871044368, guid: a44e5395d06c8bc41af76d1791451c88, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: TimeManager, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 5834999996871044368, guid: a44e5395d06c8bc41af76d1791451c88, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
+      value: TimeManager, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 5834999996871044368, guid: a44e5395d06c8bc41af76d1791451c88, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_FloatArgument
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 5834999996871044371, guid: a44e5395d06c8bc41af76d1791451c88, type: 3}
       propertyPath: m_AnchorMax.y
@@ -3002,12 +3072,44 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5834999996904275592, guid: a44e5395d06c8bc41af76d1791451c88, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 5834999996904275592, guid: a44e5395d06c8bc41af76d1791451c88, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 5834999996904275592, guid: a44e5395d06c8bc41af76d1791451c88, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1336425976}
     - target: {fileID: 5834999996904275592, guid: a44e5395d06c8bc41af76d1791451c88, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
+      objectReference: {fileID: 1336425976}
+    - target: {fileID: 5834999996904275592, guid: a44e5395d06c8bc41af76d1791451c88, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: SetPause
+      objectReference: {fileID: 0}
+    - target: {fileID: 5834999996904275592, guid: a44e5395d06c8bc41af76d1791451c88, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: SetSpeed
+      objectReference: {fileID: 0}
+    - target: {fileID: 5834999996904275592, guid: a44e5395d06c8bc41af76d1791451c88, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: TimeManager, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 5834999996904275592, guid: a44e5395d06c8bc41af76d1791451c88, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
+      value: TimeManager, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 5834999996904275592, guid: a44e5395d06c8bc41af76d1791451c88, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_FloatArgument
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5834999996904275592, guid: a44e5395d06c8bc41af76d1791451c88, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_FloatArgument
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5834999996904275595, guid: a44e5395d06c8bc41af76d1791451c88, type: 3}
       propertyPath: m_AnchorMax.y
@@ -3026,8 +3128,20 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6343969049749351349, guid: a44e5395d06c8bc41af76d1791451c88, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6343969049749351349, guid: a44e5395d06c8bc41af76d1791451c88, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
+      objectReference: {fileID: 1336425976}
+    - target: {fileID: 6343969049749351349, guid: a44e5395d06c8bc41af76d1791451c88, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: Pause
+      objectReference: {fileID: 0}
+    - target: {fileID: 6343969049749351349, guid: a44e5395d06c8bc41af76d1791451c88, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: TimeManager, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 7710253534470592459, guid: a44e5395d06c8bc41af76d1791451c88, type: 3}
       propertyPath: m_AnchorMax.y
