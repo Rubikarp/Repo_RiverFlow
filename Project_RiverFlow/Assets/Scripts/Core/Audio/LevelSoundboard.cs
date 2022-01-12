@@ -32,6 +32,9 @@ public class LevelSoundboard : Singleton<LevelSoundboard>
     public AudioSource SpawnSource;
     public AudioSource itemEffectSource;
     public AudioSource growingSource;
+    public AudioSource diggingSource;
+    public AudioSource irrigatedSource;
+    public AudioSource eraseSource;
     //...
     //attention au dela de 32 call simultannée ça va plus du tout et le son coupe
     //https://answers.unity.com/questions/1192900/playing-many-audioclips-with-playoneshot-causes-al.html
@@ -89,6 +92,21 @@ public class LevelSoundboard : Singleton<LevelSoundboard>
     {
         SoundAsset sound = soundEffectLib.Find(sound => sound.name == name);
         soundHandler.PlaySound(sound, growingSource);
+    }
+    public void PlayDigEffectSound(string name)//alternative si soucis avec unity event
+    {
+        SoundAsset sound = soundEffectLib.Find(sound => sound.name == name);
+        soundHandler.PlaySound(sound, diggingSource);
+    }
+    public void PlayEraseEffectSound(string name)//alternative si soucis avec unity event
+    {
+        SoundAsset sound = soundEffectLib.Find(sound => sound.name == name);
+        soundHandler.PlaySound(sound, eraseSource);
+    }
+    public void PlayIrrigatedEffectSound(string name)//alternative si soucis avec unity event
+    {
+        SoundAsset sound = soundEffectLib.Find(sound => sound.name == name);
+        soundHandler.PlaySound(sound, diggingSource);
     }
     //...
 
