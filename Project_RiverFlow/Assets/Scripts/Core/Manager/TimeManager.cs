@@ -41,7 +41,7 @@ public class TimeManager : Singleton<TimeManager>
 
         if (!isPaused)
         {
-            gameTimer += Time.deltaTime;
+            gameTimer += Time.deltaTime * gameTimeSpeed;
 
             if (gameTimer > (weekDuration * weekNumber))
             {
@@ -60,7 +60,7 @@ public class TimeManager : Singleton<TimeManager>
                 nextPlantSpawn = 0;
             }
 
-            nextPlantSpawn -= Time.deltaTime;
+            nextPlantSpawn -= Time.deltaTime * gameTimeSpeed;
             if (nextPlantSpawn < 0)
             {
                 switch(plantSpawner.threatState) {
