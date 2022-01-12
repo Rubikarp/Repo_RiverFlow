@@ -10,6 +10,9 @@ public class LevelsManager : MonoBehaviour
     public LevelDisplay levelButton;
     public RectTransform levelSelectionPanelTransform;
     List<LevelDisplay> levelDisplays;
+    public Camera menuCamera;
+    public Vector3 mainMenuCameraPos;
+    public Vector3 levelSelectionCameraPos;
 
 
     void Start()
@@ -37,4 +40,10 @@ public class LevelsManager : MonoBehaviour
             (currentLevels.Count - 1) * (levelButton.GetComponent<RectTransform>().sizeDelta.x + levelSelectionPanelTransform.GetComponent<HorizontalLayoutGroup>().spacing), 
             levelSelectionPanelTransform.sizeDelta.y);
     }
+
+    public void moveToLevelSelection()
+    {
+
+    }
+
 }
