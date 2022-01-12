@@ -10,11 +10,14 @@ namespace Karprod
 
     public static class TextureGenerator
     {
+        private const int defaultSize = 256;
+        private const string defaultName = "new_Texture";
+
         //Generate Texture Methodes
-        public static Texture2D Generate(int size = 256, bool alpha = true)
+        public static Texture2D Generate(int size = defaultSize, bool alpha = true)
         {
             //Création de la Texture
-            Texture2D texture = TextureGenerator.Generate(new Vector2Int(size,size), alpha);
+            Texture2D texture = TextureGenerator.Generate(new Vector2Int(size, size), alpha);
 
             return texture;
         }
@@ -28,8 +31,12 @@ namespace Karprod
         public static Texture2D Generate(Vector2Int size, bool alpha = true)
         {
             //Création de la Texture
-            Texture2D texture = new Texture2D(size.x, size.y, TextureFormat.ARGB32, false);
-            if (!alpha)
+            Texture2D texture;
+            if (alpha)
+            {
+                texture = new Texture2D(size.x, size.y, TextureFormat.ARGB32, false);
+            }
+            else
             {
                 texture = new Texture2D(size.x, size.y, TextureFormat.RGB24, false);
             }
@@ -50,10 +57,16 @@ namespace Karprod
             return texture;
         }
 
-        #if UNITY_EDITOR
+#if UNITY_EDITOR
 
-        //Create Texture Methodes
-        public static void Create(string name, TextureType fileType = TextureType.PNG, int size = 256)
+        public static void Create(string name, int size = 256, TextureType fileType = TextureType.PNG)
+        {
+            //Creating The texture
+            Texture2D texture = TextureGenerator.Generate(size, fileType == TextureType.PNG);
+
+            Create(name, texture, fileType);
+        }
+        public static void Create(string name, Texture2D texture, TextureType fileType = TextureType.PNG)
         {
             //generate the path
             string path = TextureGenerator.PathAsking(name, fileType);
@@ -63,20 +76,17 @@ namespace Karprod
                 return;
             }
 
-            //Creating The texture
-            Texture2D texture = TextureGenerator.Generate(size, fileType == TextureType.PNG);
-
             //Check for copy
             TextureGenerator.DeleteCopy(path);
 
             //create the asset
-            if(fileType == TextureType.JPG)
+            if (fileType == TextureType.PNG)
             {
-                TextureGenerator.TextureToAssetJPG(path, texture);
+                TextureGenerator.TextureToAssetPNG(path, texture);
             }
             else
             {
-                TextureGenerator.TextureToAssetPNG(path, texture);
+                TextureGenerator.TextureToAssetJPG(path, texture);
             }
 
             //Debug.log the test       
@@ -204,7 +214,7 @@ namespace Karprod
             }
             path = FileUtil.GetProjectRelativePath(path);
             return path;
-        }        
+        }
         public static void DeleteCopy(string filePath)
         {
             if ((Texture2D)AssetDatabase.LoadAssetAtPath(filePath, typeof(Texture2D)) != null)
@@ -230,7 +240,7 @@ namespace Karprod
             }
         }
         #endregion
-        
-        #endif
+
+#endif
     }
 }

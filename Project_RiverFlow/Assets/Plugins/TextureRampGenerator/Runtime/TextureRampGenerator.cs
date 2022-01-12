@@ -10,7 +10,7 @@ namespace Karprod
         private const int defaultSize = 256;
         private const string defaultName = "new_TextureRamp";
 
-        public static Texture2D Generate(Gradient grd, int size = defaultSize, bool alpha = true)
+        public static Texture2D Generate(Gradient grd, int size = 256, bool alpha = true)
         {
             //Création de la Texture Ramp
             Texture2D textureRamp = TextureRampGenerator.Generate(grd, new Vector2Int(size, size), alpha);
@@ -50,8 +50,9 @@ namespace Karprod
             return textureRamp;
         }
 
-        #if UNITY_EDITOR
+#if UNITY_EDITOR
 
+        //Create Texture Methodes
         public static void Create(Gradient grd, int size = defaultSize, string name = defaultName, TextureType fileType = TextureType.PNG)
         {
             //Création de la Texture Ramp
@@ -60,18 +61,18 @@ namespace Karprod
         public static void Create(Gradient grd, int width, int height, string name = defaultName, TextureType fileType = TextureType.PNG)
         {
             //Création de la Texture Ramp
-           TextureRampGenerator.Create(grd, new Vector2Int(width, height), name, fileType);
+            TextureRampGenerator.Create(grd, new Vector2Int(width, height), name, fileType);
         }
         public static void Create(Gradient grd, Vector2Int size, string name, TextureType fileType = TextureType.PNG)
         {
             //generate the path
-            string path = TextureRampGenerator.PathAsking(name, fileType);
+            string path = TextureGenerator.PathAsking(name, fileType);
             if (path == null || path == string.Empty)
             {
                 Debug.Log("TextureRamp creation have been cancel");
                 return;
             }
-            
+
             //Creating The texture
             Texture2D texture = TextureRampGenerator.Generate(grd, size.x, size.y, fileType == TextureType.PNG);
 
@@ -98,29 +99,6 @@ namespace Karprod
                 Debug.LogError("Error during the TextureRamp creation");
             }
         }
-
-        #region Texture Asset managing Methodes
-        public static string PathAsking(string name, TextureType fileType = TextureType.PNG)
-        {
-            string path;
-            switch (fileType)
-            {
-                case TextureType.PNG:
-                    path = EditorUtility.SaveFilePanel("Save TextureRamp Asset", "Assets/", name, "png");
-                    break;
-
-                case TextureType.JPG:
-                    path = EditorUtility.SaveFilePanel("Save TextureRamp Asset", "Assets/", name, "jpg");
-                    break;
-
-                default:
-                    path = EditorUtility.SaveFilePanel("Save TextureRamp Asset", "Assets/", name, "png");
-                    break;
-            }
-            path = FileUtil.GetProjectRelativePath(path);
-            return path;
-        }
-        #endregion
 
         #endif
     }

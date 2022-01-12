@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Karprod;
 using UnityEngine;
 using UnityEditor;
 using NaughtyAttributes;
@@ -17,6 +18,7 @@ public class GameGrid : Singleton<GameGrid>
 
     [Header("Data")]
     public Map_Data mapData;
+    public TilePalette_SCO tilePalette;
     public GameTile[] tiles;
     #region Debug
     [BoxGroup("Debug")] public bool showDebug;
@@ -236,6 +238,82 @@ public class GameGrid : Singleton<GameGrid>
     }
     #endregion
 
+#if UNITY_EDITOR
+
+    [Button]
+    private void MapToTexture()
+    {
+        Texture2D mapTexture = TextureGenerator.Generate(size, false);
+        for (int y = 0; y < size.y; y++)
+        {
+            for (int x = 0; x < size.x; x++)
+            {
+                if (GetTile(x, y) != null)
+                {
+                    switch (GetTile(x, y).type)
+                    {
+                        case TileType.grass:
+                            mapTexture.SetPixel(x, y, tilePalette.groundGrass);
+                            break;
+                        case TileType.clay:
+                            mapTexture.SetPixel(x, y, tilePalette.groundClay);
+                            break;
+                        case TileType.sand:
+                            mapTexture.SetPixel(x, y, tilePalette.groundAride);
+                            break;
+                        case TileType.mountain:
+                            mapTexture.SetPixel(x, y, tilePalette.mountain);
+                            break;
+                        default:
+                            mapTexture.SetPixel(x, y, tilePalette.errorMat);
+                            break;
+                    }
+                }
+            }
+        }
+        //Save la modification
+        mapTexture.Apply();
+
+        TextureGenerator.Create("newMapTexture", mapTexture, TextureType.JPG);
+    }
+    [Button]
+    private void MapToTextureChannel()
+    {
+        Texture2D mapTexture = TextureGenerator.Generate(size, true);
+        for (int y = 0; y < size.y; y++)
+        {
+            for (int x = 0; x < size.x; x++)
+            {
+                if (GetTile(x, y) != null)
+                {
+                    switch (GetTile(x, y).type)
+                    {
+                        case TileType.grass:
+                            mapTexture.SetPixel(x, y, new Color(0, 1, 0, 1));
+                            break;
+                        case TileType.clay:
+                            mapTexture.SetPixel(x, y, new Color(0, 0, 1, 1));
+                            break;
+                        case TileType.sand:
+                            mapTexture.SetPixel(x, y, new Color(1, 0, 0, 1));
+                            break;
+                        case TileType.mountain:
+                            mapTexture.SetPixel(x, y, new Color(0, 0, 0, 0));
+                            break;
+                        default:
+                            mapTexture.SetPixel(x, y, new Color(0, 0, 0, 0));
+                            break;
+                    }
+                }
+            }
+        }
+        //Save la modification
+        mapTexture.Apply();
+
+        TextureGenerator.Create("newMapTexture", mapTexture, TextureType.PNG);
+    }
+
+#endif
     private void OnDrawGizmos()
     {
         if (showDebug)
