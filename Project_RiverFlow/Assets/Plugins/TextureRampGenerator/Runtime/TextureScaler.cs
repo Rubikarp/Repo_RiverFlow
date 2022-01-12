@@ -11,9 +11,9 @@ public static class TextureScaler
         Color[] colorsBlock = new Color[scaleFactor * scaleFactor];
         Vector2Int pos = new Vector2Int(0, 0);
 
-        for (int x = 0; x < newTexture.width; x++)
+        for (int x = 0; x < baseTexture.width; x++)
         {
-            for (int y = 0; y < newTexture.height; y++)
+            for (int y = 0; y < baseTexture.height; y++)
             {
                 pos = new Vector2Int(x, y);
 
@@ -28,6 +28,7 @@ public static class TextureScaler
 
                 //Set the texture color
                 newTexture.SetPixels(pos.x * scaleFactor, pos.y * scaleFactor, scaleFactor, scaleFactor, colorsBlock);
+                //newTexture.SetPixel(pos.x , pos.y , colorsBlock[0]);
             }
         }
 

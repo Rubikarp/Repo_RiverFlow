@@ -7,8 +7,6 @@ namespace Karprod
     public class Tool_TextureScaler : EditorWindow
     {
         #region Constante
-        private const int defaultSize = 256;
-        private const string defaultName = "new_TextureRamp";
         //GUI
         private const int MinHeight = 50;
         private const int LeftBordWidth = 150;
@@ -18,8 +16,8 @@ namespace Karprod
 
         #region Variable
         //Texture Name
-        private Texture2D originalText;
-        private string textureName = defaultName;
+        private Texture2D originalTexture;
+        private string textureName = string.Empty;
         private int scaleFactor = 2;
         #endregion
 
@@ -31,52 +29,19 @@ namespace Karprod
             myWindow.name = "TextureScaler";
             myWindow.minSize = new Vector2(420, 220);
         }
-        /*
+        
         private void OnGUI()
         {
-            GUILayout.Space(5);
             //Main Property
             using (new GUILayout.VerticalScope(GUILayout.MaxWidth(MaxWidth)))
             {
                 GUILayout.Label("Texture", EditorStyles.boldLabel);
-
-                originalText = EditorGUILayout.ObjectField("Gradient", gradient);
-                textureName = EditorGUILayout.TextField("Name", textureName);
+                originalTexture = (Texture2D)EditorGUILayout.ObjectField(originalTexture, typeof(Texture2D));
+                GUILayout.Space(10);
+                //textureName = EditorGUILayout.TextField("Name", textureName);
+                scaleFactor = EditorGUILayout.IntField("Scale", scaleFactor);
             }
             GUILayout.Space(15);
-            //Texture Size
-            using (new GUILayout.HorizontalScope(GUILayout.MaxWidth(MaxWidth)))
-            {
-                using (new GUILayout.VerticalScope(GUILayout.MaxWidth(Width)))
-                {
-                    GUILayout.Label("Texture Size", EditorStyles.boldLabel);
-                    isSquare = EditorGUILayout.Toggle("Texture Square ?", isSquare);
-                }
-                using (new GUILayout.VerticalScope(GUILayout.Width(Width)))
-                {
-                    GUILayout.Label("", EditorStyles.boldLabel);
-                    if (isSquare)
-                    {
-                        squareSize = EditorGUILayout.IntField("", squareSize);
-                    }
-                    else
-                    {
-                        size = EditorGUILayout.Vector2IntField("", new Vector2Int(size.x, size.y));
-                    }
-                }
-            }
-            GUILayout.Space(5);
-            //Texture Format
-            using (new GUILayout.HorizontalScope(GUILayout.MaxWidth(MaxWidth)))
-            {
-                GUILayout.Label("Texture Format", EditorStyles.boldLabel, GUILayout.Width(LeftBordWidth));
-                using (new GUILayout.HorizontalScope())
-                {
-                    TextureFormatButton("PNG", TextureType.PNG);
-                    TextureFormatButton("JPG", TextureType.JPG);
-                }
-            }
-            GUILayout.Space(10);
             //Creation Button
             using (new GUILayout.HorizontalScope(GUILayout.MaxWidth(MaxWidth)))
             {
@@ -85,32 +50,10 @@ namespace Karprod
                 {
                     if (GUILayout.Button("Generate Texture Ramp", GUILayout.MinHeight(MinHeight)))
                     {
-                        ButtonCreateGradient();
+                        ButtonScaleTexture();
                     }
                 }
             }
-        }
-
-        void TextureFormatButton(string name, TextureType texType)
-        {
-            GUIContent content = new GUIContent(name);
-
-            var oldBackGroundColor = GUI.backgroundColor;
-            var oldContentColor = GUI.contentColor;
-
-            if (actualTexType == texType)
-            {
-                GUI.backgroundColor = new Color(0.3f, 0.3f, 0.3f);
-                GUI.contentColor = Color.white;
-            }
-
-            if (GUILayout.Button(content, GetButtonStyle(), GUILayout.Height(25), GUILayout.MinWidth(40), GUILayout.MaxWidth((Width +50)/2)))
-            {
-                actualTexType = texType;
-            }
-
-            GUI.backgroundColor = oldBackGroundColor;
-            GUI.contentColor = oldContentColor;
         }
         GUIStyle GetButtonStyle()
         {
@@ -125,20 +68,19 @@ namespace Karprod
             s.border.bottom = 0;
             return s;
         }
-
-
-        private void ButtonCreateGradient()
+        private void ButtonScaleTexture()
         {
-            if (isSquare)
-            {
-                TextureRampGenerator.Create(gradient, squareSize, textureName, actualTexType);
-            }
-            else
-            {
-                TextureRampGenerator.Create(gradient, size, textureName, actualTexType);
-            }
+            string path = AssetDatabase.GetAssetPath(originalTexture);
+            string[] pathBlock = path.Split('.');
+
+            pathBlock[0] = pathBlock[0] + "x" + scaleFactor.ToString() +'.';
+            path = pathBlock[0] + pathBlock[1];
+
+            Texture2D temp = originalTexture;
+            Texture2D newTexture = TextureScaler.Scale(temp, scaleFactor);
+
+            TextureGenerator.Create(newTexture, path);
         }
-        */
     }
 }
 #endif

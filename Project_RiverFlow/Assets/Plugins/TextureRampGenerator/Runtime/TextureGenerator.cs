@@ -7,7 +7,6 @@ using System.IO;
 namespace Karprod
 {
     public enum TextureType { PNG, JPG};
-
     public static class TextureGenerator
     {
         private const int defaultSize = 256;
@@ -99,95 +98,171 @@ namespace Karprod
                 Debug.LogError("Error during the Texture creation");
             }
         }
-
-        #region Texture Encoding
-        public static void TextureToAssetPNG(string filePath, Texture2D texture)
+        public static void Create(Texture2D texture, string path, TextureType fileType = TextureType.PNG)
         {
-            FileStream stream = new FileStream(filePath, FileMode.OpenOrCreate, FileAccess.Write);
-            BinaryWriter writer = new BinaryWriter(stream);
+            //Check for copy
+            TextureGenerator.DeleteCopy(path);
 
-            byte[] bytes = texture.EncodeToPNG();
-            for (int i = 0; i < bytes.Length; i++)
+            //create the asset
+            if (fileType == TextureType.PNG)
             {
-                writer.Write(bytes[i]);
-            }
-
-            writer.Close();
-            stream.Close();
-
-            AssetDatabase.ImportAsset(filePath, ImportAssetOptions.ForceUpdate);
-
-            //Update Folder
-            AssetDatabase.Refresh();
-        }
-        public static void TextureToAssetJPG(string filePath, Texture2D texture)
-        {
-            FileStream stream = new FileStream(filePath, FileMode.OpenOrCreate, FileAccess.Write);
-            BinaryWriter writer = new BinaryWriter(stream);
-
-            byte[] bytes = texture.EncodeToJPG();
-            for (int i = 0; i < bytes.Length; i++)
-            {
-                writer.Write(bytes[i]);
-            }
-
-            writer.Close();
-            stream.Close();
-
-            AssetDatabase.ImportAsset(filePath, ImportAssetOptions.ForceUpdate);
-
-            //Update Folder
-            AssetDatabase.Refresh();
-        }
-        #endregion
-
-        #region Texture Asset managing Methodes
-        public static string PathAsking(string name, TextureType fileType = TextureType.PNG)
-        {
-            string path;
-            switch (fileType)
-            {
-                case TextureType.PNG:
-                    path = EditorUtility.SaveFilePanel("Save Texture Asset", "Assets/", name, "png");
-                    break;
-
-                case TextureType.JPG:
-                    path = EditorUtility.SaveFilePanel("Save Texture Asset", "Assets/", name, "jpg");
-                    break;
-
-                default:
-                    path = EditorUtility.SaveFilePanel("Save Texture Asset", "Assets/", name, "png");
-                    break;
-            }
-            path = FileUtil.GetProjectRelativePath(path);
-            return path;
-        }
-        public static void DeleteCopy(string filePath)
-        {
-            if ((Texture2D)AssetDatabase.LoadAssetAtPath(filePath, typeof(Texture2D)) != null)
-            {
-                Debug.Log("A file have already this name, this file have been replace");
-
-                FileUtil.DeleteFileOrDirectory(filePath);
-
-                //Update Folder
-                AssetDatabase.Refresh();
-            }
-
-        }
-        public static bool TestTexture2DAtPath(string filePath)
-        {
-            if ((Texture2D)AssetDatabase.LoadAssetAtPath(filePath, typeof(Texture2D)) == null)
-            {
-                return false;
+                TextureGenerator.TextureToAssetPNG(path, texture);
             }
             else
             {
-                return true;
+                TextureGenerator.TextureToAssetJPG(path, texture);
             }
+
+            //Debug.log the test       
+            if (TextureGenerator.TestTexture2DAtPath(path))
+            {
+                Debug.Log("The texture have been successfully Created");
+            }
+            else
+            {
+                Debug.LogError("Error during the Texture creation");
+            }
+
+            //https://forum.unity.com/threads/how-to-change-png-import-settings-via-script.734834/
+            //.meta 
         }
-        #endregion
+
+        private static TextureImporter GetPixelImport(string path)
+        {
+            TextureImporter importer = (TextureImporter)TextureImporter.GetAtPath(path);
+
+            importer.isReadable = true;
+            importer.textureType = TextureImporterType.Sprite;
+
+            TextureImporterSettings importerSettings = new TextureImporterSettings();
+            importer.ReadTextureSettings(importerSettings);
+            importerSettings.spriteExtrude = 0;
+            importerSettings.spriteGenerateFallbackPhysicsShape = false;
+            importerSettings.spriteMeshType = SpriteMeshType.FullRect;
+            importerSettings.spriteMode = (int)SpriteImportMode.Multiple;
+            importer.SetTextureSettings(importerSettings);
+
+            importer.spriteImportMode = SpriteImportMode.Multiple;
+            importer.maxTextureSize = 1024; // or whatever
+            importer.alphaIsTransparency = true;
+            importer.textureCompression = TextureImporterCompression.Uncompressed;
+            importer.alphaSource = TextureImporterAlphaSource.FromInput;
+
+            EditorUtility.SetDirty(importer);
+            importer.SaveAndReimport();
+
+            /*if multiple*/
+            /*
+            Rect[] spriteRects = texture.PackTextures( SPRITE_TEXTURES , PADDING , textureSize, false);
+            SpriteMetaData[] isheet = new SpriteMetaData[spriteRects.Length];
+            for (t = 0; t < isheet.Length; t++)
+            {
+            SpriteMetaData md = new SpriteMetaData();
+            md.rect = new Rect(
+            spriteRects[t].position.x * (float)texture.width,
+            spriteRects[t].position.y * (float)texture.height,
+            spriteRects[t].size.x * (float)texture.width,
+            spriteRects[t].size.y * (float)texture.height
+            );
+            // md.alignment = .. i.e. (int)SpriteAlignment.Custom;
+            // md.pivot = .. i.e. Vector3.zero
+            // md.name = ..
+            isheet[t] = md;
+            }
+            importer.spritesheet = isheet;
+            */
+
+return importer;
+}
+
+#region Texture Encoding
+public static void TextureToAssetPNG(string filePath, Texture2D texture)
+{
+FileStream stream = new FileStream(filePath, FileMode.OpenOrCreate, FileAccess.Write);
+BinaryWriter writer = new BinaryWriter(stream);
+
+byte[] bytes = texture.EncodeToPNG();
+for (int i = 0; i < bytes.Length; i++)
+{
+    writer.Write(bytes[i]);
+}
+
+writer.Close();
+stream.Close();
+
+AssetDatabase.ImportAsset(filePath, ImportAssetOptions.ForceUpdate);
+
+//Update Folder
+AssetDatabase.Refresh();
+}
+public static void TextureToAssetJPG(string filePath, Texture2D texture)
+{
+FileStream stream = new FileStream(filePath, FileMode.OpenOrCreate, FileAccess.Write);
+BinaryWriter writer = new BinaryWriter(stream);
+
+byte[] bytes = texture.EncodeToJPG();
+for (int i = 0; i < bytes.Length; i++)
+{
+    writer.Write(bytes[i]);
+}
+
+writer.Close();
+stream.Close();
+
+AssetDatabase.ImportAsset(filePath, ImportAssetOptions.ForceUpdate);
+
+//Update Folder
+AssetDatabase.Refresh();
+}
+#endregion
+
+#region Texture Asset managing Methodes
+public static string PathAsking(string name, TextureType fileType = TextureType.PNG)
+{
+string path;
+switch (fileType)
+{
+    case TextureType.PNG:
+        path = EditorUtility.SaveFilePanel("Save Texture Asset", "Assets/", name, "png");
+        break;
+
+    case TextureType.JPG:
+        path = EditorUtility.SaveFilePanel("Save Texture Asset", "Assets/", name, "jpg");
+        break;
+
+    default:
+        path = EditorUtility.SaveFilePanel("Save Texture Asset", "Assets/", name, "png");
+        break;
+}
+path = FileUtil.GetProjectRelativePath(path);
+return path;
+}
+public static void DeleteCopy(string filePath)
+{
+if ((Texture2D)AssetDatabase.LoadAssetAtPath(filePath, typeof(Texture2D)) != null)
+{
+    Debug.Log("A file have already this name, this file have been replace");
+
+    FileUtil.DeleteFileOrDirectory(filePath);
+
+    //Update Folder
+    AssetDatabase.Refresh();
+}
+
+}
+public static bool TestTexture2DAtPath(string filePath)
+{
+if ((Texture2D)AssetDatabase.LoadAssetAtPath(filePath, typeof(Texture2D)) == null)
+{
+    return false;
+}
+else
+{
+    return true;
+}
+}
+#endregion
 
 #endif
-    }
+}
 }
