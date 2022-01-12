@@ -36,6 +36,46 @@ public class Digging_UI : MonoBehaviour
                     selfImage.sprite = on;
                 }
                     break;
+
+            case Items.Lake:
+                if (Inventory.lakesAmmount <= 0)
+                {
+                    textGUI.text = string.Empty;
+                    selfImage.sprite = off;
+                }
+                else
+                {
+                    textGUI.text = Inventory.lakesAmmount.ToString();
+                    selfImage.sprite = on;
+                }
+                break;
+
+            case Items.Cloud:
+                if (Inventory.cloudsAmmount <= 0)
+                {
+                    textGUI.text = string.Empty;
+                    selfImage.sprite = off;
+                }
+                else
+                {
+                    textGUI.text = Inventory.cloudsAmmount.ToString();
+                    selfImage.sprite = on;
+                }
+                break;
+
+            case Items.Source:
+                if (Inventory.sourcesAmmount <= 0)
+                {
+                    textGUI.text = string.Empty;
+                    selfImage.sprite = off;
+                }
+                else
+                {
+                    textGUI.text = Inventory.cloudsAmmount.ToString();
+                    selfImage.sprite = on;
+                }
+                break;
+
             case Items.Tunnel:
                 if (Inventory.tunnelsAmmount <= 0)
                 {
