@@ -77,6 +77,9 @@ public class Plant : Element
     public ParticleSystem fruitDropSavanna;
     public ParticleSystem fruitDropDesert;
 
+    [Header("Sound")]
+    public string irrigatedSound = "Irrigated";
+
     [Header("Scoring")]
     public int youngTreeScoring;
     public int adultTreeScoring;
@@ -201,6 +204,7 @@ public class Plant : Element
             {
                 timeWithoutIrrigation = 0;
                 waveIrrigate.Play();
+                LevelSoundboard.Instance.PlayIrrigatedEffectSound(irrigatedSound);
             }
 
             previousIrrigation = isIrrigated;

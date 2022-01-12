@@ -15,6 +15,8 @@ public class CurrentModVisualizer : MonoBehaviour
 
     [Header("Parameters")]
     public float sizeAugment = 1.2f;
+    [Header("Sounds")]
+    public string modeButtonSound = "ModeButton";
 
     void Awake()
     {
@@ -87,5 +89,10 @@ public class CurrentModVisualizer : MonoBehaviour
                 eraser.localScale = Vector3.one * 1;
             }
         }
+    }
+
+    public void playModeButtonSound()
+    {
+        LevelSoundboard.Instance.PlayModeUISound(modeButtonSound);
     }
 }
