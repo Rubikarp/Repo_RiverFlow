@@ -33,6 +33,10 @@ public class Plant_Drawer : MonoBehaviour
     public ParticleSystem MiniWave;
     public ParticleSystem NoWater;
 
+
+    [Header("Sound")]
+    public string growingSound = "Growing";
+    public string sproutSpawn = "SproutSpawn";
     //[Header("Fade")]
     //public float lerpToGrey;
     //public float lerpToWhite;
@@ -78,7 +82,8 @@ public class Plant_Drawer : MonoBehaviour
         transform.DOScaleY(1f, 1.3f).SetEase(Ease.OutElastic);
         yield return new WaitForSecondsRealtime(0.1f);
         transform.DOScaleX(1f, 1.3f).SetEase(Ease.OutElastic);
-        UpgradeFeedback();
+        SpawnFeedback();
+        
     }
     IEnumerator TreeSkouiz(PlantState state)
     {
@@ -335,7 +340,26 @@ public class Plant_Drawer : MonoBehaviour
 
                 break;
         }
+        LevelSoundboard.Instance.PlaySpawnEffectSound(growingSound);
+    }
+    public void SpawnFeedback()
+    {
+        switch (plant.TileOn.type)
+        {
+            case TileType.grass:
+                LeafsDefault.Play(true);
+                break;
+            case TileType.clay:
+                LeafsSavana.Play(true);
+                break;
+            case TileType.sand:
+                LeafsDesert.Play(true);
+                break;
+            default:
 
+                break;
+        }
+        LevelSoundboard.Instance.PlaySpawnEffectSound(sproutSpawn);
     }
     public void NoWaterFeedback()
     {

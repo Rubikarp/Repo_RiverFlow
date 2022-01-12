@@ -32,8 +32,8 @@ public class ElementHandler : MonoBehaviour
     [SerializeField] int posX;
     [SerializeField] int posY;
 
-    [Header("Event")]
-    public UnityEvent onSproutSpawn;
+
+    
 
 
     private void Awake()
@@ -46,6 +46,8 @@ public class ElementHandler : MonoBehaviour
         {
             LinkElementToGrid(allSources[i]);
         }
+
+
     }
     #region Spawn
     public void SpawnPlantAt(Vector2Int gridPos)
@@ -71,7 +73,7 @@ public class ElementHandler : MonoBehaviour
             LinkElementToGrid(plant);
 
             PositionRendererSorter.SortTreePositionOderInLayer(plant.GetComponent<SpriteRenderer>(), plant.GetComponent<Transform>());
-            onSproutSpawn?.Invoke();
+
         }
     }
     public void SpawnWaterSourceAt(Vector2Int grisPos)

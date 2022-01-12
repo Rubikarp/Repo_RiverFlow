@@ -16,7 +16,7 @@ public class RewardDisplay : MonoBehaviour
     public int sourceBonus;
     public int lakeBonus;
     public int tunnelBonus;
-
+    public string soundButtonReward = "SoundButtonReward";
 
     private void Start()
     {
@@ -32,5 +32,7 @@ public class RewardDisplay : MonoBehaviour
         Inventory.tunnelsAmmount = Inventory.tunnelsAmmount + tunnelBonus;
         TimeManager.Instance.Pause();
         this.gameObject.GetComponentInParent<RewardManager>().EmptySelectionPanel();
+        LevelSoundboard.Instance.PlayRewardUISound(soundButtonReward);
     }
+
 }

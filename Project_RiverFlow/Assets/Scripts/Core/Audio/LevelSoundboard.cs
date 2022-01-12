@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Audio;
 
-public class LevelSoundboard : MonoBehaviour
+public class LevelSoundboard : Singleton<LevelSoundboard>
 {
     [Header("Component")]
     public SoundHandler soundHandler;
@@ -29,7 +29,9 @@ public class LevelSoundboard : MonoBehaviour
     [Space(5)]
     public AudioSource scoreEffectSource;
     public AudioSource plantEffectSource;
+    public AudioSource SpawnSource;
     public AudioSource itemEffectSource;
+    public AudioSource growingSource;
     //...
     //attention au dela de 32 call simultannée ça va plus du tout et le son coupe
     //https://answers.unity.com/questions/1192900/playing-many-audioclips-with-playoneshot-causes-al.html
@@ -42,6 +44,7 @@ public class LevelSoundboard : MonoBehaviour
     public AudioSource timeUISource;
     public AudioSource modesUISource;
     public AudioSource menuTravellingUISource;
+    public AudioSource rewardUISource;
     //...
     [Space(15)]
     public List<SoundAsset> soundUILib = new List<SoundAsset>();
@@ -51,8 +54,9 @@ public class LevelSoundboard : MonoBehaviour
     {
         soundHandler = SoundHandler.Instance;
 
-        //PlayLevelTheme();
-        //PlayBackground();
+        PlayLevelTheme();
+        
+        PlayBackground();
 
         //Place rightly the slider
         //soundSliderMaster.value = PlayerPrefs.GetFloat("masterVolume", 0.5f);
@@ -76,16 +80,33 @@ public class LevelSoundboard : MonoBehaviour
         SoundAsset sound = soundEffectLib.Find(sound => sound.name == name);
         soundHandler.PlaySound(sound, scoreEffectSource);
     }
+    public void PlaySpawnEffectSound(string name)//alternative si soucis avec unity event
+    {
+        SoundAsset sound = soundEffectLib.Find(sound => sound.name == name);
+        soundHandler.PlaySound(sound, SpawnSource);
+    }
+    public void PlayGrowEffectSound(string name)//alternative si soucis avec unity event
+    {
+        SoundAsset sound = soundEffectLib.Find(sound => sound.name == name);
+        soundHandler.PlaySound(sound, growingSource);
+    }
     //...
 
     //UI sound
-    public void PlayTimeUISound(SoundAsset sound)
+    public void PlayTimeUISound(string name)
     {
+        SoundAsset sound = soundUILib.Find(sound => sound.name == name);
         soundHandler.PlaySound(sound, timeUISource);
     }
-    public void PlayModeUISound(SoundAsset sound)
+    public void PlayModeUISound(string name)
     {
+        SoundAsset sound = soundUILib.Find(sound => sound.name == name);
         soundHandler.PlaySound(sound, modesUISource);
+    }
+    public void PlayRewardUISound(string name)
+    {
+        SoundAsset sound = soundUILib.Find(sound => sound.name == name);
+        soundHandler.PlaySound(sound, rewardUISource);
     }
     //...
 

@@ -25,10 +25,13 @@ public class RewardManager : MonoBehaviour
     public InventoryManager Inventory;
     public TimeManager Timer;
 
+    public string rewardTimeSound = "RewardTime";
+
     void Start()
     {
         Inventory = InventoryManager.Instance;
         rewardDisplays = new List<GameObject>();
+        Timer = TimeManager.Instance;
     }
 
     void Update()
@@ -53,6 +56,7 @@ public class RewardManager : MonoBehaviour
     {
 
         Newday.SetActive(true);
+        LevelSoundboard.Instance.PlayRewardUISound(rewardTimeSound);
         EmptySelectionPanel();
 
         List<WeightedButton> Temporary = new List<WeightedButton>(usedButtons);
