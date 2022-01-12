@@ -410,32 +410,8 @@ MonoBehaviour:
     IsBackgroundRecursive: 0
     IsHidden: 0
   - Type: 1
-    Key: Assets/Scripts/Core/Interaction
-    Ordinal: 33
-    Priority: 0
-    IconType: 220
-    SmallIcon: {fileID: 0}
-    LargeIcon: {fileID: 0}
-    IsIconRecursive: 0
-    BackgroundType: 0
-    BackgroundTexture: {fileID: 0}
-    IsBackgroundRecursive: 0
-    IsHidden: 0
-  - Type: 1
-    Key: Assets/Scripts/Core/Level
-    Ordinal: 34
-    Priority: 0
-    IconType: 180
-    SmallIcon: {fileID: 0}
-    LargeIcon: {fileID: 0}
-    IsIconRecursive: 0
-    BackgroundType: 0
-    BackgroundTexture: {fileID: 0}
-    IsBackgroundRecursive: 0
-    IsHidden: 0
-  - Type: 1
     Key: Assets/Scripts/Core/Manager
-    Ordinal: 35
+    Ordinal: 33
     Priority: 0
     IconType: 10
     SmallIcon: {fileID: 0}
@@ -447,7 +423,7 @@ MonoBehaviour:
     IsHidden: 0
   - Type: 1
     Key: Assets/Scripts/Core/River
-    Ordinal: 36
+    Ordinal: 34
     Priority: 0
     IconType: 140
     SmallIcon: {fileID: 0}
@@ -459,7 +435,7 @@ MonoBehaviour:
     IsHidden: 0
   - Type: 1
     Key: Assets/Scripts/Core/SceneManagement
-    Ordinal: 37
+    Ordinal: 35
     Priority: 0
     IconType: 2150
     SmallIcon: {fileID: 0}
@@ -471,7 +447,7 @@ MonoBehaviour:
     IsHidden: 0
   - Type: 1
     Key: Assets/Scripts/Core/UI
-    Ordinal: 38
+    Ordinal: 36
     Priority: 0
     IconType: 40
     SmallIcon: {fileID: 0}
@@ -483,7 +459,7 @@ MonoBehaviour:
     IsHidden: 0
   - Type: 1
     Key: Assets/Scripts/Core/Visuals
-    Ordinal: 39
+    Ordinal: 37
     Priority: 0
     IconType: 2070
     SmallIcon: {fileID: 0}
@@ -495,7 +471,7 @@ MonoBehaviour:
     IsHidden: 0
   - Type: 1
     Key: Assets/Scripts/Core
-    Ordinal: 40
+    Ordinal: 38
     Priority: 0
     IconType: 2660
     SmallIcon: {fileID: 0}
@@ -507,7 +483,7 @@ MonoBehaviour:
     IsHidden: 0
   - Type: 1
     Key: Assets/Scripts/Sandbox
-    Ordinal: 41
+    Ordinal: 39
     Priority: 0
     IconType: 1040
     SmallIcon: {fileID: 0}
@@ -519,7 +495,7 @@ MonoBehaviour:
     IsHidden: 0
   - Type: 1
     Key: Assets/Scripts/UpcomingFeature
-    Ordinal: 42
+    Ordinal: 40
     Priority: 0
     IconType: 1090
     SmallIcon: {fileID: 0}
@@ -531,7 +507,7 @@ MonoBehaviour:
     IsHidden: 0
   - Type: 1
     Key: Assets/Scripts/Obselete
-    Ordinal: 43
+    Ordinal: 41
     Priority: 0
     IconType: 1010
     SmallIcon: {fileID: 0}
@@ -543,7 +519,7 @@ MonoBehaviour:
     IsHidden: 0
   - Type: 1
     Key: Assets/Data/LevelsMap
-    Ordinal: 44
+    Ordinal: 42
     Priority: 0
     IconType: 2190
     SmallIcon: {fileID: 0}
@@ -555,7 +531,7 @@ MonoBehaviour:
     IsHidden: 0
   - Type: 1
     Key: Assets/Data/MenuLevels
-    Ordinal: 45
+    Ordinal: 43
     Priority: 0
     IconType: 2150
     SmallIcon: {fileID: 0}

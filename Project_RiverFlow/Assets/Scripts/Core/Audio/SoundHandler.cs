@@ -48,6 +48,11 @@ public class SoundHandler : Singleton<SoundHandler>
 
         source.Play();
     }
+    public void PlaySound(SoundAsset sound, AudioSource source)
+    {
+        source.outputAudioMixerGroup = sound.targetGroup;
+        source.PlayOneShot(sound.clip, sound.volume);
+    }
     public void StopSound(AudioSource source)
     {
         if (source.isPlaying)
