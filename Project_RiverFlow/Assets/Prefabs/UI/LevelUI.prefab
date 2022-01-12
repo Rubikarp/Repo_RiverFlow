@@ -245,11 +245,11 @@ MonoBehaviour:
   isPaused: 0
   gameTimer: 0
   gameTimeSpeed: 1
-  weekDuration: 10
+  weekDuration: 120
   weekNumber: 1
   iterationStepDur: 0.2
   plantSpawnRateCalm: 10
-  plantSpawnRateNeutral: 12
+  plantSpawnRateNeutral: 10
   plantSpawnRateChaotic: 6
   spawnRateVariation: 0.35
   onWaterSimulationStep:
@@ -270,6 +270,19 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &1396773769
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5834999995886299197}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7d468d61e15dff24791e93c14319e987, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  timeButtonSound: TimeButton
 --- !u!114 &2142884564
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -287,19 +300,6 @@ MonoBehaviour:
   speed2: {fileID: 5834999996718195713}
   speed3: {fileID: 5834999995628799743}
   sizeChange: 2
---- !u!114 &1396773769
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5834999995886299197}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7d468d61e15dff24791e93c14319e987, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  timeButtonSound: TimeButton
 --- !u!1 &5992319867804571623
 GameObject:
   m_ObjectHideFlags: 0
@@ -1645,7 +1645,8 @@ MonoBehaviour:
   Newday: {fileID: 7564991290344970225}
   rewardSelectionPanelTransform: {fileID: 7564991290505418659}
   Inventory: {fileID: 0}
-  Timer: {fileID: 1336425976}
+  Timer: {fileID: 0}
+  rewardTimeSound: RewardTime
 --- !u!1 &7564991290151202831
 GameObject:
   m_ObjectHideFlags: 0
@@ -3008,11 +3009,11 @@ PrefabInstance:
     - target: {fileID: 5834999995747536882, guid: a44e5395d06c8bc41af76d1791451c88, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 1336425976}
+      objectReference: {fileID: 1107170651}
     - target: {fileID: 5834999995747536882, guid: a44e5395d06c8bc41af76d1791451c88, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
-      objectReference: {fileID: 1336425976}
+      objectReference: {fileID: 1107170651}
     - target: {fileID: 5834999995747536882, guid: a44e5395d06c8bc41af76d1791451c88, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: SetPause
@@ -3031,7 +3032,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5834999995747536882, guid: a44e5395d06c8bc41af76d1791451c88, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_FloatArgument
-      value: 4
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 5834999995968923729, guid: a44e5395d06c8bc41af76d1791451c88, type: 3}
       propertyPath: m_Name
@@ -3104,7 +3105,7 @@ PrefabInstance:
     - target: {fileID: 5834999996114804025, guid: a44e5395d06c8bc41af76d1791451c88, type: 3}
       propertyPath: time
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1107170651}
     - target: {fileID: 5834999996871044368, guid: a44e5395d06c8bc41af76d1791451c88, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
       value: 6
@@ -3116,11 +3117,11 @@ PrefabInstance:
     - target: {fileID: 5834999996871044368, guid: a44e5395d06c8bc41af76d1791451c88, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 1336425976}
+      objectReference: {fileID: 1107170651}
     - target: {fileID: 5834999996871044368, guid: a44e5395d06c8bc41af76d1791451c88, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
-      objectReference: {fileID: 1336425976}
+      objectReference: {fileID: 1107170651}
     - target: {fileID: 5834999996871044368, guid: a44e5395d06c8bc41af76d1791451c88, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: SetPause
@@ -3168,11 +3169,11 @@ PrefabInstance:
     - target: {fileID: 5834999996904275592, guid: a44e5395d06c8bc41af76d1791451c88, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 1336425976}
+      objectReference: {fileID: 1107170651}
     - target: {fileID: 5834999996904275592, guid: a44e5395d06c8bc41af76d1791451c88, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
-      objectReference: {fileID: 1336425976}
+      objectReference: {fileID: 1107170651}
     - target: {fileID: 5834999996904275592, guid: a44e5395d06c8bc41af76d1791451c88, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: SetPause
@@ -3220,7 +3221,7 @@ PrefabInstance:
     - target: {fileID: 6343969049749351349, guid: a44e5395d06c8bc41af76d1791451c88, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 1336425976}
+      objectReference: {fileID: 1107170651}
     - target: {fileID: 6343969049749351349, guid: a44e5395d06c8bc41af76d1791451c88, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: Pause
