@@ -90,7 +90,7 @@ public class MagicTree : Element
     {
         scoringTimer += Time.deltaTime * gameTime.gameTimeSpeed;
 
-        if (scoringTimer >= scoringTick)
+        if (scoringTimer >= scoringTick && gameTime.isPaused == false)
         {
             scoreManager.gameScore += magicTreeScoring;
 
