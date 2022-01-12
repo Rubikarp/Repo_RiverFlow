@@ -1,0 +1,59 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 840d256aba3cd134685c41c6b2b9111a, type: 3}
+  m_Name: PlantSprites_proto
+  m_EditorClassIdentifier: 
+  grass_plantGrowth:
+    deadSprite: {fileID: 21300000, guid: 6218ccf040e8dc446bbe7cf8b03da5a4, type: 3}
+    agonySprite: {fileID: 21300000, guid: 414a7633427ab4b489d48cb288a068c9, type: 3}
+    babySprite: {fileID: 21300000, guid: 97d4e0b38df86914cab3ebbd8fa16fe8, type: 3}
+    youngSprite: {fileID: 21300000, guid: 5f1d928c4cd5e854fb63a24628902a15, type: 3}
+    adultSprite: {fileID: 21300000, guid: 3c325cdc19ddbeb4883c1f17adde95e1, type: 3}
+    seniorSprite: {fileID: 21300000, guid: 0584da852c49d45458dce8b6cd3a3063, type: 3}
+    fruitSprite: {fileID: 21300000, guid: fc41c1556752b284796efc3cd94203d6, type: 3}
+    flowers:
+    - {fileID: 21300000, guid: 83645e4d79d147d45977a1d9b766a90b, type: 3}
+    - {fileID: 21300000, guid: 79e2a57b2c9bba844b8ca26766967b96, type: 3}
+    - {fileID: 21300000, guid: ba5472467f2038b46b5b802d989bf0c8, type: 3}
+    - {fileID: 21300000, guid: 56820f661bdb11f4d955ba8a6f106dd0, type: 3}
+    - {fileID: 21300000, guid: 9d62bddfeeef2f64da111e4aa0456777, type: 3}
+    - {fileID: 21300000, guid: e2f81e49b303a3c4682fdc104969a097, type: 3}
+  clay_plantGrowth:
+    deadSprite: {fileID: 21300000, guid: 7cd0e215aa04b6540bf4c60d7a0479d2, type: 3}
+    agonySprite: {fileID: 21300000, guid: 9bacee108d699ed40b32d48caef49bee, type: 3}
+    babySprite: {fileID: 21300000, guid: 547c16bbf3c28ba45ae23a36b322000b, type: 3}
+    youngSprite: {fileID: 21300000, guid: ff6dfcc0eb93273479bdc72252dea918, type: 3}
+    adultSprite: {fileID: 21300000, guid: 60033aca410484e46a32946679c12e18, type: 3}
+    seniorSprite: {fileID: 21300000, guid: 64b3b261f82c8ff478ad9df56f24e62f, type: 3}
+    fruitSprite: {fileID: 21300000, guid: 28d54a21882cc734ba8c4c3eaa0bb576, type: 3}
+    flowers:
+    - {fileID: 21300000, guid: c0005bf19aef49e4aac4afd11e9e5738, type: 3}
+    - {fileID: 21300000, guid: 8230bff30e610334784e8b9b3f247dca, type: 3}
+    - {fileID: 21300000, guid: e2c119e9f71e7984788c482c6debe1e1, type: 3}
+    - {fileID: 21300000, guid: 8b2ecab57d3388b4188f44f27f5145a8, type: 3}
+    - {fileID: 21300000, guid: bbe3b6c6dac2d814198d2650849bbba5, type: 3}
+    - {fileID: 21300000, guid: 0a1de038ca027864a9169a552fead208, type: 3}
+  sand_plantGrowth:
+    deadSprite: {fileID: 21300000, guid: f6a8bcde42d95df40a2284c67e7e58f4, type: 3}
+    agonySprite: {fileID: 21300000, guid: 5043aa4992e8c6844addef1ede78dfa4, type: 3}
+    babySprite: {fileID: 21300000, guid: 830932bf9a45c19438c2d5b9b20ef330, type: 3}
+    youngSprite: {fileID: 21300000, guid: 6b2d33ef0dfe5fe4bb1720cf3dee2204, type: 3}
+    adultSprite: {fileID: 21300000, guid: 6419cd5b867cc7d46a4a28f127624314, type: 3}
+    seniorSprite: {fileID: 21300000, guid: 78ae08fb7b6344c448ac2f30897d7ce2, type: 3}
+    fruitSprite: {fileID: 21300000, guid: 114481e9cbbb34a478a739d174593742, type: 3}
+    flowers:
+    - {fileID: 21300000, guid: 2114542e32457544ab34b22ee4d10a0f, type: 3}
+    - {fileID: 21300000, guid: a52df9ac16aea2849b83eca850adb96b, type: 3}
+    - {fileID: 21300000, guid: cf3e129208dea0549aef337deab736b2, type: 3}
+    - {fileID: 21300000, guid: 7e3b27a056041bc48948c0eb67c7eb22, type: 3}
+    - {fileID: 21300000, guid: 16d6de34228123847bb7560b82d767d8, type: 3}
+    - {fileID: 21300000, guid: 934aa639771370e43a0b5abda20dc78a, type: 3}
