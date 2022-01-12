@@ -11,12 +11,18 @@ public class LevelDisplay : MonoBehaviour
     public Text nameText;
     //public Text descriptionText;
 
-    public Image scoreImage;
-    public Text levelNumberText;
+    public Image levelImage;
+    public GameObject levelImageObject;
     public Text levelRecordText;
     public int levelNumber;
     [SerializeField]
     private Button self;
+    public Image levelbackgroundImage;
+    public Sprite levelbackgroundLocked;
+    public GameObject playButton;
+    public GameObject textScore;
+    public GameObject unlockTextObject;
+    public Text unlockText;
 
 
     // Update is called once per frame
@@ -30,10 +36,9 @@ public class LevelDisplay : MonoBehaviour
         nameText.text = level.name;
         //descriptionText.text = level.description;
         levelNumber = level.levelNumber;
-        levelNumberText.text = "Level " + levelNumber.ToString();
-        levelRecordText.text = "Score " + record.ToString();
+        levelRecordText.text = "High score " + record.ToString();
         Unlock(GameManager.Instance.levelList.IndexOf(level.LockLvl));
-        
+        levelImage.sprite = level.levelCapture;
     }
 
     public void GoToScene()
@@ -45,12 +50,17 @@ public class LevelDisplay : MonoBehaviour
         if(level.scoreUnlock <= GameManager.Instance.levelSaves[lockerPos].levelRecord)
         {
             //unlocked
-            self.interactable =true;
+            self.interactable = true;
         }
         else
         {
-            self.interactable = false;
-;
+            levelbackgroundImage.sprite = levelbackgroundLocked;
+            levelImageObject.SetActive(false);
+            playButton.SetActive(false);
+            textScore.SetActive(false);
+            unlockTextObject.SetActive(true);
+            unlockText.text = "You need " + level.scoreUnlock + " butterflies on the precedent level to unlock.";
+
         }
     }
 }

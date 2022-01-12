@@ -139,6 +139,40 @@ public class InputHandler : Singleton<InputHandler>
                 onInputRelease?.Invoke(mode);
             }
         }
+
+        //Right Click eraser
+        //OnPress
+        if (Input.GetMouseButtonDown(1))
+        {
+            if (!KarpHelper.IsOverUI())
+            {
+                isMaintaining = true;
+                onInputPress?.Invoke(InputMode.eraser);
+            }
+        }
+        //OnDrag
+        if (Input.GetMouseButton(1))
+        {
+            if (KarpHelper.IsOverUI())
+            {
+                onInputRelease?.Invoke(InputMode.eraser);
+            }
+            else
+            if (isMaintaining)
+            {
+                onInputMaintain?.Invoke(InputMode.eraser);
+            }
+        }
+        //OnRelease
+        if (Input.GetMouseButtonUp(1))
+        {
+            if (isMaintaining)
+            {
+                isMaintaining = false;
+                onInputRelease?.Invoke(InputMode.eraser);
+            }
+        }
+
     }
     //
     public void ChangeMode(InputMode newMode)

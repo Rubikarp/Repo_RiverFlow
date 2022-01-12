@@ -247,7 +247,7 @@ public class TileSpawnScore : MonoBehaviour
         bool output = false;
 
         int maxX = (int)Mathf.Floor(((float)Screen.width / (float)Screen.height) * mainCamera.orthographicSize);
-        int maxY = (int)Mathf.Floor(mainCamera.orthographicSize);
+        int maxY = (int)Mathf.Floor(mainCamera.orthographicSize)-1;
 
         if(!(-maxX <= tile.worldPos2D.x && tile.worldPos2D.x <= maxX) || !(-maxY <= tile.worldPos2D.y && tile.worldPos2D.y <= maxY))
         {

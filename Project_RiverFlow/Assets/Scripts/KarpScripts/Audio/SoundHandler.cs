@@ -15,17 +15,17 @@ public class SoundHandler : Singleton<SoundHandler>
 {
     [Header("Main Parameters")]
     public AudioMixer mainAudioMixer;
-    public AudioMixerGroup masterGroup;
-
-    [Range(-80f, 20f)]
-    public float masterVolume;
 
     [Header("AudioGroups")]
+    public AudioMixerGroup masterGroup;
+    [Space(10)]
     public AudioMixerGroup uiGroup;
     public AudioMixerGroup effectsGroup;
     public AudioMixerGroup musicGroup;
 
     [Header("StartVolumes")]
+    [Range(-80f, 20f), Tooltip("Volume in decibel")] public float masterVolume;
+    [Space(10)]
     [Range(-80f, 20f), Tooltip("Volume in decibel")] public float uiVolume;
     [Range(-80f, 20f), Tooltip("Volume in decibel")] public float effectsVolume;
     [Range(-80f, 20f), Tooltip("Volume in decibel")] public float musicVolume;

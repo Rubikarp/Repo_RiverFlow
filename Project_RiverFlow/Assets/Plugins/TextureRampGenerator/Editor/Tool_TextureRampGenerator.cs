@@ -1,5 +1,6 @@
-﻿using UnityEditor;
+﻿#if UNITY_EDITOR
 using UnityEngine;
+using UnityEditor;
 
 namespace Karprod
 {
@@ -156,3 +157,4 @@ namespace Karprod
         }
     }
 }
+#endif
