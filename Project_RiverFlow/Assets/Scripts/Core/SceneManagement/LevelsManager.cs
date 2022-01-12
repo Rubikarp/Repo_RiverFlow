@@ -13,6 +13,7 @@ public class LevelsManager : MonoBehaviour
     public Camera menuCamera;
     public Vector3 mainMenuCameraPos;
     public Vector3 levelSelectionCameraPos;
+    public GameObject cameraFollower;
 
 
     void Start()
@@ -39,11 +40,18 @@ public class LevelsManager : MonoBehaviour
         levelSelectionPanelTransform.sizeDelta = new Vector2(
             (currentLevels.Count - 1) * (levelButton.GetComponent<RectTransform>().sizeDelta.x + levelSelectionPanelTransform.GetComponent<HorizontalLayoutGroup>().spacing), 
             levelSelectionPanelTransform.sizeDelta.y);
+
+        moveToLevelSelection();
     }
 
     public void moveToLevelSelection()
     {
+        cameraFollower.transform.position = levelSelectionCameraPos;
+    }
 
+    public void moveToMainMenu()
+    {
+        cameraFollower.transform.position = mainMenuCameraPos;
     }
 
 }
