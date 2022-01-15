@@ -31,9 +31,10 @@ public class DigingHandler : MonoBehaviour
     [Space(10)]
     private GameTile lastSelectedTile;
 
-    [Header("Digging")]
+    [Header("Sounds")]
     public string digSound = "Digging";
     public string eraseSound = "Erase";
+
 
     void OnEnable()
     {
@@ -172,7 +173,9 @@ public class DigingHandler : MonoBehaviour
                                 {
                                     //Event
                                     onLink?.Invoke(startSelectTile, endSelectTile);
+                                    LevelSoundboard.Instance.ChangePitchDig();
                                     LevelSoundboard.Instance.PlayDigEffectSound(digSound);
+                                    LevelSoundboard.Instance.UpPitchDig();
                                 }
                             }
                         }
@@ -211,6 +214,7 @@ public class DigingHandler : MonoBehaviour
     }
     private void InputRelease(InputMode mode)
     {
+        LevelSoundboard.Instance.InitializePitchDig();
         //Moutain end
         if (endSelectTile != null)
         {

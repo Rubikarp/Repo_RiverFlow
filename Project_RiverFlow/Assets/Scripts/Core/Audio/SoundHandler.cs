@@ -142,4 +142,8 @@ public class SoundHandler : Singleton<SoundHandler>
         mainAudioMixer.SetFloat(targetGroup, value != 0 ? Mathf.Log10(value) * 20 : -80);
         PlayerPrefs.SetFloat(targetGroup, value);
     }
+    public void ChangePitch(float newPitch,AudioSource audioSource)
+    {
+        audioSource.pitch = newPitch;
+    }
 }

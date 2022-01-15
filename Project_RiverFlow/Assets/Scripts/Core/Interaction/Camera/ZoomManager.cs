@@ -16,6 +16,7 @@ public class ZoomManager : MonoBehaviour
     {
         startZoom = minZoom;
         Cam.orthographicSize = startZoom;
+        Timer = TimeManager.Instance;
     }
 
     // Update is called once per frame

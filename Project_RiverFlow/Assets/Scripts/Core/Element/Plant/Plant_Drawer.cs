@@ -340,7 +340,8 @@ public class Plant_Drawer : MonoBehaviour
 
                 break;
         }
-        LevelSoundboard.Instance.PlaySpawnEffectSound(growingSound);
+        LevelSoundboard.Instance.ChangeGrowPitch();
+        LevelSoundboard.Instance.PlayGrowEffectSound(growingSound);
     }
     public void SpawnFeedback()
     {
@@ -360,6 +361,7 @@ public class Plant_Drawer : MonoBehaviour
                 break;
         }
         LevelSoundboard.Instance.PlaySpawnEffectSound(sproutSpawn);
+
     }
     public void NoWaterFeedback()
     {
