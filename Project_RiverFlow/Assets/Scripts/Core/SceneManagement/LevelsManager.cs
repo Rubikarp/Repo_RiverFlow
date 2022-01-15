@@ -13,6 +13,8 @@ public class LevelsManager : MonoBehaviour
     public Camera menuCamera;
     public Vector3 mainMenuCameraPos;
     public Vector3 levelSelectionCameraPos;
+    public Vector3 optionMenuCameraPos;
+    public Vector3 CreditMenuCameraPos;
     public GameObject cameraFollower;
 
 
@@ -52,6 +54,16 @@ public class LevelsManager : MonoBehaviour
     public void moveToMainMenu()
     {
         cameraFollower.transform.position = mainMenuCameraPos;
+    }
+
+    public void moveToOptionMenu()
+    {
+        cameraFollower.transform.position = optionMenuCameraPos;
+    }
+
+    public void moveToCreditMenu()
+    {
+        cameraFollower.transform.position = CreditMenuCameraPos;
     }
 
 }
