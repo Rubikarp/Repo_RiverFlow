@@ -89,6 +89,7 @@ public class PlantSpawner : MonoBehaviour
         gameGrid = GameObject.Find("Grid").GetComponent<GameGrid>();
         tileScores = new List<TileInfoScore>();
         elementHandler = GameObject.Find("Element").GetComponent<ElementHandler>();
+        gametime = TimeManager.Instance;
     }
 
     public void SpawnPlant()

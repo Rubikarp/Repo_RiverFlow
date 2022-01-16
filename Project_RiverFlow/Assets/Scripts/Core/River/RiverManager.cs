@@ -29,12 +29,14 @@ public class RiverManager : Singleton<RiverManager>
     {
         gameTime = TimeManager.Instance;
         gameTime.onWaterSimulationStep.AddListener(FlowStep);
+        gameTime.onWaterSimulationStep.AddListener(UpdateSoundRiver);
         digging.onLink.AddListener(OnLink);
         digging.onBreak.AddListener(OnBreak);
     }
     private void OnDestroy()
     {
         gameTime.onWaterSimulationStep.RemoveListener(FlowStep);
+        gameTime.onWaterSimulationStep.RemoveListener(UpdateSoundRiver);
         digging.onLink.RemoveListener(OnLink);
         digging.onBreak.RemoveListener(OnBreak);
     }
@@ -1024,5 +1026,17 @@ public class RiverManager : Singleton<RiverManager>
                 Debug.DrawLine(grid.TileToPos(canals[i].startNode), grid.TileToPos(canals[i].endNode), Color.green);
             }
         }
+    }
+    private void UpdateSoundRiver()
+    {
+
+        //for (int i = 0; i < canals.Count; i++)
+        //{
+        //    if (canals[i].canalTiles.)
+        //    {
+        //    }
+
+        //}
+
     }
 }

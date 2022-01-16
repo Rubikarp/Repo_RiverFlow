@@ -1040,10 +1040,16 @@ MonoBehaviour:
   plantEffectSource: {fileID: 214600380762059960}
   SpawnSource: {fileID: 214600381608622820}
   itemEffectSource: {fileID: 0}
-  growingSource: {fileID: 214600381347304464}
-  diggingSource: {fileID: 214600381568605721}
   irrigatedSource: {fileID: 214600379831939307}
   eraseSource: {fileID: 214600379565285795}
+  diggingSource: {fileID: 214600381568605721}
+  digPitch: 0.9
+  minPitchDig: 0.9
+  maxPitchDig: 1.5
+  digPitchIncrement: 0.05
+  growingSource: {fileID: 214600381347304464}
+  minPitchGrow: 0.9
+  maxPitchGrow: 1.5
   soundEffectLib:
   - name: SproutSpawn
     clip: {fileID: 8300000, guid: 8e964b715a811464e82529c35987d43b, type: 3}
@@ -1059,7 +1065,7 @@ MonoBehaviour:
     targetGroup: {fileID: -9015305574639715243, guid: 1843abb1a777b1a46adaf9d5c2519ee8, type: 2}
   - name: Irrigated
     clip: {fileID: 8300000, guid: 211b76a7cb2f54d4c843edac50ca3b45, type: 3}
-    volume: 0.7
+    volume: 1
     targetGroup: {fileID: -9015305574639715243, guid: 1843abb1a777b1a46adaf9d5c2519ee8, type: 2}
   - name: Erase
     clip: {fileID: 8300000, guid: 2920fba53fe76407a83bbe9dc7eeeb53, type: 3}
