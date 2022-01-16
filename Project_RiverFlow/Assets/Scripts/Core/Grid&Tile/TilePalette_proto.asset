@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: TilePalette_proto
   m_EditorClassIdentifier: 
   holedGround: {r: 0.5754717, g: 0.51355827, b: 0.3936009, a: 1}
-  groundGrass: {r: 0.6, g: 0.854902, b: 0.60784316, a: 1}
+  groundGrass: {r: 0.6156863, g: 0.8392157, b: 0.5647059, a: 1}
   groundClay: {r: 0.9372549, g: 0.6784314, b: 0.5058824, a: 1}
   groundAride: {r: 0.9647059, g: 0.8745098, b: 0.6431373, a: 1}
   mountain: {r: 0.5, g: 0.5, b: 0.5, a: 1}
