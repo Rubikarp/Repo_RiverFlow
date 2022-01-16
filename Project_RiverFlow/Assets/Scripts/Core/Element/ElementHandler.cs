@@ -236,4 +236,17 @@ public class ElementHandler : MonoBehaviour
         }
     }
 #endif
+    public void UpdateSoundRiver()
+    {
+        LevelSoundboard.Instance.riverPresent = false;
+        for (int i = 0; i < allSources.Count; i++)
+        {
+            if (allSources[i].TileOn.linkAmount > 0)
+            {
+                LevelSoundboard.Instance.riverPresent = true;
+            }
+        }
+        LevelSoundboard.Instance.ChangeBackGroundSoundVolume();
+
+    }
 }

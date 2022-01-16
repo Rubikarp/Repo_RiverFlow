@@ -365,7 +365,7 @@ public class Plant_Drawer : MonoBehaviour
     }
     public void NoWaterFeedback()
     {
-        Debug.Log(plant.hasDiedRecently);
+        //Debug.Log(plant.hasDiedRecently);
         bool playing = false;
         if (plant.timeWithoutIrrigation >=nowaterTime && playing ==false && plant.hasDiedRecently == false)
         {
@@ -381,7 +381,7 @@ public class Plant_Drawer : MonoBehaviour
         {
             NoWater.Stop(true);
             Destroy(NoWater);
-            playing = false;
+
         }
 
     }
