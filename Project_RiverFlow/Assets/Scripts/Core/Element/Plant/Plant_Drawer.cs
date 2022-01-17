@@ -13,7 +13,7 @@ public class Plant_Drawer : MonoBehaviour
     [Header("Visual")]
     private SpriteRenderer sprRender;
     public PlantSprites_SCO visual;
-
+    private bool isDead = false;
     [Header("Living")]
     [SerializeField] Camera cam;
     [SerializeField] Canvas canvas;
@@ -365,9 +365,10 @@ public class Plant_Drawer : MonoBehaviour
     }
     public void NoWaterFeedback()
     {
+        
         //Debug.Log(plant.hasDiedRecently);
         bool playing = false;
-        if (plant.timeWithoutIrrigation >=nowaterTime && playing ==false && plant.hasDiedRecently == false)
+        if (plant.timeWithoutIrrigation >=nowaterTime && playing ==false && plant.hasDiedRecently == false && isDead==false)
         {
             NoWater.Play(true);
             playing = true;
@@ -377,11 +378,11 @@ public class Plant_Drawer : MonoBehaviour
             NoWater.Stop(true);
             playing = false;
         }
-        else if (plant.hasDiedRecently == true)
+        else if (plant.hasDiedRecently == true&&isDead==false)
         {
             NoWater.Stop(true);
             Destroy(NoWater);
-
+            isDead = true;
         }
 
     }

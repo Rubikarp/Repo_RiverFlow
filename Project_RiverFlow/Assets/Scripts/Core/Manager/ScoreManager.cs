@@ -11,6 +11,7 @@ public class ScoreManager : Singleton<ScoreManager>
     public GameObject gameOverText;
     private bool gameOn = true;
     private int deadPlants = 0;
+    public int exposedDeadPlants = 0;
     public int gameScore = 0;
     private int moreScore = 0;
     public TimeManager gameTime;
@@ -110,10 +111,12 @@ public class ScoreManager : Singleton<ScoreManager>
         if (deadPlants < 3)
         {
             gameOn = true;
+            exposedDeadPlants = deadPlants;
         }
         else if (deadPlants >= 3)
         {
             gameOn = false;
+            exposedDeadPlants = deadPlants;
         }
 
         deadPlants = 0;
