@@ -74,7 +74,7 @@ MonoBehaviour:
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
+  m_PixelsPerUnitMultiplier: 1.5
 --- !u!1 &1688877799898591881
 GameObject:
   m_ObjectHideFlags: 0
@@ -319,7 +319,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 574, y: 468}
+  m_AnchoredPosition: {x: 0, y: 439}
   m_SizeDelta: {x: 400, y: -1005.7587}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &8549408419394729719
@@ -737,13 +737,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   scoreUI: {fileID: 6191867705184167725}
   gameOverText: {fileID: 8997791680449102427}
+  exposedDeadPlants: 0
   gameScore: 0
   gameTime: {fileID: 0}
   elementHandler: {fileID: 0}
   magicTreeScoring: 10
   lakeFishesScoring: 10
   level: {fileID: 11400000, guid: dfb255225e6354f41a4f27526680a3e0, type: 2}
-  menuPath: Assets/Scenes/Build/_MainMenu.unity
+  menuPath: Assets/Scenes/Louis/Menu.unity
 --- !u!1 &8997791680449102427
 GameObject:
   m_ObjectHideFlags: 0

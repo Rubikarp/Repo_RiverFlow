@@ -3,6 +3,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
 
 public class ScoreManager : Singleton<ScoreManager>
 {
@@ -125,7 +126,11 @@ public class ScoreManager : Singleton<ScoreManager>
     private IEnumerator EndGame()
     {
         gameTime.isPaused = true;
+
+        yield return new WaitForSeconds(1);
         gameOverText.SetActive(true);
+        gameOverText.transform.DOScaleY(1.5f, 1.5f).SetEase(Ease.OutElastic);
+        gameOverText.transform.DOScaleX(1.5f, 1.5f).SetEase(Ease.OutElastic);
 
         yield return new WaitForSeconds(5);
 
