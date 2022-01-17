@@ -50,7 +50,7 @@ public class ScoreManager : Singleton<ScoreManager>
 
             if (gameOn == false)
             {
-                EndGame();
+                StartCoroutine(EndGame());
             }
         }
         scoreUI.text = gameScore.ToString();
@@ -119,10 +119,14 @@ public class ScoreManager : Singleton<ScoreManager>
         deadPlants = 0;
     }
 
-    private void EndGame()
+    private IEnumerator EndGame()
     {
         gameTime.isPaused = true;
         gameOverText.SetActive(true);
+
+        yield return new WaitForSeconds(5);
+
+        Debug.Log("Return to menu");
 
         gameManager.levelSaves[gameManager.levelList.IndexOf(level)].levelRecord = gameScore;
         gameManager.SaveLevels();
