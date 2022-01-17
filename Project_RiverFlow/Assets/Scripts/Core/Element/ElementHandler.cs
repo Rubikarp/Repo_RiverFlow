@@ -32,8 +32,11 @@ public class ElementHandler : MonoBehaviour
     [SerializeField] int posX;
     [SerializeField] int posY;
 
+    [Header("Sounds"), HorizontalLine]
+    public string sourceSound = "Source";
+    public string cloudSound = "Cloud";
+    public string lakeSound = "Lake";
 
-    
 
 
     private void Awake()
@@ -84,6 +87,8 @@ public class ElementHandler : MonoBehaviour
             go.transform.position = grid.TileToPos(new Vector2Int(grisPos.x, grisPos.y));
             go.name = "Source_" + grisPos;
 
+            //sound
+            LevelSoundboard.Instance.PlaySourceEffectSound(sourceSound);
             //Check if Plant
             WaterSource source = go.GetComponent<WaterSource>();
             if (source == null)
@@ -108,8 +113,10 @@ public class ElementHandler : MonoBehaviour
                 go.transform.position = grid.TileToPos(new Vector2Int(grisPos.x, grisPos.y));
                 go.name = "Cloud_" + grisPos;
 
-                //Check if Plant
-                Cloud cloud = go.GetComponent<Cloud>();
+        //sound
+        LevelSoundboard.Instance.PlayCloudEffectSound(cloudSound);
+        //Check if Plant
+        Cloud cloud = go.GetComponent<Cloud>();
                 if (cloud == null)
                 {
                     Debug.LogError("can't Find WaterSource on the object", go);
@@ -152,6 +159,8 @@ public class ElementHandler : MonoBehaviour
         go.transform.position = grid.TileToPos(new Vector2Int(grisPos.x, grisPos.y));
         go.name = "Lake_" + grisPos;
 
+        //sound
+        LevelSoundboard.Instance.PlayLakeEffectSound(lakeSound);
         //Check if Lake
         Lake lake = go.GetComponent<Lake>();
         if (lake == null)

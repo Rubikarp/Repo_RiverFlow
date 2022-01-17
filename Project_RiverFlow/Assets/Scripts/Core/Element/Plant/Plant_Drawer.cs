@@ -370,18 +370,21 @@ public class Plant_Drawer : MonoBehaviour
         bool playing = false;
         if (plant.timeWithoutIrrigation >=nowaterTime && playing ==false && plant.hasDiedRecently == false && isDead==false)
         {
+
+            NoWater.transform.gameObject.SetActive(true);
             NoWater.Play(true);
             playing = true;
         }
         else if (plant.timeWithoutIrrigation < nowaterTime)
         {
+            NoWater.transform.gameObject.SetActive(false);
             NoWater.Stop(true);
             playing = false;
         }
         else if (plant.hasDiedRecently == true&&isDead==false)
         {
+            NoWater.transform.gameObject.SetActive(false);
             NoWater.Stop(true);
-            Destroy(NoWater);
             isDead = true;
         }
 

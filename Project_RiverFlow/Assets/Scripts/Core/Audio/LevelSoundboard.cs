@@ -46,6 +46,10 @@ public class LevelSoundboard : Singleton<LevelSoundboard>
     public AudioSource growingSource;
     public float minPitchGrow;
     public float maxPitchGrow;
+    [Header("Items")]
+    public AudioSource SourceSource;
+    public AudioSource CloudSource;
+    public AudioSource LakeSource;
 
 
     //...
@@ -158,6 +162,22 @@ public class LevelSoundboard : Singleton<LevelSoundboard>
     {
         SoundAsset sound = soundEffectLib.Find(sound => sound.name == name);
         soundHandler.PlaySound(sound, diggingSource);
+    }
+    //items
+    public void PlaySourceEffectSound(string name)//alternative si soucis avec unity event
+    {
+        SoundAsset sound = soundEffectLib.Find(sound => sound.name == name);
+        soundHandler.PlaySound(sound, SourceSource);
+    }
+    public void PlayCloudEffectSound(string name)//alternative si soucis avec unity event
+    {
+        SoundAsset sound = soundEffectLib.Find(sound => sound.name == name);
+        soundHandler.PlaySound(sound, CloudSource);
+    }
+    public void PlayLakeEffectSound(string name)//alternative si soucis avec unity event
+    {
+        SoundAsset sound = soundEffectLib.Find(sound => sound.name == name);
+        soundHandler.PlaySound(sound, LakeSource);
     }
     //...
     #endregion
