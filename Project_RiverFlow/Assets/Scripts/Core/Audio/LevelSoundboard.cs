@@ -19,9 +19,11 @@ public class LevelSoundboard : Singleton<LevelSoundboard>
     public AudioMixerGroup musicGroup;
     [Space(5)]
     public AudioSource musicPlayer;
+    public AudioSource looserPlayer;
     public AudioSource backgroundPlayer;
     [Space(15)]
     public AudioClip levelTheme;
+    public AudioClip loserTheme;
     public AudioClip backgroundTheme;
     [Space(5)]
     public float riverNormalVolume;
@@ -36,6 +38,8 @@ public class LevelSoundboard : Singleton<LevelSoundboard>
     public AudioSource itemEffectSource;
     public AudioSource irrigatedSource;
     public AudioSource eraseSource;
+    public AudioSource deathSource;
+    public AudioSource decreaseSource;
     [Header("Dig")]
     public AudioSource diggingSource;
     public float digPitch = 1;
@@ -89,6 +93,11 @@ public class LevelSoundboard : Singleton<LevelSoundboard>
 
     //Music
     public void PlayLevelTheme() { soundHandler.PlaySound(levelTheme, musicPlayer, musicGroup); }
+    public void StopLevelTheme() { soundHandler.StopSound(musicPlayer); }
+    public void PlayLoserTheme()
+    {
+        soundHandler.PlaySound(loserTheme, looserPlayer,musicGroup);
+    }
     //ambiant
     public void PlayBackground() { soundHandler.PlaySound(backgroundTheme, backgroundPlayer, musicGroup); }
     public void ChangeBackGroundSoundVolume()
@@ -122,6 +131,16 @@ public class LevelSoundboard : Singleton<LevelSoundboard>
     {
         SoundAsset sound = soundEffectLib.Find(sound => sound.name == name);
         soundHandler.PlaySound(sound, SpawnSource);
+    }
+    public void PlayDeathEffectSound(string name)//alternative si soucis avec unity event
+    {
+        SoundAsset sound = soundEffectLib.Find(sound => sound.name == name);
+        soundHandler.PlaySound(sound, deathSource);
+    }
+    public void PlayDecreaseEffectSound(string name)
+    {
+        SoundAsset sound = soundEffectLib.Find(sound => sound.name == name);
+        soundHandler.PlaySound(sound, decreaseSource);
     }
     //grow effect
     public void PlayGrowEffectSound(string name)//alternative si soucis avec unity event

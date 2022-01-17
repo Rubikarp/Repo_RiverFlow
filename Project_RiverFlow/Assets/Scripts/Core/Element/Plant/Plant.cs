@@ -79,6 +79,8 @@ public class Plant : Element
 
     [Header("Sound")]
     public string irrigatedSound = "Irrigated";
+    public string deathSound = "Death";
+    public string decreaseSound = "Decrease";
 
     [Header("Scoring")]
     public int youngTreeScoring;
@@ -240,6 +242,11 @@ public class Plant : Element
             if(currentState == PlantState.Dead)
             {
                 hasDiedRecently = true;
+                LevelSoundboard.Instance.PlayDeathEffectSound(deathSound);
+            }
+            else
+            {
+                LevelSoundboard.Instance.PlayDecreaseEffectSound(decreaseSound);
             }
             onStateChange?.Invoke(false);
             //Debug.Log("testcridown");

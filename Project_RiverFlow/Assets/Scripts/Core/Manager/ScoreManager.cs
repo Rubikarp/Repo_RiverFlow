@@ -126,7 +126,7 @@ public class ScoreManager : Singleton<ScoreManager>
     private IEnumerator EndGame()
     {
         gameTime.isPaused = true;
-
+        LevelSoundboard.Instance.PlayLoserTheme();
         yield return new WaitForSeconds(1);
         gameOverText.SetActive(true);
         gameOverText.transform.DOScaleY(1.5f, 1.5f).SetEase(Ease.OutElastic);
