@@ -23,6 +23,9 @@ public class LevelSoundboard : Singleton<LevelSoundboard>
     [Space(15)]
     public AudioClip levelTheme;
     public AudioClip backgroundTheme;
+    [Space(5)]
+    public float riverNormalVolume;
+    public bool riverPresent = false;
 
     [Header("Effect")]
     public AudioMixerGroup FXGroup;
@@ -77,13 +80,31 @@ public class LevelSoundboard : Singleton<LevelSoundboard>
         soundSliderMusic.value = PlayerPrefs.GetFloat("musicVolume", 0.5f);
         soundSliderEffect.value = PlayerPrefs.GetFloat("effectsVolume", 0.5f);
         
+
     }
 
     //Music
     public void PlayLevelTheme() { soundHandler.PlaySound(levelTheme, musicPlayer, musicGroup); }
+    //ambiant
     public void PlayBackground() { soundHandler.PlaySound(backgroundTheme, backgroundPlayer, musicGroup); }
+    public void ChangeBackGroundSoundVolume()
+    {
+        //Debug.Log("ChangeSoundVolume");
+        if (riverPresent)
+        {
+        
+            soundHandler.FadeVolume(backgroundPlayer, 0.5f, riverNormalVolume);
 
-    //SFX
+        }
+        else
+        {
+            soundHandler.FadeVolume(backgroundPlayer, 1f, 0);
+        }
+
+
+    }
+
+    #region SFX
     public void PlayScoreEffectSound(SoundAsset sound)
     {
         soundHandler.PlaySound(sound, scoreEffectSource);
@@ -127,7 +148,7 @@ public class LevelSoundboard : Singleton<LevelSoundboard>
     {
         digPitch = minPitchDig;
     }
-    //Digging
+    //DiggingEnd
     public void PlayEraseEffectSound(string name)//alternative si soucis avec unity event
     {
         SoundAsset sound = soundEffectLib.Find(sound => sound.name == name);
@@ -139,7 +160,7 @@ public class LevelSoundboard : Singleton<LevelSoundboard>
         soundHandler.PlaySound(sound, diggingSource);
     }
     //...
-
+    #endregion
     //UI sound
     public void PlayTimeUISound(string name)
     {

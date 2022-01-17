@@ -110,6 +110,25 @@ public class SoundHandler : Singleton<SoundHandler>
         if (!source.isPlaying)
             source.Play();
     }
+    public void FadeVolume(AudioSource source, float fadeDuration, float newVolume = 0)
+    {
+        Coroutine fade = StartCoroutine(FadeRoutine(source, fadeDuration, newVolume));
+    }
+    public IEnumerator FadeRoutine(AudioSource source, float fadeDuration, float newVolume = 0)
+    {
+        float time = 0;
+        float currentVolume = source.volume;
+
+        while (time < fadeDuration)
+        {
+            source.volume = Mathf.Lerp(currentVolume, newVolume, time / fadeDuration);
+            yield return null;
+            time += Time.deltaTime;
+        }
+
+        time = 0;
+
+    }
 
     //Change a volume
     public void ChangeVolume(float value, SoundMixerGroup targetGroup)

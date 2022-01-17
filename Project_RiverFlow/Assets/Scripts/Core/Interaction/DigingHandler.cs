@@ -173,9 +173,12 @@ public class DigingHandler : MonoBehaviour
                                 {
                                     //Event
                                     onLink?.Invoke(startSelectTile, endSelectTile);
+                                    //sounds
                                     LevelSoundboard.Instance.ChangePitchDig();
                                     LevelSoundboard.Instance.PlayDigEffectSound(digSound);
                                     LevelSoundboard.Instance.UpPitchDig();
+                                    element.UpdateSoundRiver();
+
                                 }
                             }
                         }
@@ -190,6 +193,7 @@ public class DigingHandler : MonoBehaviour
                             lastSelectedTile = endSelectTile;
                             onBreak?.Invoke(endSelectTile);
                             LevelSoundboard.Instance.PlayEraseEffectSound(eraseSound);
+                            element.UpdateSoundRiver();
                         }
                     }
                     break;
@@ -214,7 +218,10 @@ public class DigingHandler : MonoBehaviour
     }
     private void InputRelease(InputMode mode)
     {
+        //sound
         LevelSoundboard.Instance.InitializePitchDig();
+        element.UpdateSoundRiver();
+
         //Moutain end
         if (endSelectTile != null)
         {

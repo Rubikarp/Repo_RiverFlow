@@ -65,7 +65,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Having a tunnel allows you to dig a path throught a mountain
+  m_text: 'You may place a source to be able to generate a new river
 
 '
   m_isRightToLeft: 0

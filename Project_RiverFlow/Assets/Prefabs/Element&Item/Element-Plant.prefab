@@ -1469,6 +1469,7 @@ MonoBehaviour:
   fruitDropForest: {fileID: 3280036359541204280}
   fruitDropSavanna: {fileID: 949850900365964289}
   fruitDropDesert: {fileID: 4554788367413003811}
+  irrigatedSound: Irrigated
   youngTreeScoring: 1
   adultTreeScoring: 2
   seniorTreeScoring: 4
@@ -1523,12 +1524,14 @@ MonoBehaviour:
   - 0.9
   - 1.2
   currentTwitch: 0
-  nowaterTime: 10
+  nowaterTime: 5
   LeafsDefault: {fileID: 4497268701671101756}
   LeafsDesert: {fileID: 3372413344352302530}
   LeafsSavana: {fileID: 4324557442799640850}
   MiniWave: {fileID: 7044593471437667412}
   NoWater: {fileID: 3323013486589095526}
+  growingSound: Growing
+  sproutSpawn: SproutSpawn
 --- !u!1 &7433603878243962071
 GameObject:
   m_ObjectHideFlags: 0
@@ -1645,7 +1648,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7765756693867423144}
   m_LocalRotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 0.001, y: 1.24, z: -0.66}
+  m_LocalPosition: {x: 0.001, y: 0.195, z: -0.66}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 8408782267423306832}
@@ -1661,7 +1664,7 @@ ParticleSystem:
   serializedVersion: 7
   lengthInSec: 2
   simulationSpeed: 1
-  stopAction: 0
+  stopAction: 2
   cullingMode: 0
   ringBufferMode: 0
   ringBufferLoopRange: {x: 0, y: 1}
