@@ -297,7 +297,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: -475553357682887328, guid: 1843abb1a777b1a46adaf9d5c2519ee8, type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
-  m_Volume: 0.01
+  m_Volume: 0
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -1035,6 +1035,8 @@ MonoBehaviour:
   backgroundPlayer: {fileID: 214600380564921504}
   levelTheme: {fileID: 8300000, guid: 299b6e987acfcd94295b00bd65f5f953, type: 3}
   backgroundTheme: {fileID: 8300000, guid: cb53c5896a35f294fbd154f3f20a5d84, type: 3}
+  riverNormalVolume: 0.01
+  riverPresent: 0
   FXGroup: {fileID: -9015305574639715243, guid: 1843abb1a777b1a46adaf9d5c2519ee8, type: 2}
   scoreEffectSource: {fileID: 0}
   plantEffectSource: {fileID: 214600380762059960}
