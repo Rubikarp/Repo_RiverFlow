@@ -65,9 +65,9 @@ public class RewardManager : MonoBehaviour
         LevelSoundboard.Instance.PlayRewardUISound(rewardTimeSound);
 
 
-        Newday.GetComponent<RawImage>().DOColor(newDayColor, 1.5f);
-        clock.transform.DOScaleY(1f, 0.5f).SetEase(Ease.OutBack);
-        clock.transform.DOScaleX(1f, 0.5f).SetEase(Ease.OutBack);
+        Newday.GetComponent<RawImage>().DOColor(newDayColor, 0.5f);
+        clock.transform.DOScaleY(1f, 0.1f).SetEase(Ease.OutBack);
+        clock.transform.DOScaleX(1f, 0.1f).SetEase(Ease.OutBack);
         List<WeightedButton> Temporary = new List<WeightedButton>(usedButtons);
 
 

@@ -22,8 +22,8 @@ public class RewardDisplay : MonoBehaviour
     private void Start()
     {
 
-        transform.DOScaleY(0.8f, 1f).SetEase(Ease.OutBack);
-        transform.DOScaleX(0.8f, 1f).SetEase(Ease.OutBack);
+        transform.DOScaleY(0.8f, 0.2f).SetEase(Ease.OutBack);
+        transform.DOScaleX(0.8f, 0.2f).SetEase(Ease.OutBack);
         Inventory = this.gameObject.GetComponentInParent<RewardManager>().Inventory;
         digNumber.text = digBonus.ToString();
     }

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 
 public class ZoomManager : MonoBehaviour
 {
@@ -14,14 +15,16 @@ public class ZoomManager : MonoBehaviour
 
     void Start()
     {
+        Timer = TimeManager.Instance;
+        Timer.getMoreDig.AddListener(Zoom);
         startZoom = minZoom;
         Cam.orthographicSize = startZoom;
-        Timer = TimeManager.Instance;
+
     }
 
     // Update is called once per frame
-    void FixedUpdate()
+    public void Zoom()
     {
-        Cam.orthographicSize = Mathf.Clamp(startZoom + zoomIncrement * (Timer.weekNumber-1), minZoom, maxZoom);
+        Cam.DOOrthoSize(Mathf.Clamp(startZoom + zoomIncrement * (Timer.weekNumber - 1), minZoom, maxZoom), 1f);
     }
 }
