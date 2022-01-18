@@ -135,7 +135,7 @@ public class GameTile : MonoBehaviour
                         {
                             if (neighborOfNeighbor.isRiver)
                             {
-                                switch (type)
+                                /*switch (type)
                                 {
                                     case TileType.grass:
                                         if (neighborOfNeighbor.riverStrenght >=FlowStrenght._25_)
@@ -157,7 +157,9 @@ public class GameTile : MonoBehaviour
                                         break;
                                     default:
                                         break;
-                                }
+                                }*/
+
+                                return true;
 
                             }
                         }
