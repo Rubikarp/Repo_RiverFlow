@@ -626,6 +626,17 @@ Mesh:
     offset: 0
     size: 0
     path: 
+--- !u!114 &188061779 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 214600381503014250, guid: fc71bd7ad89d19345b1fcaf6779f439b, type: 3}
+  m_PrefabInstance: {fileID: 704954107}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 455793b6e982e5f4a966218ad16c9aa2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &191233606
 GameObject:
   m_ObjectHideFlags: 0
@@ -1153,6 +1164,30 @@ MonoBehaviour:
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 188061779}
+        m_TargetAssemblyTypeName: LevelSoundboard, Assembly-CSharp
+        m_MethodName: PlayModeUISound
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: ModeButton
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 188061779}
+        m_TargetAssemblyTypeName: LevelSoundboard, Assembly-CSharp
+        m_MethodName: PlaySwishUISound
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: Swish
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &311998203
@@ -5059,6 +5094,30 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 188061779}
+        m_TargetAssemblyTypeName: LevelSoundboard, Assembly-CSharp
+        m_MethodName: PlayModeUISound
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: ModeButton
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 188061779}
+        m_TargetAssemblyTypeName: LevelSoundboard, Assembly-CSharp
+        m_MethodName: PlaySwishUISound
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: Swish
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &653952426
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5140,6 +5199,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 214600380564921504, guid: fc71bd7ad89d19345b1fcaf6779f439b, type: 3}
+      propertyPath: m_Volume
+      value: 0.01
+      objectReference: {fileID: 0}
+    - target: {fileID: 214600380922903422, guid: fc71bd7ad89d19345b1fcaf6779f439b, type: 3}
+      propertyPath: m_Pitch
+      value: 1.2
+      objectReference: {fileID: 0}
     - target: {fileID: 214600381503014244, guid: fc71bd7ad89d19345b1fcaf6779f439b, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -5197,9 +5264,17 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 214600381503014250, guid: fc71bd7ad89d19345b1fcaf6779f439b, type: 3}
+      propertyPath: menu
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 214600381503014250, guid: fc71bd7ad89d19345b1fcaf6779f439b, type: 3}
       propertyPath: soundSliderUI
       value: 
       objectReference: {fileID: 1053805433}
+    - target: {fileID: 214600381503014250, guid: fc71bd7ad89d19345b1fcaf6779f439b, type: 3}
+      propertyPath: swishUISource
+      value: 
+      objectReference: {fileID: 899260876}
     - target: {fileID: 214600381503014250, guid: fc71bd7ad89d19345b1fcaf6779f439b, type: 3}
       propertyPath: soundSliderMusic
       value: 
@@ -5212,6 +5287,30 @@ PrefabInstance:
       propertyPath: soundSliderMaster
       value: 
       objectReference: {fileID: 1978670948}
+    - target: {fileID: 214600381503014250, guid: fc71bd7ad89d19345b1fcaf6779f439b, type: 3}
+      propertyPath: soundUILib.Array.size
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 214600381503014250, guid: fc71bd7ad89d19345b1fcaf6779f439b, type: 3}
+      propertyPath: soundUILib.Array.data[4].clip
+      value: 
+      objectReference: {fileID: 8300000, guid: 73c06b73f80c4438788f8197fd8ddb6e, type: 3}
+    - target: {fileID: 214600381503014250, guid: fc71bd7ad89d19345b1fcaf6779f439b, type: 3}
+      propertyPath: soundUILib.Array.data[4].name
+      value: Swish
+      objectReference: {fileID: 0}
+    - target: {fileID: 214600381503014250, guid: fc71bd7ad89d19345b1fcaf6779f439b, type: 3}
+      propertyPath: soundUILib.Array.data[1].volume
+      value: 0.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 214600381503014250, guid: fc71bd7ad89d19345b1fcaf6779f439b, type: 3}
+      propertyPath: soundUILib.Array.data[4].volume
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 214600381503014250, guid: fc71bd7ad89d19345b1fcaf6779f439b, type: 3}
+      propertyPath: soundUILib.Array.data[4].targetGroup
+      value: 
+      objectReference: {fileID: 7017793297182156295, guid: 1843abb1a777b1a46adaf9d5c2519ee8, type: 2}
     - target: {fileID: 214600381503014251, guid: fc71bd7ad89d19345b1fcaf6779f439b, type: 3}
       propertyPath: m_Name
       value: '#Audio'
@@ -6879,6 +6978,11 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!82 &899260876 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 214600380922903422, guid: fc71bd7ad89d19345b1fcaf6779f439b, type: 3}
+  m_PrefabInstance: {fileID: 704954107}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &899528563
 GameObject:
   m_ObjectHideFlags: 0
@@ -7796,6 +7900,30 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 188061779}
+        m_TargetAssemblyTypeName: LevelSoundboard, Assembly-CSharp
+        m_MethodName: PlayModeUISound
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: ModeButton
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 188061779}
+        m_TargetAssemblyTypeName: LevelSoundboard, Assembly-CSharp
+        m_MethodName: PlaySwishUISound
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: Swish
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1199181992
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8116,6 +8244,18 @@ MonoBehaviour:
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 188061779}
+        m_TargetAssemblyTypeName: LevelSoundboard, Assembly-CSharp
+        m_MethodName: PlayModeUISound
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: ModeButton
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &1286386737
@@ -8634,6 +8774,30 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 188061779}
+        m_TargetAssemblyTypeName: LevelSoundboard, Assembly-CSharp
+        m_MethodName: PlayModeUISound
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: ModeButton
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 188061779}
+        m_TargetAssemblyTypeName: LevelSoundboard, Assembly-CSharp
+        m_MethodName: PlaySwishUISound
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: Swish
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1366809608
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9020,6 +9184,30 @@ MonoBehaviour:
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 188061779}
+        m_TargetAssemblyTypeName: LevelSoundboard, Assembly-CSharp
+        m_MethodName: PlayModeUISound
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: ModeButton
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 188061779}
+        m_TargetAssemblyTypeName: LevelSoundboard, Assembly-CSharp
+        m_MethodName: PlaySwishUISound
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: Swish
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!1 &1675172731
@@ -14656,6 +14844,30 @@ MonoBehaviour:
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 188061779}
+        m_TargetAssemblyTypeName: LevelSoundboard, Assembly-CSharp
+        m_MethodName: PlayModeUISound
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: ModeButton
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 188061779}
+        m_TargetAssemblyTypeName: LevelSoundboard, Assembly-CSharp
+        m_MethodName: PlaySwishUISound
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: Swish
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &1973358875
