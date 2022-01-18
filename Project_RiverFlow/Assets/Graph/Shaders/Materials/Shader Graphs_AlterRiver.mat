@@ -49,6 +49,6 @@ Material:
     - _Alpha: 1
     - _RiverStrenght: 3
     m_Colors:
-    - Color_a71f16f0c170475d887cd0209bcee73d: {r: 0.6698113, g: 0.6152686, b: 0.54027236, a: 1}
+    - Color_a71f16f0c170475d887cd0209bcee73d: {r: 0.7529412, g: 0.6313726, b: 0.46666667, a: 1}
     - Vector2_7744f58aaafa492993e470861eb0b752: {r: 0, g: -0.5, b: 0, a: 0}
   m_BuildTextureStacks: []
