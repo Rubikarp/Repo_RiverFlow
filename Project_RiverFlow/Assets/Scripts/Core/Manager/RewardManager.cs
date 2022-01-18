@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
+using DG.Tweening;
 [System.Serializable]
 public class WeightedButton
 {
@@ -21,6 +22,9 @@ public class RewardManager : MonoBehaviour
     List<GameObject> rewardDisplays;
     public RewardDisplay rewardButton;
     public GameObject Newday;
+    public GameObject clock;
+    public Color newDayColor;
+    public Color newDayColorFade;
     public RectTransform rewardSelectionPanelTransform;
     public InventoryManager Inventory;
     public TimeManager Timer;
@@ -47,6 +51,8 @@ public class RewardManager : MonoBehaviour
         while (rewardSelectionPanelTransform.childCount != 0)
         {
             Newday.SetActive(false);
+            clock.transform.localScale = new Vector3(0, 0, 0);
+            Newday.GetComponent<RawImage>().color = newDayColorFade;
             DestroyImmediate(rewardSelectionPanelTransform.GetChild(0).gameObject);
             rewardSelectionPanelTransform.sizeDelta = new Vector2(0, 0);
             rewardDisplays.Clear();
@@ -54,11 +60,14 @@ public class RewardManager : MonoBehaviour
     }
     public void InitializeSelectionPanel()
     {
-
+        EmptySelectionPanel();
         Newday.SetActive(true);
         LevelSoundboard.Instance.PlayRewardUISound(rewardTimeSound);
-        EmptySelectionPanel();
 
+
+        Newday.GetComponent<RawImage>().DOColor(newDayColor, 1.5f);
+        clock.transform.DOScaleY(1f, 0.5f).SetEase(Ease.OutBack);
+        clock.transform.DOScaleX(1f, 0.5f).SetEase(Ease.OutBack);
         List<WeightedButton> Temporary = new List<WeightedButton>(usedButtons);
 
 

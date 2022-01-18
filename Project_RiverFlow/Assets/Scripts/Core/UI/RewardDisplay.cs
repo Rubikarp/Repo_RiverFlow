@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using TMPro;
+using DG.Tweening;
 
 public class RewardDisplay : MonoBehaviour
 {
@@ -20,6 +21,9 @@ public class RewardDisplay : MonoBehaviour
 
     private void Start()
     {
+
+        transform.DOScaleY(1f, 1f).SetEase(Ease.OutBack);
+        transform.DOScaleX(1f, 1f).SetEase(Ease.OutBack);
         Inventory = this.gameObject.GetComponentInParent<RewardManager>().Inventory;
         digNumber.text = digBonus.ToString();
     }
