@@ -9322,6 +9322,8 @@ MonoBehaviour:
   levelList:
   - {fileID: 11400000, guid: dfb255225e6354f41a4f27526680a3e0, type: 2}
   - {fileID: 11400000, guid: 7c2049fdedf69144cad32cfa3e02e7ff, type: 2}
+  - {fileID: 11400000, guid: a5fc19b27e1957b48ab4933486c48989, type: 2}
+  - {fileID: 11400000, guid: 0a48774936fd693428cf9e55f5019c89, type: 2}
   levelSaves: []
 --- !u!1 &1759074865
 GameObject:
