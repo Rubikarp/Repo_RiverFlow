@@ -10,9 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b29908123b7277242a9c96854f780ebc, type: 3}
-  m_Name: LevelTest1
+  m_Name: Level1
   m_EditorClassIdentifier: 
-  levelSceneName: Assets/Scenes/Manon/LD_Manon.unity
+  levelSceneName: Assets/Scenes/Build/Level_01.unity
+  levelCapture: {fileID: 0}
   levelNumber: 1
   name: Niveau 1
   recordScore: 0

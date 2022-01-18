@@ -10,11 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b29908123b7277242a9c96854f780ebc, type: 3}
-  m_Name: LevelTest3
+  m_Name: Level4
   m_EditorClassIdentifier: 
-  levelSceneName: Assets/Scenes/Luc/Level_03.unity
-  levelNumber: 3
-  name: Level 3
+  levelSceneName: Assets/Scenes/Build/Level_04.unity
+  levelCapture: {fileID: 0}
+  levelNumber: 4
+  name: Level 4
   recordScore: 0
   scoreUnlock: 1000
-  LockLvl: {fileID: 11400000, guid: 7c2049fdedf69144cad32cfa3e02e7ff, type: 2}
+  LockLvl: {fileID: 11400000, guid: a5fc19b27e1957b48ab4933486c48989, type: 2}
