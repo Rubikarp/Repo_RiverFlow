@@ -70,6 +70,7 @@ public class LevelSoundboard : Singleton<LevelSoundboard>
     public AudioSource swishUISource;
     public AudioSource menuTravellingUISource;
     public AudioSource rewardUISource;
+    public AudioSource errorUISource;
     //...
     [Space(15)]
     public List<SoundAsset> soundUILib = new List<SoundAsset>();
@@ -229,6 +230,11 @@ public class LevelSoundboard : Singleton<LevelSoundboard>
     {
         SoundAsset sound = soundUILib.Find(sound => sound.name == name);
         soundHandler.PlaySound(sound, rewardUISource);
+    }
+    public void PlayErrorUISound(string name)
+    {
+        SoundAsset sound = soundUILib.Find(sound => sound.name == name);
+        soundHandler.PlaySound(sound, errorUISource);
     }
     //...
 
