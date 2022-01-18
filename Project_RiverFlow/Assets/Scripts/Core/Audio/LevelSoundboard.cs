@@ -55,7 +55,7 @@ public class LevelSoundboard : Singleton<LevelSoundboard>
     public AudioSource CloudSource;
     public AudioSource LakeSource;
 
-
+    public bool menu = false;
     //...
     //attention au dela de 32 call simultannée ça va plus du tout et le son coupe
     //https://answers.unity.com/questions/1192900/playing-many-audioclips-with-playoneshot-causes-al.html
@@ -67,8 +67,10 @@ public class LevelSoundboard : Singleton<LevelSoundboard>
     [Space(5)]
     public AudioSource timeUISource;
     public AudioSource modesUISource;
+    public AudioSource swishUISource;
     public AudioSource menuTravellingUISource;
     public AudioSource rewardUISource;
+    public AudioSource errorUISource;
     //...
     [Space(15)]
     public List<SoundAsset> soundUILib = new List<SoundAsset>();
@@ -78,9 +80,17 @@ public class LevelSoundboard : Singleton<LevelSoundboard>
     {
         soundHandler = SoundHandler.Instance;
 
-        PlayLevelTheme();
-        
-        PlayBackground();
+        if(menu == true)
+        {
+            PlayBackground();
+        }
+        else
+        {
+            PlayLevelTheme();
+
+            PlayBackground();
+        }
+
 
         //Place rightly the slider
         soundSliderMaster.value = PlayerPrefs.GetFloat("masterVolume", 0.5f);
@@ -211,10 +221,20 @@ public class LevelSoundboard : Singleton<LevelSoundboard>
         SoundAsset sound = soundUILib.Find(sound => sound.name == name);
         soundHandler.PlaySound(sound, modesUISource);
     }
+    public void PlaySwishUISound(string name)
+    {
+        SoundAsset sound = soundUILib.Find(sound => sound.name == name);
+        soundHandler.PlaySound(sound, swishUISource);
+    }
     public void PlayRewardUISound(string name)
     {
         SoundAsset sound = soundUILib.Find(sound => sound.name == name);
         soundHandler.PlaySound(sound, rewardUISource);
+    }
+    public void PlayErrorUISound(string name)
+    {
+        SoundAsset sound = soundUILib.Find(sound => sound.name == name);
+        soundHandler.PlaySound(sound, errorUISource);
     }
     //...
 

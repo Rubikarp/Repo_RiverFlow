@@ -23,7 +23,9 @@ public class RiverManager : Singleton<RiverManager>
     public MessageEvent loopEvent = new MessageEvent();
 
     public InventoryManager inventory;
+    [HideInInspector] public bool forbidenMove = false;
 
+    public string error = "Error";
 
     void Start()
     {
@@ -472,8 +474,21 @@ public class RiverManager : Singleton<RiverManager>
     private void CannotLink(MessageCase messageCase)
     {
         Debug.LogError("Move Interdit");
+        LevelSoundboard.Instance.PlayErrorUISound(error);
+        StartCoroutine(ForbidenMoveGridColor());
         loopEvent?.Invoke(MessageCase.TryLoopingCanal, "You can't create a loop");
         inventory.digAmmount++;
+    }
+    IEnumerator ForbidenMoveGridColor()
+    {
+        forbidenMove = true;
+        yield return new WaitForSeconds(0.3f);
+        forbidenMove = false;
+        yield return new WaitForSeconds(0.2f);
+        forbidenMove = true;
+        yield return new WaitForSeconds(0.3f);
+        forbidenMove = false;
+
     }
     #endregion
     #region Break Link

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 
 public class MagicTree : Element
 {
@@ -46,39 +47,44 @@ public class MagicTree : Element
     public int scoringTick;
 
     [Header("Sprites")]
-    public GameObject forestSprite;
-    public GameObject savanaSprite;
-    public GameObject desertSprite;
+    public Sprite forestSprite;
+    public Sprite savanaSprite;
+    public Sprite desertSprite;
+    public SpriteRenderer sprite;
+
 
     private void Start()
     {
+        sprite = this.gameObject.GetComponent<SpriteRenderer>();
         gameTime = TimeManager.Instance;
         scoreManager = ScoreManager.Instance;
 
         switch (tileOn.type)
         {
             case TileType.grass:
-                forestSprite.SetActive(true);
-                savanaSprite.SetActive(false);
-                desertSprite.SetActive(false);
+                sprite.sprite = forestSprite;
                 break;
 
             case TileType.clay:
-                forestSprite.SetActive(false);
-                savanaSprite.SetActive(true);
-                desertSprite.SetActive(false);
+                sprite.sprite = savanaSprite;
                 break;
 
             case TileType.sand:
-                forestSprite.SetActive(false);
-                savanaSprite.SetActive(false);
-                desertSprite.SetActive(true);
+                sprite.sprite = desertSprite;
                 break;
 
             default:
                 break;
 
         }
+
+
+        // layer
+        PositionRendererSorter.SortTreePositionOderInLayer(sprite,this.transform);
+        //tweening
+
+        transform.DOScaleY(1f, 0.5f).SetEase(Ease.OutQuart);
+        transform.DOScaleX(1f, 1.3f).SetEase(Ease.OutElastic);
     }
 
     private void Update()
