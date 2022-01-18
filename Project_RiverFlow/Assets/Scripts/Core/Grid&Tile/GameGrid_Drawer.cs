@@ -9,9 +9,12 @@ public class GameGrid_Drawer : MonoBehaviour
     public InputHandler input;
     public SpriteRenderer rend;
 
+    private RiverManager riverManager;
+
     [Header("Parameter")]
     [SerializeField] private float speed = 5f;
     [SerializeField] private float colorSpeed = 5f;
+    private float initialColorSpeed;
     [Space(10)]
     [SerializeField, Range(0, 1.00f)] private float opacity = 0.66f;
     [SerializeField, Range(0, 2.00f)] private float roundness = 1f;
@@ -20,6 +23,7 @@ public class GameGrid_Drawer : MonoBehaviour
     [SerializeField, ColorUsage(true, false)] private Color baseColor;
     [SerializeField, ColorUsage(true, false)] private Color pencilColor;
     [SerializeField, ColorUsage(true, false)] private Color eraserColor;
+    [SerializeField, ColorUsage(true, false)] private Color forbidenMoveColor;
     
     [Header("Internal")]
     private MaterialPropertyBlock propBlock;
@@ -29,6 +33,8 @@ public class GameGrid_Drawer : MonoBehaviour
 
     void Start()
     {
+        
+        riverManager = RiverManager.Instance;
         transform.localScale = new Vector3(grid.size.x, grid.size.y, 1);
 
         //permet d'overide les param sans modif le mat ou créer d'instance
@@ -44,12 +50,14 @@ public class GameGrid_Drawer : MonoBehaviour
 
         //Push Data
         rend.SetPropertyBlock(propBlock);
+
+        initialColorSpeed = colorSpeed;
     }
 
     void Update()
     {
         //OnDrag
-        if (Input.GetMouseButton(0))
+        if (Input.GetMouseButton(0) && riverManager.forbidenMove == false)
         {
             time += Time.deltaTime * speed;
             colorTime += Time.deltaTime * colorSpeed;
@@ -69,6 +77,18 @@ public class GameGrid_Drawer : MonoBehaviour
             colorTime = Mathf.Clamp01(colorTime);
 
             rend.color = Color.Lerp(baseColor, eraserColor, Mathf.Pow(colorTime, 3));
+        }
+        else if(riverManager.forbidenMove == true)
+        {
+            colorSpeed = 10;
+            time += Time.deltaTime * speed;
+            colorTime += Time.deltaTime * colorSpeed;
+
+            time = Mathf.Clamp01(time);
+            colorTime = Mathf.Clamp01(colorTime);
+
+            rend.color = Color.Lerp(pencilColor, forbidenMoveColor, Mathf.Pow(colorTime, 3));
+            colorSpeed = initialColorSpeed;
         }
         else
         {
