@@ -46,6 +46,7 @@ public class InputHandler : Singleton<InputHandler>
 
     private bool isMaintaining = false;
     private InputMode lastMode = InputMode.diging;
+    public bool shortCutErasing = false;
 
     void Update()
     {
@@ -113,6 +114,7 @@ public class InputHandler : Singleton<InputHandler>
         {
             if (!KarpHelper.IsOverUI())
             {
+
                 isMaintaining = true;
                 onInputPress?.Invoke(mode);
             }
@@ -127,6 +129,7 @@ public class InputHandler : Singleton<InputHandler>
             else 
             if(isMaintaining)
             {
+
                 onInputMaintain?.Invoke(mode);
             }
         }
@@ -135,6 +138,7 @@ public class InputHandler : Singleton<InputHandler>
         {
             if (isMaintaining)
             {
+
                 isMaintaining = false;
                 onInputRelease?.Invoke(mode);
             }
@@ -146,6 +150,7 @@ public class InputHandler : Singleton<InputHandler>
         {
             if (!KarpHelper.IsOverUI())
             {
+                shortCutErasing = true;
                 isMaintaining = true;
                 onInputPress?.Invoke(InputMode.eraser);
             }
@@ -155,11 +160,13 @@ public class InputHandler : Singleton<InputHandler>
         {
             if (KarpHelper.IsOverUI())
             {
+                shortCutErasing = false;
                 onInputRelease?.Invoke(InputMode.eraser);
             }
             else
             if (isMaintaining)
             {
+                shortCutErasing = true;
                 onInputMaintain?.Invoke(InputMode.eraser);
             }
         }
@@ -168,6 +175,7 @@ public class InputHandler : Singleton<InputHandler>
         {
             if (isMaintaining)
             {
+                shortCutErasing = false;
                 isMaintaining = false;
                 onInputRelease?.Invoke(InputMode.eraser);
             }

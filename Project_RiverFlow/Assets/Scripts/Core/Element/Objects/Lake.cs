@@ -34,6 +34,7 @@ public class Lake : Element
     private int neededTrees = 0;
     public GameObject lakeMainBodySprite;
     public SpriteRenderer lakeRender;
+
     public Sprite lake25;
     public Sprite lake50;
     public Sprite lake75;
@@ -67,6 +68,8 @@ public class Lake : Element
                 break;
             case FlowStrenght._100_:
                 lakeRender.sprite = lake100;
+                break;
+            default:
                 break;
         }
 

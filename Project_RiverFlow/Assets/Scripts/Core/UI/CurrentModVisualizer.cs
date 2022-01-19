@@ -25,6 +25,8 @@ public class CurrentModVisualizer : MonoBehaviour
 
     void Update()
     {
+
+
         switch (input.mode)
         {
             case InputMode.nothing:
@@ -83,6 +85,11 @@ public class CurrentModVisualizer : MonoBehaviour
             if (Input.GetMouseButton(1))
             {
                 eraser.localScale = Vector3.one * sizeAugment;
+                dig.localScale = Vector3.one * 1;
+
+                cloud.localScale = Vector3.one * 1;
+                lake.localScale = Vector3.one * 1;
+                source.localScale = Vector3.one * 1;
             }
             else
             {
