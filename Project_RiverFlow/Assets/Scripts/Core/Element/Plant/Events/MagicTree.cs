@@ -52,6 +52,10 @@ public class MagicTree : Element
     public Sprite desertSprite;
     public SpriteRenderer sprite;
 
+    [Header("Particles")]
+    public ParticleSystem basicLucioles;
+    public ParticleSystem blueLucioles;
+    public ParticleSystem redLucioles;
 
     private void Start()
     {
@@ -63,13 +67,16 @@ public class MagicTree : Element
         {
             case TileType.grass:
                 sprite.sprite = forestSprite;
+                basicLucioles.Play(true);
                 break;
 
             case TileType.clay:
+                blueLucioles.Play(true);
                 sprite.sprite = savanaSprite;
                 break;
 
             case TileType.sand:
+                redLucioles.Play(true);
                 sprite.sprite = desertSprite;
                 break;
 
@@ -83,7 +90,7 @@ public class MagicTree : Element
         PositionRendererSorter.SortTreePositionOderInLayer(sprite,this.transform);
         //tweening
 
-        transform.DOScaleY(1f, 0.5f).SetEase(Ease.OutQuart);
+        transform.DOScaleY(1f, 0.7f).SetEase(Ease.OutQuart);
         transform.DOScaleX(1f, 1.3f).SetEase(Ease.OutElastic);
     }
 
