@@ -33,20 +33,41 @@ public class Lake : Element
     public bool hasFish = false;
     private int neededTrees = 0;
     public GameObject lakeMainBodySprite;
+    public SpriteRenderer lakeRender;
+    public Sprite lake25;
+    public Sprite lake50;
+    public Sprite lake75;
+    public Sprite lake100;
     private bool isTurned = false;
 
     // Start is called before the first frame update
     void Start()
     {
+       
+        if (isTurned == false && isVertical == true)
+        {
+            lakeMainBodySprite.transform.localRotation = Quaternion.Euler(0, 0, 90);
+            isTurned = true;
+        }
 
     }
 
     private void Update()
     {
-        if (isTurned == false && isVertical == true)
+        switch (tileOn.ReceivedFlow())
         {
-            lakeMainBodySprite.transform.localRotation = Quaternion.Euler(0,0,90);
-            isTurned = true;
+            case FlowStrenght._25_:
+                lakeRender.sprite = lake25;
+                break;
+            case FlowStrenght._50_:
+                lakeRender.sprite = lake50;
+                break;
+            case FlowStrenght._75_:
+                lakeRender.sprite = lake75;
+                break;
+            case FlowStrenght._100_:
+                lakeRender.sprite = lake100;
+                break;
         }
 
         VerifyFish();
