@@ -95,16 +95,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5ae69e38dea5b114b809a922a9536c78, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gridPos: {x: 0, y: 0}
   tileOn: {fileID: 0}
   flowOut:
     dirValue: {x: 0, y: 0}
     dirEnum: 0
   spriteDirections:
-  - {fileID: 21300000, guid: bdb611019343fad4089301f30775f6bc, type: 3}
-  - {fileID: 21300000, guid: cc3b47e53990509439c0ff2334bba018, type: 3}
-  - {fileID: 21300000, guid: 3cd93013b52682c448a309e48ea531c4, type: 3}
-  - {fileID: 21300000, guid: d044e6d65e4caf84ea7b6bc4faf15e98, type: 3}
-  - {fileID: 21300000, guid: d67aea80b27ce334bb185b4aa5f60e5e, type: 3}
-  - {fileID: 21300000, guid: 8a586f99c25496c40b4ac7fcb2c30cf0, type: 3}
-  - {fileID: 21300000, guid: 7bdc11baac2d6fa46a51c4f3640ce48a, type: 3}
-  - {fileID: 21300000, guid: 91a462df00c033e4bbfe32480ef0d643, type: 3}
+  - {fileID: 21300000, guid: b6e887d5e210a6245b33b06e3a4cc3a8, type: 3}
+  - {fileID: 21300000, guid: a1d4ad5f49bbcac478dbfe500eca6051, type: 3}
+  - {fileID: 21300000, guid: 1beb888cec1bf7746b1340190a7b9922, type: 3}
+  - {fileID: 21300000, guid: ba3487d908f912a4d82270dc28f50a5e, type: 3}
+  - {fileID: 21300000, guid: bb67e0b8a084aa24b901e4474e0fa5af, type: 3}
+  - {fileID: 21300000, guid: a9ad16dc1ec9e5a4bbe1c4b86393d44c, type: 3}
+  - {fileID: 21300000, guid: 8d59364e10ea40244aaebac0b7f3c58c, type: 3}
+  - {fileID: 21300000, guid: 3e72bbe42ddf975488710790adfa5284, type: 3}
