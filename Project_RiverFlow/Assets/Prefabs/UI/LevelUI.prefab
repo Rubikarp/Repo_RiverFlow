@@ -1444,7 +1444,7 @@ MonoBehaviour:
   textGUI: {fileID: 1105158023416456393}
   Inventory: {fileID: 0}
   on: {fileID: 21300000, guid: 7b7ba48895fb8b0408080aba791f39ca, type: 3}
-  off: {fileID: 21300000, guid: 75a9b9ecd381bbd4e998f012275253ee, type: 3}
+  off: {fileID: 21300000, guid: 9f8474218d7f83546999416dd02ee634, type: 3}
   selfImage: {fileID: 1229170658949500465}
   Item: 4
 --- !u!114 &159723688929086686
@@ -2037,7 +2037,7 @@ MonoBehaviour:
   textGUI: {fileID: 7564991289677188741}
   Inventory: {fileID: 0}
   on: {fileID: 21300000, guid: c97e0911ef22cf1478fb8382d9ea36d5, type: 3}
-  off: {fileID: 21300000, guid: 1491223f9110f8f4cba9d997258aed8f, type: 3}
+  off: {fileID: 21300000, guid: d084db6887de8af469afa9fdf9a50fb3, type: 3}
   selfImage: {fileID: 7564991288843447505}
   Item: 2
 --- !u!1 &7564991288911682893
@@ -2266,7 +2266,7 @@ MonoBehaviour:
   textGUI: {fileID: 7564991290804351309}
   Inventory: {fileID: 0}
   on: {fileID: 21300000, guid: 6d4347d074ab3ac4bba45d4b0f797610, type: 3}
-  off: {fileID: 21300000, guid: 1d38d4f353c311a46b1b593321f127c5, type: 3}
+  off: {fileID: 21300000, guid: 735ca3ae96ef13e41ab6aa32592a0291, type: 3}
   selfImage: {fileID: 7564991288911682888}
   Item: 3
 --- !u!1 &7564991289040015181
@@ -3925,7 +3925,7 @@ MonoBehaviour:
   textGUI: {fileID: 7564991290160162973}
   Inventory: {fileID: 0}
   on: {fileID: 21300000, guid: 2d216c2df221e3e4a948be7408598e64, type: 3}
-  off: {fileID: 21300000, guid: dadaa62378f984246bf3a5d92f7887bf, type: 3}
+  off: {fileID: 21300000, guid: 73cbc524594a49d4fa402c23e404596c, type: 3}
   selfImage: {fileID: 7564991290855244986}
   Item: 1
 --- !u!1 &8060996204395468034
