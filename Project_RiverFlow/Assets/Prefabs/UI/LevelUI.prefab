@@ -2054,7 +2054,6 @@ GameObject:
   - component: {fileID: 2043809741}
   - component: {fileID: 4348055093739839932}
   - component: {fileID: 8229577610339623521}
-  - component: {fileID: 1247004352445640912}
   m_Layer: 5
   m_Name: ButtonDragLake
   m_TagString: Untagged
@@ -2203,7 +2202,7 @@ MonoBehaviour:
   textGUI: {fileID: 7564991290804351309}
   Inventory: {fileID: 0}
   on: {fileID: 21300000, guid: 6d4347d074ab3ac4bba45d4b0f797610, type: 3}
-  off: {fileID: 21300000, guid: 1d38d4f353c311a46b1b593321f127c5, type: 3}
+  off: {fileID: 21300000, guid: 735ca3ae96ef13e41ab6aa32592a0291, type: 3}
   selfImage: {fileID: 7564991288911682888}
   Item: 3
 --- !u!114 &8229577610339623521
@@ -2251,24 +2250,6 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
---- !u!114 &1247004352445640912
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7564991288911682893}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 497113d2aa647f147827ae487d30d7bb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  textGUI: {fileID: 7564991290804351309}
-  Inventory: {fileID: 0}
-  on: {fileID: 21300000, guid: 6d4347d074ab3ac4bba45d4b0f797610, type: 3}
-  off: {fileID: 21300000, guid: 735ca3ae96ef13e41ab6aa32592a0291, type: 3}
-  selfImage: {fileID: 7564991288911682888}
-  Item: 3
 --- !u!1 &7564991289040015181
 GameObject:
   m_ObjectHideFlags: 0
