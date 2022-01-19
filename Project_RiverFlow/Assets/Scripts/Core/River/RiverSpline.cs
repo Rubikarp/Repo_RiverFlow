@@ -160,7 +160,7 @@ public class RiverSpline : MonoBehaviour
         startDisk.Color = points[0].color;
         startDisk.transform.position = points[0].pos;
 
-        endDisk.Radius = points[points.Count - 1].thickness * 0.75f * line.Thickness;
+        endDisk.Radius = points[points.Count - 1].thickness * 0.5f * line.Thickness;
         endDisk.Color = points[points.Count - 1].color;
         endDisk.transform.position = points[points.Count - 1].pos;
     }
