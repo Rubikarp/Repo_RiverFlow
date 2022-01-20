@@ -673,11 +673,13 @@ public class RiverManager : Singleton<RiverManager>
                 {
                     for (int j = 0; j < tile.canalsIn.Count; j++)
                     {
-                        if (tile.canalsIn[j].Contains(tile.GetNeighbor(tile.flowIn[i]).gridPos))
+                        /*
+                        TODO : trouver pourquoi c'est important
+                        while (tile.canalsIn[j].Contains(tile.GetNeighbor(tile.flowIn[i]).gridPos))
                         {
                             tile.canalsIn[j].Inverse(grid);
-                            j--;
                         }
+                        */
                     }
                 }
             }

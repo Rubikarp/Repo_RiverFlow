@@ -2017,8 +2017,8 @@ MonoBehaviour:
   sourcePreview: {fileID: 21300000, guid: 4cb332ebf0545b344b826be67264ee62, type: 3}
   cursorMode: 0
   hotSpot: {x: 0, y: 0}
-  defaultCursor: {fileID: 2800000, guid: 78083b4de3a3cc14f81cd544b27e8290, type: 3}
-  digCursor: {fileID: 2800000, guid: 409cb9f928eb3b54eaf0b87216d71534, type: 3}
+  defaultCursor: {fileID: 0}
+  digCursor: {fileID: 0}
   eraserCursor: {fileID: 0}
 --- !u!1 &7564991288843447511
 GameObject:

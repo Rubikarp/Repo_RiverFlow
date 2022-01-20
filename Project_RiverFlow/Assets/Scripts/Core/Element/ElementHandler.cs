@@ -37,8 +37,6 @@ public class ElementHandler : MonoBehaviour
     public string cloudSound = "Cloud";
     public string lakeSound = "Lake";
 
-
-
     private void Awake()
     {
         for (int i = 0; i < allPlants.Count; i++)
@@ -49,8 +47,6 @@ public class ElementHandler : MonoBehaviour
         {
             LinkElementToGrid(allSources[i]);
         }
-
-
     }
     #region Spawn
     public void SpawnPlantAt(Vector2Int gridPos)

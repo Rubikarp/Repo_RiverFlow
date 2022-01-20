@@ -30,6 +30,14 @@ public class SoundHandler : Singleton<SoundHandler>
     [Range(-80f, 20f), Tooltip("Volume in decibel")] public float effectsVolume;
     [Range(-80f, 20f), Tooltip("Volume in decibel")] public float musicVolume;
 
+    private void Start()
+    {
+        masterVolume = PlayerPrefs.GetFloat("masterVolume", 0.5f); ;
+        uiVolume = PlayerPrefs.GetFloat("uiVolume", 0.5f); ;
+        effectsVolume = PlayerPrefs.GetFloat("musicVolume", 0.5f); ;
+        musicVolume = PlayerPrefs.GetFloat("effectsVolume", 0.5f); ;
+    }
+
     [Button]
     void SetVolumes()
     {

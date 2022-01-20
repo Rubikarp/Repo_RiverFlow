@@ -310,7 +310,6 @@ public class DigingHandler : MonoBehaviour
         else if (element is Cloud)
         {
             element.TileOn = null;
-            element.TileOn = null;
 
             Destroy(element.gameObject);
             inventory.cloudsAmmount++;
