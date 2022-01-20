@@ -107,11 +107,14 @@ public class DigingHandler : MonoBehaviour
                         if (startSelectTile.ReceivedFlow() > FlowStrenght._00_) //
                         {
                             List<GameTile> testedTileLinks = startSelectTile.GetLinkedTile();
+                            GameTile previousTile = startSelectTile.GetNeighbor(startSelectTile.flowIn[0]);
+                            GameTile previousLakeTile = previousTile.GetNeighbor(previousTile.flowIn[0]);
+
                             //check if vertical
                             if ((testedTileLinks[0] == startSelectTile.neighbors[1] && testedTileLinks[1] == startSelectTile.neighbors[5])
                              || (testedTileLinks[0] == startSelectTile.neighbors[5] && testedTileLinks[1] == startSelectTile.neighbors[1]))
                             {
-                                element.SpawnLakeAt(startSelectTile.gridPos, vertical: true);
+                                element.SpawnLakeAt(startSelectTile.gridPos, vertical: true, previousLakeTile);
                                 inventory.lakesAmmount--;
                                 input.ChangeMode(InputMode.diging);
                             }
@@ -120,7 +123,7 @@ public class DigingHandler : MonoBehaviour
                             if ((testedTileLinks[0] == startSelectTile.neighbors[3] && testedTileLinks[1] == startSelectTile.neighbors[7])
                              || (testedTileLinks[0] == startSelectTile.neighbors[7] && testedTileLinks[1] == startSelectTile.neighbors[3]))
                             {
-                                element.SpawnLakeAt(startSelectTile.gridPos, vertical: false);
+                                element.SpawnLakeAt(startSelectTile.gridPos, vertical: false, previousLakeTile);
                                 inventory.lakesAmmount--;
                                 input.ChangeMode(InputMode.diging);
                             }

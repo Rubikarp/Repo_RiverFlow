@@ -43,7 +43,7 @@ public class River_Drawer : MonoBehaviour
         }
 
         //Lie chaque riverRender à son canal
-        for (int i = 0; i < riverHandler.canals.Count; i++)
+        for (int i = 0; i < riverRender.Count; i++)
         {
             if (riverHandler.canals[i] != null)
             {
