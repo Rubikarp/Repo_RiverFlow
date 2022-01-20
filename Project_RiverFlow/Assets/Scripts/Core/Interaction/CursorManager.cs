@@ -89,27 +89,41 @@ public class CursorManager : MonoBehaviour
                     {
                         if (testedTile.linkAmount == 2)
                         {
-                            Debug.Log("test");
-                            preview.gameObject.SetActive(true);
+                            //Debug.Log("test");
+                            
                             List<GameTile> testedTileLinks = testedTile.GetLinkedTile();
                             //check if vertical
                             if ((testedTileLinks[0] == testedTile.neighbors[1] && testedTileLinks[1] == testedTile.neighbors[5])
                              || (testedTileLinks[0] == testedTile.neighbors[5] && testedTileLinks[1] == testedTile.neighbors[1]))
                             {
+                                preview.gameObject.SetActive(true);
                                 preview.transform.localRotation = Quaternion.Euler(0, 0, 90);
                                 previewSprite.sprite = lakePreview;
-                                previewSprite.color = new Color(1, 1, 1, 1);
+                                previewSprite.color = new Color(1, 1, 1, 0.6f);
                             }
                             //check if horizontal
                             else
                             if ((testedTileLinks[0] == testedTile.neighbors[3] && testedTileLinks[1] == testedTile.neighbors[7])
                              || (testedTileLinks[0] == testedTile.neighbors[7] && testedTileLinks[1] == testedTile.neighbors[3]))
                             {
+                                preview.gameObject.SetActive(true);
                                 preview.transform.localRotation = Quaternion.Euler(0, 0, 0);
                                 previewSprite.sprite = lakePreview;
                                 previewSprite.color = new Color(1, 1, 1, 0.6f);
                             }
+                            else
+                            {
+                                preview.gameObject.SetActive(false);
+                            }
                         }
+                        else
+                        {
+                            preview.gameObject.SetActive(false);
+                        }
+                    }
+                    else
+                    {
+                        preview.gameObject.SetActive(false);
                     }
                     break;
 
@@ -127,7 +141,19 @@ public class CursorManager : MonoBehaviour
                                 previewSprite.color = new Color(1, 1, 1, 0);
                                 cloudPreview.SetActive(true);
                             }
+                            else
+                            {
+                                preview.gameObject.SetActive(false);
+                            }
                         }
+                        else
+                        {
+                            preview.gameObject.SetActive(false);
+                        }
+                    }
+                    else
+                    {
+                        preview.gameObject.SetActive(false);
                     }
                     break;
 
@@ -144,6 +170,14 @@ public class CursorManager : MonoBehaviour
                             previewSprite.sprite = sourcePreview;
                             previewSprite.color = new Color(1, 1, 1, 0.6f);
                         }
+                        else
+                        {
+                            preview.gameObject.SetActive(false);
+                        }
+                    }
+                    else
+                    {
+                        preview.gameObject.SetActive(false);
                     }
                     break;
             }
