@@ -12,13 +12,6 @@ void CornersMask_float( in float2 uv, in uint4 bitmask, out float4 mask)
 	uint dr = down+right;
 	uint dl = down+left;
 
-	/*
-	uint4 tr = uint4(top+right);
-	uint4 tl = uint4(top+left);
-	uint4 dr = uint4(down+right);
-	uint4 dl = uint4(down+left);
-	*/
-
 	uv = frac(uv);
 	uv *= 3;
 

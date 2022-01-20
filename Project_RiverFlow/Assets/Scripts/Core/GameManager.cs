@@ -13,9 +13,10 @@ public class GameManager : Singleton<GameManager>
     {
         MakeSingleton(true);
         levelSaves = Save.LoadSave();
-        //si on a pas de saves
-        if (levelSaves.Count < levelList.Count)
+        if (levelSaves == null || levelSaves.Count != levelList.Count)
         {
+            
+            Debug.Log("no save bru");
             //creer des fichiers ou tt les scores max sont à 0
             levelSaves = new List<LevelSave>();
             for (int i=0; i<levelList.Count; i++)
