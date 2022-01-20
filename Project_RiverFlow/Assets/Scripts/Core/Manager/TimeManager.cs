@@ -45,19 +45,14 @@ public class TimeManager : Singleton<TimeManager>
 
     void Update()
     {
-
         if (!isPaused)
         {
             gameTimer += DeltaSimulTime;
 
             if (gameTimer > (weekDuration * weekNumber))
             {
-                
                 getMoreDig?.Invoke();
-                
                 weekNumber++;
-
-
                 Pause();
             }
 
@@ -87,10 +82,8 @@ public class TimeManager : Singleton<TimeManager>
                         nextPlantSpawn = plantSpawnRateNeutral + (plantSpawnRateNeutral * spawnRateVariation);
                         break;
                 }
-
                 plantSpawner.SpawnPlant();
             }
-            
         }
     }
 
