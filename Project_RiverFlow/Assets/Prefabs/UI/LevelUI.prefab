@@ -4722,22 +4722,6 @@ PrefabInstance:
       propertyPath: getMoreDig.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 7564991290013214242}
-    - target: {fileID: 5834999995567139795, guid: a44e5395d06c8bc41af76d1791451c88, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5834999995567139795, guid: a44e5395d06c8bc41af76d1791451c88, type: 3}
-      propertyPath: m_AnchorMin.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5834999995567139795, guid: a44e5395d06c8bc41af76d1791451c88, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5834999995567139795, guid: a44e5395d06c8bc41af76d1791451c88, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 5834999995747536877, guid: a44e5395d06c8bc41af76d1791451c88, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
