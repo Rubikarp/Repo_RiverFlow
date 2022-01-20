@@ -21,6 +21,7 @@ public class PauseUI : MonoBehaviour
         {
             isPaused = !isPaused;
             pauseUI.SetActive(!isPaused);
+            
             if(isPaused)
             {
                 Time.timeScale = 0;
