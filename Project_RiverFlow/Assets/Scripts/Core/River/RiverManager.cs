@@ -662,7 +662,7 @@ public class RiverManager : Singleton<RiverManager>
     }
     private void TileWaterStep(GameTile tile)
     {
-        tile.UpdateReceivedFlow();
+        tile.UpdateReceivedFlow(grid);
     }
     private List<Canal> ComputeCanalParent(Canal canal, List<Canal> alreadyCalc = null)
     {
