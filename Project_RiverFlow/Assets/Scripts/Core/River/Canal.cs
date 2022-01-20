@@ -11,6 +11,11 @@ public class Canal
     public List<Vector2Int> canalTiles;
     public Vector2Int endNode;
 
+    public int Lenght
+    {
+        get { return canalTiles.Count + 2; }
+    }
+
     public Canal(Vector2Int _startNode, Vector2Int _endNode)
     {
         startNode = _startNode;

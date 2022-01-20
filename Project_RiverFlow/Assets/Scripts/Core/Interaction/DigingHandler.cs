@@ -60,7 +60,11 @@ public class DigingHandler : MonoBehaviour
         switch (mode)
         {
             case InputMode.diging:
-                //Nothing
+                if (startSelectTile.linkAmount > 2 || startSelectTile.flowOut.Count >= 2)
+                {
+                    startSelectTile.flowOut.Add(startSelectTile.flowOut[0]);
+                    startSelectTile.flowOut.RemoveAt(0);
+                }
                 break;
             case InputMode.eraser:
                 if (startSelectTile.linkAmount > 0 || startSelectTile.haveElement)

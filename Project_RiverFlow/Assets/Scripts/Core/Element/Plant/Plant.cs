@@ -158,7 +158,7 @@ public class Plant : Element
             }
             if (isIrrigated == false)
             {
-                timeWithoutIrrigation += Time.deltaTime * gameTime.gameTimeSpeed;
+                timeWithoutIrrigation += gameTime.DeltaSimulTime;
             }
         }
     }
@@ -218,11 +218,11 @@ public class Plant : Element
     {
         if (isIrrigated)
         {
-            timer += Time.deltaTime * (1 / stateUpgradeTime) * gameTime.gameTimeSpeed;
+            timer += gameTime.DeltaSimulTime * (1 / stateUpgradeTime);
         }
         else
         {
-            timer -= Time.deltaTime * (1 / stateDowngradeTime) * gameTime.gameTimeSpeed;
+            timer -= gameTime.DeltaSimulTime * (1 / stateDowngradeTime);
         }
 
         if (currentState == PlantState.FruitTree && closeRivers.Count < closeRiverTilesNeeded)
@@ -487,12 +487,10 @@ public class Plant : Element
     {
         if (isIrrigated == true)
         {
-            scoringTimer += Time.deltaTime * gameTime.gameTimeSpeed;
+            scoringTimer += gameTime.DeltaSimulTime;
 
             if (scoringTimer >= scoringTick)
             {
-
-
                 CalculateScore();
 
                 scoringTimer = 0;

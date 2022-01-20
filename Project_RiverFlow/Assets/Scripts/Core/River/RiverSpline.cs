@@ -1,54 +1,47 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 using Shapes;
+using UnityEngine;
+using System.Collections.Generic;
 
 public class RiverSpline : MonoBehaviour
 {
+    private GameGrid grid;
     [Header("Shapes")]
-    public bool custom;
-    public Polyline line;
     public RiverMesh customLine;
-    [Space(5)]
-    public Cone cone;
     [Space(5)]
     public Disc startDisk;
     public Disc endDisk;
 
-    [Header("Data")]
+    [Header("Parameter")]
     [Range(2, 16)] public int pointPerSegment = 8;
     public RiverPalette_SCO riverData;
-    public List<RiverPoint> points = new List<RiverPoint>() {};
 
-    [Header("other")]
-    private GameGrid grid;
+    [Header("Data")]
+    public Canal canalTreated;
+    public List<RiverPoint> points = new List<RiverPoint>() {};
 
     private void Start()
     {
         grid = GameGrid.Instance;
     }
 
-    void Update()
+    void FixedUpdate()
     {
-        if(points.Count != line.points.Count)
-        {
-            ReCalculCurve();
-        }
+        ReCalculCurve();
     }
 
-    private PolylinePoint[] LinerInterpolation(RiverPoint lastPoint, RiverPoint newPoint, int iter)
+    private RiverPoint[] LinerInterpolation(RiverPoint lastPoint, RiverPoint newPoint, int iter)
     {
-        PolylinePoint[] result = new  PolylinePoint[iter];
+        RiverPoint[] result = new RiverPoint[iter];
         float step = 1f / (float)iter;
         for (int i = 0; i < iter; i++)
         {
-            result[i] = RiverPoint.Lerp(lastPoint, newPoint, (i+1) * step).ToPolyLine();
+            result[i] = RiverPoint.Lerp(lastPoint, newPoint, (i+1) * step);
         }
         return result;
     }
-    private PolylinePoint[] BezierInterpolation(CatmullRiverSegment curve, RiverPoint From, RiverPoint To)
+    private RiverPoint[] BezierInterpolation(CatmullRiverSegment curve, RiverPoint From, RiverPoint To)
     {
-        PolylinePoint[] result = new PolylinePoint[pointPerSegment - 1];
+        RiverPoint[] result = new RiverPoint[pointPerSegment - 1];
         RiverPoint temp = From;
 
         for (int i = 1; i < pointPerSegment; i++)
@@ -59,13 +52,13 @@ public class RiverSpline : MonoBehaviour
             temp = RiverPoint.Lerp(From, To, t);
             temp.pos = curve.GetPointPos(t);
 
-            result[i - 1] = temp.ToPolyLine();
+            result[i - 1] = temp;
         }
         return result;
     }
-    private PolylinePoint[] CatmullInterpolation(CatmullRiverSegment curve, RiverPoint From, RiverPoint To)
+    private RiverPoint[] CatmullInterpolation(CatmullRiverSegment curve, RiverPoint From, RiverPoint To)
     {
-        PolylinePoint[] result = new PolylinePoint[pointPerSegment - 1];
+        RiverPoint[] result = new RiverPoint[pointPerSegment - 1];
 
         RiverPoint temp = From;
 
@@ -74,7 +67,7 @@ public class RiverSpline : MonoBehaviour
             float t = i / (pointPerSegment - 1f);
             temp = RiverPoint.Lerp(From, To, t);
             temp.pos = curve.GetPointPos(t);
-            result[i-1] = temp.ToPolyLine();
+            result[i-1] = temp;
         }
         return result;
     }
@@ -85,7 +78,27 @@ public class RiverSpline : MonoBehaviour
     //
     public void ReCalculCurve()
     {
-        GameTile startTile = grid.GetTile(grid.PosToTile(points[0].pos));
+        #region Set Points
+        SetPointCount(canalTreated.Lenght);
+        //Set First Point
+        DefinePoint(0,
+            grid.GetTile(canalTreated.startNode).worldPos,
+            grid.GetTile(canalTreated.startNode).riverStrenght);
+
+        //Set Middle Point
+        for (int j = 0; j < canalTreated.canalTiles.Count; j++)
+        {
+            DefinePoint(j + 1,
+                    grid.GetTile(canalTreated.canalTiles[j]).worldPos,
+                    grid.GetTile(canalTreated.canalTiles[j]).riverStrenght);
+        }
+        //Set Last Point
+        DefinePoint(canalTreated.Lenght-1,
+                grid.GetTile(canalTreated.endNode).worldPos,
+                grid.GetTile(canalTreated.endNode).riverStrenght);
+        #endregion
+
+        GameTile startTile = grid.GetTile(canalTreated.startNode);
         Vector3 previousPos = startTile.worldPos;
         if(startTile.flowIn.Count > 0)
         {
@@ -96,7 +109,7 @@ public class RiverSpline : MonoBehaviour
             previousPos += startTile.worldPos - grid.GetTile(grid.PosToTile(points[1].pos)).worldPos;
         }
 
-        GameTile endTile = grid.GetTile(grid.PosToTile(points[points.Count - 1].pos));
+        GameTile endTile = grid.GetTile(canalTreated.endNode);
         Vector3 afterPos = endTile.worldPos;
         if (endTile.flowOut.Count > 0)
         {
@@ -107,11 +120,11 @@ public class RiverSpline : MonoBehaviour
             afterPos += endTile.worldPos - grid.GetTile(grid.PosToTile(points[points.Count - 2].pos)).worldPos;
         }
 
-        line.points.Clear();
+        customLine.points.Clear();
         if (points.Count > 2)
         {
-            line.AddPoint(points[0].ToPolyLine());
-            line.AddPoints(CatmullInterpolation(
+            customLine.AddPoint(points[0]);
+            customLine.AddPoints(CatmullInterpolation(
                 new CatmullRiverSegment(
                     previousPos,
                     points[0].pos,
@@ -121,10 +134,10 @@ public class RiverSpline : MonoBehaviour
 
             for (int i = 1; i < points.Count - 2; i++)
             {
-                line.AddPoints(CatmullInterpolation(GetCurve(i), points[i], points[i + 1]));
+                customLine.AddPoints(CatmullInterpolation(GetCurve(i), points[i], points[i + 1]));
             }
 
-            line.AddPoints(CatmullInterpolation(
+            customLine.AddPoints(CatmullInterpolation(
                  new CatmullRiverSegment(
                      points[points.Count - 3].pos,
                      points[points.Count - 2].pos,
@@ -134,8 +147,8 @@ public class RiverSpline : MonoBehaviour
         }
         else if (points.Count == 2)
         {
-            line.AddPoint(points[0].ToPolyLine());
-            line.AddPoints(
+            customLine.AddPoint(points[0]);
+            customLine.AddPoints(
                 CatmullInterpolation(
                 new CatmullRiverSegment(
                     previousPos,
@@ -149,22 +162,19 @@ public class RiverSpline : MonoBehaviour
             Debug.LogWarning("Need more point", this);
         }
 
-        customLine.linePoints = line.points;
-
-        UpdateEndPoint();
-        ArrowFlowDir();
+        UpdatePoints();
     }
-    public void UpdateEndPoint()
+    public void UpdatePoints()
     {
-        startDisk.Radius = points[0].thickness * 0.5f * line.Thickness;
+        startDisk.Radius = points[0].thickness * 0.5f * customLine.scale;
         startDisk.Color = points[0].color;
         startDisk.transform.position = points[0].pos;
 
-        endDisk.Radius = points[points.Count - 1].thickness * 0.5f * line.Thickness;
+        endDisk.Radius = points[points.Count - 1].thickness * 0.5f * customLine.scale;
         endDisk.Color = points[points.Count - 1].color;
         endDisk.transform.position = points[points.Count - 1].pos;
     }
-    public void ArrowFlowDir()
+    /* public void ArrowFlowDir()
     {
         Vector2 dir = (points[1].pos - points[0].pos).normalized * Mathf.PI;
         dir.y = dir.y * -1; //trouver un meilleur fix
@@ -175,7 +185,8 @@ public class RiverSpline : MonoBehaviour
         cone.transform.position = points[1].pos;
         cone.transform.rotation = rot.normalized;
     }
-    //
+    */
+
     public void SetPointCount(int pointNbr)
     {
         //Floor to 0

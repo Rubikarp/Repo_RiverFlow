@@ -71,7 +71,7 @@ public class FruitTree : MonoBehaviour
 
     private void FruitSpawn()
     {
-        fruitTimer += Time.deltaTime * gameTime.gameTimeSpeed;
+        fruitTimer += gameTime.DeltaSimulTime;
 
         if (fruitTimer >= fruitSpawnTime)
         {

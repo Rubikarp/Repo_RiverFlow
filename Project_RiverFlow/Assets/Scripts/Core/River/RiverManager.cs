@@ -1,7 +1,7 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using System.Collections;
+using System.Collections.Generic;
 
 public class MessageEvent : UnityEvent<MessageCase, string> { }
 public enum MessageCase
@@ -35,6 +35,21 @@ public class RiverManager : Singleton<RiverManager>
         digging.onLink.AddListener(OnLink);
         digging.onBreak.AddListener(OnBreak);
     }
+
+    private float clock = updateTime;
+    private const float updateTime = 0.3f;
+    private void Update()
+    {
+        if(clock > 0)
+        {
+            clock -= gameTime.DeltaSimulTime;
+        }
+        else
+        {
+            FlowStep();
+        }
+    }
+
     private void OnDestroy()
     {
         gameTime.onWaterSimulationStep.RemoveListener(FlowStep);
@@ -622,6 +637,7 @@ public class RiverManager : Singleton<RiverManager>
 
     public void FlowStep()
     {
+        clock = updateTime;
         for (int i = 0; i < canals.Count; i++)
         {
             WaterStep(canals[i]);
