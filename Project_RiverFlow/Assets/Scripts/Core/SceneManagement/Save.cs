@@ -31,7 +31,7 @@ public class Save : MonoBehaviour
         }
         else
         {
-            Debug.LogError("Save file not found in" + path);
+            Debug.LogWarning("Save file not found in" + path);
             return null;
         }
     }

@@ -72,6 +72,19 @@ public class InputHandler : Singleton<InputHandler>
         }
         return hitPoint;
     }
+    public bool CursorInView()
+    {
+        Vector2 viewportPos = cam.ScreenToViewportPoint(Input.mousePosition);
+
+        if (viewportPos.x > 1.0f || viewportPos.x < 0 || viewportPos.y > 1|| viewportPos.y < 0)
+        {
+            return false;
+        }
+        else
+        {
+            return true;
+        }
+    }
     //
     private void CheckMode()
     {
@@ -114,7 +127,6 @@ public class InputHandler : Singleton<InputHandler>
         {
             if (!KarpHelper.IsOverUI())
             {
-
                 isMaintaining = true;
                 onInputPress?.Invoke(mode);
             }
@@ -129,7 +141,6 @@ public class InputHandler : Singleton<InputHandler>
             else 
             if(isMaintaining)
             {
-
                 onInputMaintain?.Invoke(mode);
             }
         }
@@ -138,7 +149,6 @@ public class InputHandler : Singleton<InputHandler>
         {
             if (isMaintaining)
             {
-
                 isMaintaining = false;
                 onInputRelease?.Invoke(mode);
             }
@@ -180,7 +190,6 @@ public class InputHandler : Singleton<InputHandler>
                 onInputRelease?.Invoke(InputMode.eraser);
             }
         }
-
     }
     //
     public void ChangeMode(InputMode newMode)

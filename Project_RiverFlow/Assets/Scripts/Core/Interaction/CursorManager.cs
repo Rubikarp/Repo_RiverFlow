@@ -54,91 +54,99 @@ public class CursorManager : MonoBehaviour
     }
     void CursorChange()
     {
-        GameTile testedTile = grid.GetTile(grid.PosToTile(inputHandler.GetHitPos()));
-        switch (inputHandler.mode)
+        if (!inputHandler.CursorInView())
         {
-            case InputMode.diging:
-                UnityEngine.Cursor.SetCursor(digCursor, hotSpot, cursorMode);
-                preview.transform.localRotation = Quaternion.Euler(0, 0, 0);
-                preview.gameObject.SetActive(false);
-                break;
-            case InputMode.eraser:
-                UnityEngine.Cursor.SetCursor(eraserCursor, hotSpot, cursorMode);
-                preview.transform.localRotation = Quaternion.Euler(0, 0, 0);
-                preview.gameObject.SetActive(false);
-                break;
-            case InputMode.nothing:
-                UnityEngine.Cursor.SetCursor(defaultCursor, hotSpot, cursorMode);
-                preview.transform.localRotation = Quaternion.Euler(0, 0, 0);
-                preview.gameObject.SetActive(false);
+            UnityEngine.Cursor.SetCursor(defaultCursor, hotSpot, cursorMode);
+        }
+        else
+        {
+            GameTile testedTile = grid.GetTile(grid.PosToTile(inputHandler.GetHitPos()));
+            switch (inputHandler.mode)
+            {
+                case InputMode.diging:
+                    UnityEngine.Cursor.SetCursor(digCursor, hotSpot, cursorMode);
+                    preview.transform.localRotation = Quaternion.Euler(0, 0, 0);
+                    preview.gameObject.SetActive(false);
+                    break;
 
-                break;
-            case InputMode.lake:
-                UnityEngine.Cursor.SetCursor(defaultCursor, hotSpot, cursorMode);
-                cloudPreview.SetActive(false);
-                preview.position = grid.TileToPos(grid.PosToTile(inputHandler.GetHitPos()));
-                if (testedTile.ReceivedFlow() > FlowStrenght._00_)
-                {
+                case InputMode.eraser:
+                    UnityEngine.Cursor.SetCursor(eraserCursor, hotSpot, cursorMode);
+                    preview.transform.localRotation = Quaternion.Euler(0, 0, 0);
+                    preview.gameObject.SetActive(false);
+                    break;
 
-                    if (testedTile.linkAmount == 2)
+                case InputMode.nothing:
+                    UnityEngine.Cursor.SetCursor(defaultCursor, hotSpot, cursorMode);
+                    preview.transform.localRotation = Quaternion.Euler(0, 0, 0);
+                    preview.gameObject.SetActive(false);
+                    break;
+
+                case InputMode.lake:
+                    UnityEngine.Cursor.SetCursor(defaultCursor, hotSpot, cursorMode);
+                    cloudPreview.SetActive(false);
+                    preview.position = grid.TileToPos(grid.PosToTile(inputHandler.GetHitPos()));
+                    if (testedTile.ReceivedFlow() > FlowStrenght._00_)
                     {
-                        Debug.Log("test");
-                        preview.gameObject.SetActive(true);
-                        List<GameTile> testedTileLinks = testedTile.GetLinkedTile();
-                        //check if vertical
-                        if ((testedTileLinks[0] == testedTile.neighbors[1] && testedTileLinks[1] == testedTile.neighbors[5])
-                         || (testedTileLinks[0] == testedTile.neighbors[5] && testedTileLinks[1] == testedTile.neighbors[1]))
+                        if (testedTile.linkAmount == 2)
                         {
-                            preview.transform.localRotation = Quaternion.Euler(0, 0, 90);
-                            previewSprite.sprite = lakePreview;
-                            previewSprite.color = new Color(1, 1, 1, 1);
+                            Debug.Log("test");
+                            preview.gameObject.SetActive(true);
+                            List<GameTile> testedTileLinks = testedTile.GetLinkedTile();
+                            //check if vertical
+                            if ((testedTileLinks[0] == testedTile.neighbors[1] && testedTileLinks[1] == testedTile.neighbors[5])
+                             || (testedTileLinks[0] == testedTile.neighbors[5] && testedTileLinks[1] == testedTile.neighbors[1]))
+                            {
+                                preview.transform.localRotation = Quaternion.Euler(0, 0, 90);
+                                previewSprite.sprite = lakePreview;
+                                previewSprite.color = new Color(1, 1, 1, 1);
+                            }
+                            //check if horizontal
+                            else
+                            if ((testedTileLinks[0] == testedTile.neighbors[3] && testedTileLinks[1] == testedTile.neighbors[7])
+                             || (testedTileLinks[0] == testedTile.neighbors[7] && testedTileLinks[1] == testedTile.neighbors[3]))
+                            {
+                                preview.transform.localRotation = Quaternion.Euler(0, 0, 0);
+                                previewSprite.sprite = lakePreview;
+                                previewSprite.color = new Color(1, 1, 1, 0.6f);
+                            }
                         }
-                        //check if horizontal
-                        else
-                        if ((testedTileLinks[0] == testedTile.neighbors[3] && testedTileLinks[1] == testedTile.neighbors[7])
-                         || (testedTileLinks[0] == testedTile.neighbors[7] && testedTileLinks[1] == testedTile.neighbors[3]))
+                    }
+                    break;
+
+                case InputMode.cloud:
+                    UnityEngine.Cursor.SetCursor(defaultCursor, hotSpot, cursorMode);
+                    preview.transform.localRotation = Quaternion.Euler(0, 0, 0);
+                    preview.position = grid.TileToPos(grid.PosToTile(inputHandler.GetHitPos()));
+                    if (testedTile.ReceivedFlow() > FlowStrenght._00_)
+                    {
+                        if (!testedTile.haveElement && testedTile.type != TileType.mountain)
                         {
-                            preview.transform.localRotation = Quaternion.Euler(0, 0, 0);
-                            previewSprite.sprite = lakePreview;
+                            if (testedTile.flowOut.Count < 2 && testedTile.flowIn.Count < 2)
+                            {
+                                preview.gameObject.SetActive(true);
+                                previewSprite.color = new Color(1, 1, 1, 0);
+                                cloudPreview.SetActive(true);
+                            }
+                        }
+                    }
+                    break;
+
+                case InputMode.source:
+                    UnityEngine.Cursor.SetCursor(defaultCursor, hotSpot, cursorMode);
+                    cloudPreview.SetActive(false);
+                    preview.transform.localRotation = Quaternion.Euler(0, 0, 0);
+                    preview.position = grid.TileToPos(grid.PosToTile(inputHandler.GetHitPos()));
+                    if (testedTile.ReceivedFlow() == FlowStrenght._00_)
+                    {
+                        if (!testedTile.haveElement && testedTile.type != TileType.mountain)
+                        {
+                            preview.gameObject.SetActive(true);
+                            previewSprite.sprite = sourcePreview;
                             previewSprite.color = new Color(1, 1, 1, 0.6f);
                         }
                     }
-                }
-                break;
-            case InputMode.cloud:
-                UnityEngine.Cursor.SetCursor(defaultCursor, hotSpot, cursorMode);
-                preview.transform.localRotation = Quaternion.Euler(0, 0, 0);
-                preview.position = grid.TileToPos(grid.PosToTile(inputHandler.GetHitPos()));
-                if (testedTile.ReceivedFlow() > FlowStrenght._00_)
-                {
-                    if (!testedTile.haveElement && testedTile.type != TileType.mountain)
-                    {
-                        if (testedTile.flowOut.Count < 2 && testedTile.flowIn.Count < 2)
-                        {
-                            preview.gameObject.SetActive(true);
-                            previewSprite.color = new Color(1, 1, 1, 0);
-                            cloudPreview.SetActive(true);
-                        }
-                    }
-                }
-                break;
-            case InputMode.source:
-                UnityEngine.Cursor.SetCursor(defaultCursor, hotSpot, cursorMode);
-                cloudPreview.SetActive(false);
-                preview.transform.localRotation = Quaternion.Euler(0, 0, 0);
-                preview.position = grid.TileToPos(grid.PosToTile(inputHandler.GetHitPos()));
-
-                if (testedTile.ReceivedFlow() == FlowStrenght._00_)
-                {
-                    if (!testedTile.haveElement && testedTile.type != TileType.mountain)
-                    {
-                        preview.gameObject.SetActive(true);
-                        previewSprite.sprite = sourcePreview;
-                        previewSprite.color = new Color(1, 1, 1, 0.6f);
-                    }
-                }
-
-                break;
+                    break;
+            }
         }
     }
 }

@@ -91,14 +91,14 @@ public class LevelSoundboard : Singleton<LevelSoundboard>
             PlayBackground();
         }
 
-
-        //Place rightly the slider
-        soundSliderMaster.value = PlayerPrefs.GetFloat("masterVolume", 0.5f);
-        soundSliderUI.value = PlayerPrefs.GetFloat("uiVolume", 0.5f);
-        soundSliderMusic.value = PlayerPrefs.GetFloat("musicVolume", 0.5f);
-        soundSliderEffect.value = PlayerPrefs.GetFloat("effectsVolume", 0.5f);
-        
-
+        if (soundSliderMaster != null)
+        {
+            //Place rightly the slider
+            soundSliderMaster.value = PlayerPrefs.GetFloat("masterVolume", 0.5f);
+            soundSliderUI.value = PlayerPrefs.GetFloat("uiVolume", 0.5f);
+            soundSliderMusic.value = PlayerPrefs.GetFloat("musicVolume", 0.5f);
+            soundSliderEffect.value = PlayerPrefs.GetFloat("effectsVolume", 0.5f);
+        }
     }
 
     //Music

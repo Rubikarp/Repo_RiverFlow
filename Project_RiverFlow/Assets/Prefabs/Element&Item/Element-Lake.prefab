@@ -40,7 +40,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4143323418627759852}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 70acc114fcaf6a04787228c35a1298a4, type: 3}
   m_Name: 
@@ -50,6 +50,8 @@ MonoBehaviour:
   allTilesOn: []
   isVertical: 0
   hasFish: 0
+  entryTile: {fileID: 0}
+  entryFlow: 1
   lakeMainBodySprite: {fileID: 4403952290143895613}
   lakeRender: {fileID: 4683150324977571630}
   lake25: {fileID: 21300000, guid: ec5e6a96dc3148245b65f0d45f6c6162, type: 3}
