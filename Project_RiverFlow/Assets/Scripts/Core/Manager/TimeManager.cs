@@ -12,6 +12,13 @@ public class TimeManager : Singleton<TimeManager>
     public float gameTimeSpeed = 1f;
     [Range(10, 360)] public float weekDuration = 180f;
     public int weekNumber = 1;
+    public float DeltaSimulTime
+    {
+        get
+        {
+            return Time.deltaTime * gameTimeSpeed;
+        }
+    }
 
     [Header("FlowSimulation")]
     [Range(0.1f, 1.2f)] public float iterationStepDur = 0.2f;
@@ -41,7 +48,7 @@ public class TimeManager : Singleton<TimeManager>
 
         if (!isPaused)
         {
-            gameTimer += Time.deltaTime * gameTimeSpeed;
+            gameTimer += DeltaSimulTime;
 
             if (gameTimer > (weekDuration * weekNumber))
             {
@@ -60,7 +67,7 @@ public class TimeManager : Singleton<TimeManager>
                 nextPlantSpawn = 0;
             }
 
-            nextPlantSpawn -= Time.deltaTime * gameTimeSpeed;
+            nextPlantSpawn -= DeltaSimulTime;
             if (nextPlantSpawn < 0)
             {
                 switch(plantSpawner.threatState) {

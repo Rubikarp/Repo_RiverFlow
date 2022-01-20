@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Lake : Element
 {
+    [Header("Element Child")]
     public GameTile tileOn;
     public GameTile[] allTilesOn;
     public override GameTile TileOn
@@ -26,36 +27,42 @@ public class Lake : Element
         get { return allTilesOn; }
         set { allTilesOn = value; }
     }
-
-    public bool isVertical; //s'il n'est pas vertical, il est horizontal. 
-    private TimeManager gameTime;
     public override bool isLinkable { get { return true; } }
+
+    [Header("Dependancy")]
+    private TimeManager gameTime;
+
+    [Header("State")]
+    public bool isVertical; //s'il n'est pas vertical, il est horizontal. 
     public bool hasFish = false;
     private int neededTrees = 0;
+    [Space(5)]
+    public GameTile entryTile;
+    public FlowStrenght entryFlow = FlowStrenght._25_;
+
+    [Header("Visual")]
     public GameObject lakeMainBodySprite;
     public SpriteRenderer lakeRender;
-
-    public Sprite lake25;
-    public Sprite lake50;
-    public Sprite lake75;
-    public Sprite lake100;
+    [Space(5)]
+    [SerializeField] Sprite lake25;
+    [SerializeField] Sprite lake50;
+    [SerializeField] Sprite lake75;
+    [SerializeField] Sprite lake100;
     private bool isTurned = false;
 
-    // Start is called before the first frame update
     void Start()
     {
-       
         if (isTurned == false && isVertical == true)
         {
             lakeMainBodySprite.transform.localRotation = Quaternion.Euler(0, 0, 90);
             isTurned = true;
         }
-
     }
 
     private void Update()
     {
-        switch (tileOn.ReceivedFlow())
+        entryFlow = entryTile.ReceivedFlow();
+        switch (entryFlow)
         {
             case FlowStrenght._25_:
                 lakeRender.sprite = lake25;

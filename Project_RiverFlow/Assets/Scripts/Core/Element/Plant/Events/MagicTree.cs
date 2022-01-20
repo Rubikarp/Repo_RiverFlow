@@ -87,7 +87,7 @@ public class MagicTree : Element
 
 
         // layer
-        PositionRendererSorter.SortTreePositionOderInLayer(sprite,this.transform);
+        PositionRendererSorter.SortTreePositionOderInLayer(sprite,transform);
         //tweening
 
         transform.DOScaleY(1f, 0.7f).SetEase(Ease.OutQuart);
@@ -101,7 +101,7 @@ public class MagicTree : Element
 
     private void Scoring()
     {
-        scoringTimer += Time.deltaTime * gameTime.gameTimeSpeed;
+        scoringTimer += gameTime.DeltaSimulTime;
 
         if (scoringTimer >= scoringTick && gameTime.isPaused == false)
         {

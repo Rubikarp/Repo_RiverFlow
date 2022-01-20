@@ -231,7 +231,14 @@ public class GameTile : MonoBehaviour
 
             if(flowOut.Count == 1)
             {
-                return (FlowStrenght)riverPower;
+                if(element is Lake)
+                {
+                    return asker.element is Lake? FlowStrenght._100_ : (element as Lake).entryFlow;
+                }
+                else
+                {
+                    return (FlowStrenght)riverPower;
+                }
             }
             else 
             if (flowOut.Count > 1)

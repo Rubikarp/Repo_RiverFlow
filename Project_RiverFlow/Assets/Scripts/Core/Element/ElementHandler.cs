@@ -152,7 +152,7 @@ public class ElementHandler : MonoBehaviour
             grid.GetTile(grisPos).element = magicTree;
         }
     }
-    public void SpawnLakeAt(Vector2Int grisPos, bool vertical)
+    public void SpawnLakeAt(Vector2Int grisPos, bool vertical,GameTile previousTile)
     {
 
         GameObject go = InstanciateElement(lake_Template);
@@ -163,6 +163,7 @@ public class ElementHandler : MonoBehaviour
         LevelSoundboard.Instance.PlayLakeEffectSound(lakeSound);
         //Check if Lake
         Lake lake = go.GetComponent<Lake>();
+        lake.entryTile = previousTile;
         if (lake == null)
         {
             Debug.LogError("can't Find WaterSource on the object", go);
