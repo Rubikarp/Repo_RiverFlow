@@ -663,27 +663,6 @@ public class RiverManager : Singleton<RiverManager>
     private void TileWaterStep(GameTile tile)
     {
         tile.UpdateReceivedFlow();
-
-        //Check for empty flow
-        if (tile.ReceivedFlow() > 0)
-        {
-            for (int i = 0; i < tile.flowIn.Count; i++)
-            {
-                if ((int)tile.GetNeighbor(tile.flowIn[i]).ReceivedFlow() <= 0)
-                {
-                    for (int j = 0; j < tile.canalsIn.Count; j++)
-                    {
-                        /*
-                        TODO : trouver pourquoi c'est important
-                        while (tile.canalsIn[j].Contains(tile.GetNeighbor(tile.flowIn[i]).gridPos))
-                        {
-                            tile.canalsIn[j].Inverse(grid);
-                        }
-                        */
-                    }
-                }
-            }
-        }
     }
     private List<Canal> ComputeCanalParent(Canal canal, List<Canal> alreadyCalc = null)
     {
