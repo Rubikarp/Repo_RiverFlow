@@ -187,15 +187,6 @@ public class GameTile : MonoBehaviour
     {
         //Update RiverStrenght
         riverStrenght = ReceivedFlow();
-
-        //Check for cloud or lake remove
-        if (riverStrenght <= 0)
-        {
-            if (element is Cloud || element is Lake)
-            {
-                (element as Cloud).UnLinkElementToGrid(grid);
-            }
-        }
     }
     public FlowStrenght ReceivedFlow()
     {
@@ -206,14 +197,14 @@ public class GameTile : MonoBehaviour
         int received = (int)FlowStrenght._00_;
         if (flowIn.Count > 0)
         {
-            if (element is Cloud)
-            {
-                received += (int)FlowStrenght._25_;
-            }
-
             for (int i = 0; i < flowIn.Count; i++)
             {
                 received += (int)GetNeighbor(flowIn[i]).AskForWater(this);
+            }
+
+            if (element is Cloud && received > 0)
+            {
+                received += (int)FlowStrenght._25_;
             }
 
             return (FlowStrenght)Mathf.Clamp(received, 0, (int)FlowStrenght._100_);

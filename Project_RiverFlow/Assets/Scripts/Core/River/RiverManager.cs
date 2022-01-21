@@ -86,7 +86,10 @@ public class RiverManager : Singleton<RiverManager>
             LinkConfirmed(startTile, endTile);
         }
         inventory.digAmmount--;
-        FlowStep();
+        if (gameTime.isFreeze)
+        {
+            FlowStep();
+        }
     }
     //
     private void LinkConfirmed(GameTile startTile, GameTile endTile)
@@ -517,8 +520,11 @@ public class RiverManager : Singleton<RiverManager>
         {
             ErasedRiverInTile(erasedTile);
         }
-        FlowStep();
-        FlowStep();
+        if (gameTime.isFreeze)
+        {
+            FlowStep();
+            FlowStep();
+        }
     }
     //
     private void ErasedElement(GameTile erasedTile)

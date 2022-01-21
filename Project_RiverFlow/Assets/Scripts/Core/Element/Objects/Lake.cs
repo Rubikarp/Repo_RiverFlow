@@ -61,26 +61,42 @@ public class Lake : Element
 
     private void Update()
     {
-        entryFlow = entryTile.ReceivedFlow();
-        switch (entryFlow)
+        if(entryTile != null)
         {
-            case FlowStrenght._25_:
-                lakeRender.sprite = lake25;
-                break;
-            case FlowStrenght._50_:
-                lakeRender.sprite = lake50;
-                break;
-            case FlowStrenght._75_:
-                lakeRender.sprite = lake75;
-                break;
-            case FlowStrenght._100_:
-                lakeRender.sprite = lake100;
-                break;
-            default:
-                break;
-        }
+            entryFlow = entryTile.ReceivedFlow();
+            if(entryFlow == FlowStrenght._00_)
+            {
+                UnLinkElementToGrid(GameGrid.Instance);
+                Destroy(gameObject);
+            }
+            else
+            {
+                switch (entryFlow)
+                {
+                    case FlowStrenght._25_:
+                        lakeRender.sprite = lake25;
+                        break;
+                    case FlowStrenght._50_:
+                        lakeRender.sprite = lake50;
+                        break;
+                    case FlowStrenght._75_:
+                        lakeRender.sprite = lake75;
+                        break;
+                    case FlowStrenght._100_:
+                        lakeRender.sprite = lake100;
+                        break;
+                    default:
+                        break;
+                }
 
-        VerifyFish();
+                VerifyFish();
+            }
+        }
+        else
+        {
+            UnLinkElementToGrid(GameGrid.Instance);
+            Destroy(gameObject);
+        }
     }
 
     private void VerifyFish()
@@ -128,4 +144,15 @@ public class Lake : Element
         }
     }
 
+    public override void UnLinkElementToGrid(GameGrid grid)
+    {
+        for (int i = 0; i < TilesOn.Length; i++)
+        {
+            //UnLink Element and Tile
+            TilesOn[i].element = null;
+            TilesOn[i] = null;
+        }
+
+        InventoryManager.Instance.lakesAmmount++;
+    }
 }

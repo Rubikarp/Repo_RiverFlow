@@ -19,6 +19,13 @@ public class TimeManager : Singleton<TimeManager>
             return Time.deltaTime * gameTimeSpeed;
         }
     }
+    public bool isFreeze
+    {
+        get
+        {
+            return gameTimeSpeed <= 0;
+        }
+    }
 
     [Header("FlowSimulation")]
     [Range(0.1f, 1.2f)] public float iterationStepDur = 0.2f;
@@ -98,6 +105,10 @@ public class TimeManager : Singleton<TimeManager>
     }
     public void SetSpeed(float speed)
     {
+        if (speed > 0)
+        {
+            RiverManager.Instance.FlowStep();
+        }
         gameTimeSpeed = speed;
     }
 }

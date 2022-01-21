@@ -26,12 +26,12 @@ public class PauseUI : MonoBehaviour
             if(isPaused)
             {
                 Time.timeScale = 0;
-                timeManager.gameTimeSpeed = 0;
+                timeManager.SetSpeed(0);
             }
             else
             {
                 Time.timeScale = 1;
-                timeManager.gameTimeSpeed = 1;
+                timeManager.SetSpeed(1);
             }
         }
     }
@@ -42,7 +42,7 @@ public class PauseUI : MonoBehaviour
         pauseUI.SetActive(false);
 
         Time.timeScale = 1;
-        timeManager.gameTimeSpeed = 1;
+        timeManager.SetSpeed(1);
     }
 
     public void Options()

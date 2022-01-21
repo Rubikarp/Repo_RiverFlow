@@ -13,4 +13,29 @@ public class Cloud : Element
         set { tileOn = value; }
     }
     public override bool isLinkable { get { return true; } }
+
+    private void Update()
+    {
+        if (TileOn != null)
+        {
+            if (TileOn.ReceivedFlow() == FlowStrenght._00_)
+            {
+                UnLinkElementToGrid(GameGrid.Instance);
+                Destroy(gameObject);
+            }
+        }
+        else
+        {
+            UnLinkElementToGrid(GameGrid.Instance);
+            Destroy(gameObject);
+        }
+    }
+    public override void UnLinkElementToGrid(GameGrid grid)
+    {
+        //UnLink Element and Tile
+        TileOn.element = null;
+        TileOn = null;
+
+        InventoryManager.Instance.cloudsAmmount++;
+    }
 }
