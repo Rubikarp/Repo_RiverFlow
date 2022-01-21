@@ -86,7 +86,7 @@ public class RiverManager : Singleton<RiverManager>
             LinkConfirmed(startTile, endTile);
         }
         inventory.digAmmount--;
-        if (gameTime.isFreeze)
+        if (!gameTime.isFreeze)
         {
             FlowStep();
         }
@@ -265,7 +265,7 @@ public class RiverManager : Singleton<RiverManager>
             Canal listCanalA = CanalList(tileA.canalsIn[0]);
             Canal listCanalB = CanalList(tileB.canalsIn[0]);
 
-            if (listCanalA == listCanalB || ComputeCanalParent(listCanalA).Contains(listCanalB) || ComputeCanalParent(listCanalB).Contains(listCanalA))
+            if (CheckForLoop(listCanalA,listCanalB, tileA, tileB))
             {
                 CannotLink(MessageCase.TryLoopingCanal);
                 return;
@@ -407,7 +407,7 @@ public class RiverManager : Singleton<RiverManager>
             {
                 listCanalA = CanalList(tileA.canalsIn[1]);
             }
-            if (listCanalA == listCanalB || ComputeCanalParent(listCanalA).Contains(listCanalB) || ComputeCanalParent(listCanalB).Contains(listCanalA))
+            if (CheckForLoop(listCanalA, listCanalB, tileA, tileB))
             {
                 CannotLink(MessageCase.TryLoopingCanal);
                 return;
@@ -461,7 +461,7 @@ public class RiverManager : Singleton<RiverManager>
                     listCanalB = CanalList(tileB.canalsIn[1]);
                 }
 
-                if (listCanalA == listCanalB || ComputeCanalParent(listCanalA).Contains(listCanalB) || ComputeCanalParent(listCanalB).Contains(listCanalA))
+                if (CheckForLoop(listCanalA,listCanalB, tileA, tileB))
                 {
                     CannotLink(MessageCase.TryLoopingCanal);
                     return;
@@ -472,11 +472,11 @@ public class RiverManager : Singleton<RiverManager>
 
                 if (FlowOfA >= (2 * FlowOfB))
                 {
-                    GenerateRiverCanal(tileA, tileB);
+                    GenerateRiverCanal(tileB, tileA);
                 }
                 else if (FlowOfA < (2 * FlowOfB))
                 {
-                    GenerateRiverCanal(tileB, tileA);
+                    GenerateRiverCanal(tileA, tileB);
                 }
             }
             else
@@ -520,7 +520,7 @@ public class RiverManager : Singleton<RiverManager>
         {
             ErasedRiverInTile(erasedTile);
         }
-        if (gameTime.isFreeze)
+        if (!gameTime.isFreeze)
         {
             FlowStep();
             FlowStep();
@@ -670,6 +670,30 @@ public class RiverManager : Singleton<RiverManager>
     {
         tile.UpdateReceivedFlow(grid);
     }
+    //
+    private bool CheckForLoop(Canal canalA, Canal canalB, GameTile tileA, GameTile tileB) 
+    {
+        if(tileA.linkAmount == 1 || tileB.linkAmount == 1)
+        {
+            if (ComputeCanalParent(canalA).Contains(canalB)||ComputeCanalParent(canalB).Contains(canalA))
+            {
+                return true;
+            }
+        }
+        else
+        {
+            if (ComputeCanalParent(canalA).Contains(canalB))
+            {
+                return true;
+            }
+            else
+            if (ComputeCanalParent(canalB).Contains(canalA))
+            {
+                return false;
+            }
+        }
+        return false;
+    }
     private List<Canal> ComputeCanalParent(Canal canal, List<Canal> alreadyCalc = null)
     {
         List<Canal> result = new List<Canal>();
@@ -712,7 +736,7 @@ public class RiverManager : Singleton<RiverManager>
         }
         return result;
     }
-
+    //
     private void GenerateRiverCanal(GameTile _startNode, GameTile _endNode)
     {
         Canal linkCanal = new Canal(_startNode.gridPos, _endNode.gridPos);
