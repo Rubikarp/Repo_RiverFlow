@@ -25,6 +25,6 @@ public class ZoomManager : MonoBehaviour
     // Update is called once per frame
     public void Zoom()
     {
-        Cam.DOOrthoSize(Mathf.Clamp(startZoom + zoomIncrement * (Timer.weekNumber - 1), minZoom, maxZoom), 1f);
+        Cam.DOOrthoSize(Mathf.Clamp(startZoom + zoomIncrement * (Timer.weekNumber), minZoom, maxZoom), 1f);
     }
 }
