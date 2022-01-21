@@ -28,7 +28,7 @@ public class GameManager : Singleton<GameManager>
         }
     }
 
-    public void ChangeScene(string sceneName)
+    public static void ChangeScene(string sceneName)
     {
         SceneManager.LoadScene(sceneName);
     }

@@ -43,7 +43,7 @@ public class LevelDisplay : MonoBehaviour
 
     public void GoToScene()
     {
-        GameManager.Instance.ChangeScene(level.levelSceneName);
+        GameManager.ChangeScene(level.levelSceneName);
     }
     public void Unlock(int lockerPos)
     {
