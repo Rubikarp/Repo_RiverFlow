@@ -8,7 +8,8 @@ public class PauseUI : MonoBehaviour
     private bool isPaused = false;
     //private GameObject pauseUI;
     private TimeManager timeManager;
-    public GameObject options;
+    public RectTransform optionsPanel;
+    public RectTransform pausePanel;
     public GameObject canvas;
     private void Start()
     {
@@ -24,45 +25,57 @@ public class PauseUI : MonoBehaviour
 
             isPaused = !isPaused;
             canvas.SetActive(isPaused);
-            options.SetActive(false);
+
             if (isPaused)
             {
-                Time.timeScale = 0;
-                timeManager.SetSpeed(0);
+                pausePanel.DOScaleY(1f, 0.2f).SetEase(Ease.InOutBack);
+                pausePanel.DOScaleX(1f, 0.2f).SetEase(Ease.InOutBack);
+                timeManager.isPaused = true;
             }
             else
             {
-                Time.timeScale = 1;
-                timeManager.SetSpeed(1);
+                timeManager.isPaused = false;
+                optionsPanel.DOScaleY(0f, 0.2f).SetEase(Ease.InOutBack);
+                optionsPanel.DOScaleX(0f, 0.2f).SetEase(Ease.InOutBack);
+                pausePanel.DOScaleY(0f, 0.2f).SetEase(Ease.InOutBack);
+                pausePanel.DOScaleX(0f, 0.2f).SetEase(Ease.InOutBack);
+
+
             }
         }
     }
 
     public void Resume()
     {
+        timeManager.isPaused = false;
+        pausePanel.DOScaleY(0f, 0.2f).SetEase(Ease.InOutBack);
+        pausePanel.DOScaleX(0f, 0.2f).SetEase(Ease.InOutBack);
         isPaused = false;
         canvas.SetActive(false);
 
-        Time.timeScale = 1;
-        timeManager.SetSpeed(1);
+
+
     }
 
     public void Options()
     {
         // Ouvrir l'UI des Options
-        options.SetActive(true);
+        optionsPanel.DOScaleY(1f, 0.2f).SetEase(Ease.InOutBack);
+        optionsPanel.DOScaleX(1f, 0.2f).SetEase(Ease.InOutBack);
     }
 
     public void ResumeOptions()
     {
-        // Ouvrir l'UI des Options
-        options.SetActive(false);
+        optionsPanel.DOScaleY(0f, 0.2f).SetEase(Ease.InOutBack);
+        optionsPanel.DOScaleX(0f, 0.2f).SetEase(Ease.InOutBack);
+        // fermer l'UI des Options
+
     }
 
     public void MainMenu()
     {
-        Time.timeScale = 1;
-        timeManager.isPaused = true;
+
+        timeManager.isPaused = false;
         ScoreManager.Instance.ReturnToMenu();
     }
 
