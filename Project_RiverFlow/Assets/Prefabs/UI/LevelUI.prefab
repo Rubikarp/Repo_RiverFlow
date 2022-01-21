@@ -1989,10 +1989,10 @@ Transform:
   m_LocalPosition: {x: 174.61287, y: 297.53287, z: -976.8056}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
+  - {fileID: 5834999995850187077}
   - {fileID: 7564991290151202825}
   - {fileID: 7564991289938435645}
   - {fileID: 7564991289575890451}
-  - {fileID: 5834999995850187077}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2701,7 +2701,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 7564991288794492298}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &7564991289575890450
 MonoBehaviour:
@@ -2906,7 +2906,7 @@ RectTransform:
   - {fileID: 7564991290344970226}
   - {fileID: 7564991290013214241}
   m_Father: {fileID: 7564991288794492298}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -3073,7 +3073,7 @@ Transform:
   m_Children:
   - {fileID: 142714632602846764}
   m_Father: {fileID: 7564991288794492298}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &7564991290151202824
 SpriteRenderer:
@@ -4744,7 +4744,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5834999995968923734, guid: a44e5395d06c8bc41af76d1791451c88, type: 3}
       propertyPath: m_RootOrder
-      value: 3
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5834999995968923734, guid: a44e5395d06c8bc41af76d1791451c88, type: 3}
       propertyPath: m_LocalPosition.x
