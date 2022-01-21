@@ -15,7 +15,7 @@ MonoBehaviour:
   levelSceneName: Assets/Scenes/Build/Level_03.unity
   levelCapture: {fileID: 0}
   levelNumber: 3
-  name: Level 3
+  name: Platypus Plains
   recordScore: 0
   scoreUnlock: 1000
   LockLvl: {fileID: 11400000, guid: 7c2049fdedf69144cad32cfa3e02e7ff, type: 2}

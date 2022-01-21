@@ -15,7 +15,7 @@ MonoBehaviour:
   levelSceneName: Assets/Scenes/Build/Level_01.unity
   levelCapture: {fileID: 0}
   levelNumber: 1
-  name: Niveau 1
+  name: Fox Meadow
   recordScore: 0
   scoreUnlock: 0
   LockLvl: {fileID: 11400000}
