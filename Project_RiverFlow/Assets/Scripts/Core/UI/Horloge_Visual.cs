@@ -7,8 +7,6 @@ public class Horloge_Visual : MonoBehaviour
     public TimeManager time;
     private Transform self;
 
-    public float value;
-
     void Start()
     {
         time = TimeManager.Instance;

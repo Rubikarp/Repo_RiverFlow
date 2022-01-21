@@ -1,0 +1,49 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!21 &2100000
+Material:
+  serializedVersion: 6
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Shader Graphs_Cycle_DayNight
+  m_Shader: {fileID: -6465566751694194690, guid: 87c5946aa71e62f41a350c6aa8db801b, type: 3}
+  m_ShaderKeywords: 
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _MainTex:
+        m_Texture: {fileID: 2800000, guid: d4f2def0c7a2b0e4c9794c9d27871382, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Texture2DAsset_ba3712303733418394baf6fd62be6583_Out_0:
+        m_Texture: {fileID: 2800000, guid: 7dfc36d4ad60b43419f8b0ea15c0ea92, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - unity_Lightmaps:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - unity_LightmapsInd:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - unity_ShadowMasks:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Floats:
+    - Vector1_0e38958c1adb437bb45a15fe389f30b0: 0.66
+    - _DayTime: 0
+    - _Moon: 0.3
+    m_Colors:
+    - Color_0a928b912a9244ca966efd4f0d40ccc2: {r: 0.846, g: 0.8991, b: 0.9, a: 1}
+    - Color_88fe0dab1be04b768f43a36fa2f37a45: {r: 1, g: 1, b: 0, a: 1}
+  m_BuildTextureStacks: []
