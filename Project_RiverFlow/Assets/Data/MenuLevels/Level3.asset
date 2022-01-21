@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Level3
   m_EditorClassIdentifier: 
   levelSceneName: Assets/Scenes/Build/Level_03.unity
-  levelCapture: {fileID: 0}
+  levelCapture: {fileID: 21300000, guid: 3cb620d60e2c11049b8d443781ddb9e8, type: 3}
   levelNumber: 3
   name: Platypus Plains
   recordScore: 0

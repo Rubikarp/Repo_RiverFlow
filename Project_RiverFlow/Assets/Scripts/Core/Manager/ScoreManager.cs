@@ -130,15 +130,17 @@ public class ScoreManager : Singleton<ScoreManager>
 
         Debug.Log("Return to menu");
 
-        gameManager.levelSaves[gameManager.levelList.IndexOf(level)].levelRecord = gameScore;
-        gameManager.SaveLevels();
-        gameManager.ChangeScene(menuPath);
+        ReturnToMenu();
+
     }
 
     public void ReturnToMenu()
     {
-        gameManager.levelSaves[gameManager.levelList.IndexOf(level)].levelRecord = gameScore;
-        gameManager.SaveLevels();
-        gameManager.ChangeScene(menuPath);
+        if(gameManager != null)
+        {
+            gameManager.levelSaves[gameManager.levelList.IndexOf(level)].levelRecord = gameScore;
+            gameManager.SaveLevels();
+        }
+        GameManager.ChangeScene(menuPath);
     }
 }

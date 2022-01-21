@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Level2
   m_EditorClassIdentifier: 
   levelSceneName: Assets/Scenes/Build/Level_02.unity
-  levelCapture: {fileID: 0}
+  levelCapture: {fileID: 21300000, guid: 3208b77c3b042eb45b03b187b281f1ba, type: 3}
   levelNumber: 2
   name: Alpagas' Range
   recordScore: 0
