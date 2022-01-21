@@ -40,12 +40,6 @@ public class ScoreManager : Singleton<ScoreManager>
     void Update()
     {
 
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            gameManager.levelSaves[gameManager.levelList.IndexOf(level)].levelRecord = gameScore;
-            gameManager.SaveLevels();
-            gameManager.ChangeScene(menuPath);
-        }
         if (!gameTime.isPaused)
         {
             VerifyDefeat();
@@ -136,6 +130,13 @@ public class ScoreManager : Singleton<ScoreManager>
 
         Debug.Log("Return to menu");
 
+        gameManager.levelSaves[gameManager.levelList.IndexOf(level)].levelRecord = gameScore;
+        gameManager.SaveLevels();
+        gameManager.ChangeScene(menuPath);
+    }
+
+    public void ReturnToMenu()
+    {
         gameManager.levelSaves[gameManager.levelList.IndexOf(level)].levelRecord = gameScore;
         gameManager.SaveLevels();
         gameManager.ChangeScene(menuPath);

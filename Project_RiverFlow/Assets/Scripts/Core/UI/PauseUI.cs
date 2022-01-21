@@ -1,29 +1,31 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
+using DG.Tweening;
 
 public class PauseUI : MonoBehaviour
 {
     private bool isPaused = false;
-    private GameObject pauseUI;
+    //private GameObject pauseUI;
     private TimeManager timeManager;
-
+    public GameObject options;
+    public GameObject canvas;
     private void Start()
     {
-        pauseUI = GameObject.Find("PauseUI");
-        timeManager = GameObject.Find("Timer").GetComponent<TimeManager>();
-        pauseUI.SetActive(false);
+        
+        timeManager = TimeManager.Instance;
+        canvas.SetActive(false);
     }
 
     private void Update()
     {
-        if(Input.GetKey(KeyCode.Escape))
+        if(Input.GetKeyDown(KeyCode.Escape))
         {
+
             isPaused = !isPaused;
-            pauseUI.SetActive(!isPaused);
-            
-            if(isPaused)
+            canvas.SetActive(isPaused);
+            options.SetActive(false);
+            if (isPaused)
             {
                 Time.timeScale = 0;
                 timeManager.SetSpeed(0);
@@ -39,7 +41,7 @@ public class PauseUI : MonoBehaviour
     public void Resume()
     {
         isPaused = false;
-        pauseUI.SetActive(false);
+        canvas.SetActive(false);
 
         Time.timeScale = 1;
         timeManager.SetSpeed(1);
@@ -48,11 +50,18 @@ public class PauseUI : MonoBehaviour
     public void Options()
     {
         // Ouvrir l'UI des Options
+        options.SetActive(true);
+    }
+
+    public void ResumeOptions()
+    {
+        // Ouvrir l'UI des Options
+        options.SetActive(false);
     }
 
     public void MainMenu()
     {
-        SceneManager.LoadScene("_MainMenu");
+        ScoreManager.Instance.ReturnToMenu();
     }
 
 }
