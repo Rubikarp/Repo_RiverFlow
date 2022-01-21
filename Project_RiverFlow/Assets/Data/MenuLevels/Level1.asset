@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Level1
   m_EditorClassIdentifier: 
   levelSceneName: Assets/Scenes/Build/Level_01.unity
-  levelCapture: {fileID: 0}
+  levelCapture: {fileID: 21300000, guid: e9427e44a2abe044db79509e79b70626, type: 3}
   levelNumber: 1
   name: Fox Meadow
   recordScore: 0
