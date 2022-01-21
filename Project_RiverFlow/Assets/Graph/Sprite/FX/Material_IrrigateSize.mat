@@ -24,15 +24,15 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: 2df888894b82f8542bea925a6bc7fa89, type: 3}
+        m_Texture: {fileID: 2800000, guid: ab5c8075a4f8e884a8f0e73ec01c9c8a, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MaskTex:
-        m_Texture: {fileID: 2800000, guid: 2df888894b82f8542bea925a6bc7fa89, type: 3}
+        m_Texture: {fileID: 2800000, guid: ab5c8075a4f8e884a8f0e73ec01c9c8a, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _NormalMap:
-        m_Texture: {fileID: 2800000, guid: 2df888894b82f8542bea925a6bc7fa89, type: 3}
+        m_Texture: {fileID: 2800000, guid: ab5c8075a4f8e884a8f0e73ec01c9c8a, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
