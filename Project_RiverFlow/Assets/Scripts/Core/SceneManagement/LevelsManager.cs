@@ -43,26 +43,30 @@ public class LevelsManager : MonoBehaviour
             (currentLevels.Count - 1) * (levelButton.GetComponent<RectTransform>().sizeDelta.x + levelSelectionPanelTransform.GetComponent<HorizontalLayoutGroup>().spacing), 
             levelSelectionPanelTransform.sizeDelta.y);
 
-        moveToLevelSelection();
+        //moveToLevelSelection();
     }
 
     public void moveToLevelSelection()
     {
+        //Debug.Log(cameraFollower);
         cameraFollower.transform.position = levelSelectionCameraPos;
     }
 
     public void moveToMainMenu()
     {
+        //Debug.Log("test");
         cameraFollower.transform.position = mainMenuCameraPos;
     }
 
     public void moveToOptionMenu()
     {
+        //Debug.Log("test");
         cameraFollower.transform.position = optionMenuCameraPos;
     }
 
     public void moveToCreditMenu()
     {
+        //Debug.Log("test");
         cameraFollower.transform.position = CreditMenuCameraPos;
     }
 
