@@ -61,6 +61,8 @@ public class PauseUI : MonoBehaviour
 
     public void MainMenu()
     {
+        Time.timeScale = 1;
+        timeManager.isPaused = true;
         ScoreManager.Instance.ReturnToMenu();
     }
 
