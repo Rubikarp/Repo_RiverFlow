@@ -669,6 +669,24 @@ public class RiverManager : Singleton<RiverManager>
     private void TileWaterStep(GameTile tile)
     {
         tile.UpdateReceivedFlow(grid);
+
+        //Check for empty flow
+        if (tile.ReceivedFlow() > 0)
+        {
+            for (int i = 0; i < tile.flowIn.Count; i++)
+            {
+                if ((int)tile.GetNeighbor(tile.flowIn[i]).ReceivedFlow() <= 0)
+                {
+                    for (int j = 0; j < tile.canalsIn.Count; j++)
+                    {
+                        if (tile.canalsIn[j].Contains(tile.GetNeighbor(tile.flowIn[i]).gridPos))
+                        {
+                            tile.canalsIn[j].Inverse(grid);
+                        }
+                    }
+                }
+            }
+        }
     }
     //
     private bool CheckForLoop(Canal canalA, Canal canalB, GameTile tileA, GameTile tileB) 
@@ -682,7 +700,7 @@ public class RiverManager : Singleton<RiverManager>
         }
         else
         {
-            if (ComputeCanalParent(canalA).Contains(canalB))
+            if (ComputeCanalParent(canalA).Contains(canalB) || canalA== canalB)
             {
                 return true;
             }
