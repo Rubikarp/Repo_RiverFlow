@@ -69,5 +69,9 @@ public class LevelsManager : MonoBehaviour
         //Debug.Log("test");
         cameraFollower.transform.position = CreditMenuCameraPos;
     }
+    public void QuitApp()
+    {
+        GameManager.Instance.Quit();
+    }
 
 }
