@@ -148,7 +148,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   digNumber: {fileID: 2572214140826430823}
   Inventory: {fileID: 0}
-  digBonus: 20
+  digBonus: 15
   cloudBonus: 0
   sourceBonus: 0
   lakeBonus: 0
