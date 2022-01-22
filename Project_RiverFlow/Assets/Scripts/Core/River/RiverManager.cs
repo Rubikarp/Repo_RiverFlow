@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using System.Collections;
 using System.Collections.Generic;
+using System;
 
 public class MessageEvent : UnityEvent<MessageCase, string> { }
 public enum MessageCase
@@ -270,7 +271,18 @@ public class RiverManager : Singleton<RiverManager>
                 CannotLink(MessageCase.TryLoopingCanal);
                 return;
             }
-            if (tileA.gridPos == tileA.canalsIn[0].endNode && tileB.gridPos == tileB.canalsIn[0].endNode)
+            if(listCanalA == listCanalB)
+            {
+                if((listCanalA.startNode == tileA.gridPos && listCanalA.endNode == tileB.gridPos)
+                 ||(listCanalA.endNode == tileA.gridPos && listCanalA.startNode == tileB.gridPos))
+                {
+                    if (tileA.riverStrenght >= 0 && tileB.riverStrenght >= 0)
+                    {
+                        GenerateRiverCanal(tileA, tileB);
+                    }
+                }
+            }
+            else if (tileA.gridPos == tileA.canalsIn[0].endNode && tileB.gridPos == tileB.canalsIn[0].endNode)
             {//==>to<==
                 if (tileA.ReceivedFlow() == tileB.ReceivedFlow())
                 {
@@ -678,6 +690,11 @@ public class RiverManager : Singleton<RiverManager>
     }
     private void TileWaterStep(GameTile tile)
     {
+        if(tile.canalsIn.Count > 1)
+        {
+            CloneCanalCheck(tile);
+        }
+
         if (CheckForSource(tile.canalsIn[0]))
         {
             tile.UpdateReceivedFlow(grid);
@@ -713,6 +730,23 @@ public class RiverManager : Singleton<RiverManager>
             }
         }
     }
+
+    private void CloneCanalCheck(GameTile tile)
+    {
+        Canal verifiedCanal;
+        for (int i = 0; i < tile.canalsIn.Count; i++)
+        {
+            verifiedCanal = tile.canalsIn[i];
+            for (int j = i + 1; j < tile.canalsIn.Count - i; j++)
+            {
+                if(verifiedCanal == tile.canalsIn[j])
+                {
+                    tile.canalsIn.RemoveAt(j);
+                }
+            }
+        }
+    }
+
     //
     private bool CheckForLoop(Canal canalA, Canal canalB, GameTile tileA, GameTile tileB)
     {
@@ -743,6 +777,10 @@ public class RiverManager : Singleton<RiverManager>
         if(startTile.flowIn.Count > 0)
         {
             GameTile previousTile = grid.GetTile(startTile.gridPos + startTile.flowIn[0].dirValue);
+            if (previousTile.canalsIn.Contains(canal))
+            {
+                return startTile.element is WaterSource;
+            }
             return CheckForSource(previousTile.canalsIn[0]);
         }
         else
