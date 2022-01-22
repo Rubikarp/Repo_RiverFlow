@@ -150,9 +150,10 @@ public class Lake : Element
         {
             //UnLink Element and Tile
             TilesOn[i].element = null;
+            TilesOn[i].riverStrenght = entryFlow;
             TilesOn[i] = null;
         }
-
         InventoryManager.Instance.lakesAmmount++;
+        Destroy(gameObject);
     }
 }

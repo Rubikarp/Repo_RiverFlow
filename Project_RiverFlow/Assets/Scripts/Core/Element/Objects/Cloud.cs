@@ -24,18 +24,13 @@ public class Cloud : Element
                 Destroy(gameObject);
             }
         }
-        else
-        {
-            UnLinkElementToGrid(GameGrid.Instance);
-            Destroy(gameObject);
-        }
     }
     public override void UnLinkElementToGrid(GameGrid grid)
     {
         //UnLink Element and Tile
         TileOn.element = null;
         TileOn = null;
-
         InventoryManager.Instance.cloudsAmmount++;
+        Destroy(gameObject);
     }
 }

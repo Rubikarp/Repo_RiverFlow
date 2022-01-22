@@ -196,7 +196,6 @@ public class DigingHandler : MonoBehaviour
                     {
                         if (lastSelectedTile != endSelectTile)
                         {
-
                             lastSelectedTile = endSelectTile;
                             onBreak?.Invoke(endSelectTile);
                             LevelSoundboard.Instance.PlayEraseEffectSound(eraseSound);
@@ -298,32 +297,6 @@ public class DigingHandler : MonoBehaviour
                     break;
             }
             return cross;
-        }
-    }
-    public void RemoveElement(Element element)
-    {
-        if (element is WaterSource || element is Plant)
-        {
-            Debug.LogError("Nope tu peux pas");
-            return;
-        }
-        else if (element is Cloud)
-        {
-            element.TileOn = null;
-
-            Destroy(element.gameObject);
-            inventory.cloudsAmmount++;
-        }
-        else if (element is Lake)
-        {
-            for (int i = 0; i < element.TilesOn.Length; i++)
-            {
-                element.TilesOn[i].element = null;
-                element.TilesOn[i] = null;
-
-                Destroy(element.gameObject);
-            }
-            inventory.lakesAmmount++;
         }
     }
 }

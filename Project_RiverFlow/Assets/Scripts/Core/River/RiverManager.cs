@@ -531,10 +531,20 @@ public class RiverManager : Singleton<RiverManager>
     {
         Element element = erasedTile.element;
 
-        digging.RemoveElement(erasedTile.element);
-        erasedTile.riverStrenght = 0;
+        if (erasedTile.element is Lake)
+        {
+            (erasedTile.element as Lake).UnLinkElementToGrid(grid);
+        }
+        else if (erasedTile.element is Cloud)
+        {
+            (erasedTile.element as Cloud).UnLinkElementToGrid(grid);
+        }
+        else
+        {
+            element.UnLinkElementToGrid(grid);
+        }
 
-        element.UnLinkElementToGrid(grid);
+        erasedTile.UpdateReceivedFlow(grid);
     }
     private void ErasedRiverInTile(GameTile erasedTile)
     {

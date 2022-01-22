@@ -121,7 +121,7 @@ public class ElementHandler : MonoBehaviour
                 allClouds.Add(cloud);
                 //Link Element and Tile
                 cloud.gridPos = grisPos;
-                cloud.tileOn = aimedTile;
+                cloud.TileOn = aimedTile;
                 aimedTile.element = cloud;
 
     }
