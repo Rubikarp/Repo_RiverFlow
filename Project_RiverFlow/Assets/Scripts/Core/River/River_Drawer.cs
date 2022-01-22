@@ -24,6 +24,7 @@ public class River_Drawer : MonoBehaviour
     {
         UpdateRiverVisual();
     }
+
     public void UpdateRiverVisual()
     {
         //Faudra faire du pooling

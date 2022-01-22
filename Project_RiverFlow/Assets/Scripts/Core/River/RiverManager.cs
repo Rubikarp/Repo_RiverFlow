@@ -271,6 +271,7 @@ public class RiverManager : Singleton<RiverManager>
                 CannotLink(MessageCase.TryLoopingCanal);
                 return;
             }
+            /*Pötentiel erase*/
             if(listCanalA == listCanalB)
             {
                 if((listCanalA.startNode == tileA.gridPos && listCanalA.endNode == tileB.gridPos)
@@ -282,7 +283,7 @@ public class RiverManager : Singleton<RiverManager>
                     }
                 }
             }
-            else if (tileA.gridPos == tileA.canalsIn[0].endNode && tileB.gridPos == tileB.canalsIn[0].endNode)
+            else /**/if (tileA.gridPos == tileA.canalsIn[0].endNode && tileB.gridPos == tileB.canalsIn[0].endNode)
             {//==>to<==
                 if (tileA.ReceivedFlow() == tileB.ReceivedFlow())
                 {
@@ -503,7 +504,7 @@ public class RiverManager : Singleton<RiverManager>
     }
     private void CannotLink(MessageCase messageCase)
     {
-        Debug.LogError("Move Interdit");
+        Debug.LogWarning("Move Interdit");
         LevelSoundboard.Instance.PlayErrorUISound(error);
         StartCoroutine(ForbidenMoveGridColor());
         loopEvent?.Invoke(MessageCase.TryLoopingCanal, "You can't create a loop");
@@ -690,19 +691,27 @@ public class RiverManager : Singleton<RiverManager>
     }
     private void TileWaterStep(GameTile tile)
     {
-        if(tile.canalsIn.Count > 1)
+        if(tile.canalsIn.Count < 2)
         {
             CloneCanalCheck(tile);
         }
 
-        if (CheckForSource(tile.canalsIn[0]))
+        if (tile.canalsIn.Count > 0)
         {
-            tile.UpdateReceivedFlow(grid);
+            if (CheckForSource(tile.canalsIn[0]))
+            {
+                tile.UpdateReceivedFlow(grid);
+            }
+            else
+            {
+                tile.riverStrenght = 0;
+            }
         }
         else
         {
             tile.riverStrenght = 0;
         }
+
 
         //Check for empty flow
         if (tile.riverStrenght > 0)
@@ -752,7 +761,7 @@ public class RiverManager : Singleton<RiverManager>
     {
         if (tileA.linkAmount == 1 || tileB.linkAmount == 1)
         {
-            if (ComputeCanalParent(canalA).Contains(canalB) || ComputeCanalParent(canalB).Contains(canalA))
+            if (canalA == canalB || ComputeCanalParent(canalA).Contains(canalB) || ComputeCanalParent(canalB).Contains(canalA))
             {
                 return true;
             }
