@@ -17,6 +17,9 @@
         },
         {
             "m_Id": "a71af7eec42a4abe9d2fa98761f64e0c"
+        },
+        {
+            "m_Id": "65eb5e62420f408e9d33af4bad568b33"
         }
     ],
     "m_Keywords": [],
@@ -170,6 +173,9 @@
         },
         {
             "m_Id": "dc9f710fca6042d69aaa02500c4d9b8a"
+        },
+        {
+            "m_Id": "6c0774f0c6d347be9694c9a98a836c01"
         }
     ],
     "m_GroupDatas": [
@@ -295,20 +301,6 @@
                     "m_Id": "ae25d01b2d9a4a9aa38d7a13b86e224e"
                 },
                 "m_SlotId": 1
-            }
-        },
-        {
-            "m_OutputSlot": {
-                "m_Node": {
-                    "m_Id": "3e3d6e02ccb34242a341f0fe15f63f07"
-                },
-                "m_SlotId": 0
-            },
-            "m_InputSlot": {
-                "m_Node": {
-                    "m_Id": "ae25d01b2d9a4a9aa38d7a13b86e224e"
-                },
-                "m_SlotId": 0
             }
         },
         {
@@ -447,6 +439,20 @@
             "m_InputSlot": {
                 "m_Node": {
                     "m_Id": "53fb3c987aa9480f835c11600fb21a39"
+                },
+                "m_SlotId": 0
+            }
+        },
+        {
+            "m_OutputSlot": {
+                "m_Node": {
+                    "m_Id": "6c0774f0c6d347be9694c9a98a836c01"
+                },
+                "m_SlotId": 0
+            },
+            "m_InputSlot": {
+                "m_Node": {
+                    "m_Id": "ae25d01b2d9a4a9aa38d7a13b86e224e"
                 },
                 "m_SlotId": 0
             }
@@ -2037,7 +2043,7 @@
         "m_Position": {
             "serializedVersion": "2",
             "x": -825.0000610351563,
-            "y": 8.999975204467774,
+            "y": 2.9999916553497316,
             "width": 139.00001525878907,
             "height": 34.0
         }
@@ -2086,10 +2092,10 @@
         "m_Expanded": false,
         "m_Position": {
             "serializedVersion": "2",
-            "x": -766.0,
-            "y": -62.0000114440918,
-            "width": 80.00000762939453,
-            "height": 77.0
+            "x": -932.0000610351563,
+            "y": -79.00001525878906,
+            "width": 80.0,
+            "height": 76.0
         }
     },
     "m_Slots": [
@@ -3002,6 +3008,29 @@
 }
 
 {
+    "m_SGVersion": 1,
+    "m_Type": "UnityEditor.ShaderGraph.Internal.Vector1ShaderProperty",
+    "m_ObjectId": "65eb5e62420f408e9d33af4bad568b33",
+    "m_Guid": {
+        "m_GuidSerialized": "a7235f05-03b5-40e6-b4c6-92768c5fda78"
+    },
+    "m_Name": "RiverTime",
+    "m_DefaultReferenceName": "Vector1_65eb5e62420f408e9d33af4bad568b33",
+    "m_OverrideReferenceName": "_RiverTime",
+    "m_GeneratePropertyBlock": true,
+    "m_Precision": 0,
+    "overrideHLSLDeclaration": false,
+    "hlslDeclarationOverride": 0,
+    "m_Hidden": false,
+    "m_Value": 0.0,
+    "m_FloatType": 0,
+    "m_RangeValues": {
+        "x": 0.0,
+        "y": 1.0
+    }
+}
+
+{
     "m_SGVersion": 0,
     "m_Type": "UnityEditor.ShaderGraph.RectangleNode",
     "m_ObjectId": "65fcf20f18ca442ba5a5c3edc3c7aa2c",
@@ -3159,6 +3188,41 @@
     },
     "m_Labels": [],
     "m_Space": 0
+}
+
+{
+    "m_SGVersion": 0,
+    "m_Type": "UnityEditor.ShaderGraph.PropertyNode",
+    "m_ObjectId": "6c0774f0c6d347be9694c9a98a836c01",
+    "m_Group": {
+        "m_Id": ""
+    },
+    "m_Name": "Property",
+    "m_DrawState": {
+        "m_Expanded": true,
+        "m_Position": {
+            "serializedVersion": "2",
+            "x": -814.0000610351563,
+            "y": -23.000003814697267,
+            "width": 128.0,
+            "height": 34.0
+        }
+    },
+    "m_Slots": [
+        {
+            "m_Id": "ef5c63e57b714083ab5152c635dc0458"
+        }
+    ],
+    "synonyms": [],
+    "m_Precision": 0,
+    "m_PreviewExpanded": true,
+    "m_PreviewMode": 0,
+    "m_CustomColors": {
+        "m_SerializableColors": []
+    },
+    "m_Property": {
+        "m_Id": "65eb5e62420f408e9d33af4bad568b33"
+    }
 }
 
 {
@@ -5399,6 +5463,21 @@
     "m_CustomColors": {
         "m_SerializableColors": []
     }
+}
+
+{
+    "m_SGVersion": 0,
+    "m_Type": "UnityEditor.ShaderGraph.Vector1MaterialSlot",
+    "m_ObjectId": "ef5c63e57b714083ab5152c635dc0458",
+    "m_Id": 0,
+    "m_DisplayName": "RiverTime",
+    "m_SlotType": 1,
+    "m_Hidden": false,
+    "m_ShaderOutputName": "Out",
+    "m_StageCapability": 3,
+    "m_Value": 0.0,
+    "m_DefaultValue": 0.0,
+    "m_Labels": []
 }
 
 {

@@ -16,7 +16,7 @@ public class TimeManager : Singleton<TimeManager>
     {
         get
         {
-            return Time.deltaTime * gameTimeSpeed;
+            return isPaused? 0: Time.deltaTime * gameTimeSpeed;
         }
     }
     public bool isFreeze
