@@ -7,48 +7,32 @@ public class HorlogeShader : MonoBehaviour//,IMeshModifier
 {
     [Header("reference")]
     public TimeManager time;
-    public SpriteRenderer rend;
-    private Transform self;
 
     [Header("Parameter")]
     [SerializeField] private float dayTime = 0;
 
-    [Header("Internal")]
-    private MaterialPropertyBlock propBlock;
+    [Header("Target")]
+    public Material horlogeMat;
 
     void Awake()
     {
         time = TimeManager.Instance;
-        self = transform;
     }
 
     void Start()
     {
-        //permet d'overide les param sans modif le mat ou créer d'instance
-        propBlock = new MaterialPropertyBlock();
-        //Recup Data
-        rend.GetPropertyBlock(propBlock);
-        //Edit
-        #region EditZone
         dayTime = (time.gameTimer % time.weekDuration)/ time.weekDuration;
-        propBlock.SetFloat("_DayTime", dayTime);
-        #endregion
-        //Push Data
-        rend.SetPropertyBlock(propBlock);
+        horlogeMat.SetFloat("_DayTime", dayTime);
     }
 
     void Update()
     {
-        //permet d'overide les param sans modif le mat ou créer d'instance
-        propBlock = new MaterialPropertyBlock();
-        //Recup Data
-        rend.GetPropertyBlock(propBlock);
-        //Edit
-        #region EditZone
         dayTime = (time.gameTimer % time.weekDuration) / time.weekDuration;
-        propBlock.SetFloat("_DayTime", dayTime);
-        #endregion
-        //Push Data
-        rend.SetPropertyBlock(propBlock);
+        horlogeMat.SetFloat("_DayTime", dayTime);
+    }
+
+    private void OnDestroy()
+    {
+        horlogeMat.SetFloat("_DayTime", 0);
     }
 }

@@ -29,4 +29,9 @@ public class RiverShaderLink : MonoBehaviour
         }
         riverMat.SetFloat("_RiverTime", riverTime);
     }
+
+    private void OnDestroy()
+    {
+        riverMat.SetFloat("_RiverTime", 0);
+    }
 }

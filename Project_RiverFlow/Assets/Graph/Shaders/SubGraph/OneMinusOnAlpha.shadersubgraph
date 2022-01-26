@@ -189,31 +189,6 @@
 
 {
     "m_SGVersion": 0,
-    "m_Type": "UnityEditor.ShaderGraph.Vector4MaterialSlot",
-    "m_ObjectId": "02a3310886e0430299f51b10a58b1fd3",
-    "m_Id": 1,
-    "m_DisplayName": "Out_Vector4",
-    "m_SlotType": 0,
-    "m_Hidden": false,
-    "m_ShaderOutputName": "OutVector4",
-    "m_StageCapability": 3,
-    "m_Value": {
-        "x": 0.0,
-        "y": 0.0,
-        "z": 0.0,
-        "w": 0.0
-    },
-    "m_DefaultValue": {
-        "x": 0.0,
-        "y": 0.0,
-        "z": 0.0,
-        "w": 0.0
-    },
-    "m_Labels": []
-}
-
-{
-    "m_SGVersion": 0,
     "m_Type": "UnityEditor.ShaderGraph.Vector4Node",
     "m_ObjectId": "1c717c992e4b42798c2352794b38c547",
     "m_Group": {
@@ -392,7 +367,7 @@
     "m_Guid": {
         "m_GuidSerialized": "11c157e6-e321-473b-a1bd-e45bd021f044"
     },
-    "m_Name": "Vector4",
+    "m_Name": "In",
     "m_DefaultReferenceName": "_Vector4",
     "m_OverrideReferenceName": "",
     "m_GeneratePropertyBlock": true,
@@ -480,6 +455,31 @@
 
 {
     "m_SGVersion": 0,
+    "m_Type": "UnityEditor.ShaderGraph.Vector4MaterialSlot",
+    "m_ObjectId": "6e734a80bc474324933f00cededf7e9c",
+    "m_Id": 1,
+    "m_DisplayName": "Out",
+    "m_SlotType": 0,
+    "m_Hidden": false,
+    "m_ShaderOutputName": "Out",
+    "m_StageCapability": 3,
+    "m_Value": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0,
+        "w": 0.0
+    },
+    "m_DefaultValue": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0,
+        "w": 0.0
+    },
+    "m_Labels": []
+}
+
+{
+    "m_SGVersion": 0,
     "m_Type": "UnityEditor.ShaderGraph.DynamicVectorMaterialSlot",
     "m_ObjectId": "7da63374d007469ca89370e1324acd70",
     "m_Id": 0,
@@ -522,7 +522,7 @@
     },
     "m_Slots": [
         {
-            "m_Id": "02a3310886e0430299f51b10a58b1fd3"
+            "m_Id": "6e734a80bc474324933f00cededf7e9c"
         }
     ],
     "synonyms": [],
@@ -707,7 +707,7 @@
     "m_Type": "UnityEditor.ShaderGraph.Vector4MaterialSlot",
     "m_ObjectId": "bb1bb6f2822440a7995d5c50692db761",
     "m_Id": 0,
-    "m_DisplayName": "Vector4",
+    "m_DisplayName": "In",
     "m_SlotType": 1,
     "m_Hidden": false,
     "m_ShaderOutputName": "Out",
