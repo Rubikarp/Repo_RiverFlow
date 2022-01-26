@@ -5,9 +5,13 @@ using UnityEngine;
 public class UITimeSounds : MonoBehaviour
 {
     public string timeButtonSound = "TimeButton";
-    public void UITimeSoundPlay()
+    public void UITimeSoundPlay(bool playSoundHotfix)
     {
-        LevelSoundboard.Instance.PlayTimeUISound(timeButtonSound);
+        if(playSoundHotfix == true)
+        {
+            LevelSoundboard.Instance.PlayTimeUISound(timeButtonSound);
+        }
+
     }
 
 }

@@ -7,10 +7,12 @@ using UnityEngine.UI;
 
 public class CursorManager : MonoBehaviour
 {
+    public bool isMenu =false;
     public GameGrid grid;
     public Transform preview;
     public SpriteRenderer previewSprite;
     public InputHandler inputHandler;
+    public InventoryManager inventory;
     [Header("SpritesPreview")]
     public GameObject cloudPreview;
     public Sprite lakePreview;
@@ -26,22 +28,37 @@ public class CursorManager : MonoBehaviour
     // Start is called before the first frame update
     void Awake()
     {
-        grid = GameGrid.Instance;
-        inputHandler = InputHandler.Instance;
+
+
+        if(isMenu == false)
+        {
+            grid = GameGrid.Instance;
+            inputHandler = InputHandler.Instance;
+            inventory = InventoryManager.Instance;
+        }
+        else
+        {
+            UnityEngine.Cursor.SetCursor(defaultCursor, hotSpot, cursorMode);
+        }
+
     }
 
     // Update is called once per frame
     void Update()
     {
+        if( isMenu == false)
+        {
+            if (InputHandler.Instance.shortCutErasing == true)
+            {
+                OverRideCursorChange();
+            }
+            else
+            {
+                CursorChange();
+            }
+        }
+
        
-        if (InputHandler.Instance.shortCutErasing == true)
-        {
-            OverRideCursorChange();
-        }
-        else
-        {
-            CursorChange();
-        }
        
 
      
@@ -85,7 +102,7 @@ public class CursorManager : MonoBehaviour
                     UnityEngine.Cursor.SetCursor(defaultCursor, hotSpot, cursorMode);
                     cloudPreview.SetActive(false);
                     preview.position = grid.TileToPos(grid.PosToTile(inputHandler.GetHitPos()));
-                    if (testedTile.ReceivedFlow() > FlowStrenght._00_)
+                    if (testedTile.ReceivedFlow() > FlowStrenght._00_&&inventory.lakesAmmount>0)
                     {
                         if (testedTile.linkAmount == 2)
                         {
@@ -131,7 +148,7 @@ public class CursorManager : MonoBehaviour
                     UnityEngine.Cursor.SetCursor(defaultCursor, hotSpot, cursorMode);
                     preview.transform.localRotation = Quaternion.Euler(0, 0, 0);
                     preview.position = grid.TileToPos(grid.PosToTile(inputHandler.GetHitPos()));
-                    if (testedTile.ReceivedFlow() > FlowStrenght._00_)
+                    if (testedTile.ReceivedFlow() > FlowStrenght._00_ && inventory.cloudsAmmount > 0)
                     {
                         if (!testedTile.haveElement && testedTile.type != TileType.mountain)
                         {
@@ -162,7 +179,7 @@ public class CursorManager : MonoBehaviour
                     cloudPreview.SetActive(false);
                     preview.transform.localRotation = Quaternion.Euler(0, 0, 0);
                     preview.position = grid.TileToPos(grid.PosToTile(inputHandler.GetHitPos()));
-                    if (testedTile.ReceivedFlow() == FlowStrenght._00_)
+                    if (testedTile.ReceivedFlow() == FlowStrenght._00_ && inventory.sourcesAmmount > 0)
                     {
                         if (!testedTile.haveElement && testedTile.type != TileType.mountain)
                         {

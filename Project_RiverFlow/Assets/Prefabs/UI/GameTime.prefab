@@ -135,7 +135,7 @@ MonoBehaviour:
       - m_Target: {fileID: 1396773769}
         m_TargetAssemblyTypeName: UITimeSounds, Assembly-CSharp
         m_MethodName: UITimeSoundPlay
-        m_Mode: 1
+        m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -475,7 +475,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5834999995968923734}
-  - component: {fileID: 26289882256480320}
   - component: {fileID: 1107170651}
   m_Layer: 0
   m_Name: GameTime
@@ -499,34 +498,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &26289882256480320
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5834999995968923729}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f3ff9be447275974284a2d2cd72bc171, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  isPaused: 0
-  gameTimer: 0
-  gameTimeSpeed: 1
-  weekDuration: 180
-  weekNumber: 1
-  iterationStepDur: 0.2
-  plantSpawnRateCalm: 10
-  plantSpawnRateNeutral: 15
-  plantSpawnRateChaotic: 8
-  spawnRateVariation: 0.2
-  onWaterSimulationStep:
-    m_PersistentCalls:
-      m_Calls: []
-  getMoreDig:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!114 &1107170651
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -922,14 +893,14 @@ MonoBehaviour:
       - m_Target: {fileID: 1396773769}
         m_TargetAssemblyTypeName: UITimeSounds, Assembly-CSharp
         m_MethodName: UITimeSoundPlay
-        m_Mode: 1
+        m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
-          m_BoolArgument: 0
+          m_BoolArgument: 1
         m_CallState: 2
 --- !u!1 &5834999996904275594
 GameObject:
@@ -1078,14 +1049,14 @@ MonoBehaviour:
       - m_Target: {fileID: 1396773769}
         m_TargetAssemblyTypeName: UITimeSounds, Assembly-CSharp
         m_MethodName: UITimeSoundPlay
-        m_Mode: 1
+        m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
-          m_BoolArgument: 0
+          m_BoolArgument: 1
         m_CallState: 2
 --- !u!1 &6897585405685916043
 GameObject:

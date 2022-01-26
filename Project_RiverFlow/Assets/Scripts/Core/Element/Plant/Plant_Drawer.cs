@@ -32,6 +32,7 @@ public class Plant_Drawer : MonoBehaviour
     public ParticleSystem LeafsSavana;
     public ParticleSystem MiniWave;
     public ParticleSystem NoWater;
+    public ParticleSystem Death;
 
 
     [Header("Sound")]
@@ -232,6 +233,7 @@ public class Plant_Drawer : MonoBehaviour
                     transform.DOScaleY(0.2f, 0.3f).SetEase(Ease.InElastic);
                     transform.DOScaleX(0.2f, 0.3f).SetEase(Ease.InElastic);
                     yield return new WaitForSecondsRealtime(0.3f);
+                    Death.Play(true);
                     sprRender.sprite = visual.GetSprite(plant.currentState, plant.TileOn.type);
                     break;
 
