@@ -83,17 +83,6 @@ public class RiverManager : Singleton<RiverManager>
                 }
             }
         }
-        if (startTile.element is Lake || endTile.element is Lake)
-        {
-            if(startTile.element is Lake && startTile.linkAmount > 0)
-            {
-                CannotLink(MessageCase.NotInCanal);
-            }
-            else if (endTile.element is Lake && endTile.linkAmount > 0)
-            {
-                CannotLink(MessageCase.NotInCanal);
-            }
-        }
         else
         {
             LinkConfirmed(startTile, endTile);
@@ -418,6 +407,11 @@ public class RiverManager : Singleton<RiverManager>
     }
     private void Link2To1(GameTile tileA, GameTile tileB) 
     {
+        if (tileA.element is Lake)
+        {
+            CannotLink(MessageCase.NotInCanal);
+            return;
+        }
         //Divergence
         if (InCanalList(tileA.canalsIn[0]))
         {
@@ -462,6 +456,11 @@ public class RiverManager : Singleton<RiverManager>
     }  
     private void Link2To2(GameTile tileA, GameTile tileB)
     {
+        if (tileA.element is Lake || tileB.element is Lake)
+        {
+            CannotLink(MessageCase.NotInCanal);
+            return;
+        }
         if (InCanalList(tileA.canalsIn[0]))
         {
             Canal listCanalA = CanalList(tileA.canalsIn[0]);
@@ -792,17 +791,27 @@ public class RiverManager : Singleton<RiverManager>
         }
         return false;
     }
-    private bool CheckForSource(Canal canal)
+    private bool CheckForSource(Canal canal, List<Canal> alreadyCalc = null)
     {
+        List<Canal> result = new List<Canal>();
+        if (alreadyCalc == null)
+        {
+            alreadyCalc = new List<Canal>();
+        }
+
         GameTile startTile = grid.GetTile(canal.startNode);
         if(startTile.flowIn.Count > 0)
         {
             GameTile previousTile = grid.GetTile(startTile.gridPos + startTile.flowIn[0].dirValue);
-            if (previousTile.canalsIn.Contains(canal))
+            if (previousTile.canalsIn.Contains(canal) || alreadyCalc.Contains(canal))
             {
                 return startTile.element is WaterSource;
             }
-            return CheckForSource(previousTile.canalsIn[0]);
+            else
+            {
+                alreadyCalc.Add(previousTile.canalsIn[0]);
+                return CheckForSource(previousTile.canalsIn[0], alreadyCalc);
+            }
         }
         else
         {
@@ -816,6 +825,7 @@ public class RiverManager : Singleton<RiverManager>
         {
             alreadyCalc = new List<Canal>();
         }
+
         GameTile startTile = grid.GetTile(canal.startNode);
         if (startTile.flowIn.Count >= 1)    //y a t-il un canal avant
         {

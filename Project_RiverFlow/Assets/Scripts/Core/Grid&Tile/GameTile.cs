@@ -223,9 +223,6 @@ public class GameTile : MonoBehaviour
         if (flowOut.Contains(dir))
         {
             // Envoie l'eau Thierry !
-            float riverPower = (int)riverStrenght;
-            float riverSplits = (float)flowOut.Count;
-
             if(flowOut.Count == 1)
             {
                 if(element is Lake)
@@ -234,7 +231,7 @@ public class GameTile : MonoBehaviour
                 }
                 else
                 {
-                    return (FlowStrenght)riverPower;
+                    return riverStrenght;
                 }
             }
             else 

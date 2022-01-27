@@ -2447,7 +2447,7 @@
     "m_Type": "UnityEditor.ShaderGraph.Vector1MaterialSlot",
     "m_ObjectId": "290e9ec773e941e99174e973864f9453",
     "m_Id": 0,
-    "m_DisplayName": "ConstructMode",
+    "m_DisplayName": "WireframeMode",
     "m_SlotType": 1,
     "m_Hidden": false,
     "m_ShaderOutputName": "Out",
@@ -7146,9 +7146,9 @@
     "m_Guid": {
         "m_GuidSerialized": "bce09376-4bfa-44a3-8718-7d7ee21c1cf4"
     },
-    "m_Name": "ConstructMode",
+    "m_Name": "WireframeMode",
     "m_DefaultReferenceName": "Vector1_b2aa2b1f76f64fc189d7b561324278e8",
-    "m_OverrideReferenceName": "",
+    "m_OverrideReferenceName": "_Wireframe",
     "m_GeneratePropertyBlock": true,
     "m_Precision": 0,
     "overrideHLSLDeclaration": false,
