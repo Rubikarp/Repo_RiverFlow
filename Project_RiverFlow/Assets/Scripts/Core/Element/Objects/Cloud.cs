@@ -14,17 +14,6 @@ public class Cloud : Element
     }
     public override bool isLinkable { get { return true; } }
 
-    private void Update()
-    {
-        if (TileOn != null)
-        {
-            if (TileOn.ReceivedFlow() == FlowStrenght._00_)
-            {
-                UnLinkElementToGrid(GameGrid.Instance);
-                Destroy(gameObject);
-            }
-        }
-    }
     public override void UnLinkElementToGrid(GameGrid grid)
     {
         //UnLink Element and Tile

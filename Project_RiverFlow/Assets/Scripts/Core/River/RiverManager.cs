@@ -12,6 +12,7 @@ public enum MessageCase
     CannotInMountain = 2,
     NoMoreElement = 3,
     NoMoreDig = 4,
+    NotInCanal = 5,
 }
 
 public class RiverManager : Singleton<RiverManager>
@@ -80,6 +81,17 @@ public class RiverManager : Singleton<RiverManager>
                 {
                     LinkEdgeMoutainConfirmed(endTile, startTile);
                 }
+            }
+        }
+        if (startTile.element is Lake || endTile.element is Lake)
+        {
+            if(startTile.element is Lake && startTile.linkAmount > 0)
+            {
+                CannotLink(MessageCase.NotInCanal);
+            }
+            else if (endTile.element is Lake && endTile.linkAmount > 0)
+            {
+                CannotLink(MessageCase.NotInCanal);
             }
         }
         else

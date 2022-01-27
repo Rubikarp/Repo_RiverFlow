@@ -12,11 +12,12 @@ public class RiverMesh : MonoBehaviour
     public Color[] verticesColors = new Color[6];
     public Vector3[] vertices = new Vector3[6];
     public Vector3[] normals = new Vector3[6];
-    public Vector3[] uvs = new Vector3[6];
+    public Vector4[] uvs = new Vector4[6];
     public int[] triangles = new int[12];
 
     [Header("River Data")]
     [Range(0.01f, 4)] public float scale = 1;
+    [Range(0.01f, 4)] public float lakeScale = 1;
     [Range(1, 16)] public int subdividePerSegment = 1;
     public List<RiverPoint> points = new List<RiverPoint>() { new RiverPoint(Vector3.zero, Color.red, 1), new RiverPoint(Vector3.zero, Color.red, 1) };
     public RiverPoint previousPoint ;
@@ -63,7 +64,7 @@ public class RiverMesh : MonoBehaviour
         verticesColors = new Color[pointCount * 3];
         vertices = new Vector3[pointCount * 3];
         normals = new Vector3[pointCount * 3];
-        uvs = new Vector3[pointCount * 3];
+        uvs = new Vector4[pointCount * 3];
         //
         int segmentCount = points.Count - 1;
         triangles = new int[segmentCount * 3 * 4];
@@ -77,8 +78,8 @@ public class RiverMesh : MonoBehaviour
         float thickness = 0.5f * scale;
         //
         vertices[0] = points[0].pos;
-        vertices[1] = points[0].pos - (right * thickness);
-        vertices[2] = points[0].pos + (right * thickness);
+        vertices[1] = points[0].pos - (right * (thickness + (points[0].lake * lakeScale)));
+        vertices[2] = points[0].pos + (right * (thickness + (points[0].lake * lakeScale)));
 
         for (int i = 1; i < pointCount - 1; i++)
         {
@@ -89,8 +90,8 @@ public class RiverMesh : MonoBehaviour
             thickness = 0.5f * scale;
             //
             vertices[(i * 3) + 0] = points[i].pos;
-            vertices[(i * 3) + 1] = points[i].pos - (right * thickness);
-            vertices[(i * 3) + 2] = points[i].pos + (right * thickness);
+            vertices[(i * 3) + 1] = points[i].pos - (right * (thickness + (points[i].lake * lakeScale)));
+            vertices[(i * 3) + 2] = points[i].pos + (right * (thickness + (points[i].lake * lakeScale)));
         }
 
         previousDir = (points[(pointCount - 1)].pos - points[(pointCount - 2)].pos).normalized;
@@ -100,8 +101,8 @@ public class RiverMesh : MonoBehaviour
         thickness = 0.5f * scale;
         //
         vertices[((pointCount - 1) * 3) + 0] = points[pointCount - 1].pos;
-        vertices[((pointCount - 1) * 3) + 1] = points[pointCount - 1].pos - (right * thickness);
-        vertices[((pointCount - 1) * 3) + 2] = points[pointCount - 1].pos + (right * thickness);
+        vertices[((pointCount - 1) * 3) + 1] = points[pointCount - 1].pos - (right * (thickness + (points[pointCount - 1].lake * lakeScale)));
+        vertices[((pointCount - 1) * 3) + 2] = points[pointCount - 1].pos + (right * (thickness + (points[pointCount - 1].lake * lakeScale)));
         #endregion
         #region Normal
         for (int i = 0; i < pointCount; i++)
@@ -123,17 +124,17 @@ public class RiverMesh : MonoBehaviour
         #endregion
         #region UV
         float distTravell = 0;
-        uvs[0] = new Vector3(distTravell, 0.5f, points[0].thickness);
-        uvs[1] = new Vector3(distTravell, 1.0f, points[0].thickness);
-        uvs[2] = new Vector3(distTravell, 0.0f, points[0].thickness);
+        uvs[0] = new Vector4(distTravell, 0.5f, points[0].thickness, points[0].lake);
+        uvs[1] = new Vector4(distTravell, 1.0f, points[0].thickness, points[0].lake);
+        uvs[2] = new Vector4(distTravell, 0.0f, points[0].thickness, points[0].lake);
 
         for (int i = 1; i < pointCount; i++)
         {
             distTravell += (points[i].pos - points[i-1].pos).magnitude;
 
-            uvs[(i * 3) + 0] = new Vector3(distTravell, 0.5f, points[i].thickness);
-            uvs[(i * 3) + 1] = new Vector3(distTravell, 1.0f, points[i].thickness);
-            uvs[(i * 3) + 2] = new Vector3(distTravell, 0.0f, points[i].thickness);
+            uvs[(i * 3) + 0] = new Vector4(distTravell, 0.5f, points[i].thickness, points[i].lake);
+            uvs[(i * 3) + 1] = new Vector4(distTravell, 1.0f, points[i].thickness, points[i].lake);
+            uvs[(i * 3) + 2] = new Vector4(distTravell, 0.0f, points[i].thickness, points[i].lake);
         }
         #endregion
         #region Triangle
@@ -178,7 +179,7 @@ public class RiverMesh : MonoBehaviour
         #region Compute array size
         int pointCount = points.Count;
         verticesColors = new Color[pointCount * 3];
-        uvs = new Vector3[pointCount * 3];
+        uvs = new Vector4[pointCount * 3];
         #endregion
 
         #region Vertex Colors
@@ -193,17 +194,17 @@ public class RiverMesh : MonoBehaviour
         #endregion
         #region UV
         float distTravell = 0;
-        uvs[0] = new Vector3(distTravell, 0.5f, points[0].thickness);
-        uvs[1] = new Vector3(distTravell, 1.0f, points[0].thickness);
-        uvs[2] = new Vector3(distTravell, 0.0f, points[0].thickness);
+        uvs[0] = new Vector4(distTravell, 0.5f, points[0].thickness, points[0].lake);
+        uvs[1] = new Vector4(distTravell, 1.0f, points[0].thickness, points[0].lake);
+        uvs[2] = new Vector4(distTravell, 0.0f, points[0].thickness, points[0].lake);
 
         for (int i = 1; i < pointCount; i++)
         {
             distTravell += (points[i].pos - points[i - 1].pos).magnitude;
 
-            uvs[(i * 3) + 0] = new Vector3(distTravell, 0.5f, points[i].thickness);
-            uvs[(i * 3) + 1] = new Vector3(distTravell, 1.0f, points[i].thickness);
-            uvs[(i * 3) + 2] = new Vector3(distTravell, 0.0f, points[i].thickness);
+            uvs[(i * 3) + 0] = new Vector4(distTravell, 0.5f, points[i].thickness, points[i].lake);
+            uvs[(i * 3) + 1] = new Vector4(distTravell, 1.0f, points[i].thickness, points[i].lake);
+            uvs[(i * 3) + 2] = new Vector4(distTravell, 0.0f, points[i].thickness, points[i].lake);
         }
         #endregion
 

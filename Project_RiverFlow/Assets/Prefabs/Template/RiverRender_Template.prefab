@@ -508,23 +508,35 @@ MonoBehaviour:
   - {x: 0, y: 0, z: -1}
   - {x: 0, y: 0, z: -1}
   uvs:
-  - {x: 0, y: 0.5, z: 1}
-  - {x: 0, y: 1, z: 1}
-  - {x: 0, y: 0, z: 1}
-  - {x: 0, y: 0.5, z: 1}
-  - {x: 0, y: 1, z: 1}
-  - {x: 0, y: 0, z: 1}
+  - {x: 0, y: 0.5, z: 1, w: 0}
+  - {x: 0, y: 1, z: 1, w: 0}
+  - {x: 0, y: 0, z: 1, w: -1}
+  - {x: 0, y: 0.5, z: 1, w: 0}
+  - {x: 0, y: 1, z: 1, w: 1}
+  - {x: 0, y: 0, z: 1, w: 1}
   triangles: 000000000100000003000000000000000300000002000000030000000100000004000000020000000300000005000000
-  subdividePerSegment: 1
-  riverData: {fileID: 11400000, guid: 41848361330582a4c99fa9e0185c69e5, type: 2}
-  linePoints:
-  - point: {x: 0, y: 0, z: 0}
-    color: {r: 1, g: 0, b: 0, a: 1}
-    thickness: 1
-  - point: {x: 0, y: 0, z: 0}
-    color: {r: 1, g: 0, b: 0, a: 1}
-    thickness: 1
   scale: 0.5
+  lakeScale: 0.5
+  subdividePerSegment: 1
+  points:
+  - pos: {x: 0, y: 0, z: 0}
+    color: {r: 1, g: 0, b: 0, a: 1}
+    thickness: 1
+    lake: 0
+  - pos: {x: 0, y: 0, z: 0}
+    color: {r: 1, g: 0, b: 0, a: 1}
+    thickness: 1
+    lake: 0
+  previousPoint:
+    pos: {x: 0, y: 0, z: 0}
+    color: {r: 0, g: 0, b: 0, a: 0}
+    thickness: 0
+    lake: 0
+  nextPoint:
+    pos: {x: 0, y: 0, z: 0}
+    color: {r: 0, g: 0, b: 0, a: 0}
+    thickness: 0
+    lake: 0
 --- !u!1 &8909883473942522786
 GameObject:
   m_ObjectHideFlags: 0
@@ -575,14 +587,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3bd32828c040a5a42853b7762797c336, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  custom: 1
-  line: {fileID: 2378695613167214450}
   customLine: {fileID: 1287073707945003514}
-  cone: {fileID: 8300869875371312128}
   startDisk: {fileID: 8682154733520231574}
   endDisk: {fileID: 7183107739479947689}
   pointPerSegment: 8
   riverData: {fileID: 11400000, guid: 41848361330582a4c99fa9e0185c69e5, type: 2}
+  canalTreated:
+    startNode: {x: 0, y: 0}
+    canalTiles: []
+    endNode: {x: 0, y: 0}
   points: []
 --- !u!114 &2378695613167214450
 MonoBehaviour:

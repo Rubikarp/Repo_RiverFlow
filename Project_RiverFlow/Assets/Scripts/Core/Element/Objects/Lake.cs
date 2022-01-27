@@ -61,16 +61,16 @@ public class Lake : Element
 
     private void Update()
     {
-        if(entryTile != null)
+        if (entryTile != null)
         {
-            entryFlow = entryTile.ReceivedFlow();
-            if(entryFlow == FlowStrenght._00_)
+            if (entryTile.linkAmount <1)
             {
                 UnLinkElementToGrid(GameGrid.Instance);
                 Destroy(gameObject);
             }
             else
             {
+                entryFlow = entryTile.ReceivedFlow();
                 switch (entryFlow)
                 {
                     case FlowStrenght._25_:
@@ -88,14 +88,8 @@ public class Lake : Element
                     default:
                         break;
                 }
-
                 VerifyFish();
             }
-        }
-        else
-        {
-            UnLinkElementToGrid(GameGrid.Instance);
-            Destroy(gameObject);
         }
     }
 
@@ -107,12 +101,14 @@ public class Lake : Element
         {
             for (int a = 0; a < allTilesOn.Length; a++)
             {
-                if (allTilesOn[a].neighbors[1].neighbors[1].element is Plant && allTilesOn[a].neighbors[1].neighbors[1].IsIrrigate == true)
+                if (allTilesOn[a].neighbors[1].neighbors[1].element is Plant 
+                 && allTilesOn[a].neighbors[1].neighbors[1].IsIrrigate == true)
                 {
                     neededTrees++;
                 }
 
-                if (allTilesOn[a].neighbors[5].neighbors[5].element is Plant && allTilesOn[a].neighbors[5].neighbors[5].IsIrrigate == true)
+                if (allTilesOn[a].neighbors[5].neighbors[5].element is Plant 
+                 && allTilesOn[a].neighbors[5].neighbors[5].IsIrrigate == true)
                 {
                     neededTrees++;
                 }
@@ -122,26 +118,21 @@ public class Lake : Element
         {
             for (int b = 0; b < allTilesOn.Length; b++)
             {
-                if (allTilesOn[b].neighbors[3].neighbors[3].element is Plant && allTilesOn[b].neighbors[3].neighbors[3].IsIrrigate == true)
+                if (allTilesOn[b].neighbors[3].neighbors[3].element is Plant 
+                 && allTilesOn[b].neighbors[3].neighbors[3].IsIrrigate == true)
                 {
                     neededTrees++;
                 }
 
-                if (allTilesOn[b].neighbors[7].neighbors[7].element is Plant && allTilesOn[b].neighbors[7].neighbors[7].IsIrrigate == true)
+                if (allTilesOn[b].neighbors[7].neighbors[7].element is Plant 
+                 && allTilesOn[b].neighbors[7].neighbors[7].IsIrrigate == true)
                 {
                     neededTrees++;
                 }
             }
         }
 
-        if (neededTrees == 6)
-        {
-            hasFish = true;
-        }
-        else
-        {
-            hasFish = false;
-        }
+        hasFish = neededTrees >= 6;
     }
 
     public override void UnLinkElementToGrid(GameGrid grid)

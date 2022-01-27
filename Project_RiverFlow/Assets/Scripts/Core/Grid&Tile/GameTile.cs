@@ -206,6 +206,10 @@ public class GameTile : MonoBehaviour
             {
                 received += (int)FlowStrenght._25_;
             }
+            if (element is Lake && received > 0)
+            {
+                received = (int)FlowStrenght._100_;
+            }
 
             return (FlowStrenght)Mathf.Clamp(received, 0, (int)FlowStrenght._100_);
         }

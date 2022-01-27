@@ -76,26 +76,33 @@ public class RiverSpline : MonoBehaviour
         return new CatmullRiverSegment(points[i-1].pos, points[i].pos, points[i + 1].pos, points[i + 2].pos);
     }
     //
+    private GameTile temp;
     public void ReCalculCurve()
     {
         #region Set Points
         SetPointCount(canalTreated.Lenght);
         //Set First Point
+        temp = grid.GetTile(canalTreated.startNode);
         DefinePoint(0,
-            grid.GetTile(canalTreated.startNode).worldPos,
-            grid.GetTile(canalTreated.startNode).riverStrenght);
+            temp.worldPos,
+            temp.riverStrenght,
+            temp.element is Lake);
 
         //Set Middle Point
         for (int j = 0; j < canalTreated.canalTiles.Count; j++)
         {
+            temp = grid.GetTile(canalTreated.canalTiles[j]);
             DefinePoint(j + 1,
-                    grid.GetTile(canalTreated.canalTiles[j]).worldPos,
-                    grid.GetTile(canalTreated.canalTiles[j]).riverStrenght);
+                    temp.worldPos,
+                    temp.riverStrenght,
+                    temp.element is Lake);
         }
         //Set Last Point
-        DefinePoint(canalTreated.Lenght-1,
-                grid.GetTile(canalTreated.endNode).worldPos,
-                grid.GetTile(canalTreated.endNode).riverStrenght);
+        temp = grid.GetTile(canalTreated.endNode);
+        DefinePoint(canalTreated.Lenght - 1,
+                    temp.worldPos,
+                    temp.riverStrenght,
+                    temp.element is Lake);
         #endregion
 
         GameTile startTile = grid.GetTile(canalTreated.startNode);
@@ -214,9 +221,10 @@ public class RiverSpline : MonoBehaviour
             }
         }
     }
-    public void DefinePoint(int index, Vector3 pos, FlowStrenght riverStregth)
+    public void DefinePoint(int index, Vector3 pos, FlowStrenght riverStregth, bool lake)
     {
         RiverPoint newPoints = new RiverPoint(pos);
+        newPoints.lake = lake? 1.0f:0.0f;
 
         switch (riverStregth)
         {
@@ -249,7 +257,5 @@ public class RiverSpline : MonoBehaviour
         }
 
         points[index] = newPoints;
-
     }
-
 }
