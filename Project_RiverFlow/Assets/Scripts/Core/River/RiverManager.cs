@@ -772,7 +772,7 @@ public class RiverManager : Singleton<RiverManager>
     {
         if (tileA.linkAmount == 1 || tileB.linkAmount == 1)
         {
-            if (canalA == canalB || ComputeCanalParent(canalA).Contains(canalB) || ComputeCanalParent(canalB).Contains(canalA))
+            if (canalA == canalB || ComputeCanalParent(canalB).Contains(canalA))
             {
                 return true;
             }
