@@ -772,7 +772,7 @@ public class RiverManager : Singleton<RiverManager>
     {
         if (tileA.linkAmount == 1 || tileB.linkAmount == 1)
         {
-            if (canalA == canalB || ComputeCanalParent(canalA).Contains(canalB) || ComputeCanalParent(canalB).Contains(canalA))
+            if (canalA == canalB || ComputeCanalParent(canalB).Contains(canalA))
             {
                 return true;
             }
@@ -791,26 +791,19 @@ public class RiverManager : Singleton<RiverManager>
         }
         return false;
     }
-    private bool CheckForSource(Canal canal, List<Canal> alreadyCalc = null)
+    private bool CheckForSource(Canal canal)
     {
-        List<Canal> result = new List<Canal>();
-        if (alreadyCalc == null)
-        {
-            alreadyCalc = new List<Canal>();
-        }
-
         GameTile startTile = grid.GetTile(canal.startNode);
         if(startTile.flowIn.Count > 0)
         {
             GameTile previousTile = grid.GetTile(startTile.gridPos + startTile.flowIn[0].dirValue);
-            if (previousTile.canalsIn.Contains(canal) || alreadyCalc.Contains(canal))
+            if (previousTile.canalsIn.Contains(canal))
             {
                 return startTile.element is WaterSource;
             }
             else
             {
-                alreadyCalc.Add(previousTile.canalsIn[0]);
-                return CheckForSource(previousTile.canalsIn[0], alreadyCalc);
+                return CheckForSource(previousTile.canalsIn[0]);
             }
         }
         else
