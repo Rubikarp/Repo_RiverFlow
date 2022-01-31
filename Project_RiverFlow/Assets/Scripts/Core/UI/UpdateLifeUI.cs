@@ -7,8 +7,8 @@ using DG.Tweening;
 public class UpdateLifeUI : MonoBehaviour
 {
     public ScoreManager scoreManager;
-    //public Sprite pvAlive;
-    //public Sprite pvDead;
+    public Sprite pvDead;
+    
     public Image pv1;
     public Image pv2;
     public Image pv3;
@@ -29,27 +29,34 @@ public class UpdateLifeUI : MonoBehaviour
         {
 
             plant1Dead = true;
-            Dissapear(pv1);
+            StartCoroutine(ChangePVState(pv1));
 
         }
         else if (scoreManager.exposedDeadPlants == 2 && plant2Dead == false)
         {
             plant2Dead = true;
-            Dissapear(pv2);
+            StartCoroutine(ChangePVState(pv2));
 
         }
         else if (scoreManager.exposedDeadPlants >= 3 && plant3Dead == false)
         {
             plant3Dead = true;
-            Dissapear(pv3);
+            StartCoroutine(ChangePVState(pv3));
 
         }
 
-        void  Dissapear(Image PV)
+
+
+
+        IEnumerator ChangePVState(Image PV)
         {
             PV.rectTransform.DOScaleY(0f, 0.2f).SetEase(Ease.InOutElastic);
             PV.rectTransform.DOScaleX(0f, 0.2f).SetEase(Ease.InOutElastic);
-
+            yield return new WaitForSeconds(0.1f);
+            PV.sprite = pvDead;
+            PV.color = new Color(64f/255 , 87f/255 , 35f/255 , 1);
+            PV.rectTransform.DOScaleY(1f, 0.2f).SetEase(Ease.InOutElastic);
+            PV.rectTransform.DOScaleX(1f, 0.2f).SetEase(Ease.InOutElastic);
         }
     }
 }
