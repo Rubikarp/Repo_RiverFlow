@@ -56,9 +56,10 @@ public class DigingHandler : MonoBehaviour
         //Initialise start select
         startSelectTile = grid.GetTile(grid.PosToTile(input.GetHitPos()));
         startSelectTilePos = grid.TileToPos(startSelectTile.gridPos);
-
+        CanvasManager.Instance.Dissapear();
         switch (mode)
         {
+            
             case InputMode.diging:
                 if (startSelectTile.linkAmount > 2 || startSelectTile.flowOut.Count >= 2)
                 {
@@ -225,6 +226,7 @@ public class DigingHandler : MonoBehaviour
     private void InputRelease(InputMode mode)
     {
         //sound
+        CanvasManager.Instance.Reapear();
         LevelSoundboard.Instance.InitializePitchDig();
         element.UpdateSoundRiver();
 

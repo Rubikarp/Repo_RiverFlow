@@ -27,6 +27,8 @@ public class RiverManager : Singleton<RiverManager>
     public InventoryManager inventory;
     [HideInInspector] public bool forbidenMove = false;
 
+    public ParticleSystem boucleError;
+    public ParticleSystem tunnelError;
     public string error = "Error";
 
     void Start()
@@ -516,11 +518,24 @@ public class RiverManager : Singleton<RiverManager>
     private void CannotLink(MessageCase messageCase)
     {
         Debug.LogWarning("Move Interdit");
+
         LevelSoundboard.Instance.PlayErrorUISound(error);
+        
         StartCoroutine(ForbidenMoveGridColor());
+        switch (messageCase)
+        {
+            case MessageCase.CannotInMountain:
+                CursorManager.Instance.ErrorSpawn(boucleError);
+                break;
+            case MessageCase.TryLoopingCanal:
+                CursorManager.Instance.ErrorSpawn(boucleError);
+                break;
+        }
         loopEvent?.Invoke(MessageCase.TryLoopingCanal, "You can't create a loop");
         inventory.digAmmount++;
     }
+
+
     IEnumerator ForbidenMoveGridColor()
     {
         forbidenMove = true;

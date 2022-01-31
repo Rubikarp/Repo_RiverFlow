@@ -1971,6 +1971,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7564991288794492298}
   - component: {fileID: 7606103431888057885}
+  - component: {fileID: 7254766129536586077}
   m_Layer: 0
   m_Name: LevelUI
   m_TagString: Untagged
@@ -2008,10 +2009,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4d4feea1acb937419f630c6ec2fd4f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isMenu: 0
   grid: {fileID: 0}
   preview: {fileID: 7564991290151202825}
   previewSprite: {fileID: 7564991290151202824}
   inputHandler: {fileID: 0}
+  inventory: {fileID: 0}
   cloudPreview: {fileID: 5388795422335726589}
   lakePreview: {fileID: 21300000, guid: f1849b28187bcab40a465033c9f52467, type: 3}
   sourcePreview: {fileID: 21300000, guid: 4cb332ebf0545b344b826be67264ee62, type: 3}
@@ -2020,6 +2023,23 @@ MonoBehaviour:
   defaultCursor: {fileID: 2800000, guid: 78083b4de3a3cc14f81cd544b27e8290, type: 3}
   digCursor: {fileID: 2800000, guid: dbd83e1b2b8cc504db58be55e38031b1, type: 3}
   eraserCursor: {fileID: 2800000, guid: 537a2cc63bfc7694e83655a9ae7c4a84, type: 3}
+--- !u!114 &7254766129536586077
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7564991288794492297}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fdcbb4731e098d040a15c1d72f780d3c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  uiTools: {fileID: 7564991289040015182}
+  uiScore: {fileID: 0}
+  uiClock: {fileID: 5834999995715232448}
+  uiTime: {fileID: 5834999995886299196}
+  uiLife: {fileID: 6038980170555534829}
 --- !u!1 &7564991288843447511
 GameObject:
   m_ObjectHideFlags: 0
@@ -4845,6 +4865,16 @@ PrefabInstance:
     m_RemovedComponents:
     - {fileID: 26289882256480320, guid: a44e5395d06c8bc41af76d1791451c88, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: a44e5395d06c8bc41af76d1791451c88, type: 3}
+--- !u!224 &5834999995715232448 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 5834999995567139795, guid: a44e5395d06c8bc41af76d1791451c88, type: 3}
+  m_PrefabInstance: {fileID: 153897235}
+  m_PrefabAsset: {fileID: 0}
+--- !u!224 &5834999995886299196 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 5834999996001886511, guid: a44e5395d06c8bc41af76d1791451c88, type: 3}
+  m_PrefabInstance: {fileID: 153897235}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &5834999995850187077 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5834999995968923734, guid: a44e5395d06c8bc41af76d1791451c88, type: 3}

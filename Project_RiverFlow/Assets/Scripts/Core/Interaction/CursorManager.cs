@@ -5,7 +5,7 @@ using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 
-public class CursorManager : MonoBehaviour
+public class CursorManager : Singleton<CursorManager>
 {
     public bool isMenu =false;
     public GameGrid grid;
@@ -25,10 +25,13 @@ public class CursorManager : MonoBehaviour
     public Texture2D eraserCursor;
 
 
+    Camera camera;
+
+
     // Start is called before the first frame update
     void Awake()
     {
-
+        camera = Camera.main;
 
         if(isMenu == false)
         {
@@ -199,5 +202,16 @@ public class CursorManager : MonoBehaviour
                     break;
             }
         }
+    }
+
+    public void ErrorSpawn(ParticleSystem particles)
+    {
+        Vector3 mousePos;
+        Vector3 worldPos;
+        mousePos = Input.mousePosition;
+        mousePos.z = 1.5f;
+        worldPos = camera.ScreenToWorldPoint(mousePos);
+
+        Instantiate(particles, worldPos, Quaternion.Euler(-90, 0, 0));
     }
 }
