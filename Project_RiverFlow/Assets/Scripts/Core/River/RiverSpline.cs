@@ -187,6 +187,7 @@ public class RiverSpline : MonoBehaviour
         dir.y = dir.y * -1; //trouver un meilleur fix
         float angle = Vector2.SignedAngle(Vector2.right, dir);
         Quaternion rot = new Quaternion(Mathf.Sin(angle * Mathf.Deg2Rad), Mathf.Cos(angle * Mathf.Deg2Rad), 0, 1).normalized;
+
         cone.Radius = 0.3f * line.Thickness;
         cone.Length = 0.6f;
         cone.transform.position = points[1].pos;

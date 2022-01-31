@@ -525,7 +525,7 @@ public class RiverManager : Singleton<RiverManager>
         switch (messageCase)
         {
             case MessageCase.CannotInMountain:
-                CursorManager.Instance.ErrorSpawn(boucleError);
+                CursorManager.Instance.ErrorSpawn(tunnelError);
                 break;
             case MessageCase.TryLoopingCanal:
                 CursorManager.Instance.ErrorSpawn(boucleError);
