@@ -31,6 +31,9 @@ public class RewardManager : MonoBehaviour
 
     public string rewardTimeSound = "RewardTime";
 
+    public int[] basicRewardValue;
+    public int[] weekMilestones;
+
     void Start()
     {
         Inventory = InventoryManager.Instance;
@@ -83,9 +86,11 @@ public class RewardManager : MonoBehaviour
             int pull = Random.Range(0, Temporary.Count);
             GameObject newRewardDisplay = Instantiate(Temporary[pull].UsedButton, rewardSelectionPanelTransform);
             rewardDisplays.Add(newRewardDisplay);
+            AttributeDigRewards(newRewardDisplay, false);
             Temporary.RemoveAt(pull);
             GameObject SourceRewardDisplay = Instantiate(SourceButton, rewardSelectionPanelTransform);
             rewardDisplays.Add(SourceRewardDisplay);
+            AttributeDigRewards(SourceRewardDisplay, true);
         }
         else
         {
@@ -105,6 +110,7 @@ public class RewardManager : MonoBehaviour
                     //Debug.Log("Button to Display : " + usedButton.name);
                     GameObject newRewardDisplay = Instantiate(usedButton, rewardSelectionPanelTransform);
                     rewardDisplays.Add(newRewardDisplay);
+                    AttributeDigRewards(newRewardDisplay, false);
                 }
             }
         }
@@ -154,5 +160,42 @@ public class RewardManager : MonoBehaviour
             weightIndexes.Add(i);
         }
         return weightIndexes;
+    }
+
+    private void AttributeDigRewards(GameObject reward, bool isSource)
+    {
+        if (Timer.weekNumber < weekMilestones[0])
+        {
+            reward.GetComponent<RewardDisplay>().digBonus = basicRewardValue[0];
+        }
+        else if (Timer.weekNumber < weekMilestones[1])
+        {
+            reward.GetComponent<RewardDisplay>().digBonus = basicRewardValue[1];
+        }
+        else if (Timer.weekNumber < weekMilestones[2])
+        {
+            reward.GetComponent<RewardDisplay>().digBonus = basicRewardValue[2];
+        }
+        else if (Timer.weekNumber < weekMilestones[3])
+        {
+            reward.GetComponent<RewardDisplay>().digBonus = basicRewardValue[3];
+        }
+        else if (Timer.weekNumber < weekMilestones[4])
+        {
+            reward.GetComponent<RewardDisplay>().digBonus = basicRewardValue[4];
+        }
+        else if (Timer.weekNumber >= weekMilestones[4])
+        {
+            reward.GetComponent<RewardDisplay>().digBonus = basicRewardValue[5];
+        }
+
+        if (isSource == true)
+        {
+            reward.GetComponent<RewardDisplay>().digBonus -= 5;
+        }
+        if (reward.GetComponent<RewardDisplay>().cloudBonus == 0 && reward.GetComponent<RewardDisplay>().sourceBonus == 0 && reward.GetComponent<RewardDisplay>().lakeBonus == 0 && reward.GetComponent<RewardDisplay>().tunnelBonus == 0)
+        {
+            reward.GetComponent<RewardDisplay>().digBonus += 5;
+        }
     }
 }
