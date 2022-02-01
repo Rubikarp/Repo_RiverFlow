@@ -26,22 +26,11 @@ public class DivergeanceChoice : MonoBehaviour
             visual.SetActive(true);
 
             // Rotate quaternion
-            dir = tileOn.flowOut[0].dirValue;
-            dir.y = dir.y * -1; //trouver un meilleur fix
-            angle = Vector2.SignedAngle(Vector2.right, dir.normalized);
-            rot = new Quaternion(Mathf.Sin(angle * Mathf.Deg2Rad), Mathf.Cos(angle * Mathf.Deg2Rad), 0, 1).normalized;
-            /*
-            dir = dir.normalized;
-            rot = new Quaternion(Mathf.Cos(dir.y * Mathf.PI), Mathf.Sin(dir.x * Mathf.PI), 0, 0).normalized;
-            */
+            rot = Direction.ToQuat2D(tileOn.flowOut[0].dirEnum);
             arrowA.transform.rotation = rot;
-
-            /*
-            dir = tileOn.flowOut[1].dirValue;
-            dir.y = dir.y * -1; //trouver un meilleur fix
-            angle = Vector2.SignedAngle(Vector2.right, dir);
-            rot = new Quaternion(Mathf.Sin(angle * Mathf.Deg2Rad), Mathf.Cos(angle * Mathf.Deg2Rad), 0, 0).normalized;
-            arrowB.transform.rotation = rot;*/
+            //
+            rot = Direction.ToQuat2D(tileOn.flowOut[0].dirEnum);
+            arrowB.transform.rotation = rot;
         }
     }
 }

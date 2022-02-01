@@ -13,12 +13,22 @@ public class QuaternionVisualizer : MonoBehaviour
     public float z = 0f;
     public float w = 1f;
 
-    private void OnDrawGizmos()
+    private void Update()
     {
         //Rotate 2D
         //Draw.Cone(transform.position, new Quaternion(Mathf.Sin(angle), Mathf.Cos(angle), z, w).normalized, 0.5f, 2f);
 
         //Default
-        Draw.Cone(transform.position, new Quaternion(x, y, z, w).normalized, 0.5f, 2f);
+        transform.rotation = new Quaternion(x, y, z, w).normalized;
+
+    }
+
+    [NaughtyAttributes.Button]
+    public void Normalized()
+    {
+        x = transform.rotation.x;
+        y = transform.rotation.y;
+        z = transform.rotation.z;
+        w = transform.rotation.w;
     }
 }
