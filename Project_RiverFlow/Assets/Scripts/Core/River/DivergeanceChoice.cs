@@ -19,6 +19,10 @@ public class DivergeanceChoice : MonoBehaviour
     {
         if(tileOn.flowOut.Count < 2)
         {
+            Destroy(gameObject);
+        }
+        else if ((int)tileOn.riverStrenght % 2 == 0)
+        {
             visual.SetActive(false);
         }
         else
@@ -29,7 +33,7 @@ public class DivergeanceChoice : MonoBehaviour
             rot = Direction.ToQuat2D(tileOn.flowOut[0].dirEnum);
             arrowA.transform.rotation = rot;
             //
-            rot = Direction.ToQuat2D(tileOn.flowOut[0].dirEnum);
+            rot = Direction.ToQuat2D(tileOn.flowOut[1].dirEnum);
             arrowB.transform.rotation = rot;
         }
     }
