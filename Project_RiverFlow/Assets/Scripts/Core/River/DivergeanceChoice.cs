@@ -17,11 +17,7 @@ public class DivergeanceChoice : MonoBehaviour
     Quaternion rot;
     public void UpdateChoice()
     {
-        if(tileOn.flowOut.Count < 2)
-        {
-            Destroy(gameObject);
-        }
-        else if ((int)tileOn.riverStrenght % 2 == 0)
+        if ((int)tileOn.riverStrenght % 2 == 0)
         {
             visual.SetActive(false);
         }
@@ -32,9 +28,12 @@ public class DivergeanceChoice : MonoBehaviour
             // Rotate quaternion
             rot = Direction.ToQuat2D(tileOn.flowOut[0].dirEnum);
             arrowA.transform.rotation = rot;
-            //
-            rot = Direction.ToQuat2D(tileOn.flowOut[1].dirEnum);
-            arrowB.transform.rotation = rot;
+
+            if (tileOn.flowOut.Count < 2)
+            {
+                rot = Direction.ToQuat2D(tileOn.flowOut[1].dirEnum);
+                arrowB.transform.rotation = rot;
+            }
         }
     }
 }

@@ -23,6 +23,7 @@ public class DivergeanceManager : MonoBehaviour
     void Update()
     {
         GameTile lookedTile;
+
         foreach (Canal canal in riverManager.canals)
         {
             lookedTile = grid.GetTile(canal.startNode);
@@ -30,23 +31,20 @@ public class DivergeanceManager : MonoBehaviour
             {
                 DivergeanceChoice choice = divergeances.Find(x => x.gridPos == lookedTile.gridPos);
                 //check if not already here
-                if (choice != null)
-                {
-                    // already here
-                    if (lookedTile.linkAmount < 3)
-                    {
-                        divergeances.Remove(choice);
-                        Destroy(choice.gameObject);
-                    }
-                    else
-                    {
-                        choice.UpdateChoice();
-                    }
-                }
-                else
+                if (choice == null)
                 {
                     SpawnDivergeance(lookedTile);
                 }
+            }
+        }
+
+        foreach (var choice in divergeances)
+        {
+            choice.UpdateChoice();
+
+            if (choice.tileOn.flowOut.Count < 2)
+            {
+                Destroy(choice.gameObject);
             }
         }
     }
