@@ -111,4 +111,20 @@ public class TimeManager : Singleton<TimeManager>
         }
         gameTimeSpeed = speed;
     }
+
+    private void SetSpawnMarginValue()
+    {
+        if (weekNumber < 4)
+        {
+            plantSpawner.marginValue = 2;
+        }
+        else if (weekNumber < 8)
+        {
+            plantSpawner.marginValue = 3;
+        }
+        else
+        {
+            plantSpawner.marginValue = 4;
+        }
+    }
 }
