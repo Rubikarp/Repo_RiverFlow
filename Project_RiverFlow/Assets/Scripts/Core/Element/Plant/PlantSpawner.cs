@@ -65,6 +65,7 @@ public class PlantSpawner : MonoBehaviour
     private int difficultyScore;
     private ThreatState lastThreastState;
     public TimeManager gametime;
+    [HideInInspector] public int marginValue = 2;
 
     [Header("Difficulty Score")]
     public float digNumberMultiplier;
@@ -109,12 +110,18 @@ public class PlantSpawner : MonoBehaviour
             }
             DifficultyScoreCalcul();
             EvaluateTiles();
+            Debug.Log(tileScores.Count);
             for (int i = tileScores.Count - 1; i > 0; i--)
             {
                 if (tileScores[i].spawn)
                 {
                     elementHandler.SpawnPlantAt(tileScores[i].tile.gridPos);
+                    Debug.Log(tileScores[i].tile.gridPos);
                     break;
+                }
+                else
+                {
+                    Debug.Log(tileScores[i]);
                 }
             }
         }

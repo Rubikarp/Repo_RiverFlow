@@ -143,6 +143,7 @@ public class Plant : Element
             CheckNeighboringRivers();
             StateUpdate();
             Scoring();
+
             if (isFruitTree == true)
             {
                 FruitSpawn();
@@ -340,17 +341,11 @@ public class Plant : Element
         {
             for (int a = 0; a < tileOn.neighbors.Length; a++)
             {
-                if (tileOn.neighbors[a].linkAmount == 0 && tileOn.neighbors[a].element == null)
+                if (tileOn.neighbors[a].linkAmount == 0 && tileOn.neighbors[a].element == null && isValidSpawnTarget(tileOn.neighbors[a]))
                 {
-                    for (int b = 0; b < tileOn.neighbors[a].neighbors.Length; b++)
-                    {
-                        if (tileOn.neighbors[a].neighbors[b].ReceivedFlow() >= FlowStrenght._25_)
-                        {
-                            irrigatedNeighbors[a] = true;
+                    irrigatedNeighbors[a] = true;
 
-                            goodTilesForFruit++;
-                        }
-                    }
+                    goodTilesForFruit++;
                 }
             }
 
@@ -660,4 +655,16 @@ public class Plant : Element
             flowerSpawnAeras.RemoveAt(chooseCollider);
         }
     }
+
+     private bool isValidSpawnTarget(GameTile targetTile)
+     {
+         bool targetIsValid = false;
+        
+        if (targetTile.type != TileType.mountain && targetTile.IsIrrigate)
+        {
+            targetIsValid = true;
+        }
+
+         return targetIsValid;
+     }
 }

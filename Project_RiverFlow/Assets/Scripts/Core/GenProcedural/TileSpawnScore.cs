@@ -25,6 +25,8 @@ public class TileSpawnScore : MonoBehaviour
     private Camera mainCamera;
     private PlantSpawner plantSpawner;
     private DistanceField distanceField;
+    private int spawnMargin;
+    public int occupiedTilesLimit = 4;
 
     private void Start()
     {
@@ -240,14 +242,16 @@ public class TileSpawnScore : MonoBehaviour
         boolOutput |= IsNextToLake();
 
         return !boolOutput;
+        
     }
 
     private bool IsOutsideOfCamera()
     {
         bool output = false;
+        spawnMargin = plantSpawner.marginValue;
 
-        int maxX = (int)Mathf.Floor(((float)Screen.width / (float)Screen.height) * mainCamera.orthographicSize)-2;
-        int maxY = (int)Mathf.Floor(mainCamera.orthographicSize)-2;
+        int maxX = (int)Mathf.Floor(((float)Screen.width / (float)Screen.height) * mainCamera.orthographicSize) - spawnMargin;
+        int maxY = (int)Mathf.Floor(mainCamera.orthographicSize) - spawnMargin;
 
         if(!(-maxX <= tile.worldPos2D.x && tile.worldPos2D.x <= maxX) || !(-maxY <= tile.worldPos2D.y && tile.worldPos2D.y <= maxY))
         {
@@ -259,12 +263,25 @@ public class TileSpawnScore : MonoBehaviour
 
     private bool AreAllTilesAroundOccupied()
     {
+        int blockedNeighbors = 0;
         bool output = false;
         foreach(GameTile iTile in tile.neighbors)
         {
             if (iTile != null)
             {
-                output |= (iTile.isDuged || (iTile.type == TileType.mountain));
+                if (iTile.type == TileType.mountain || iTile.element != null)
+                {
+                    blockedNeighbors++;
+                }
+                if (iTile.isDuged)
+                {
+                    output = true;
+                }
+            }
+
+            if (blockedNeighbors > occupiedTilesLimit)
+            {
+                output = true;
             }
         }
         return output;

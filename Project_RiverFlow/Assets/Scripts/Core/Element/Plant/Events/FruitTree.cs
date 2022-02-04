@@ -134,4 +134,65 @@ public class FruitTree : MonoBehaviour
             }
         }
     }
+
+    private bool isValidSpawnTarget(GameTile targetTile)
+    {
+        bool targetIsValid = false; 
+
+        switch (targetTile.type)
+        {
+            case TileType.mountain:
+
+                targetIsValid = false;
+
+                break;
+
+            case TileType.grass:
+
+                if (targetTile.ReceivedFlow() >= FlowStrenght._25_)
+                {
+                    targetIsValid = true;
+                }
+                else
+                {
+                    targetIsValid = false;
+                }
+
+                break;
+
+            case TileType.clay:
+
+                if (targetTile.ReceivedFlow() >= FlowStrenght._50_)
+                {
+                    targetIsValid = true;
+                }
+                else
+                {
+                    targetIsValid = false;
+                }
+
+                break;
+
+            case TileType.sand:
+
+                if (targetTile.ReceivedFlow() >= FlowStrenght._75_)
+                {
+                    targetIsValid = true;
+                }
+                else
+                {
+                    targetIsValid = false;
+                }
+
+                break;
+
+            case TileType.other:
+
+                targetIsValid = false;
+
+                break;
+        }
+
+        return targetIsValid;
+    }
 }

@@ -121,6 +121,11 @@ public class GameTile : MonoBehaviour
                                 return true;
                             }
                             break;
+                        case TileType.mountain:
+
+                            return false;
+
+                            break;
                         default:
                             Debug.Log("oupsie");
                             break;
