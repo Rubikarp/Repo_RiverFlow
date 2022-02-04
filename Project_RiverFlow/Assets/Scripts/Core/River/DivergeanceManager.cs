@@ -40,11 +40,14 @@ public class DivergeanceManager : MonoBehaviour
 
         foreach (var choice in divergeances)
         {
-            choice.UpdateChoice();
-
             if (choice.tileOn.flowOut.Count < 2)
             {
                 Destroy(choice.gameObject);
+                divergeances.Remove(choice);
+            }
+            else
+            {
+                choice.UpdateChoice();
             }
         }
     }
@@ -53,7 +56,7 @@ public class DivergeanceManager : MonoBehaviour
     {
         GameObject go = InstanciateObject(dixVergeTemplate, tile);
         go.transform.position = grid.TileToPos(new Vector2Int(tile.gridPos.x, tile.gridPos.y));
-        go.name = "Source_" + tile.gridPos;
+        go.name = "Choice_on_" + tile.gridPos;
 
         //Check if Plant
         DivergeanceChoice choice = go.GetComponent<DivergeanceChoice>();
@@ -74,7 +77,7 @@ public class DivergeanceManager : MonoBehaviour
 #if UNITY_EDITOR
         return PrefabUtility.InstantiatePrefab(template, tile.transform) as GameObject;
 #else
-        return Instantiate(template, elementContainer);
+        return Instantiate(template, tile.transform);
 #endif 
     }
 }

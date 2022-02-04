@@ -184,7 +184,10 @@ public class GameTile : MonoBehaviour
     void Start()
     {
         spawnScore = GetComponent<TileSpawnScore>();
-        distanceField = GameObject.Find("PlantSpawner").GetComponent<DistanceField>();
+        if (GameObject.Find("PlantSpawner").GetComponent<DistanceField>())
+        {
+            distanceField = GameObject.Find("PlantSpawner").GetComponent<DistanceField>();
+        }
     }
 
     //Flow

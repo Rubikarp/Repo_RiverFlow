@@ -5,7 +5,7 @@ using UnityEditor;
 using NaughtyAttributes;
 using UnityEngine.Events;
 
-public class ElementHandler : MonoBehaviour
+public class ElementHandler : Singleton<ElementHandler>
 {
     public GameGrid grid;
     [Space(10)]

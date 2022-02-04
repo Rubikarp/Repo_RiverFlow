@@ -72,6 +72,11 @@ public class TimeManager : Singleton<TimeManager>
             nextPlantSpawn -= DeltaSimulTime;
             if (nextPlantSpawn < 0)
             {
+                if(plantSpawner == null)
+                {
+                    return;
+                }
+
                 switch(plantSpawner.threatState) {
                     case ThreatState.CALM:
                         nextPlantSpawn = plantSpawnRateCalm + (plantSpawnRateCalm * spawnRateVariation);
