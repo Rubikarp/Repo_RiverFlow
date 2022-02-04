@@ -252,7 +252,7 @@ public class RiverManager : Singleton<RiverManager>
             Canal listCanal = CanalList(tileA.canalsIn[0]);
             listCanal.Extend(tileA, tileB);
 
-            if (tileA.ReceivedFlow() < tileB.ReceivedFlow()) 
+            if (tileA.ReceivedFlow() < tileB.ReceivedFlow() && !(tileB.element is WaterSource))
             {
                 listCanal.Inverse(grid);
             }

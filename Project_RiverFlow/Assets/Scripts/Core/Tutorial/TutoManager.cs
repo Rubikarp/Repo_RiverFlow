@@ -23,15 +23,18 @@ public class TutoManager : MonoBehaviour
         gameTime = TimeManager.Instance;
         elements = ElementHandler.Instance;
         riverManager = RiverManager.Instance;
+
+        //Conséquence
+        StopAllCoroutines();
+        StartCoroutine(BeginCreation());
+
     }
 
 
     public IEnumerator BeginCreation()
     {
         //Set-Up
-        /*
-            Actu il y a rien
-        */
+        Debug.Log("BeginCreation");
 
         //Attente d'action
         do
@@ -50,9 +53,7 @@ public class TutoManager : MonoBehaviour
     public IEnumerator IrrigateCreation()
     {
         //Set-Up
-        /*
-            Actu il y a rien
-        */
+        Debug.Log("IrrigateCreation");
 
         //Attente d'action
         do
@@ -63,8 +64,8 @@ public class TutoManager : MonoBehaviour
         }
         //Tant que le joueur n'a pas créer de canal
         while 
-        (  grid.GetTile(riverManager.canals[0].endNode).riverStrenght > 0
-        && tutoSource.TileOn.linkAmount > 0);
+        (  (int)grid.GetTile(riverManager.canals[0].endNode).riverStrenght < 1
+        && tutoSource.TileOn.linkAmount < 1);
 
         //Conséquence
         StopAllCoroutines();
@@ -73,8 +74,10 @@ public class TutoManager : MonoBehaviour
     public IEnumerator IrrigatePlant()
     {
         //Set-Up
-        elements.SpawnPlantAt(new Vector2Int(15, 15));
-        firstPlant = (Plant)grid.GetTile(new Vector2Int(15, 15)).element;
+        Debug.Log("IrrigatePlant");
+
+        elements.SpawnPlantAt(new Vector2Int(25, 15));
+        firstPlant = (Plant)grid.GetTile(new Vector2Int(25, 15)).element;
 
         //Attente d'action
         do
@@ -93,9 +96,8 @@ public class TutoManager : MonoBehaviour
     public IEnumerator LookForSplit()
     {
         //Set-Up
-        /*
-            Actu il y a rien
-        */
+        Debug.Log("LookForSplit");
+
 
         //Attente d'action
         do
