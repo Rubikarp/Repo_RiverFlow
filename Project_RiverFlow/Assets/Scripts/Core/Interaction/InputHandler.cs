@@ -44,7 +44,7 @@ public class InputHandler : Singleton<InputHandler>
     public InputMode mode = InputMode.diging;
     //public InputMode secondaryMode = InputMode.eraser;
 
-    private bool isMaintaining = false;
+    public bool isMaintaining = false;
     private InputMode lastMode = InputMode.diging;
     public bool shortCutErasing = false;
 
