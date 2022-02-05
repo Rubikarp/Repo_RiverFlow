@@ -14,10 +14,13 @@ public class TutoManager : MonoBehaviour
     private ElementHandler elements;
     private RiverManager riverManager;
     public DigingHandler digging;
+    public ZoomManager camera;
 
     [Header("Info")]
     public WaterSource tutoSource;
     public Plant firstPlant;
+    public Plant secondPlant;
+    public Plant desertPlant;
 
     [Header("ToolTips")]
     public List<RectTransform> tooltips;
@@ -121,8 +124,8 @@ public class TutoManager : MonoBehaviour
         //Set-Up
         Debug.Log("IrrigatePlant");
 
-        elements.SpawnPlantAt(new Vector2Int(25, 15));
-        firstPlant = (Plant)grid.GetTile(new Vector2Int(25, 15)).element;
+        elements.SpawnPlantAt(new Vector2Int(25, 13));
+        firstPlant = (Plant)grid.GetTile(new Vector2Int(25, 13)).element;
         SpawnToolTip(currentStep);
         //Attente d'action
         do
@@ -137,6 +140,56 @@ public class TutoManager : MonoBehaviour
         //Conséquence
         StopAllCoroutines();
         currentStep++;
+        StartCoroutine(InfoIrrigate());
+    }
+    public IEnumerator InfoIrrigate()
+    {
+        bool hasRealeasedKey = false;
+        //Set-Up
+        Debug.Log("InfoRiverFlow");
+
+
+        SpawnToolTip(currentStep);
+        //Attente d'action
+        do
+        {
+            if (!UnityEngine.Input.GetMouseButton(0))
+            {
+                Debug.Log("released");
+                hasRealeasedKey = true;
+            }
+            yield return new WaitForEndOfFrame();
+        }
+        while (!UnityEngine.Input.GetMouseButton(0) || !hasRealeasedKey);
+        DissapearToolTip();
+        //Conséquence
+        StopAllCoroutines();
+        currentStep++;
+        StartCoroutine(InfoButterfly());
+    }
+    public IEnumerator InfoButterfly()
+    {
+        bool hasRealeasedKey = false;
+        //Set-Up
+        Debug.Log("InfoRiverFlow");
+
+
+        SpawnToolTip(currentStep);
+        //Attente d'action
+        do
+        {
+            if (!UnityEngine.Input.GetMouseButton(0))
+            {
+                Debug.Log("released");
+                hasRealeasedKey = true;
+            }
+            yield return new WaitForEndOfFrame();
+        }
+        while (!UnityEngine.Input.GetMouseButton(0) || !hasRealeasedKey);
+        DissapearToolTip();
+        //Conséquence
+        StopAllCoroutines();
+        currentStep++;
         StartCoroutine(LookForSplit());
     }
     public IEnumerator LookForSplit()
@@ -144,6 +197,8 @@ public class TutoManager : MonoBehaviour
         //Set-Up
         Debug.Log("LookForSplit");
 
+        elements.SpawnPlantAt(new Vector2Int(24, 17));
+        secondPlant = (Plant)grid.GetTile(new Vector2Int(24, 17)).element;
         SpawnToolTip(currentStep);
 
         //Attente d'action
@@ -154,13 +209,113 @@ public class TutoManager : MonoBehaviour
             yield return new WaitForEndOfFrame();
         }
         //Tant que le joueur n'a pas créer de canal
-        while (!(riverManager.canals.Count > 3));
+        while (!(riverManager.canals.Count >= 3) || !secondPlant.isIrrigated);
         DissapearToolTip();
         //Conséquence
         StopAllCoroutines();
         currentStep++;
-        //StartCoroutine();
+        StartCoroutine(InfoDivideForShovels());
     }
+    public IEnumerator InfoDivideForShovels()
+    {
+        bool hasRealeasedKey = false;
+        //Set-Up
+        Debug.Log("InfoRiverFlow");
+
+
+        SpawnToolTip(currentStep);
+        //Attente d'action
+        do
+        {
+            if (!UnityEngine.Input.GetMouseButton(0))
+            {
+                Debug.Log("released");
+                hasRealeasedKey = true;
+            }
+            yield return new WaitForEndOfFrame();
+        }
+        while (!UnityEngine.Input.GetMouseButton(0) || !hasRealeasedKey);
+        DissapearToolTip();
+        //Conséquence
+        StopAllCoroutines();
+        currentStep++;
+        StartCoroutine(InfoCarefulDivide());
+    }
+    public IEnumerator InfoCarefulDivide()
+    {
+        bool hasRealeasedKey = false;
+        //Set-Up
+        Debug.Log("InfoRiverFlow");
+
+
+        SpawnToolTip(currentStep);
+        //Attente d'action
+        do
+        {
+            if (!UnityEngine.Input.GetMouseButton(0))
+            {
+                Debug.Log("released");
+                hasRealeasedKey = true;
+            }
+            yield return new WaitForEndOfFrame();
+        }
+        while (!UnityEngine.Input.GetMouseButton(0) || !hasRealeasedKey);
+        DissapearToolTip();
+        //Conséquence
+        StopAllCoroutines();
+        currentStep++;
+        StartCoroutine(DesertReveal());
+    }
+    public IEnumerator DesertReveal()
+    {
+        bool hasRealeasedKey = false;
+        //Set-Up
+        Debug.Log("InfoRiverFlow");
+
+
+        SpawnToolTip(currentStep);
+        camera.Zoom();
+        //Attente d'action
+        do
+        {
+            if (!UnityEngine.Input.GetMouseButton(0))
+            {
+                Debug.Log("released");
+                hasRealeasedKey = true;
+            }
+            yield return new WaitForEndOfFrame();
+        }
+        while (!UnityEngine.Input.GetMouseButton(0) || !hasRealeasedKey);
+        DissapearToolTip();
+        //Conséquence
+        StopAllCoroutines();
+        currentStep++;
+        StartCoroutine(MergeForDesert());
+    }
+    public IEnumerator MergeForDesert()
+    {
+        //Set-Up
+        Debug.Log("IrrigatePlant");
+
+        elements.SpawnPlantAt(new Vector2Int(20, 15));
+        desertPlant = (Plant)grid.GetTile(new Vector2Int(20, 15)).element;
+        SpawnToolTip(currentStep);
+        //Attente d'action
+        do
+        {
+
+
+            yield return new WaitForEndOfFrame();
+        }
+        //Tant que le joueur n'a pas créer de canal
+        while (!desertPlant.isIrrigated);
+        DissapearToolTip();
+        //Conséquence
+        StopAllCoroutines();
+        currentStep++;
+        StartCoroutine(InfoIrrigate());
+    }
+
 
 
     void SpawnToolTip(int currentStep)
