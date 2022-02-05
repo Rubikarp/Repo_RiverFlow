@@ -1,9 +1,8 @@
+using DG.Tweening;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
-using DG.Tweening;
-using System;
 
 public class TutoManager : MonoBehaviour
 {
@@ -14,7 +13,8 @@ public class TutoManager : MonoBehaviour
     private ElementHandler elements;
     private RiverManager riverManager;
     public DigingHandler digging;
-    public ZoomManager camera;
+    public ZoomManager cameraZoom;
+    public InventoryManager inventory;
 
     [Header("Info")]
     public WaterSource tutoSource;
@@ -146,7 +146,7 @@ public class TutoManager : MonoBehaviour
     {
         bool hasRealeasedKey = false;
         //Set-Up
-        Debug.Log("InfoRiverFlow");
+        Debug.Log("InfoIrrigate");
 
 
         SpawnToolTip(currentStep);
@@ -171,7 +171,7 @@ public class TutoManager : MonoBehaviour
     {
         bool hasRealeasedKey = false;
         //Set-Up
-        Debug.Log("InfoRiverFlow");
+        Debug.Log("InfoButterfly");
 
 
         SpawnToolTip(currentStep);
@@ -208,7 +208,7 @@ public class TutoManager : MonoBehaviour
 
             yield return new WaitForEndOfFrame();
         }
-        //Tant que le joueur n'a pas créer de canal
+        //Tant que le joueur n'a pas splitté + irrigué
         while (!(riverManager.canals.Count >= 3) || !secondPlant.isIrrigated);
         DissapearToolTip();
         //Conséquence
@@ -220,7 +220,7 @@ public class TutoManager : MonoBehaviour
     {
         bool hasRealeasedKey = false;
         //Set-Up
-        Debug.Log("InfoRiverFlow");
+        Debug.Log("InfoDivideForShovels");
 
 
         SpawnToolTip(currentStep);
@@ -245,7 +245,7 @@ public class TutoManager : MonoBehaviour
     {
         bool hasRealeasedKey = false;
         //Set-Up
-        Debug.Log("InfoRiverFlow");
+        Debug.Log("InfoCarefulDivide");
 
 
         SpawnToolTip(currentStep);
@@ -270,11 +270,11 @@ public class TutoManager : MonoBehaviour
     {
         bool hasRealeasedKey = false;
         //Set-Up
-        Debug.Log("InfoRiverFlow");
+        Debug.Log("DesertReveal");
 
 
         SpawnToolTip(currentStep);
-        camera.Zoom();
+        cameraZoom.Zoom();
         //Attente d'action
         do
         {
@@ -290,15 +290,41 @@ public class TutoManager : MonoBehaviour
         //Conséquence
         StopAllCoroutines();
         currentStep++;
-        StartCoroutine(MergeForDesert());
+        StartCoroutine(MergeForDesertPhase1());
     }
-    public IEnumerator MergeForDesert()
+    public IEnumerator MergeForDesertPhase1()
     {
+        bool firstPartDone = false;
         //Set-Up
-        Debug.Log("IrrigatePlant");
+        Debug.Log("MergeForDesertPhase1");
 
         elements.SpawnPlantAt(new Vector2Int(20, 15));
         desertPlant = (Plant)grid.GetTile(new Vector2Int(20, 15)).element;
+        SpawnToolTip(currentStep);
+        //Attente d'action
+        do
+        {
+            for (int i = 0; i < desertPlant.TileOn.neighbors.Length; i++)
+            {
+                if (desertPlant.TileOn.neighbors[i].isDuged == true)
+                {
+                    firstPartDone = true;
+                }
+            }
+
+            yield return new WaitForEndOfFrame();
+        }
+        //Tant que le joueur n'a pas irrigué la pousse désertique (et donc mergé)
+        while (!firstPartDone);
+        //Conséquence
+        StopAllCoroutines();
+        StartCoroutine(MergeForDesertPhase2());
+    }
+    public IEnumerator MergeForDesertPhase2()
+    {
+        //Set-Up
+        Debug.Log("MergeForDesertPhase2");
+
         SpawnToolTip(currentStep);
         //Attente d'action
         do
@@ -307,13 +333,165 @@ public class TutoManager : MonoBehaviour
 
             yield return new WaitForEndOfFrame();
         }
-        //Tant que le joueur n'a pas créer de canal
+        //Tant que le joueur n'a pas irrigué la pousse désertique (et donc mergé)
         while (!desertPlant.isIrrigated);
         DissapearToolTip();
         //Conséquence
         StopAllCoroutines();
         currentStep++;
-        StartCoroutine(InfoIrrigate());
+        StartCoroutine(InfoDieCondition());
+    }
+    public IEnumerator InfoDieCondition()
+    {
+        bool hasRealeasedKey = false;
+        //Set-Up
+        Debug.Log("InfoDieCondition");
+
+
+        SpawnToolTip(currentStep);
+        //Attente d'action
+        do
+        {
+            if (!UnityEngine.Input.GetMouseButton(0))
+            {
+                Debug.Log("released");
+                hasRealeasedKey = true;
+            }
+            yield return new WaitForEndOfFrame();
+        }
+        while (!UnityEngine.Input.GetMouseButton(0) || !hasRealeasedKey);
+        DissapearToolTip();
+        //Conséquence
+        StopAllCoroutines();
+        currentStep++;
+        StartCoroutine(ErasePhase1());
+    }
+    public IEnumerator ErasePhase1()
+    {
+        //Set-Up
+        Debug.Log("ErasePhase1");
+
+        SpawnToolTip(currentStep);
+        //Attente d'action
+        do
+        {
+
+
+            yield return new WaitForEndOfFrame();
+        }
+        //Tant que le joueur n'a pas irrigué la pousse désertique (et donc mergé)
+        while (!(riverManager.canals.Count <= 2));
+        //Conséquence
+        StopAllCoroutines();
+        StartCoroutine(ErasePhase2());
+    }
+    public IEnumerator ErasePhase2()
+    {
+        //Set-Up
+        Debug.Log("ErasePhase2");
+
+        SpawnToolTip(currentStep);
+        //Attente d'action
+        do
+        {
+
+
+            yield return new WaitForEndOfFrame();
+        }
+        //Tant que le joueur n'a pas irrigué la pousse désertique (et donc mergé)
+        while (!(riverManager.canals.Count <= 3));
+        DissapearToolTip();
+        //Conséquence
+        StopAllCoroutines();
+        currentStep++;
+        StartCoroutine(InfoTime());
+    }
+    public IEnumerator InfoTime()
+    {
+        bool hasRealeasedKey = false;
+        //Set-Up
+        Debug.Log("InfoTime");
+
+
+        SpawnToolTip(currentStep);
+        //Attente d'action
+        do
+        {
+            if (!UnityEngine.Input.GetMouseButton(0))
+            {
+                Debug.Log("released");
+                hasRealeasedKey = true;
+            }
+            yield return new WaitForEndOfFrame();
+        }
+        while (!UnityEngine.Input.GetMouseButton(0) || !hasRealeasedKey);
+        DissapearToolTip();
+        //Conséquence
+        StopAllCoroutines();
+        StartCoroutine(WaitForNewDay());
+    }
+    public IEnumerator WaitForNewDay()
+    {
+        //Set-Up
+        Debug.Log("WaitForNewDay");
+
+        //Attente d'action
+        do
+        {
+
+
+            yield return new WaitForEndOfFrame();
+        }
+        //Tant que le joueur n'a pas irrigué la pousse désertique (et donc mergé)
+        while (!(gameTime.weekNumber >= 2));
+        //Conséquence
+        StopAllCoroutines();
+        currentStep++;
+        StartCoroutine(RewardLake());
+    }
+    public IEnumerator RewardLake()
+    {
+        //Set-Up
+        Debug.Log("RewardLake");
+
+        //Attente d'action
+        do
+        {
+
+            yield return new WaitForEndOfFrame();
+        }
+        //Tant que le joueur n'a pas irrigué la pousse désertique (et donc mergé)
+        while (!(inventory.lakesAmmount >= 1));
+        DissapearToolTip();
+        //Conséquence
+        StopAllCoroutines();
+        currentStep++;
+        StartCoroutine(InfoLake());
+    }
+    public IEnumerator InfoLake()
+    {
+        bool hasRealeasedKey = false;
+        //Set-Up
+        Debug.Log("InfoLake");
+
+
+        SpawnToolTip(currentStep);
+        //Attente d'action
+        do
+        {
+            if (!UnityEngine.Input.GetMouseButton(0))
+            {
+                Debug.Log("released");
+                hasRealeasedKey = true;
+            }
+            yield return new WaitForEndOfFrame();
+        }
+        while (!UnityEngine.Input.GetMouseButton(0) || !hasRealeasedKey);
+        DissapearToolTip();
+        //Conséquence
+        StopAllCoroutines();
+        currentStep++;
+        StartCoroutine(InfoTime());
     }
 
 
