@@ -13,20 +13,17 @@ public class GameManager : Singleton<GameManager>
     {
         MakeSingleton(true);
         levelSaves = Save.LoadSave();
-        if (levelSaves == null)
+        if (levelSaves == null || levelSaves.Count != levelList.Count)
         {
             Debug.Log("no save bru");
             //creer des fichiers ou tt les scores max sont à 0
             levelSaves = new List<LevelSave>();
-            if (levelSaves.Count != levelList.Count)
+            for (int i = 0; i < levelList.Count; i++)
             {
-                for (int i = 0; i < levelList.Count; i++)
-                {
-                    levelSaves.Add(new LevelSave(0));
-                }
-                //on les save
-                Save.SaveLevel(levelSaves);
+                levelSaves.Add(new LevelSave(0));
             }
+            //on les save
+            Save.SaveLevel(levelSaves);
         }
     }
 
