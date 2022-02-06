@@ -27,6 +27,9 @@ public class TutoManager : MonoBehaviour
     private RectTransform currentTooltipTransform;
     bool alreadyDone;
 
+    [Header("Indicators")]
+    public RectTransform step8Indicator;
+
     int currentStep = 0;
 
     void Start()
@@ -222,8 +225,8 @@ public class TutoManager : MonoBehaviour
         //Set-Up
         Debug.Log("InfoDivideForShovels");
 
-
         SpawnToolTip(currentStep);
+        SpawnIndicator(step8Indicator, 0.65f);
         //Attente d'action
         do
         {
@@ -236,6 +239,7 @@ public class TutoManager : MonoBehaviour
         }
         while (!UnityEngine.Input.GetMouseButton(0) || !hasRealeasedKey);
         DissapearToolTip();
+        DissapearIndicator(step8Indicator);
         //Conséquence
         StopAllCoroutines();
         currentStep++;
@@ -246,7 +250,6 @@ public class TutoManager : MonoBehaviour
         bool hasRealeasedKey = false;
         //Set-Up
         Debug.Log("InfoCarefulDivide");
-
 
         SpawnToolTip(currentStep);
         //Attente d'action
@@ -380,7 +383,7 @@ public class TutoManager : MonoBehaviour
             yield return new WaitForEndOfFrame();
         }
         //Tant que le joueur n'a pas irrigué la pousse désertique (et donc mergé)
-        while (!(riverManager.canals.Count <= 2));
+        while (!(riverManager.canals.Count <= 3));
         //Conséquence
         StopAllCoroutines();
         StartCoroutine(ErasePhase2());
@@ -399,7 +402,26 @@ public class TutoManager : MonoBehaviour
             yield return new WaitForEndOfFrame();
         }
         //Tant que le joueur n'a pas irrigué la pousse désertique (et donc mergé)
-        while (!(riverManager.canals.Count <= 3));
+        while (!(riverManager.canals.Count <= 2));
+        //Conséquence
+        StopAllCoroutines();
+        StartCoroutine(OptimiseRiver());
+    }
+    public IEnumerator OptimiseRiver()
+    {
+        //Set-Up
+        Debug.Log("OptimiseRiver");
+
+        SpawnToolTip(currentStep);
+        //Attente d'action
+        do
+        {
+
+
+            yield return new WaitForEndOfFrame();
+        }
+        //Tant que le joueur n'a pas irrigué la pousse désertique (et donc mergé)
+        while (!desertPlant.isIrrigated || !secondPlant.isIrrigated || !firstPlant.isIrrigated);
         DissapearToolTip();
         //Conséquence
         StopAllCoroutines();
@@ -491,7 +513,7 @@ public class TutoManager : MonoBehaviour
         //Conséquence
         StopAllCoroutines();
         currentStep++;
-        StartCoroutine(InfoTime());
+        //StartCoroutine(InfoTime());
     }
 
 
@@ -499,13 +521,23 @@ public class TutoManager : MonoBehaviour
     void SpawnToolTip(int currentStep)
     {
         currentTooltipTransform = tooltips[currentStep];
-        currentTooltipTransform.DOScaleY(1f, 0.2f).SetEase(Ease.InOutBack);
-        currentTooltipTransform.DOScaleX(1f, 0.2f).SetEase(Ease.InOutBack);
+        currentTooltipTransform.DOScaleY(0.5f, 0.2f).SetEase(Ease.InOutBack);
+        currentTooltipTransform.DOScaleX(0.5f, 0.2f).SetEase(Ease.InOutBack);
 
     }
     void DissapearToolTip()
     {
         currentTooltipTransform.DOScaleY(0f, 0.2f).SetEase(Ease.InOutBack);
         currentTooltipTransform.DOScaleX(0f, 0.2f).SetEase(Ease.InOutBack);
+    }
+    void SpawnIndicator(RectTransform Indicator, float scale)
+    {
+        Indicator.DOScaleY(scale, 0.2f).SetEase(Ease.InOutBack);
+        Indicator.DOScaleX(scale, 0.2f).SetEase(Ease.InOutBack);
+    }
+    void DissapearIndicator(RectTransform Indicator)
+    {
+        Indicator.DOScaleY(0f, 0.2f).SetEase(Ease.InOutBack);
+        Indicator.DOScaleX(0f, 0.2f).SetEase(Ease.InOutBack);
     }
 }
