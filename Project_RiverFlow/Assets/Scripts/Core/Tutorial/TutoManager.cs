@@ -29,6 +29,12 @@ public class TutoManager : MonoBehaviour
 
     [Header("Indicators")]
     public RectTransform step8Indicator;
+    public GameObject mouseIndicator;
+    public GameObject highlightTile;
+    public GameObject tilesToIrrigate;
+    public GameObject butterflies;
+    bool moveIndicatorAgain;
+
 
     int currentStep = 0;
 
@@ -56,6 +62,10 @@ public class TutoManager : MonoBehaviour
         //Set-Up
         Debug.Log("BeginCreation");
         SpawnToolTip(currentStep);
+        mouseIndicator.transform.localPosition = new Vector3(1.5f, -1.4f, 0);
+        SpawnMouse(mouseIndicator.transform, 0.1f);
+        StartCoroutine(MoveIndicator(mouseIndicator.transform, new Vector2(mouseIndicator.transform.localPosition.x - 4, mouseIndicator.transform.localPosition.y), 5));
+        
         //Attente d'action
         do
         {
@@ -66,8 +76,9 @@ public class TutoManager : MonoBehaviour
         //Tant que le joueur n'a pas créer de canal
         while (riverManager.canals.Count < 1);
         DissapearToolTip();
-        
-
+        DissapearMouse(mouseIndicator.transform);
+        mouseIndicator.transform.DOKill();
+        moveIndicatorAgain = false;
         //Conséquence
         StopAllCoroutines();
         currentStep++;
@@ -78,6 +89,9 @@ public class TutoManager : MonoBehaviour
         //Set-Up
         Debug.Log("IrrigateCreation");
         SpawnToolTip(currentStep);
+        mouseIndicator.transform.localPosition = new Vector3(2.3f, -1.4f, 0);
+        SpawnMouse(mouseIndicator.transform, 0.1f);
+        StartCoroutine(MoveIndicator(mouseIndicator.transform, new Vector2(mouseIndicator.transform.localPosition.x - 2, mouseIndicator.transform.localPosition.y), 3));
         //Attente d'action
         do
         {
@@ -90,6 +104,9 @@ public class TutoManager : MonoBehaviour
         (  (int)grid.GetTile(riverManager.canals[0].endNode).riverStrenght < 1
         && tutoSource.TileOn.linkAmount < 1);
         DissapearToolTip();
+        DissapearMouse(mouseIndicator.transform);
+        mouseIndicator.transform.DOKill();
+        moveIndicatorAgain = false;
         //Conséquence
         StopAllCoroutines();
         currentStep++;
@@ -102,8 +119,9 @@ public class TutoManager : MonoBehaviour
         bool hasRealeasedKey = false;
         //Set-Up
         Debug.Log("InfoRiverFlow");
+        mouseIndicator.transform.localPosition = new Vector3(2.2f, 1.9f, 0);
+        SpawnMouse(mouseIndicator.transform, 0.1f);
 
-       
         SpawnToolTip(currentStep);
         //Attente d'action
         do
@@ -117,6 +135,7 @@ public class TutoManager : MonoBehaviour
         }
         while (!UnityEngine.Input.GetMouseButton(0)||!hasRealeasedKey);
         DissapearToolTip();
+        DissapearMouse(mouseIndicator.transform);
         //Conséquence
         StopAllCoroutines();
         currentStep++;
@@ -127,9 +146,14 @@ public class TutoManager : MonoBehaviour
         //Set-Up
         Debug.Log("IrrigatePlant");
 
-        elements.SpawnPlantAt(new Vector2Int(25, 13));
-        firstPlant = (Plant)grid.GetTile(new Vector2Int(25, 13)).element;
+        elements.SpawnPlantAt(new Vector2Int(23, 12));
+        firstPlant = (Plant)grid.GetTile(new Vector2Int(23, 12)).element;
+
         SpawnToolTip(currentStep);
+        mouseIndicator.transform.localPosition = new Vector3(-3.5f, -0.5f, 0);
+        SpawnMouse(mouseIndicator.transform, 0.1f);
+        highlightTile.SetActive(true);
+        StartCoroutine(MoveIndicator(mouseIndicator.transform, new Vector2(mouseIndicator.transform.localPosition.x - 2, mouseIndicator.transform.localPosition.y - 2), 3));
         //Attente d'action
         do
         {
@@ -140,6 +164,10 @@ public class TutoManager : MonoBehaviour
         //Tant que le joueur n'a pas créer de canal
         while (!firstPlant.isIrrigated);
         DissapearToolTip();
+        DissapearMouse(mouseIndicator.transform);
+        mouseIndicator.transform.DOKill();
+        moveIndicatorAgain = false;
+        highlightTile.SetActive(false);
         //Conséquence
         StopAllCoroutines();
         currentStep++;
@@ -150,7 +178,9 @@ public class TutoManager : MonoBehaviour
         bool hasRealeasedKey = false;
         //Set-Up
         Debug.Log("InfoIrrigate");
-
+        mouseIndicator.transform.localPosition = new Vector3(2.2f, 1.9f, 0);
+        SpawnMouse(mouseIndicator.transform, 0.1f);
+        tilesToIrrigate.SetActive(true);
 
         SpawnToolTip(currentStep);
         //Attente d'action
@@ -165,6 +195,8 @@ public class TutoManager : MonoBehaviour
         }
         while (!UnityEngine.Input.GetMouseButton(0) || !hasRealeasedKey);
         DissapearToolTip();
+        DissapearMouse(mouseIndicator.transform);
+        tilesToIrrigate.SetActive(false);
         //Conséquence
         StopAllCoroutines();
         currentStep++;
@@ -175,9 +207,14 @@ public class TutoManager : MonoBehaviour
         bool hasRealeasedKey = false;
         //Set-Up
         Debug.Log("InfoButterfly");
-
+        mouseIndicator.transform.localPosition = new Vector3(2.2f, 1.9f, 0);
+        SpawnMouse(mouseIndicator.transform, 0.1f);
 
         SpawnToolTip(currentStep);
+        butterflies.SetActive(true);
+        butterflies.GetComponent<ParticleSystem>().Play();
+
+        
         //Attente d'action
         do
         {
@@ -190,6 +227,9 @@ public class TutoManager : MonoBehaviour
         }
         while (!UnityEngine.Input.GetMouseButton(0) || !hasRealeasedKey);
         DissapearToolTip();
+        butterflies.GetComponent<ParticleSystem>().Stop();
+        butterflies.SetActive(false);
+        DissapearMouse(mouseIndicator.transform);
         //Conséquence
         StopAllCoroutines();
         currentStep++;
@@ -204,6 +244,10 @@ public class TutoManager : MonoBehaviour
         secondPlant = (Plant)grid.GetTile(new Vector2Int(24, 17)).element;
         SpawnToolTip(currentStep);
 
+        mouseIndicator.transform.localPosition = new Vector3(-2.5f, -0.5f, 0);
+        SpawnMouse(mouseIndicator.transform, 0.1f);
+        StartCoroutine(MoveIndicator(mouseIndicator.transform, new Vector2(mouseIndicator.transform.localPosition.x - 4, mouseIndicator.transform.localPosition.y + 1), 3));
+
         //Attente d'action
         do
         {
@@ -214,6 +258,10 @@ public class TutoManager : MonoBehaviour
         //Tant que le joueur n'a pas splitté + irrigué
         while (!(riverManager.canals.Count >= 3) || !secondPlant.isIrrigated);
         DissapearToolTip();
+        mouseIndicator.transform.DOKill();
+        DissapearMouse(mouseIndicator.transform);
+
+        moveIndicatorAgain = false;
         //Conséquence
         StopAllCoroutines();
         currentStep++;
@@ -226,7 +274,9 @@ public class TutoManager : MonoBehaviour
         Debug.Log("InfoDivideForShovels");
 
         SpawnToolTip(currentStep);
-        SpawnIndicator(step8Indicator, 0.65f);
+        SpawnIndicator(step8Indicator, 0.9f);
+        mouseIndicator.transform.localPosition = new Vector3(2.2f, 1.9f, 0);
+        SpawnMouse(mouseIndicator.transform, 0.1f);
         //Attente d'action
         do
         {
@@ -240,6 +290,7 @@ public class TutoManager : MonoBehaviour
         while (!UnityEngine.Input.GetMouseButton(0) || !hasRealeasedKey);
         DissapearToolTip();
         DissapearIndicator(step8Indicator);
+        DissapearMouse(mouseIndicator.transform);
         //Conséquence
         StopAllCoroutines();
         currentStep++;
@@ -250,8 +301,9 @@ public class TutoManager : MonoBehaviour
         bool hasRealeasedKey = false;
         //Set-Up
         Debug.Log("InfoCarefulDivide");
-
         SpawnToolTip(currentStep);
+        mouseIndicator.transform.localPosition = new Vector3(2.2f, 1.9f, 0);
+        SpawnMouse(mouseIndicator.transform, 0.1f);
         //Attente d'action
         do
         {
@@ -264,6 +316,7 @@ public class TutoManager : MonoBehaviour
         }
         while (!UnityEngine.Input.GetMouseButton(0) || !hasRealeasedKey);
         DissapearToolTip();
+        DissapearMouse(mouseIndicator.transform);
         //Conséquence
         StopAllCoroutines();
         currentStep++;
@@ -275,9 +328,10 @@ public class TutoManager : MonoBehaviour
         //Set-Up
         Debug.Log("DesertReveal");
 
-
         SpawnToolTip(currentStep);
         cameraZoom.Zoom();
+        mouseIndicator.transform.localPosition = new Vector3(2.8f, 2.5f, 0);
+        SpawnMouse(mouseIndicator.transform, 0.1f);
         //Attente d'action
         do
         {
@@ -290,6 +344,7 @@ public class TutoManager : MonoBehaviour
         }
         while (!UnityEngine.Input.GetMouseButton(0) || !hasRealeasedKey);
         DissapearToolTip();
+        DissapearMouse(mouseIndicator.transform);
         //Conséquence
         StopAllCoroutines();
         currentStep++;
@@ -304,6 +359,10 @@ public class TutoManager : MonoBehaviour
         elements.SpawnPlantAt(new Vector2Int(20, 15));
         desertPlant = (Plant)grid.GetTile(new Vector2Int(20, 15)).element;
         SpawnToolTip(currentStep);
+
+        mouseIndicator.transform.localPosition = new Vector3(-5.5f, -2.5f, 0);
+        SpawnMouse(mouseIndicator.transform, 0.1f);
+        StartCoroutine(MoveIndicator(mouseIndicator.transform, new Vector2(mouseIndicator.transform.localPosition.x - 4, mouseIndicator.transform.localPosition.y + 1), 3));
         //Attente d'action
         do
         {
@@ -319,6 +378,9 @@ public class TutoManager : MonoBehaviour
         }
         //Tant que le joueur n'a pas irrigué la pousse désertique (et donc mergé)
         while (!firstPartDone);
+        DissapearMouse(mouseIndicator.transform);
+        mouseIndicator.transform.DOKill();
+        moveIndicatorAgain = false;
         //Conséquence
         StopAllCoroutines();
         StartCoroutine(MergeForDesertPhase2());
@@ -329,6 +391,10 @@ public class TutoManager : MonoBehaviour
         Debug.Log("MergeForDesertPhase2");
 
         SpawnToolTip(currentStep);
+
+        mouseIndicator.transform.localPosition = new Vector3(-4.5f, -0.5f, 0);
+        SpawnMouse(mouseIndicator.transform, 0.1f);
+        StartCoroutine(MoveIndicator(mouseIndicator.transform, new Vector2(mouseIndicator.transform.localPosition.x - 3, mouseIndicator.transform.localPosition.y - 2), 3));
         //Attente d'action
         do
         {
@@ -339,6 +405,9 @@ public class TutoManager : MonoBehaviour
         //Tant que le joueur n'a pas irrigué la pousse désertique (et donc mergé)
         while (!desertPlant.isIrrigated);
         DissapearToolTip();
+        mouseIndicator.transform.DOKill();
+        moveIndicatorAgain = false;
+        DissapearMouse(mouseIndicator.transform);
         //Conséquence
         StopAllCoroutines();
         currentStep++;
@@ -352,6 +421,8 @@ public class TutoManager : MonoBehaviour
 
 
         SpawnToolTip(currentStep);
+        mouseIndicator.transform.localPosition = new Vector3(2.8f, 2.5f, 0);
+        SpawnMouse(mouseIndicator.transform, 0.1f);
         //Attente d'action
         do
         {
@@ -364,6 +435,7 @@ public class TutoManager : MonoBehaviour
         }
         while (!UnityEngine.Input.GetMouseButton(0) || !hasRealeasedKey);
         DissapearToolTip();
+        DissapearMouse(mouseIndicator.transform);
         //Conséquence
         StopAllCoroutines();
         currentStep++;
@@ -375,6 +447,11 @@ public class TutoManager : MonoBehaviour
         Debug.Log("ErasePhase1");
 
         SpawnToolTip(currentStep);
+        mouseIndicator.GetComponent<SpriteRenderer>().flipX = true;
+        mouseIndicator.transform.localPosition = new Vector3(2.5f, -1.4f, 0);
+        SpawnMouse(mouseIndicator.transform, 0.1f);
+        StartCoroutine(MoveIndicator(mouseIndicator.transform, new Vector2(mouseIndicator.transform.localPosition.x - 4, mouseIndicator.transform.localPosition.y ), 3));
+
         //Attente d'action
         do
         {
@@ -384,6 +461,9 @@ public class TutoManager : MonoBehaviour
         }
         //Tant que le joueur n'a pas irrigué la pousse désertique (et donc mergé)
         while (!(riverManager.canals.Count <= 3));
+        mouseIndicator.transform.DOKill();
+        moveIndicatorAgain = false;
+        DissapearMouse(mouseIndicator.transform);
         //Conséquence
         StopAllCoroutines();
         StartCoroutine(ErasePhase2());
@@ -436,6 +516,8 @@ public class TutoManager : MonoBehaviour
 
 
         SpawnToolTip(currentStep);
+        mouseIndicator.transform.localPosition = new Vector3(2.8f, 2.5f, 0);
+        SpawnMouse(mouseIndicator.transform, 0.1f);
         //Attente d'action
         do
         {
@@ -448,6 +530,7 @@ public class TutoManager : MonoBehaviour
         }
         while (!UnityEngine.Input.GetMouseButton(0) || !hasRealeasedKey);
         DissapearToolTip();
+        DissapearMouse(mouseIndicator.transform);
         //Conséquence
         StopAllCoroutines();
         StartCoroutine(WaitForNewDay());
@@ -540,4 +623,44 @@ public class TutoManager : MonoBehaviour
         Indicator.DOScaleY(0f, 0.2f).SetEase(Ease.InOutBack);
         Indicator.DOScaleX(0f, 0.2f).SetEase(Ease.InOutBack);
     }
+
+    public IEnumerator MoveIndicator(Transform Indicator, Vector2 endPosition, float duration)
+    {
+        Vector2 startPosition = Indicator.localPosition;
+        
+        while (true)
+        {
+            if (moveIndicatorAgain == false)
+            {
+                Indicator.DOMove(endPosition, duration);
+                moveIndicatorAgain = true;
+            }
+
+            if (Indicator.localPosition.x <= endPosition.x + 0.3f && Indicator.localPosition.x >= endPosition.x - 0.3f && 
+                Indicator.localPosition.y <= endPosition.y + 0.3f && Indicator.localPosition.y >= endPosition.y - 0.3f)
+            {
+                Debug.Log("OKKKKKKKKKKKKKKK");
+                Indicator.DOKill();
+                Indicator.localPosition = startPosition;
+                moveIndicatorAgain = false;
+            }
+
+
+            yield return new WaitForEndOfFrame();
+        }
+        
+        
+ 
+    }
+    void SpawnMouse(Transform Indicator, float scale)
+    {
+        Indicator.DOScaleY(scale, 0.2f).SetEase(Ease.InOutBack);
+        Indicator.DOScaleX(scale, 0.2f).SetEase(Ease.InOutBack);
+    }
+    void DissapearMouse(Transform Indicator)
+    {
+        Indicator.DOScaleY(0f, 0.2f).SetEase(Ease.InOutBack);
+        Indicator.DOScaleX(0f, 0.2f).SetEase(Ease.InOutBack);
+    }
+
 }
