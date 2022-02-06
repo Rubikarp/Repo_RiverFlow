@@ -17,5 +17,5 @@ MonoBehaviour:
   levelNumber: 4
   name: Sneaky Desert
   recordScore: 0
-  scoreUnlock: 1000
+  scoreUnlock: 0
   LockLvl: {fileID: 11400000, guid: a5fc19b27e1957b48ab4933486c48989, type: 2}
