@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b29908123b7277242a9c96854f780ebc, type: 3}
-  m_Name: Level4
+  m_Name: Level5
   m_EditorClassIdentifier: 
-  levelSceneName: Assets/Scenes/Build/Level_04.unity
+  levelSceneName: Assets/Scenes/Build/Level_05.unity
   levelCapture: {fileID: 21300000, guid: b4758e86c122477478ce007c1f01d685, type: 3}
-  levelNumber: 5
-  name: Sneaky Desert
+  levelNumber: 6
+  name: Hawk's Maze
   recordScore: 0
   scoreUnlock: 0
-  LockLvl: {fileID: 11400000, guid: a5fc19b27e1957b48ab4933486c48989, type: 2}
+  LockLvl: {fileID: 11400000, guid: 0a48774936fd693428cf9e55f5019c89, type: 2}

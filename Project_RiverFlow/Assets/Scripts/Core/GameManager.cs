@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 public class GameManager : Singleton<GameManager>
 {
     public List<LevelSO> levelList;
-    [HideInInspector]
+    //[HideInInspector]
     public List<LevelSave> levelSaves;
 
     void Start()
