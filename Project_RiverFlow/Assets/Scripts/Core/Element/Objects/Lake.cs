@@ -43,6 +43,7 @@ public class Lake : Element
     [Header("Visual")]
     public GameObject lakeMainBodySprite;
     public SpriteRenderer lakeRender;
+    public ParticleSystem previsual;
     [Space(5)]
     [SerializeField] Sprite lake25;
     [SerializeField] Sprite lake50;
