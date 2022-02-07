@@ -11,6 +11,9 @@ namespace Shapes {
 
 		#if UNITY_EDITOR
 		internal static RenderPipeline GetCurrentRenderPipelineInUse() {
+
+			return RenderPipeline.Legacy;
+
 			RenderPipelineAsset rpa = GraphicsSettings.renderPipelineAsset;
 			//return RenderPipeline.Legacy;
 
