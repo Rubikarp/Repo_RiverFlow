@@ -385,6 +385,12 @@ public class RiverManager : Singleton<RiverManager>
     }
     private void Link2To0(GameTile tileA, GameTile tileB)
     {
+        if (tileA.element is Lake)
+        {
+            CannotLink(MessageCase.NotInCanal);
+            return;
+        }
+
         if (InCanalList(tileA.canalsIn[0]))
         {
             if (tileA.canalsIn.Count == 1)

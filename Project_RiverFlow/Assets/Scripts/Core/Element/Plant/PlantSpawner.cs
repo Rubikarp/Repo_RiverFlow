@@ -110,18 +110,18 @@ public class PlantSpawner : MonoBehaviour
             }
             DifficultyScoreCalcul();
             EvaluateTiles();
-            Debug.Log(tileScores.Count);
+            //Debug.Log(tileScores.Count);
             for (int i = tileScores.Count - 1; i > 0; i--)
             {
                 if (tileScores[i].spawn)
                 {
                     elementHandler.SpawnPlantAt(tileScores[i].tile.gridPos);
-                    Debug.Log(tileScores[i].tile.gridPos);
+                    //Debug.Log(tileScores[i].tile.gridPos);
                     break;
                 }
                 else
                 {
-                    Debug.Log(tileScores[i]);
+                    //Debug.Log(tileScores[i]);
                 }
             }
         }
