@@ -8,6 +8,7 @@ public class FeedbackLake : MonoBehaviour
     public InputHandler input;
     private GameTile currentTile;
     private Lake currentLake;
+    bool isplaying = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -23,11 +24,17 @@ public class FeedbackLake : MonoBehaviour
         if (currentTile.element is Lake)
         {
             currentLake = currentTile.element as Lake;
-            currentLake.previsual.Play(true);
+            if (isplaying == false)
+            {
+                currentLake.previsual.Play(true);
+                isplaying = true;
+            }
+
         }
         else
         {
             currentLake.previsual.Stop(true);
+            isplaying = false;
         }
     }
 }
