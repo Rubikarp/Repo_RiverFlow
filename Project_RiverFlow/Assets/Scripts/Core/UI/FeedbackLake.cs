@@ -9,14 +9,14 @@ public class FeedbackLake : MonoBehaviour
     private GameTile currentTile;
     private Lake currentLake;
     bool isplaying = false;
-    // Start is called before the first frame update
+
     void Start()
     {
         input = InputHandler.Instance;
         grid = GameGrid.Instance;
     }
 
-    // Update is called once per frame
+
     void Update()
     {
         currentTile = grid.GetTile(grid.PosToTile(input.GetHitPos()));
@@ -33,7 +33,7 @@ public class FeedbackLake : MonoBehaviour
         }
         else
         {
-            currentLake.previsual.Stop(true);
+            currentLake?.previsual.Stop(true);
             isplaying = false;
         }
     }
